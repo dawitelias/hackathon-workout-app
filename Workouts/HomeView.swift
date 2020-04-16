@@ -7,6 +7,7 @@
 //
 
 import SwiftUI
+import HealthKit
 
 struct HomeView: View {
     @EnvironmentObject var userData: UserData
@@ -17,19 +18,12 @@ struct HomeView: View {
     var body: some View {
         NavigationView {
             List {
-                // sample layout
-                // WorkoutRow can be moved to its own file once we dial it in
-                Section(header: Text("April 2020")) {
-                    ForEach(userData.workouts, id: \.self) { workout in
-                        NavigationLink(destination: WorkoutDetail(workout: workout)) {
-                            WorkoutRow(workout: workout)
-                        }
-                    }
-                }
-                Section(header: Text("March 2020")) {
-                    ForEach(userData.workouts, id: \.self) { workout in
-                        NavigationLink(destination: WorkoutDetail(workout: workout)) {
-                            WorkoutRow(workout: workout)
+                ForEach(userData.workoutsGroupedByDate.map { $0.key }, id: \.self) { key in
+                    Section(header: Text(key)) {
+                        ForEach(self.userData.workoutsGroupedByDate[key] ?? [HKWorkout](), id: \.self) { workout in
+                            NavigationLink(destination: WorkoutDetail(workout: workout)) {
+                                WorkoutRow(workout: workout)
+                            }
                         }
                     }
                 }

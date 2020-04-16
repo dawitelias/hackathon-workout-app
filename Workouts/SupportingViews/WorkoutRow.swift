@@ -20,12 +20,10 @@ struct WorkoutRow: View {
                 Image(systemName: workout.workoutTypeMetadata.systemIconName)
                 Text(workout.workoutTypeMetadata.activityDescription)
                 Spacer()
-                Text("Tuesday") // <-- I need to do work to get the date
+                Text(workout.startDate.weekday)
                     .font(.caption)
                     .foregroundColor(Color.gray)
             }
-        }.onAppear {
-            print("ContentView appeared!")
         }
     }
 }

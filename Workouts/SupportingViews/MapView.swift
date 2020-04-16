@@ -27,7 +27,7 @@ struct MapView: UIViewRepresentable {
                 return
             }
             if let myRoute = route {
-                let polyline = MKGeodesicPolyline(coordinates: myRoute, count: myRoute.count)
+                let polyline = MKGeodesicPolyline(coordinates: myRoute.map { return CLLocationCoordinate2D(latitude: $0.coordinate.latitude, longitude: $0.coordinate.longitude) }, count: myRoute.count)
                 uiView.setVisibleMapRect(polyline.boundingMapRect, animated: true)
                 uiView.addOverlay(polyline)
             }

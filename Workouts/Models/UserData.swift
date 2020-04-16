@@ -12,6 +12,7 @@ import HealthKit
 class UserData: ObservableObject {
 
     @Published var workouts: [HKWorkout] = [HKWorkout]()
+    @Published var workoutsGroupedByDate: [String: [HKWorkout]] = [String: [HKWorkout]]()
     
     private var healthKitAssistant = HealthKitAssistant()
 
@@ -23,6 +24,12 @@ class UserData: ObservableObject {
                 return
             }
             self?.workouts = workouts
+            self?.groupWorkouts(workouts: workouts)
         }
+    }
+    
+    private func groupWorkouts(workouts: [HKWorkout]) {
+        self.workoutsGroupedByDate = Dictionary(grouping: workouts, by: { ("\($0.startDate.month) \($0.startDate.year)") })
+        print("Finished grouping workouts: \(self.workoutsGroupedByDate.count)")
     }
 }

@@ -52,7 +52,7 @@ extension HKWorkout {
         HKHealthStore().execute(routeQuery)
     }
 
-    func getWorkoutLocationData(completion: @escaping ([CLLocationCoordinate2D]?, Error?) -> Void) {
+    func getWorkoutLocationData(completion: @escaping ([CLLocation]?, Error?) -> Void) {
         self.getWorkoutRouteSamples() { (samples, error) in
             if let error = error {
                 completion(nil, error)
@@ -66,7 +66,7 @@ extension HKWorkout {
             // For each sample, we want to extract the location datazzz...
             //
             let dispatchGroup = DispatchGroup()
-            var locationData = [CLLocationCoordinate2D]()
+            var locationData = [CLLocation]()
 
             locationSamples.forEach { sample in
                 guard let routeSample = sample as? HKWorkoutRoute else {
@@ -77,9 +77,7 @@ extension HKWorkout {
                 let routeQuery = HKWorkoutRouteQuery(route: routeSample) { (query, locations, done, error) in
 
                     if let locationResults = locations {
-                        locationData += locationResults.map {
-                            return CLLocationCoordinate2D(latitude: $0.coordinate.latitude, longitude: $0.coordinate.longitude)
-                        }
+                        locationData += locationResults
                     }
                     
                     if done {

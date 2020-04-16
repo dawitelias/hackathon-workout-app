@@ -13,6 +13,7 @@
 		A52FBEFC2447C8F700016025 /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A52FBEFB2447C8F700016025 /* MapView.swift */; };
 		A52FBEFE2447C91700016025 /* WorkoutDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = A52FBEFD2447C91700016025 /* WorkoutDetail.swift */; };
 		A52FBF012447D6ED00016025 /* HKWorkout+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A52FBF002447D6ED00016025 /* HKWorkout+Extensions.swift */; };
+		A5B6CEE32448913300CF2B86 /* Date+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B6CEE22448913300CF2B86 /* Date+Extensions.swift */; };
 		AC46320A2447593700619284 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC4632092447593700619284 /* AppDelegate.swift */; };
 		AC46320C2447593700619284 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC46320B2447593700619284 /* SceneDelegate.swift */; };
 		AC46320E2447593700619284 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC46320D2447593700619284 /* HomeView.swift */; };
@@ -51,6 +52,7 @@
 		A52FBEFB2447C8F700016025 /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
 		A52FBEFD2447C91700016025 /* WorkoutDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutDetail.swift; sourceTree = "<group>"; };
 		A52FBF002447D6ED00016025 /* HKWorkout+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HKWorkout+Extensions.swift"; sourceTree = "<group>"; };
+		A5B6CEE22448913300CF2B86 /* Date+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extensions.swift"; sourceTree = "<group>"; };
 		AC4632062447593700619284 /* Workouts.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Workouts.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AC4632092447593700619284 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		AC46320B2447593700619284 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -124,6 +126,7 @@
 			children = (
 				A52FBF002447D6ED00016025 /* HKWorkout+Extensions.swift */,
 				A52FBEF72447C84900016025 /* HealthKitAssistant.swift */,
+				A5B6CEE22448913300CF2B86 /* Date+Extensions.swift */,
 			);
 			path = HelpersAndExtensions;
 			sourceTree = "<group>";
@@ -335,6 +338,7 @@
 			files = (
 				AC46323A2447712700619284 /* FilterView.swift in Sources */,
 				A52FBEFA2447C89300016025 /* WorkoutRow.swift in Sources */,
+				A5B6CEE32448913300CF2B86 /* Date+Extensions.swift in Sources */,
 				AC46320A2447593700619284 /* AppDelegate.swift in Sources */,
 				A52FBEF52447C81E00016025 /* UserData.swift in Sources */,
 				A52FBF012447D6ED00016025 /* HKWorkout+Extensions.swift in Sources */,
