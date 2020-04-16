@@ -7,24 +7,25 @@
 //
 
 import SwiftUI
+import HealthKit
 
-struct ContentView: View {
-    
+struct HomeView: View {
+    @EnvironmentObject var userData: UserData
+
     @State var showFilterView = false
     @State var showProfileView = false
     
     var body: some View {
         NavigationView {
             List {
-                // sample layout
-                // WorkoutRow can be moved to its own file once we dial it in
-                Section(header: Text("April 2020")) {
-                    WorkoutRow()
-                    WorkoutRow()
-                    WorkoutRow()
-                }
-                Section(header: Text("March 2020")) {
-                    WorkoutRow()
+                ForEach(userData.workoutsGroupedByDate.map { $0.key }, id: \.self) { key in
+                    Section(header: Text(key)) {
+                        ForEach(self.userData.workoutsGroupedByDate[key] ?? [HKWorkout](), id: \.self) { workout in
+                            NavigationLink(destination: WorkoutDetail(workout: workout)) {
+                                WorkoutRow(workout: workout)
+                            }
+                        }
+                    }
                 }
             }
             .navigationBarTitle(Text("Workouts"))
@@ -48,25 +49,8 @@ struct ContentView: View {
     }
 }
 
-struct WorkoutRow: View {
-    var body: some View {
-        NavigationLink(destination: Text("hi there")) {
-            // existing contents…
-            // NavigationLink(destination: ItemDetail(item: item))
-            HStack {
-                Image(systemName: "person.fill")
-                Text("Strength Training")
-                Spacer()
-                Text("Tuesday")
-                    .font(.caption)
-                    .foregroundColor(Color.gray)
-            }
-        }
-    }
-}
-
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView()
+        HomeView().environmentObject(UserData())
     }
 }

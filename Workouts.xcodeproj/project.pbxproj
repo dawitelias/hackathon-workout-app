@@ -7,9 +7,16 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A52FBEF52447C81E00016025 /* UserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = A52FBEF42447C81E00016025 /* UserData.swift */; };
+		A52FBEF82447C84900016025 /* HealthKitAssistant.swift in Sources */ = {isa = PBXBuildFile; fileRef = A52FBEF72447C84900016025 /* HealthKitAssistant.swift */; };
+		A52FBEFA2447C89300016025 /* WorkoutRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = A52FBEF92447C89300016025 /* WorkoutRow.swift */; };
+		A52FBEFC2447C8F700016025 /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A52FBEFB2447C8F700016025 /* MapView.swift */; };
+		A52FBEFE2447C91700016025 /* WorkoutDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = A52FBEFD2447C91700016025 /* WorkoutDetail.swift */; };
+		A52FBF012447D6ED00016025 /* HKWorkout+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A52FBF002447D6ED00016025 /* HKWorkout+Extensions.swift */; };
+		A5B6CEE32448913300CF2B86 /* Date+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B6CEE22448913300CF2B86 /* Date+Extensions.swift */; };
 		AC46320A2447593700619284 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC4632092447593700619284 /* AppDelegate.swift */; };
 		AC46320C2447593700619284 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC46320B2447593700619284 /* SceneDelegate.swift */; };
-		AC46320E2447593700619284 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC46320D2447593700619284 /* ContentView.swift */; };
+		AC46320E2447593700619284 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC46320D2447593700619284 /* HomeView.swift */; };
 		AC4632102447593C00619284 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AC46320F2447593C00619284 /* Assets.xcassets */; };
 		AC4632132447593C00619284 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AC4632122447593C00619284 /* Preview Assets.xcassets */; };
 		AC4632162447593C00619284 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AC4632142447593C00619284 /* LaunchScreen.storyboard */; };
@@ -19,7 +26,6 @@
 		AC46323E244781E800619284 /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AC46323D244781E800619284 /* HealthKit.framework */; };
 		AC4632402447863600619284 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC46323F2447863600619284 /* ProfileView.swift */; };
 		ACB7D44124478A3500D2B680 /* HomeKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ACB7D44024478A3500D2B680 /* HomeKit.framework */; };
-		ACB7D44324478B7A00D2B680 /* HealthKitSetupAssistant.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACB7D44224478B7A00D2B680 /* HealthKitSetupAssistant.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,10 +46,17 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		A52FBEF42447C81E00016025 /* UserData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserData.swift; sourceTree = "<group>"; };
+		A52FBEF72447C84900016025 /* HealthKitAssistant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthKitAssistant.swift; sourceTree = "<group>"; };
+		A52FBEF92447C89300016025 /* WorkoutRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutRow.swift; sourceTree = "<group>"; };
+		A52FBEFB2447C8F700016025 /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
+		A52FBEFD2447C91700016025 /* WorkoutDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutDetail.swift; sourceTree = "<group>"; };
+		A52FBF002447D6ED00016025 /* HKWorkout+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HKWorkout+Extensions.swift"; sourceTree = "<group>"; };
+		A5B6CEE22448913300CF2B86 /* Date+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extensions.swift"; sourceTree = "<group>"; };
 		AC4632062447593700619284 /* Workouts.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Workouts.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AC4632092447593700619284 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		AC46320B2447593700619284 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		AC46320D2447593700619284 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		AC46320D2447593700619284 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		AC46320F2447593C00619284 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		AC4632122447593C00619284 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		AC4632152447593C00619284 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -59,7 +72,6 @@
 		AC46323D244781E800619284 /* HealthKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HealthKit.framework; path = System/Library/Frameworks/HealthKit.framework; sourceTree = SDKROOT; };
 		AC46323F2447863600619284 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		ACB7D44024478A3500D2B680 /* HomeKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HomeKit.framework; path = System/Library/Frameworks/HomeKit.framework; sourceTree = SDKROOT; };
-		ACB7D44224478B7A00D2B680 /* HealthKitSetupAssistant.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HealthKitSetupAssistant.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -89,6 +101,36 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		A52FBEF22447BF9E00016025 /* SupportingViews */ = {
+			isa = PBXGroup;
+			children = (
+				AC46323F2447863600619284 /* ProfileView.swift */,
+				AC4632392447712700619284 /* FilterView.swift */,
+				A52FBEF92447C89300016025 /* WorkoutRow.swift */,
+				A52FBEFB2447C8F700016025 /* MapView.swift */,
+				A52FBEFD2447C91700016025 /* WorkoutDetail.swift */,
+			);
+			path = SupportingViews;
+			sourceTree = "<group>";
+		};
+		A52FBEF32447C81000016025 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				A52FBEF42447C81E00016025 /* UserData.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		A52FBEF62447C83B00016025 /* HelpersAndExtensions */ = {
+			isa = PBXGroup;
+			children = (
+				A52FBF002447D6ED00016025 /* HKWorkout+Extensions.swift */,
+				A52FBEF72447C84900016025 /* HealthKitAssistant.swift */,
+				A5B6CEE22448913300CF2B86 /* Date+Extensions.swift */,
+			);
+			path = HelpersAndExtensions;
+			sourceTree = "<group>";
+		};
 		AC4631FD2447593700619284 = {
 			isa = PBXGroup;
 			children = (
@@ -113,13 +155,13 @@
 		AC4632082447593700619284 /* Workouts */ = {
 			isa = PBXGroup;
 			children = (
-				ACB7D44224478B7A00D2B680 /* HealthKitSetupAssistant.swift */,
-				AC4632392447712700619284 /* FilterView.swift */,
+				A52FBEF62447C83B00016025 /* HelpersAndExtensions */,
+				A52FBEF32447C81000016025 /* Models */,
+				A52FBEF22447BF9E00016025 /* SupportingViews */,
 				AC46323B244781E800619284 /* Workouts.entitlements */,
 				AC4632092447593700619284 /* AppDelegate.swift */,
 				AC46320B2447593700619284 /* SceneDelegate.swift */,
-				AC46320D2447593700619284 /* ContentView.swift */,
-				AC46323F2447863600619284 /* ProfileView.swift */,
+				AC46320D2447593700619284 /* HomeView.swift */,
 				AC46320F2447593C00619284 /* Assets.xcassets */,
 				AC4632142447593C00619284 /* LaunchScreen.storyboard */,
 				AC4632172447593C00619284 /* Info.plist */,
@@ -295,11 +337,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				AC46323A2447712700619284 /* FilterView.swift in Sources */,
+				A52FBEFA2447C89300016025 /* WorkoutRow.swift in Sources */,
+				A5B6CEE32448913300CF2B86 /* Date+Extensions.swift in Sources */,
 				AC46320A2447593700619284 /* AppDelegate.swift in Sources */,
+				A52FBEF52447C81E00016025 /* UserData.swift in Sources */,
+				A52FBF012447D6ED00016025 /* HKWorkout+Extensions.swift in Sources */,
 				AC4632402447863600619284 /* ProfileView.swift in Sources */,
-				ACB7D44324478B7A00D2B680 /* HealthKitSetupAssistant.swift in Sources */,
 				AC46320C2447593700619284 /* SceneDelegate.swift in Sources */,
-				AC46320E2447593700619284 /* ContentView.swift in Sources */,
+				A52FBEFE2447C91700016025 /* WorkoutDetail.swift in Sources */,
+				A52FBEFC2447C8F700016025 /* MapView.swift in Sources */,
+				A52FBEF82447C84900016025 /* HealthKitAssistant.swift in Sources */,
+				AC46320E2447593700619284 /* HomeView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -467,14 +515,15 @@
 				CODE_SIGN_ENTITLEMENTS = Workouts/Workouts.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"Workouts/Preview Content\"";
-				DEVELOPMENT_TEAM = DE63G2V7AY;
+				DEVELOPMENT_TEAM = ARSB35QAMQ;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = Workouts/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.dawitelias.Workouts;
+				PRODUCT_BUNDLE_IDENTIFIER = com.echeroske.swiftui.HealthKitSwiftUI;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -488,14 +537,15 @@
 				CODE_SIGN_ENTITLEMENTS = Workouts/Workouts.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"Workouts/Preview Content\"";
-				DEVELOPMENT_TEAM = DE63G2V7AY;
+				DEVELOPMENT_TEAM = ARSB35QAMQ;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = Workouts/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.dawitelias.Workouts;
+				PRODUCT_BUNDLE_IDENTIFIER = com.echeroske.swiftui.HealthKitSwiftUI;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
