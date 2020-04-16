@@ -11,15 +11,23 @@ import HealthKit
 
 struct WorkoutRow: View {
     var workout: HKWorkout
+    var exerciseGreenColor: Color = Color(UIColor(named: "exerciseGreen")!)
 
     var body: some View {
         HStack {
             Image(systemName: workout.workoutActivityType.workoutTypeMetadata.systemIconName)
-            Text(workout.workoutActivityType.workoutTypeMetadata.activityTypeDescription)
-            Spacer()
-            Text(workout.startDate.weekday)
-                .font(.caption)
-                .foregroundColor(Color.gray)
+            VStack(alignment: .leading) {
+                HStack {
+                    Text(workout.workoutActivityType.workoutTypeMetadata.activityTypeDescription) // ^^
+                    Text("·   " + workout.startDate.weekday)
+                    .font(.caption)
+                    .foregroundColor(Color.gray)
+                }
+                Text("\(workout.totalEnergyBurned?.doubleValue(for: .kilocalorie()) ?? 0, specifier: "%.0f")cal")
+                    .font(.system(.largeTitle, design: .rounded))
+                    .foregroundColor(exerciseGreenColor)
+            }
+            .padding(.leading)
         }
     }
 }
