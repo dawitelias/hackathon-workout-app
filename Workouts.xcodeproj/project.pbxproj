@@ -515,7 +515,7 @@
 				CODE_SIGN_ENTITLEMENTS = Workouts/Workouts.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"Workouts/Preview Content\"";
-				DEVELOPMENT_TEAM = ARSB35QAMQ;
+				DEVELOPMENT_TEAM = DE63G2V7AY;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = Workouts/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
@@ -523,7 +523,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.echeroske.swiftui.HealthKitSwiftUI;
+				PRODUCT_BUNDLE_IDENTIFIER = com.dawitelias.swiftui.HealthKitSwiftUI;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -537,7 +537,7 @@
 				CODE_SIGN_ENTITLEMENTS = Workouts/Workouts.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"Workouts/Preview Content\"";
-				DEVELOPMENT_TEAM = ARSB35QAMQ;
+				DEVELOPMENT_TEAM = DE63G2V7AY;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = Workouts/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
@@ -545,7 +545,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.echeroske.swiftui.HealthKitSwiftUI;
+				PRODUCT_BUNDLE_IDENTIFIER = com.dawitelias.swiftui.HealthKitSwiftUI;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

@@ -15,15 +15,26 @@ struct HomeView: View {
     @State var showFilterView = false
     @State var showProfileView = false
     
+    init() {
+        UITableViewHeaderFooterView.appearance().tintColor = UIColor.systemGray6
+    }
+    
     var body: some View {
         NavigationView {
             List {
                 ForEach(userData.workoutsGroupedByDate.map { $0.key }, id: \.self) { key in
-                    Section(header: Text(key)) {
+//                    Section(header: Text(key)) {
+                    Section(header: VStack {
+                        Text(key)
+                            .font(.headline)
+                            .padding(.vertical, 8).padding(.horizontal)
+                            .frame(width: UIScreen.main.bounds.width, alignment: .leading)
+                    }) {
                         ForEach(self.userData.workoutsGroupedByDate[key] ?? [HKWorkout](), id: \.self) { workout in
                             NavigationLink(destination: WorkoutDetail(workout: workout)) {
                                 WorkoutRow(workout: workout)
                             }
+                            .padding(.vertical, 8.0)
                         }
                     }
                 }
@@ -46,6 +57,7 @@ struct HomeView: View {
                 }
             )
         }
+        .accentColor(Color.pink)
     }
 }
 
