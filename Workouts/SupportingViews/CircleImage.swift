@@ -10,14 +10,14 @@ import SwiftUI
 
 struct CircleImage: View {
     var image: Image
-    var color: Color = Color(UIColor(named: "CustomBlue")!)
 
     var body: some View {
         image
             .clipShape(Circle())
-            .overlay(Circle().stroke(color, lineWidth: 1))
+            .overlay(Circle().stroke(Color.white, lineWidth: 1))
             .shadow(radius: 3)
             .frame(width: 20, height: 20, alignment: .center)
+            .padding(10)
     }
 }
 
