@@ -36,22 +36,25 @@ struct ProfileView: View {
     }
     
     private func authorizeHealthKit() {
-      HealthKitSetupAssistant.authorizeHealthKit { (authorized, error) in
-            
-        guard authorized else {
-          let baseMessage = "HealthKit Authorization Failed"
-              
-          if let error = error {
-            print("\(baseMessage). Reason: \(error.localizedDescription)")
-          } else {
-            print(baseMessage)
-          }
-              
-          return
-        }
-            
-        print("HealthKit Successfully Authorized.")
-      }
+        // Note - I went ahead a coded this up so that as soon as we try and access the user health data
+        // to display on the front page of the app we prompt for permission from the user to read their data
+
+//      HealthKitAssistant.authorizeHealthKit { (authorized, error) in
+//
+//    guard authorized else {
+//          let baseMessage = "HealthKit Authorization Failed"
+//
+//          if let error = error {
+//            print("\(baseMessage). Reason: \(error.localizedDescription)")
+//          } else {
+//            print(baseMessage)
+//          }
+//
+//          return
+//        }
+//
+//        print("HealthKit Successfully Authorized.")
+//      }
     }
     
 }
