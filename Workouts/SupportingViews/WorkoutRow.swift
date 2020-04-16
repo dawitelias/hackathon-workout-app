@@ -13,17 +13,13 @@ struct WorkoutRow: View {
     var workout: HKWorkout
 
     var body: some View {
-        NavigationLink(destination: Text("hi there")) {
-        // existing contents…
-        // NavigationLink(destination: ItemDetail(item: item))
-            HStack {
-                Image(systemName: workout.workoutTypeMetadata.systemIconName)
-                Text(workout.workoutTypeMetadata.activityDescription)
-                Spacer()
-                Text(workout.startDate.weekday)
-                    .font(.caption)
-                    .foregroundColor(Color.gray)
-            }
+        HStack {
+            Image(systemName: workout.workoutTypeMetadata.systemIconName) // The icons are being determined in HelpersAndExtensions/HKWorkout+Extensions file... you can tell it which icons you want for each activity type in here
+            Text(workout.workoutTypeMetadata.activityDescription) // ^^
+            Spacer()
+            Text(workout.startDate.weekday)
+                .font(.caption)
+                .foregroundColor(Color.gray)
         }
     }
 }
