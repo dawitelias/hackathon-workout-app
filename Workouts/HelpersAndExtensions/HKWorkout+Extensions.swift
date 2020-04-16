@@ -8,41 +8,7 @@
 import HealthKit
 import CoreLocation
 
-struct WorkoutTypeMetadata {
-    var systemIconName: String
-    var activityDescription: String
-
-    init(type: HKWorkoutActivityType) {
-        switch type {
-            case .running:
-                self.systemIconName = "person.fill"
-                self.activityDescription = "Running"
-            case .swimming:
-               self.systemIconName = "person.fill"
-               self.activityDescription = "Swimming"
-            case .cycling:
-               self.systemIconName = "person.fill"
-               self.activityDescription = "Cycling"
-            case .walking:
-                self.systemIconName = "person.fill"
-                self.activityDescription = "Walking"
-            default:
-               self.systemIconName = "person.fill"
-               self.activityDescription = "Some Other Activity Type"
-        }
-    }
-}
-
 extension HKWorkout {
-
-    // Couple'a extra *bits* in the HKWorkout that will make it easy for us to get icons and activity types
-    //
-    var workoutTypeMetadata: WorkoutTypeMetadata {
-        get {
-            return WorkoutTypeMetadata(type: self.workoutActivityType)
-        }
-    }
-
     private func getWorkoutRouteSamples(completion: @escaping ([HKSample]?, Error?) -> Void) {
         let runningObjectQuery = HKQuery.predicateForObjects(from: self)
 

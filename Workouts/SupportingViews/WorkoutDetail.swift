@@ -16,7 +16,6 @@ struct WorkoutDetail: View {
     var body: some View {
         VStack {
             MapView(workout: workout)
-            Text("Here is a map view of the route???")
         }
     }
 }
