@@ -53,7 +53,7 @@ struct HomeView: View {
                 }) {
                     Image(systemName: "line.horizontal.3.decrease.circle").imageScale(.large)
                 }.sheet(isPresented: $showFilterView) {
-                    FilterView(showFilterView: self.$showFilterView)
+                    FilterView(showFilterView: self.$showFilterView).environmentObject(self.userData)
                 }
             )
         }

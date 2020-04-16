@@ -15,10 +15,10 @@ struct WorkoutRow: View {
 
     var body: some View {
         HStack {
-            Image(systemName: workout.workoutTypeMetadata.systemIconName) // The icons are being determined in HelpersAndExtensions/HKWorkout+Extensions file... you can tell it which icons you want for each activity type in here
+            Image(systemName: workout.workoutActivityType.workoutTypeMetadata.systemIconName)
             VStack(alignment: .leading) {
                 HStack {
-                    Text(workout.workoutTypeMetadata.activityDescription) // ^^
+                    Text(workout.workoutActivityType.workoutTypeMetadata.activityTypeDescription) // ^^
                     Text("·   " + workout.startDate.weekday)
                     .font(.caption)
                     .foregroundColor(Color.gray)
@@ -27,7 +27,6 @@ struct WorkoutRow: View {
                     .font(.largeTitle)
                     .foregroundColor(Color.init(exerciseGreen))
             }
-            
         }
     }
 }

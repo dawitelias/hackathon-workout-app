@@ -10,8 +10,8 @@ import SwiftUI
 import HealthKit
 
 struct FilterView: View {
-    
-    var workouts = ["Strength Training", "Yoga", "Outdoor Run", "Outdoor Cycle", "Etc....."]
+    @EnvironmentObject private var userData: UserData
+    var workouts = HKWorkoutActivityType.allCases.map { $0.workoutTypeMetadata.activityTypeDescription }
     
     @Binding var showFilterView: Bool
     @State private var selectedWorkouts = 0
@@ -48,12 +48,17 @@ struct FilterView: View {
                 }) {
                     Text("Done").bold()
                 })
+        }.onAppear {
+            self.selectedWorkouts = self.workouts.firstIndex(of: self.userData.activityTypeFilter.workoutTypeMetadata.activityTypeDescription) ?? 0
+        }.onDisappear {
+            self.userData.activityTypeFilter = HKWorkoutActivityType.allCases.filter { return $0.workoutTypeMetadata.activityTypeDescription == self.workouts[self.selectedWorkouts] }.first ?? .walking
+            self.userData.queryWorkouts()
         }
     }
 }
 
 struct FilterView_Previews: PreviewProvider {
     static var previews: some View {
-        FilterView(showFilterView: .constant(false))
+        FilterView(showFilterView: .constant(false)).environmentObject(UserData())
     }
 }

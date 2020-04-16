@@ -14,12 +14,18 @@ class UserData: ObservableObject {
     @Published var workouts: [HKWorkout] = [HKWorkout]()
     @Published var workoutsGroupedByDate: [String: [HKWorkout]] = [String: [HKWorkout]]()
     
+    // Add in whatever activity types you want to see here, I just added default, if we can select multiple from the picker we can update this to hold array
+    //
+    @Published var activityTypeFilter: HKWorkoutActivityType = .walking
+    
     private var healthKitAssistant = HealthKitAssistant()
 
     init() {
-        // TODO: ".walking" -> this is just to go and grab some initial data this will change
-        //
-        healthKitAssistant.getWorkoutsByType(type: .walking) { [weak self] results, error in
+        queryWorkouts()
+    }
+    
+    func queryWorkouts() {
+        healthKitAssistant.getWorkoutsByType(type: activityTypeFilter) { [weak self] results, error in
             guard let workouts = results else {
                 return
             }
@@ -27,9 +33,8 @@ class UserData: ObservableObject {
             self?.groupWorkouts(workouts: workouts)
         }
     }
-    
+
     private func groupWorkouts(workouts: [HKWorkout]) {
         self.workoutsGroupedByDate = Dictionary(grouping: workouts, by: { ("\($0.startDate.month) \($0.startDate.year)") })
-        print("Finished grouping workouts: \(self.workoutsGroupedByDate.count)")
     }
 }
