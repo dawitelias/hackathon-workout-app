@@ -23,7 +23,7 @@ struct WorkoutRow: View {
                     .font(.caption)
                     .foregroundColor(Color.gray)
                 }
-                Text("\(workout.totalEnergyBurned?.doubleValue(for: .kilocalorie()) ?? 0)")
+                Text("\(workout.totalEnergyBurned?.doubleValue(for: .kilocalorie()) ?? 0, specifier: "%.0f")cal")
                     .font(.largeTitle)
                     .foregroundColor(Color.init(exerciseGreen))
             }
