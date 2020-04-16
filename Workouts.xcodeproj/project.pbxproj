@@ -15,6 +15,10 @@
 		A52FBF012447D6ED00016025 /* HKWorkout+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A52FBF002447D6ED00016025 /* HKWorkout+Extensions.swift */; };
 		A5B6CEE32448913300CF2B86 /* Date+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B6CEE22448913300CF2B86 /* Date+Extensions.swift */; };
 		A5B6CEE52448AB2D00CF2B86 /* HKWorkoutActivityType+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B6CEE42448AB2D00CF2B86 /* HKWorkoutActivityType+Extension.swift */; };
+		A5B6CEE72448CA0900CF2B86 /* FeaturedWorkout.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B6CEE62448CA0900CF2B86 /* FeaturedWorkout.swift */; };
+		A5B6CEE92448D30800CF2B86 /* CircleImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B6CEE82448D30800CF2B86 /* CircleImage.swift */; };
+		A5B6CEEB2448D91100CF2B86 /* ShareSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B6CEEA2448D91100CF2B86 /* ShareSheet.swift */; };
+		A5B6CEED2448F30300CF2B86 /* MapImageGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B6CEEC2448F30300CF2B86 /* MapImageGenerator.swift */; };
 		AC46320A2447593700619284 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC4632092447593700619284 /* AppDelegate.swift */; };
 		AC46320C2447593700619284 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC46320B2447593700619284 /* SceneDelegate.swift */; };
 		AC46320E2447593700619284 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC46320D2447593700619284 /* HomeView.swift */; };
@@ -55,6 +59,10 @@
 		A52FBF002447D6ED00016025 /* HKWorkout+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HKWorkout+Extensions.swift"; sourceTree = "<group>"; };
 		A5B6CEE22448913300CF2B86 /* Date+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extensions.swift"; sourceTree = "<group>"; };
 		A5B6CEE42448AB2D00CF2B86 /* HKWorkoutActivityType+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HKWorkoutActivityType+Extension.swift"; sourceTree = "<group>"; };
+		A5B6CEE62448CA0900CF2B86 /* FeaturedWorkout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeaturedWorkout.swift; sourceTree = "<group>"; };
+		A5B6CEE82448D30800CF2B86 /* CircleImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleImage.swift; sourceTree = "<group>"; };
+		A5B6CEEA2448D91100CF2B86 /* ShareSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareSheet.swift; sourceTree = "<group>"; };
+		A5B6CEEC2448F30300CF2B86 /* MapImageGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapImageGenerator.swift; sourceTree = "<group>"; };
 		AC4632062447593700619284 /* Workouts.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Workouts.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AC4632092447593700619284 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		AC46320B2447593700619284 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -111,6 +119,9 @@
 				A52FBEF92447C89300016025 /* WorkoutRow.swift */,
 				A52FBEFB2447C8F700016025 /* MapView.swift */,
 				A52FBEFD2447C91700016025 /* WorkoutDetail.swift */,
+				A5B6CEE62448CA0900CF2B86 /* FeaturedWorkout.swift */,
+				A5B6CEE82448D30800CF2B86 /* CircleImage.swift */,
+				A5B6CEEA2448D91100CF2B86 /* ShareSheet.swift */,
 			);
 			path = SupportingViews;
 			sourceTree = "<group>";
@@ -130,6 +141,7 @@
 				A52FBEF72447C84900016025 /* HealthKitAssistant.swift */,
 				A5B6CEE22448913300CF2B86 /* Date+Extensions.swift */,
 				A5B6CEE42448AB2D00CF2B86 /* HKWorkoutActivityType+Extension.swift */,
+				A5B6CEEC2448F30300CF2B86 /* MapImageGenerator.swift */,
 			);
 			path = HelpersAndExtensions;
 			sourceTree = "<group>";
@@ -341,17 +353,21 @@
 			files = (
 				AC46323A2447712700619284 /* FilterView.swift in Sources */,
 				A52FBEFA2447C89300016025 /* WorkoutRow.swift in Sources */,
+				A5B6CEED2448F30300CF2B86 /* MapImageGenerator.swift in Sources */,
 				A5B6CEE52448AB2D00CF2B86 /* HKWorkoutActivityType+Extension.swift in Sources */,
 				A5B6CEE32448913300CF2B86 /* Date+Extensions.swift in Sources */,
 				AC46320A2447593700619284 /* AppDelegate.swift in Sources */,
 				A52FBEF52447C81E00016025 /* UserData.swift in Sources */,
 				A52FBF012447D6ED00016025 /* HKWorkout+Extensions.swift in Sources */,
+				A5B6CEEB2448D91100CF2B86 /* ShareSheet.swift in Sources */,
+				A5B6CEE72448CA0900CF2B86 /* FeaturedWorkout.swift in Sources */,
 				AC4632402447863600619284 /* ProfileView.swift in Sources */,
 				AC46320C2447593700619284 /* SceneDelegate.swift in Sources */,
 				A52FBEFE2447C91700016025 /* WorkoutDetail.swift in Sources */,
 				A52FBEFC2447C8F700016025 /* MapView.swift in Sources */,
 				A52FBEF82447C84900016025 /* HealthKitAssistant.swift in Sources */,
 				AC46320E2447593700619284 /* HomeView.swift in Sources */,
+				A5B6CEE92448D30800CF2B86 /* CircleImage.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

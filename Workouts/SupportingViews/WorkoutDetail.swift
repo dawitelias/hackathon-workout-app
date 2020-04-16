@@ -9,9 +9,14 @@
 import SwiftUI
 import HealthKit
 import CoreLocation
+import MapKit
+
+var generatedMapImage: UIImage = UIImage()
 
 struct WorkoutDetail: View {
     let workout: HKWorkout
+
+    @State var showShareSheet: Bool = false
 
     var body: some View {
         VStack(spacing: 0) {
@@ -92,6 +97,31 @@ struct WorkoutDetail: View {
             .shadow(radius: 3, y: 0)
         }
         .edgesIgnoringSafeArea(.vertical)
+        .navigationBarItems(trailing:
+            Button(action: {
+                if self.showShareSheet == false {
+                    self.workout.getWorkoutLocationData { route, error in
+                        guard let workoutRoute = route else {
+                            return
+                        }
+                        MapImageGenerator.generateMapImageWithRoute(route: workoutRoute) {
+                            image, error in
+                            guard let generatedImage = image else {
+                                return
+                            }
+                            generatedMapImage = generatedImage
+                            self.showShareSheet.toggle()
+                        }
+                    }
+                } else {
+                    self.showShareSheet.toggle()
+                }
+            }) {
+                Image(systemName: "square.and.arrow.up").imageScale(.large)
+            }.sheet(isPresented: $showShareSheet) {
+                ShareSheet(activityItems: [generatedMapImage, "Generated map image"])
+            }
+        )
     }
 }
 
