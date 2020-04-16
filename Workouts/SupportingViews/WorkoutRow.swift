@@ -11,7 +11,7 @@ import HealthKit
 
 struct WorkoutRow: View {
     var workout: HKWorkout
-    let exerciseGreen = UIColor(red: 0.655, green: 0.992, blue: 0.2, alpha: 1)
+    var exerciseGreenColor: Color = Color(UIColor(named: "exerciseGreen")!)
 
     var body: some View {
         HStack {
@@ -24,9 +24,10 @@ struct WorkoutRow: View {
                     .foregroundColor(Color.gray)
                 }
                 Text("\(workout.totalEnergyBurned?.doubleValue(for: .kilocalorie()) ?? 0, specifier: "%.0f")cal")
-                    .font(.largeTitle)
-                    .foregroundColor(Color.init(exerciseGreen))
+                    .font(.system(.largeTitle, design: .rounded))
+                    .foregroundColor(exerciseGreenColor)
             }
+            .padding(.leading)
         }
     }
 }
