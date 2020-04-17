@@ -6,6 +6,8 @@
 //  Copyright © 2020 Dawit Elias. All rights reserved.
 //
 
+// This component is curtosy of Jeff Jackson
+
 import SwiftUI
 
 struct ShareSheet: UIViewControllerRepresentable {
