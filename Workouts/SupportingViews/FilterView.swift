@@ -55,46 +55,46 @@ struct FilterView: View {
                 
                 // Select date you want to show
                 //
-                Section(header: Text("Filter by Date Range")) {
+                Section(header: Text("Date 📅")) {
                     DatePicker(selection: $startDate, in: ...(Calendar.current.date(byAdding: .month, value: -12, to: Date()) ?? Date()), displayedComponents: .date) {
-                        Text("Start Date:")
+                        Text("From")
                     }
                     DatePicker(selection: $endDate, in: ...(Calendar.current.date(byAdding: .month, value: 12, to: Date()) ?? Date()), displayedComponents: .date) {
-                        Text("End Date:")
+                        Text("To")
                     }
-                }
-                
-
-                // Select calorie range
-                //
-                Section(header: Text("Calories Burned")) {
-                TextField("From", text: $caloriesBurnedMin)
-                    .keyboardType(.numberPad)
-                TextField("To", text: $caloriesBurnedMax)
-                    .keyboardType(.numberPad)
-
                 }
                 
                 // Select distance range
                 //
-                Section(header: Text("Filter by Workout Distance")) {
+                // maybe this is conditionally visible based on certain types of workouts (e.g., runs, swims, bike rides, etc.)
+                Section(header: Text("Workout Distance 📏")) {
                     DatePicker(selection: $startDate, in: ...(Calendar.current.date(byAdding: .month, value: -12, to: Date()) ?? Date()), displayedComponents: .date) {
-                        Text("Start Date:")
+                        Text("From")
                     }
                     DatePicker(selection: $endDate, in: ...(Calendar.current.date(byAdding: .month, value: 12, to: Date()) ?? Date()), displayedComponents: .date) {
-                        Text("End Date:")
+                        Text("To")
                     }
                 }
                 
                 // Select duration range
                 //
-                Section(header: Text("Filter by Workout Duration")) {
-                    DatePicker(selection: $startDate, in: ...(Calendar.current.date(byAdding: .month, value: -12, to: Date()) ?? Date()), displayedComponents: .date) {
-                        Text("Start Date:")
+                Section(header: Text("Workout Duration ⏳")) {
+                    DatePicker(selection: $startDate, in: ...(Calendar.current.date(byAdding: .month, value: -12, to: Date()) ?? Date()), displayedComponents: .hourAndMinute) {
+                        Text("From")
                     }
-                    DatePicker(selection: $endDate, in: ...(Calendar.current.date(byAdding: .month, value: 12, to: Date()) ?? Date()), displayedComponents: .date) {
-                        Text("End Date:")
+                    DatePicker(selection: $endDate, in: ...(Calendar.current.date(byAdding: .month, value: 12, to: Date()) ?? Date()), displayedComponents: .hourAndMinute) {
+                        Text("To")
                     }
+                }
+                
+                // Select calorie range
+                //
+                Section(header: Text("Calories Burned 🥵")) {
+                TextField("From", text: $caloriesBurnedMin)
+                    .keyboardType(.numberPad)
+                TextField("To", text: $caloriesBurnedMax)
+                    .keyboardType(.numberPad)
+
                 }
 
             }
