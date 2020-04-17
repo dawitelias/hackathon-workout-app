@@ -25,15 +25,19 @@ struct HomeView: View {
         return NavigationView {
             List {
                 if featuredWorkout != nil {
-                    NavigationLink(destination: WorkoutDetail(workout: featuredWorkout!)) {
-                        VStack(alignment: .leading) {
-                            Text("Your latest workout 🏅")
-                                .padding(.vertical)
-                                .font(.system(size: 21, weight: .medium))
+                    Section(header: VStack {
+                        Text("Your latest workout 🏅")
+                            .padding(.all)
+                            .font(.system(size: 21, weight: .medium))
+                            .frame(width: UIScreen.main.bounds.width, alignment: .leading)
+                    }) {
+                        ZStack {
                             FeaturedWorkout(workout: featuredWorkout!)
-                                .padding(EdgeInsets(top: 0, leading: 10, bottom: 0, trailing: 10))
+                            NavigationLink(destination: WorkoutDetail(workout: featuredWorkout!)) {
+                                EmptyView()
+                            }
                         }
-                    }.padding(.trailing, -22.0) // <-- hide that dang little arrow icon
+                    }
                 }
                 
                 ForEach(userData.workoutsGroupedByDate.map { $0.key }, id: \.self) { key in
@@ -52,6 +56,7 @@ struct HomeView: View {
                     }
                 }
             }
+            .listStyle(GroupedListStyle()).environment(\.horizontalSizeClass, .regular)
             .navigationBarTitle(Text("Workouts"))
             .navigationBarItems(leading:
                 Button(action: {
