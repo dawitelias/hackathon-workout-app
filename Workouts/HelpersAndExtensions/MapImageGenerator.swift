@@ -22,6 +22,10 @@ class MapImageGenerator {
         options.mapType = .standard
         options.size = finalImageSize
         
+        // Check if we have a valid route, insantiate a polyline off of the route
+        // so that we can get the bounding box around the polygon where we want to center the map for
+        // generating the image
+        //
         if route.count > 0 {
              let polyline = MKGeodesicPolyline(coordinates: route.map { return CLLocationCoordinate2D(latitude: $0.coordinate.latitude, longitude: $0.coordinate.longitude) }, count: route.count)
             options.mapRect = polyline.boundingMapRect

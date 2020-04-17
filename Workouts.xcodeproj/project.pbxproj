@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A52F932524493C4900DDB791 /* ChuckNorris.swift in Sources */ = {isa = PBXBuildFile; fileRef = A52F932424493C4900DDB791 /* ChuckNorris.swift */; };
 		A52FBEF52447C81E00016025 /* UserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = A52FBEF42447C81E00016025 /* UserData.swift */; };
 		A52FBEF82447C84900016025 /* HealthKitAssistant.swift in Sources */ = {isa = PBXBuildFile; fileRef = A52FBEF72447C84900016025 /* HealthKitAssistant.swift */; };
 		A52FBEFA2447C89300016025 /* WorkoutRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = A52FBEF92447C89300016025 /* WorkoutRow.swift */; };
@@ -51,6 +52,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		A52F932424493C4900DDB791 /* ChuckNorris.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChuckNorris.swift; sourceTree = "<group>"; };
 		A52FBEF42447C81E00016025 /* UserData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserData.swift; sourceTree = "<group>"; };
 		A52FBEF72447C84900016025 /* HealthKitAssistant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthKitAssistant.swift; sourceTree = "<group>"; };
 		A52FBEF92447C89300016025 /* WorkoutRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutRow.swift; sourceTree = "<group>"; };
@@ -142,6 +144,7 @@
 				A5B6CEE22448913300CF2B86 /* Date+Extensions.swift */,
 				A5B6CEE42448AB2D00CF2B86 /* HKWorkoutActivityType+Extension.swift */,
 				A5B6CEEC2448F30300CF2B86 /* MapImageGenerator.swift */,
+				A52F932424493C4900DDB791 /* ChuckNorris.swift */,
 			);
 			path = HelpersAndExtensions;
 			sourceTree = "<group>";
@@ -353,6 +356,7 @@
 			files = (
 				AC46323A2447712700619284 /* FilterView.swift in Sources */,
 				A52FBEFA2447C89300016025 /* WorkoutRow.swift in Sources */,
+				A52F932524493C4900DDB791 /* ChuckNorris.swift in Sources */,
 				A5B6CEED2448F30300CF2B86 /* MapImageGenerator.swift in Sources */,
 				A5B6CEE52448AB2D00CF2B86 /* HKWorkoutActivityType+Extension.swift in Sources */,
 				A5B6CEE32448913300CF2B86 /* Date+Extensions.swift in Sources */,

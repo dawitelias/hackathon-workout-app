@@ -16,21 +16,34 @@ var generatedMapImage: UIImage = UIImage()
 struct WorkoutDetail: View {
     let workout: HKWorkout
 
+    @State var route: [CLLocation]? = nil
     @State var showShareSheet: Bool = false
 
     var body: some View {
-        VStack(spacing: 0) {
+        let workoutDistance = workout.totalDistance?.doubleValue(for: .mile()) ?? 0
+    
+        let distanceString = "\(String.init(format: "%.0f", workoutDistance))mi"
+        let workoutTimer = workout.duration.getTimerStyleActivityDurationString()
+        let workoutHrAndMin = workout.duration.getHoursAndMinutesString()
+
+        return VStack(spacing: 0) {
             MapView(workout: workout)
             VStack(alignment: .leading) {
                 // header
-                VStack(alignment: .leading) {
-                    Text(workout.workoutActivityType.workoutTypeMetadata.activityTypeDescription)
-                        .font(.title)
-                        .fontWeight(.semibold)
-                    Text("\(workout.startDate.weekday), " + "\(workout.duration)hrs")
-                        .font(.subheadline)
-                        .foregroundColor(.gray)
+                HStack {
+                    CircleImage(image: Image(workout.workoutActivityType.workoutTypeMetadata.systemIconName))
+                        .padding(EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 10))
+
+                    VStack(alignment: .leading) {
+                        Text(workout.workoutActivityType.workoutTypeMetadata.activityTypeDescription)
+                            .font(.title)
+                            .fontWeight(.semibold)
+                        Text("\(workout.startDate.weekday), " + "\(workoutHrAndMin)")
+                            .font(.subheadline)
+                            .foregroundColor(.gray)
+                    }
                 }
+                
                 Divider()
                 
                 // metrics.. all static right now..
@@ -38,14 +51,14 @@ struct WorkoutDetail: View {
                 HStack {
                     VStack(alignment: .leading) {
                         Text("Total Time")
-                        Text("0:41:48")
+                        Text(workoutTimer)
                             .font(.system(.title, design: .rounded))
                             .foregroundColor(.yellow)
                     }
                     Spacer()
                     VStack(alignment: .leading) {
                         Text("Distance")
-                        Text("2.10mi")
+                        Text(distanceString)
                             .font(.system(.title, design: .rounded))
                             .foregroundColor(.blue)
                     }
@@ -119,7 +132,7 @@ struct WorkoutDetail: View {
             }) {
                 Image(systemName: "square.and.arrow.up").imageScale(.large)
             }.sheet(isPresented: $showShareSheet) {
-                ShareSheet(activityItems: [generatedMapImage, "Generated map image"])
+                ShareSheet(activityItems: [generatedMapImage, "\(distanceString) \u{1F525} \(workoutHrAndMin) \u{1F947} \n\n \(ChuckNorris.getRandomChuckNorrisQuote())"])
             }
         )
     }
