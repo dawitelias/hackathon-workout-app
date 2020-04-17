@@ -20,7 +20,7 @@ struct HomeView: View {
     }
     
     var body: some View {
-        let featuredWorkout = userData.workouts.first // MARK: TODO <-- Emily come back to this
+        let featuredWorkout = userData.featuredWorkout // MARK: TODO <-- Emily come back to this
         
         return NavigationView {
             List {

@@ -33,7 +33,7 @@ class HealthKitAssistant {
             let query = HKSampleQuery(
                 sampleType: .workoutType(),
                 predicate: predicate,
-                limit: 30, // MARK: <- Come back to this... ???
+                limit: 100,
                 sortDescriptors: [sortDescriptor]) { (query, samples, error) in
                     if error != nil {
                         completion(nil, error)
@@ -47,6 +47,93 @@ class HealthKitAssistant {
                     }
                 }
             HKHealthStore().execute(query)
+        }
+    }
+    // MARK: Get workouts regardless of type
+    //
+    func getWorkouts(predicates: [NSPredicate], completion: @escaping ([HKWorkout]?, Error?) -> Void) {
+            checkAccess() { success, error in
+
+                if !success || error != nil {
+                    completion(nil, error)
+                    return
+                }
+            
+                let compound = NSCompoundPredicate(andPredicateWithSubpredicates: predicates)
+                let sortDescriptor = NSSortDescriptor(key: HKSampleSortIdentifierEndDate, ascending: false)
+                
+                let query = HKSampleQuery(
+                    sampleType: .workoutType(),
+                    predicate: compound,
+                    limit: 100,
+                    sortDescriptors: [sortDescriptor]) { (query, samples, error) in
+                        
+                        if error != nil {
+                            completion(nil, error)
+                            return
+                        }
+
+                        DispatchQueue.main.async {
+                            if let workoutData = samples as? [HKWorkout] {
+                                completion(workoutData, nil)
+                            }
+                        }
+                    }
+                
+                HKHealthStore().execute(query)
+            }
+        }
+    
+    // MARK: Get workouts with predicates for each activity type
+    //
+    func getWorkoutsByTypes(types: [HKWorkoutActivityType], predicates: [NSPredicate], completion: @escaping ([HKWorkout]?, Error?) -> Void) {
+        checkAccess() { success, error in
+
+            if !success || error != nil {
+                completion(nil, error)
+                return
+            }
+
+            let dispatchGroup = DispatchGroup()
+            var workoutData = [HKWorkout]()
+            
+            types.forEach { activityType in
+                var summedPredicates = predicates
+                summedPredicates.append(HKQuery.predicateForWorkouts(with: activityType))
+                let compound = NSCompoundPredicate(andPredicateWithSubpredicates: summedPredicates)
+                let sortDescriptor = NSSortDescriptor(key: HKSampleSortIdentifierEndDate, ascending: false)
+                
+                dispatchGroup.enter()
+                let query = HKSampleQuery(
+                    sampleType: .workoutType(),
+                    predicate: compound,
+                    limit: 100,
+                    sortDescriptors: [sortDescriptor]) { (query, samples, error) in
+                        dispatchGroup.leave()
+                        
+                        if error != nil {
+                            completion(nil, error)
+                            return
+                        }
+
+                        if let data = samples as? [HKWorkout] {
+                            workoutData += data
+                        }
+//                        DispatchQueue.main.async {
+//                            if let workoutData = samples as? [HKWorkout] {
+//                                //completion(workoutData, nil)
+//                            }
+//                        }
+                    }
+                HKHealthStore().execute(query)
+            }
+            
+            // notify main dispatch queue with workout data, call completion
+            dispatchGroup.notify(queue: .main) {
+                print("dispatchGroup notifying")
+                completion(workoutData, nil)
+            }
+            
         }
     }
 
