@@ -13,8 +13,19 @@ struct FeaturedWorkout: View {
     var workout: HKWorkout
 
     var body: some View {
-        MapView(workout: workout)
+        return VStack(alignment: .leading) {
+            Text(workout.workoutActivityType.workoutTypeMetadata.activityTypeDescription)
+                .font(.headline)
+                .fontWeight(.semibold)
+            Text("date")
+                .font(.subheadline)
+                .foregroundColor(.gray)
+            MapView(workout: workout)
+                .frame(height: 200)
+            Text("test")
+        }
     }
+
 }
 
 struct FeaturedWorkout_Previews: PreviewProvider {

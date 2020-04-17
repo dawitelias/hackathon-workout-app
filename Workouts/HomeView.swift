@@ -20,10 +20,15 @@ struct HomeView: View {
     }
     
     var body: some View {
-        NavigationView {
+        let featuredWorkout = userData.workouts.first // MARK: TODO <-- Emily come back to this
+        
+        return NavigationView {
             List {
+                if featuredWorkout != nil {
+                    FeaturedWorkout(workout: featuredWorkout!)
+                }
+                
                 ForEach(userData.workoutsGroupedByDate.map { $0.key }, id: \.self) { key in
-//                    Section(header: Text(key)) {
                     Section(header: VStack {
                         Text(key)
                             .font(.headline)
