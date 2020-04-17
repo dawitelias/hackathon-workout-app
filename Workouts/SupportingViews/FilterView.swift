@@ -17,6 +17,8 @@ struct FilterView: View {
     @Binding var showFilterView: Bool
     @State private var selectedWorkouts = 0
     @State private var caloriesBurned = 0
+    @State private var caloriesBurnedMin = ""
+    @State private var caloriesBurnedMax = ""
     
     var body: some View {
         NavigationView {
@@ -29,18 +31,11 @@ struct FilterView: View {
                         }
                     }
                 }
-                // pick a caloric range.. maybe incremented not by 1, which would be pretty terrible
                 Section(header: Text("Calories Burned")) {
-                    Picker("From", selection: $caloriesBurned) {
-                        ForEach(0 ..< 5000) {
-                            Text("\($0) calories")
-                        }
-                    }
-                    Picker("To", selection: $caloriesBurned) {
-                        ForEach(0 ..< 5000) {
-                            Text("\($0) calories")
-                        }
-                    }
+                    TextField("From", text: $caloriesBurnedMin)
+                        .keyboardType(.numberPad)
+                    TextField("To", text: $caloriesBurnedMax)
+                        .keyboardType(.numberPad)
                 }
             }
             .navigationBarTitle(Text("Filters"), displayMode: .inline)
