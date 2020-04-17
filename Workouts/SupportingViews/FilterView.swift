@@ -17,13 +17,33 @@ struct FilterView: View {
     @Binding var showFilterView: Bool
     @State private var selectedWorkouts = 0
     @State private var caloriesBurned = 0
-    @State private var querySinceDate = Date()
+    
+    // Date range state variables
+    //
+    @State private var startDate = Date()
+    @State private var endDate = Date()
+    
+    
+    // Calorie range sort variables
+    //
+    @State private var caloriesBurnedMin: String = "0"
+    @State private var caloriesBurnedMax: String = "1000"
+    
+    // Distance range sort variables
+    //
+    @State private var minDistance: Int = 0
+    @State private var maxDistance: Int = 100
+    
+    // Duration range sort variables
+    //
+    @State private var minDuration: Int = 0
+    @State private var maxDuration: Int = 300
     
     var body: some View {
         NavigationView {
             Form {
                 Section {
-                    Picker("Workouts", selection: $selectedWorkouts) {
+                    Picker("Workout Types", selection: $selectedWorkouts) {
                         ForEach(0 ..< workouts.count) {
                             Text(self.workouts[$0])
 
@@ -33,25 +53,47 @@ struct FilterView: View {
                 
                 // Select date you want to show
                 //
-                Section {
-                    DatePicker(selection: $querySinceDate, in: ...(Calendar.current.date(byAdding: .month, value: -12, to: Date()) ?? Date()), displayedComponents: .date) {
-                        Text("Select a date")
+                Section(header: Text("Filter by Date Range")) {
+                    DatePicker(selection: $startDate, in: ...(Calendar.current.date(byAdding: .month, value: -12, to: Date()) ?? Date()), displayedComponents: .date) {
+                        Text("Start Date:")
+                    }
+                    DatePicker(selection: $endDate, in: ...(Calendar.current.date(byAdding: .month, value: 12, to: Date()) ?? Date()), displayedComponents: .date) {
+                        Text("End Date:")
+                    }
+                }
+                
+
+                // Select calorie range
+                //
+                Section(header: Text("Calories Burned")) {
+                    TextField("From", text: $caloriesBurnedMin)
+                        .keyboardType(.numberPad)
+                    TextField("To", text: $caloriesBurnedMax)
+                        .keyboardType(.numberPad)
+                }
+                
+                // Select distance range
+                //
+                Section(header: Text("Filter by Workout Distance")) {
+                    DatePicker(selection: $startDate, in: ...(Calendar.current.date(byAdding: .month, value: -12, to: Date()) ?? Date()), displayedComponents: .date) {
+                        Text("Start Date:")
+                    }
+                    DatePicker(selection: $endDate, in: ...(Calendar.current.date(byAdding: .month, value: 12, to: Date()) ?? Date()), displayedComponents: .date) {
+                        Text("End Date:")
+                    }
+                }
+                
+                // Select duration range
+                //
+                Section(header: Text("Filter by Workout Duration")) {
+                    DatePicker(selection: $startDate, in: ...(Calendar.current.date(byAdding: .month, value: -12, to: Date()) ?? Date()), displayedComponents: .date) {
+                        Text("Start Date:")
+                    }
+                    DatePicker(selection: $endDate, in: ...(Calendar.current.date(byAdding: .month, value: 12, to: Date()) ?? Date()), displayedComponents: .date) {
+                        Text("End Date:")
                     }
                 }
 
-                // pick a caloric range.. maybe incremented not by 1, which would be pretty terrible
-                Section(header: Text("Calories Burned")) {
-                    Picker("From", selection: $caloriesBurned) {
-                        ForEach(0 ..< 5000) {
-                            Text("\($0) calories")
-                        }
-                    }
-                    Picker("To", selection: $caloriesBurned) {
-                        ForEach(0 ..< 5000) {
-                            Text("\($0) calories")
-                        }
-                    }
-                }
             }
             .navigationBarTitle(Text("Filters"), displayMode: .inline)
                 .navigationBarItems(trailing: Button(action: {
