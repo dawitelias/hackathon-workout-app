@@ -25,13 +25,15 @@ struct HomeView: View {
         return NavigationView {
             List {
                 if featuredWorkout != nil {
-                    VStack(alignment: .leading) {
-                        Text("Your latest workout 🏅")
-                            .padding(.vertical)
-                            .font(.system(size: 21, weight: .medium))
-                        FeaturedWorkout(workout: featuredWorkout!)
-                            .padding(.bottom)
-                    }
+                    NavigationLink(destination: WorkoutDetail(workout: featuredWorkout!)) {
+                        VStack(alignment: .leading) {
+                            Text("Your latest workout 🏅")
+                                .padding(.vertical)
+                                .font(.system(size: 21, weight: .medium))
+                            FeaturedWorkout(workout: featuredWorkout!)
+                                .padding(EdgeInsets(top: 0, leading: 10, bottom: 0, trailing: 10))
+                        }
+                    }.padding(.trailing, -22.0) // <-- hide that dang little arrow icon
                 }
                 
                 ForEach(userData.workoutsGroupedByDate.map { $0.key }, id: \.self) { key in
