@@ -29,7 +29,7 @@ struct MapView: UIViewRepresentable {
             // Note * We need to handle workouts/workout types that may not have route data. This myRoute.count > 0 is a safety check - but we should probably handle this in the workout detail page so that we aren't showing the map view at all if we don't have route data
             if let myRoute = route, myRoute.count > 0 {
                 let polyline = MKGeodesicPolyline(coordinates: myRoute.map { return CLLocationCoordinate2D(latitude: $0.coordinate.latitude, longitude: $0.coordinate.longitude) }, count: myRoute.count)
-                uiView.setVisibleMapRect(polyline.boundingMapRect, animated: true)
+                uiView.setVisibleMapRect(polyline.boundingMapRect, animated: false)
                 uiView.addOverlay(polyline)
             }
             

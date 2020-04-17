@@ -17,6 +17,7 @@ struct FilterView: View {
     @Binding var showFilterView: Bool
     @State private var selectedWorkouts = 0
     @State private var caloriesBurned = 0
+    @State private var querySinceDate = Date()
     
     var body: some View {
         NavigationView {
@@ -29,6 +30,15 @@ struct FilterView: View {
                         }
                     }
                 }
+                
+                // Select date you want to show
+                //
+                Section {
+                    DatePicker(selection: $querySinceDate, in: ...(Calendar.current.date(byAdding: .month, value: -12, to: Date()) ?? Date()), displayedComponents: .date) {
+                        Text("Select a date")
+                    }
+                }
+
                 // pick a caloric range.. maybe incremented not by 1, which would be pretty terrible
                 Section(header: Text("Calories Burned")) {
                     Picker("From", selection: $caloriesBurned) {
@@ -50,9 +60,9 @@ struct FilterView: View {
                     Text("Done").bold()
                 })
         }.onAppear {
-            self.selectedWorkouts = self.workouts.firstIndex(of: self.userData.activityTypeFilter.workoutTypeMetadata.activityTypeDescription) ?? 0
+//            self.selectedWorkouts = self.workouts.firstIndex(of: self.userData.activityTypeFilter.workoutTypeMetadata.activityTypeDescription) ?? 0
         }.onDisappear {
-            self.userData.activityTypeFilter = HKWorkoutActivityType.allCases.filter { return $0.workoutTypeMetadata.activityTypeDescription == self.workouts[self.selectedWorkouts] }.first ?? .walking
+//            self.userData.activityTypeFilter = HKWorkoutActivityType.allCases.filter { return $0.workoutTypeMetadata.activityTypeDescription == self.workouts[self.selectedWorkouts] }.first ?? .walking
             self.userData.queryWorkouts()
         }
     }
