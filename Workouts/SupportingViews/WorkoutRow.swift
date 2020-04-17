@@ -15,7 +15,7 @@ struct WorkoutRow: View {
 
     var body: some View {
         HStack {
-            Image(systemName: workout.workoutActivityType.workoutTypeMetadata.systemIconName)
+            CircleImage(image: Image(workout.workoutActivityType.workoutTypeMetadata.systemIconName))
             VStack(alignment: .leading) {
                 HStack {
                     Text(workout.workoutActivityType.workoutTypeMetadata.activityTypeDescription) // ^^

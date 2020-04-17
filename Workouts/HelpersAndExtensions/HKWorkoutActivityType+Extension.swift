@@ -106,153 +106,153 @@ extension HKWorkoutActivityType {
     var workoutTypeMetadata: WorkoutTypeMetadata {
         switch self {
         case .americanFootball:
-            return WorkoutTypeMetadata(icon: "person.fill", description: "American Football")
+            return WorkoutTypeMetadata(icon: "Kettlebell", description: "American Football")
         case .archery:
-            return WorkoutTypeMetadata(icon: "person.fill", description: "Archery")
+            return WorkoutTypeMetadata(icon: "Kettlebell", description: "Archery")
         case .australianFootball:
-            return WorkoutTypeMetadata(icon: "person.fill", description: "Australian Football")
+            return WorkoutTypeMetadata(icon: "Kettlebell", description: "Australian Football")
         case .badminton:
-            return WorkoutTypeMetadata(icon: "person.fill", description: "Badmiton")
+            return WorkoutTypeMetadata(icon: "Kettlebell", description: "Badmiton")
         case .baseball:
-            return WorkoutTypeMetadata(icon: "person.fill", description: "Baseball")
+            return WorkoutTypeMetadata(icon: "Kettlebell", description: "Baseball")
         case .basketball:
-            return WorkoutTypeMetadata(icon: "person.fill", description: "Basketball")
+            return WorkoutTypeMetadata(icon: "Kettlebell", description: "Basketball")
         case .bowling:
-            return WorkoutTypeMetadata(icon: "person.fill", description: "Bowling")
+            return WorkoutTypeMetadata(icon: "Kettlebell", description: "Bowling")
         case .boxing:
-            return WorkoutTypeMetadata(icon: "person.fill", description: "Boxing")
+            return WorkoutTypeMetadata(icon: "Kettlebell", description: "Boxing")
         case .climbing:
-            return WorkoutTypeMetadata(icon: "person.fill", description: "Climbing")
+            return WorkoutTypeMetadata(icon: "Kettlebell", description: "Climbing")
         case .crossTraining:
-            return WorkoutTypeMetadata(icon: "person.fill", description: "Cross Training")
+            return WorkoutTypeMetadata(icon: "Kettlebell", description: "Cross Training")
         case .curling:
-            return WorkoutTypeMetadata(icon: "person.fill", description: "Curling")
+            return WorkoutTypeMetadata(icon: "Kettlebell", description: "Curling")
         case .cycling:
-            return WorkoutTypeMetadata(icon: "person.fill", description: "Cycling")
+            return WorkoutTypeMetadata(icon: "Biking", description: "Cycling")
         case .dance:
-            return WorkoutTypeMetadata(icon: "person.fill", description: "Dance")
+            return WorkoutTypeMetadata(icon: "Kettlebell", description: "Dance")
         case .elliptical:
-            return WorkoutTypeMetadata(icon: "person.fill", description: "Elliptical")
+            return WorkoutTypeMetadata(icon: "Kettlebell", description: "Elliptical")
         case .equestrianSports:
-            return WorkoutTypeMetadata(icon: "person.fill", description: "Equestrian Sports")
+            return WorkoutTypeMetadata(icon: "Kettlebell", description: "Equestrian Sports")
         case .fencing:
-            return WorkoutTypeMetadata(icon: "person.fill", description: "Fencing")
+            return WorkoutTypeMetadata(icon: "Kettlebell", description: "Fencing")
         case .fishing:
-            return WorkoutTypeMetadata(icon: "person.fill", description: "Fishing")
+            return WorkoutTypeMetadata(icon: "Kettlebell", description: "Fishing")
         case .functionalStrengthTraining:
-            return WorkoutTypeMetadata(icon: "person.fill", description: "Strength Training")
+            return WorkoutTypeMetadata(icon: "Kettlebell", description: "Strength Training")
         case .golf:
-            return WorkoutTypeMetadata(icon: "person.fill", description: "Golf")
+            return WorkoutTypeMetadata(icon: "Kettlebell", description: "Golf")
         case .gymnastics:
-            return WorkoutTypeMetadata(icon: "person.fill", description: "Gymnastics")
+            return WorkoutTypeMetadata(icon: "Kettlebell", description: "Gymnastics")
         case .handball:
-            return WorkoutTypeMetadata(icon: "person.fill", description: "Handball")
+            return WorkoutTypeMetadata(icon: "Kettlebell", description: "Handball")
         case .hiking:
-            return WorkoutTypeMetadata(icon: "person.fill", description: "Hiking")
+            return WorkoutTypeMetadata(icon: "Kettlebell", description: "Hiking")
         case .hockey:
-            return WorkoutTypeMetadata(icon: "person.fill", description: "Hockey")
+            return WorkoutTypeMetadata(icon: "Kettlebell", description: "Hockey")
         case .hunting:
-            return WorkoutTypeMetadata(icon: "person.fill", description: "Hunting")
+            return WorkoutTypeMetadata(icon: "Kettlebell", description: "Hunting")
         case .lacrosse:
-            return WorkoutTypeMetadata(icon: "person.fill", description: "Lacrosse")
+            return WorkoutTypeMetadata(icon: "Kettlebell", description: "Lacrosse")
         case .martialArts:
-            return WorkoutTypeMetadata(icon: "person.fill", description: "Martial Arts")
+            return WorkoutTypeMetadata(icon: "Kettlebell", description: "Martial Arts")
         case .mindAndBody:
-            return WorkoutTypeMetadata(icon: "person.fill", description: "Mind and Body")
+            return WorkoutTypeMetadata(icon: "Kettlebell", description: "Mind and Body")
         case .paddleSports:
-            return WorkoutTypeMetadata(icon: "person.fill", description: "Paddle Sports")
+            return WorkoutTypeMetadata(icon: "Kettlebell", description: "Paddle Sports")
         case .play:
-            return WorkoutTypeMetadata(icon: "person.fill", description: "Play")
+            return WorkoutTypeMetadata(icon: "Kettlebell", description: "Play")
         case .preparationAndRecovery:
-            return WorkoutTypeMetadata(icon: "person.fill", description: "Preparation and Recovery")
+            return WorkoutTypeMetadata(icon: "Kettlebell", description: "Preparation and Recovery")
         case .racquetball:
-            return WorkoutTypeMetadata(icon: "person.fill", description: "Raquetball")
+            return WorkoutTypeMetadata(icon: "Kettlebell", description: "Raquetball")
         case .rowing:
-            return WorkoutTypeMetadata(icon: "person.fill", description: "Rowing")
+            return WorkoutTypeMetadata(icon: "Kettlebell", description: "Rowing")
         case .rugby:
-            return WorkoutTypeMetadata(icon: "person.fill", description: "Rugby")
+            return WorkoutTypeMetadata(icon: "Kettlebell", description: "Rugby")
         case .running:
-            return WorkoutTypeMetadata(icon: "person.fill", description: "Running")
+            return WorkoutTypeMetadata(icon: "Running", description: "Running")
         case .sailing:
-            return WorkoutTypeMetadata(icon: "person.fill", description: "Sailing")
+            return WorkoutTypeMetadata(icon: "Kettlebell", description: "Sailing")
         case .skatingSports:
-            return WorkoutTypeMetadata(icon: "person.fill", description: "Skating Sports")
+            return WorkoutTypeMetadata(icon: "Kettlebell", description: "Skating Sports")
         case .snowSports:
-            return WorkoutTypeMetadata(icon: "person.fill", description: "Snow Sports")
+            return WorkoutTypeMetadata(icon: "Kettlebell", description: "Snow Sports")
         case .soccer:
-            return WorkoutTypeMetadata(icon: "person.fill", description: "Soccer")
+            return WorkoutTypeMetadata(icon: "Kettlebell", description: "Soccer")
         case .softball:
-            return WorkoutTypeMetadata(icon: "person.fill", description: "Softball")
+            return WorkoutTypeMetadata(icon: "Kettlebell", description: "Softball")
         case .squash:
-            return WorkoutTypeMetadata(icon: "person.fill", description: "Squash")
+            return WorkoutTypeMetadata(icon: "Kettlebell", description: "Squash")
         case .stairClimbing:
-            return WorkoutTypeMetadata(icon: "person.fill", description: "Stair Climbing")
+            return WorkoutTypeMetadata(icon: "Kettlebell", description: "Stair Climbing")
         case .surfingSports:
-            return WorkoutTypeMetadata(icon: "person.fill", description: "Surfing Sports")
+            return WorkoutTypeMetadata(icon: "Kettlebell", description: "Surfing Sports")
         case .swimming:
-            return WorkoutTypeMetadata(icon: "person.fill", description: "Swimming")
+            return WorkoutTypeMetadata(icon: "Kettlebell", description: "Swimming")
         case .tableTennis:
-            return WorkoutTypeMetadata(icon: "person.fill", description: "Table Tennis")
+            return WorkoutTypeMetadata(icon: "Kettlebell", description: "Table Tennis")
         case .tennis:
-            return WorkoutTypeMetadata(icon: "person.fill", description: "Tennis")
+            return WorkoutTypeMetadata(icon: "Kettlebell", description: "Tennis")
         case .trackAndField:
-            return WorkoutTypeMetadata(icon: "person.fill", description: "Track and Field")
+            return WorkoutTypeMetadata(icon: "Kettlebell", description: "Track and Field")
         case .traditionalStrengthTraining:
-            return WorkoutTypeMetadata(icon: "person.fill", description: "Traditional Strength Training")
+            return WorkoutTypeMetadata(icon: "Kettlebell", description: "Traditional Strength Training")
         case .volleyball:
-            return WorkoutTypeMetadata(icon: "person.fill", description: "Volleyball")
+            return WorkoutTypeMetadata(icon: "Kettlebell", description: "Volleyball")
         case .walking:
-            return WorkoutTypeMetadata(icon: "person.fill", description: "Walking")
+            return WorkoutTypeMetadata(icon: "Walking", description: "Walking")
         case .waterFitness:
-            return WorkoutTypeMetadata(icon: "person.fill", description: "Water Fitness")
+            return WorkoutTypeMetadata(icon: "Kettlebell", description: "Water Fitness")
         case .waterPolo:
-            return WorkoutTypeMetadata(icon: "person.fill", description: "Water Polo")
+            return WorkoutTypeMetadata(icon: "Kettlebell", description: "Water Polo")
         case .waterSports:
-            return WorkoutTypeMetadata(icon: "person.fill", description: "Water Sports")
+            return WorkoutTypeMetadata(icon: "Kettlebell", description: "Water Sports")
         case .wrestling:
-            return WorkoutTypeMetadata(icon: "person.fill", description: "Wrestling")
+            return WorkoutTypeMetadata(icon: "Kettlebell", description: "Wrestling")
         case .yoga:
-            return WorkoutTypeMetadata(icon: "person.fill", description: "Yoga")
+            return WorkoutTypeMetadata(icon: "Kettlebell", description: "Yoga")
         case .barre:
-            return WorkoutTypeMetadata(icon: "person.fill", description: "Barre")
+            return WorkoutTypeMetadata(icon: "Kettlebell", description: "Barre")
         case .coreTraining:
-            return WorkoutTypeMetadata(icon: "person.fill", description: "Core Training")
+            return WorkoutTypeMetadata(icon: "Kettlebell", description: "Core Training")
         case .crossCountrySkiing:
-            return WorkoutTypeMetadata(icon: "person.fill", description: "Cross Country Skiing")
+            return WorkoutTypeMetadata(icon: "Kettlebell", description: "Cross Country Skiing")
         case .downhillSkiing:
-            return WorkoutTypeMetadata(icon: "person.fill", description: "Downhill Skiing")
+            return WorkoutTypeMetadata(icon: "Kettlebell", description: "Downhill Skiing")
         case .flexibility:
-            return WorkoutTypeMetadata(icon: "person.fill", description: "Flexibility")
+            return WorkoutTypeMetadata(icon: "Kettlebell", description: "Flexibility")
         case .highIntensityIntervalTraining:
-            return WorkoutTypeMetadata(icon: "person.fill", description: "HIIT")
+            return WorkoutTypeMetadata(icon: "Kettlebell", description: "HIIT")
         case .jumpRope:
-            return WorkoutTypeMetadata(icon: "person.fill", description: "Jump Rope")
+            return WorkoutTypeMetadata(icon: "Kettlebell", description: "Jump Rope")
         case .kickboxing:
-            return WorkoutTypeMetadata(icon: "person.fill", description: "Kickboxing")
+            return WorkoutTypeMetadata(icon: "Kickboxing", description: "Kickboxing")
         case .pilates:
-            return WorkoutTypeMetadata(icon: "person.fill", description: "Pilates")
+            return WorkoutTypeMetadata(icon: "Kettlebell", description: "Pilates")
         case .snowboarding:
-            return WorkoutTypeMetadata(icon: "person.fill", description: "Snowboarding")
+            return WorkoutTypeMetadata(icon: "Kettlebell", description: "Snowboarding")
         case .stairs:
-            return WorkoutTypeMetadata(icon: "person.fill", description: "Stairs")
+            return WorkoutTypeMetadata(icon: "Kettlebell", description: "Stairs")
         case .stepTraining:
-            return WorkoutTypeMetadata(icon: "person.fill", description: "Step Training")
+            return WorkoutTypeMetadata(icon: "Kettlebell", description: "Step Training")
         case .wheelchairWalkPace:
-            return WorkoutTypeMetadata(icon: "person.fill", description: "Wheelchair Walk Pace")
+            return WorkoutTypeMetadata(icon: "Kettlebell", description: "Wheelchair Walk Pace")
         case .wheelchairRunPace:
-            return WorkoutTypeMetadata(icon: "person.fill", description: "Wheelchair Run Pace")
+            return WorkoutTypeMetadata(icon: "Kettlebell", description: "Wheelchair Run Pace")
         case .taiChi:
-            return WorkoutTypeMetadata(icon: "person.fill", description: "Tai Chi")
+            return WorkoutTypeMetadata(icon: "Kettlebell", description: "Tai Chi")
         case .mixedCardio:
-            return WorkoutTypeMetadata(icon: "person.fill", description: "Mixed Cardio")
+            return WorkoutTypeMetadata(icon: "Kettlebell", description: "Mixed Cardio")
         case .handCycling:
-            return WorkoutTypeMetadata(icon: "person.fill", description: "Hand Cycling")
+            return WorkoutTypeMetadata(icon: "Kettlebell", description: "Hand Cycling")
         case .discSports:
-            return WorkoutTypeMetadata(icon: "person.fill", description: "Disc Sports")
+            return WorkoutTypeMetadata(icon: "Kettlebell", description: "Disc Sports")
         case .fitnessGaming:
-            return WorkoutTypeMetadata(icon: "person.fill", description: "Fitness Gaming")
+            return WorkoutTypeMetadata(icon: "Kettlebell", description: "Fitness Gaming")
         default:
-            return WorkoutTypeMetadata(icon: "person.fill", description: "Other")
+            return WorkoutTypeMetadata(icon: "Kettlebell", description: "Other")
         }
     }
 

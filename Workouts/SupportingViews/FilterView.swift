@@ -11,6 +11,7 @@ import HealthKit
 
 struct FilterView: View {
     @EnvironmentObject private var userData: UserData
+
     var workouts = HKWorkoutActivityType.allCases.map { $0.workoutTypeMetadata.activityTypeDescription }
     
     @Binding var showFilterView: Bool
