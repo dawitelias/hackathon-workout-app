@@ -16,12 +16,16 @@ struct HomeView: View {
     @State var showProfileView = false
     
     init() {
-        UITableViewHeaderFooterView.appearance().tintColor = UIColor.systemGray6
+        UITableViewHeaderFooterView.appearance().tintColor = UIColor.systemGroupedBackground
     }
     
     var body: some View {
         NavigationView {
             List {
+                Text("Your latest workout 💪")
+                    .fontWeight(.medium)
+                    .padding(.vertical)
+                    .font(.title)
                 ForEach(userData.workoutsGroupedByDate.map { $0.key }, id: \.self) { key in
 //                    Section(header: Text(key)) {
                     Section(header: VStack {
