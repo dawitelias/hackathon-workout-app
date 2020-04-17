@@ -14,16 +14,24 @@ struct FeaturedWorkout: View {
 
     var body: some View {
         return VStack(alignment: .leading) {
-            Text(workout.workoutActivityType.workoutTypeMetadata.activityTypeDescription)
-                .font(.headline)
-                .fontWeight(.semibold)
-            Text("date")
-                .font(.subheadline)
-                .foregroundColor(.gray)
+            HStack {
+                CircleImage(image: Image(workout.workoutActivityType.workoutTypeMetadata.systemIconName))
+                VStack(alignment: .leading) {
+                    Text(workout.workoutActivityType.workoutTypeMetadata.activityTypeDescription)
+                        .font(.headline)
+                        .fontWeight(.semibold)
+                    Text("\(workout.endDate.date)")
+                        .font(.subheadline)
+                        .foregroundColor(.gray)
+                }
+            }
             MapView(workout: workout)
                 .frame(height: 200)
-            Text("test")
+                .cornerRadius(12.0)
+            Divider()
+                .padding(.top)
         }
+        .background(Color.init(.systemBackground))
     }
 
 }

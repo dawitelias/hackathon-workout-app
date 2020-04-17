@@ -16,7 +16,7 @@ struct HomeView: View {
     @State var showProfileView = false
     
     init() {
-        UITableViewHeaderFooterView.appearance().tintColor = UIColor.systemGray6
+        UITableViewHeaderFooterView.appearance().tintColor = UIColor.systemBackground
     }
     
     var body: some View {
@@ -25,14 +25,20 @@ struct HomeView: View {
         return NavigationView {
             List {
                 if featuredWorkout != nil {
-                    FeaturedWorkout(workout: featuredWorkout!)
+                    VStack(alignment: .leading) {
+                        Text("Your latest workout 🏅")
+                            .padding(.vertical)
+                            .font(.system(size: 21, weight: .medium))
+                        FeaturedWorkout(workout: featuredWorkout!)
+                            .padding(.bottom)
+                    }
                 }
                 
                 ForEach(userData.workoutsGroupedByDate.map { $0.key }, id: \.self) { key in
                     Section(header: VStack {
                         Text(key)
-                            .font(.headline)
-                            .padding(.vertical, 8).padding(.horizontal)
+                            .padding(.all)
+                            .font(.system(size: 21, weight: .medium))
                             .frame(width: UIScreen.main.bounds.width, alignment: .leading)
                     }) {
                         ForEach(self.userData.workoutsGroupedByDate[key] ?? [HKWorkout](), id: \.self) { workout in
