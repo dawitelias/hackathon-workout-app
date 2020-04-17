@@ -16,9 +16,6 @@ struct FilterView: View {
     
     @Binding var showFilterView: Bool
     @State private var selectedWorkouts = 0
-    @State private var caloriesBurned = 0
-    @State private var caloriesBurnedMin = ""
-    @State private var caloriesBurnedMax = ""
     
     // Date range state variables
     //
@@ -28,8 +25,8 @@ struct FilterView: View {
     
     // Calorie range sort variables
     //
-//    @State private var caloriesBurnedMin: String = "0"
-//    @State private var caloriesBurnedMax: String = "1000"
+    @State private var caloriesBurnedMin = 0
+    @State private var caloriesBurnedMax = 0
     
     // Distance range sort variables
     //
@@ -67,7 +64,7 @@ struct FilterView: View {
                 // Select distance range
                 //
                 // maybe this is conditionally visible based on certain types of workouts (e.g., runs, swims, bike rides, etc.)
-                Section(header: Text("Workout Distance 📏")) {
+                Section(header: Text("Workout Distance (miles) 📏")) {
                     DatePicker(selection: $startDate, in: ...(Calendar.current.date(byAdding: .month, value: -12, to: Date()) ?? Date()), displayedComponents: .date) {
                         Text("From")
                     }
@@ -76,13 +73,17 @@ struct FilterView: View {
                     }
                 }
                 
-                // Select duration range
-                //
+                // Select duration
+                // Would be nice to use a countdown timer (UIDatePicker.Mode.countDownTimer)
+                // But it's not available in SwiftUI yet
                 Section(header: Text("Workout Duration ⏳")) {
                     DatePicker(selection: $startDate, in: ...(Calendar.current.date(byAdding: .month, value: -12, to: Date()) ?? Date()), displayedComponents: .hourAndMinute) {
                         Text("From")
                     }
-                    DatePicker(selection: $endDate, in: ...(Calendar.current.date(byAdding: .month, value: 12, to: Date()) ?? Date()), displayedComponents: .hourAndMinute) {
+                }
+                
+                Section(header: Text("Workout Duration ⏳")) {
+                    DatePicker(selection: $startDate, in: ...(Calendar.current.date(byAdding: .month, value: -12, to: Date()) ?? Date()), displayedComponents: .hourAndMinute) {
                         Text("To")
                     }
                 }
@@ -90,13 +91,17 @@ struct FilterView: View {
                 // Select calorie range
                 //
                 Section(header: Text("Calories Burned 🥵")) {
-                TextField("From", text: $caloriesBurnedMin)
-                    .keyboardType(.numberPad)
-                TextField("To", text: $caloriesBurnedMax)
-                    .keyboardType(.numberPad)
-
+                    Picker("From", selection: $caloriesBurnedMin) {
+                        ForEach(0 ..< 41) {
+                            Text("\($0 * 50) calories")
+                        }
+                    }
+                    Picker("To", selection: $caloriesBurnedMax) {
+                        ForEach(1 ..< 41) {
+                            Text("\($0 * 50) calories")
+                        }
+                    }
                 }
-
             }
             .navigationBarTitle(Text("Filters"), displayMode: .inline)
                 .navigationBarItems(trailing: Button(action: {
