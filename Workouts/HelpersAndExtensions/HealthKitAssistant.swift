@@ -130,7 +130,6 @@ class HealthKitAssistant {
             
             // notify main dispatch queue with workout data, call completion
             dispatchGroup.notify(queue: .main) {
-                print("dispatchGroup notifying")
                 completion(workoutData, nil)
             }
             

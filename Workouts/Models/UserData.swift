@@ -95,7 +95,10 @@ class UserData: ObservableObject {
                 return
             }
             self?.workouts = workouts
-            self?.groupWorkouts(workouts: workouts)
+            self?.workouts.sort(by: { $0.startDate > $1.startDate })
+            if let sortedWorkouts = self?.workouts {
+                self?.groupWorkouts(workouts: sortedWorkouts)
+            }
             self?.getFeaturedWorkout()
         }
     }
