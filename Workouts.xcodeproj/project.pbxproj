@@ -16,6 +16,7 @@
 		A52FBEFE2447C91700016025 /* WorkoutDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = A52FBEFD2447C91700016025 /* WorkoutDetail.swift */; };
 		A52FBF012447D6ED00016025 /* HKWorkout+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A52FBF002447D6ED00016025 /* HKWorkout+Extensions.swift */; };
 		A55C84E52449EC3F00D81C44 /* Blur.swift in Sources */ = {isa = PBXBuildFile; fileRef = A55C84E42449EC3F00D81C44 /* Blur.swift */; };
+		A5AF6083244AAAAD00AB7E72 /* ToggleableHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5AF6082244AAAAD00AB7E72 /* ToggleableHeader.swift */; };
 		A5B6CEE32448913300CF2B86 /* Date+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B6CEE22448913300CF2B86 /* Date+Extensions.swift */; };
 		A5B6CEE52448AB2D00CF2B86 /* HKWorkoutActivityType+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B6CEE42448AB2D00CF2B86 /* HKWorkoutActivityType+Extension.swift */; };
 		A5B6CEE92448D30800CF2B86 /* CircleImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B6CEE82448D30800CF2B86 /* CircleImage.swift */; };
@@ -62,6 +63,7 @@
 		A52FBEFD2447C91700016025 /* WorkoutDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutDetail.swift; sourceTree = "<group>"; };
 		A52FBF002447D6ED00016025 /* HKWorkout+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HKWorkout+Extensions.swift"; sourceTree = "<group>"; };
 		A55C84E42449EC3F00D81C44 /* Blur.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Blur.swift; sourceTree = "<group>"; };
+		A5AF6082244AAAAD00AB7E72 /* ToggleableHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToggleableHeader.swift; sourceTree = "<group>"; };
 		A5B6CEE22448913300CF2B86 /* Date+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extensions.swift"; sourceTree = "<group>"; };
 		A5B6CEE42448AB2D00CF2B86 /* HKWorkoutActivityType+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HKWorkoutActivityType+Extension.swift"; sourceTree = "<group>"; };
 		A5B6CEE82448D30800CF2B86 /* CircleImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleImage.swift; sourceTree = "<group>"; };
@@ -127,6 +129,7 @@
 				A5B6CEEA2448D91100CF2B86 /* ShareSheet.swift */,
 				A50E46492449E76000D1F435 /* FeaturedWorkout.swift */,
 				A55C84E42449EC3F00D81C44 /* Blur.swift */,
+				A5AF6082244AAAAD00AB7E72 /* ToggleableHeader.swift */,
 			);
 			path = SupportingViews;
 			sourceTree = "<group>";
@@ -365,6 +368,7 @@
 				A50E464A2449E76000D1F435 /* FeaturedWorkout.swift in Sources */,
 				A5B6CEE32448913300CF2B86 /* Date+Extensions.swift in Sources */,
 				AC46320A2447593700619284 /* AppDelegate.swift in Sources */,
+				A5AF6083244AAAAD00AB7E72 /* ToggleableHeader.swift in Sources */,
 				A55C84E52449EC3F00D81C44 /* Blur.swift in Sources */,
 				A52FBEF52447C81E00016025 /* UserData.swift in Sources */,
 				A52FBF012447D6ED00016025 /* HKWorkout+Extensions.swift in Sources */,

@@ -9,38 +9,54 @@
 import SwiftUI
 import HealthKit
 
+struct NumericWorkoutFilter {
+    var value: Double
+    var isApplied: Bool
+    var predicate: NSPredicate?
+
+    init(defaultValue: Double, isApplied: Bool) {
+        self.value = defaultValue
+        self.isApplied = isApplied
+    }
+}
+struct DateRangeWorkoutFilter {
+    var startDate: Date
+    var endDate: Date
+    var isApplied: Bool
+    var predicate: NSPredicate?
+    
+    init(startDate: Date, endDate: Date, isApplied: Bool) {
+        self.startDate = startDate
+        self.endDate = endDate
+        self.isApplied = isApplied
+    }
+}
+
 struct FilterView: View {
     @EnvironmentObject private var userData: UserData
 
     var workouts = HKWorkoutActivityType.allCases.map { $0.workoutTypeMetadata.activityTypeDescription }
     
     @Binding var showFilterView: Bool
-    @State private var selectedWorkouts = 0
+    @State private var selectedWorkouts = 0 // <-- this should be an array when we can select multiple
     
-    // Date range state variables
+    // State variables
     //
-    @State private var startDate = Date()
-    @State private var endDate = Date()
-    
-    
-    // Calorie range sort variables
-    //
-    @State private var caloriesBurnedMin = 0
-    @State private var caloriesBurnedMax = 0
-    
-    // Distance range sort variables
-    //
-    @State private var minDistance: Int = 0
-    @State private var maxDistance: Int = 100
-    
-    // Duration range sort variables
-    //
-    @State private var minDuration: Int = 0
-    @State private var maxDuration: Int = 300
+    @State private var dateRangeFilter = DateRangeWorkoutFilter(startDate: Date(), endDate: Date(), isApplied: false)
+    @State private var caloriesBurned = NumericWorkoutFilter(defaultValue: 500, isApplied: false)
+    @State private var workoutDistance = NumericWorkoutFilter(defaultValue: 5, isApplied: false)
+    @State private var workoutDuration = NumericWorkoutFilter(defaultValue: 2, isApplied: false)
     
     var body: some View {
-        NavigationView {
+        let durationString = "\(Int(workoutDuration.value)) hr \(Int(workoutDuration.value.truncatingRemainder(dividingBy: 1) * 60)) min"
+        let distanceString = "\(String.init(format: "%.2f", workoutDistance.value)) miles"
+        let caloriesString = "\(Int(caloriesBurned.value)) calories"
+
+        return NavigationView {
             Form {
+                // Workout types is kind of a required filter, since we have to query by activity type
+                // so, that's why I didn't wrap this guy in a hidable filter option
+                //
                 Section {
                     Picker("Workout Types", selection: $selectedWorkouts) {
                         ForEach(0 ..< workouts.count) {
@@ -52,55 +68,56 @@ struct FilterView: View {
                 
                 // Select date you want to show
                 //
-                Section(header: Text("Date 📅")) {
-                    DatePicker(selection: $startDate, in: ...(Calendar.current.date(byAdding: .month, value: -12, to: Date()) ?? Date()), displayedComponents: .date) {
-                        Text("From")
-                    }
-                    DatePicker(selection: $endDate, in: ...(Calendar.current.date(byAdding: .month, value: 12, to: Date()) ?? Date()), displayedComponents: .date) {
-                        Text("To")
+                Section(header: ToggleableHeader(text: "Date 📅", switchValue: $dateRangeFilter.isApplied)) {
+                    if dateRangeFilter.isApplied {
+                        DatePicker(selection: $dateRangeFilter.startDate, in: ...(Calendar.current.date(byAdding: .month, value: -12, to: Date()) ?? Date()), displayedComponents: .date) {
+                            Text("From")
+                        }
+                        DatePicker(selection: $dateRangeFilter.endDate, in: ...(Calendar.current.date(byAdding: .month, value: 12, to: Date()) ?? Date()), displayedComponents: .date) {
+                            Text("To")
+                        }
                     }
                 }
                 
                 // Select distance range
                 //
                 // maybe this is conditionally visible based on certain types of workouts (e.g., runs, swims, bike rides, etc.)
-                Section(header: Text("Workout Distance (miles) 📏")) {
-                    DatePicker(selection: $startDate, in: ...(Calendar.current.date(byAdding: .month, value: -12, to: Date()) ?? Date()), displayedComponents: .date) {
-                        Text("From")
-                    }
-                    DatePicker(selection: $endDate, in: ...(Calendar.current.date(byAdding: .month, value: 12, to: Date()) ?? Date()), displayedComponents: .date) {
-                        Text("To")
+                Section(header: ToggleableHeader(text: "Workout Distance (miles) 📏 \(workoutDistance.isApplied ? distanceString : "")", switchValue: $workoutDistance.isApplied)) {
+                    if workoutDistance.isApplied {
+                        Slider(value: $workoutDistance.value, in: 0...50)
+                            .transition(.slide)
                     }
                 }
                 
                 // Select duration
                 // Would be nice to use a countdown timer (UIDatePicker.Mode.countDownTimer)
-                // But it's not available in SwiftUI yet
-                Section(header: Text("Workout Duration ⏳")) {
-                    DatePicker(selection: $startDate, in: ...(Calendar.current.date(byAdding: .month, value: -12, to: Date()) ?? Date()), displayedComponents: .hourAndMinute) {
-                        Text("From")
+                // But it's not available in SwiftUI yet, how about a slider?
+                Section(header: ToggleableHeader(text: "Workout Duration ⏳ \(workoutDuration.isApplied ? durationString : "")", switchValue: $workoutDuration.isApplied)) {
+                    if workoutDuration.isApplied {
+                        Slider(value: $workoutDuration.value, in: 0...5)
+                            .transition(.slide)
                     }
                 }
-                
-                Section(header: Text("Workout Duration ⏳")) {
-                    DatePicker(selection: $startDate, in: ...(Calendar.current.date(byAdding: .month, value: -12, to: Date()) ?? Date()), displayedComponents: .hourAndMinute) {
-                        Text("To")
-                    }
-                }
+
                 
                 // Select calorie range
                 //
-                Section(header: Text("Calories Burned 🥵")) {
-                    Picker("From", selection: $caloriesBurnedMin) {
-                        ForEach(0 ..< 41) {
-                            Text("\($0 * 50) calories")
-                        }
+                Section(header: ToggleableHeader(text: "Calories Burned 🥵 \(caloriesBurned.isApplied ? caloriesString : "")", switchValue: $caloriesBurned.isApplied)) {
+                    if caloriesBurned.isApplied {
+                        Slider(value: $caloriesBurned.value, in: 0...2000)
+                            .transition(.asymmetric(insertion: .move(edge: .leading), removal: .slide))
                     }
-                    Picker("To", selection: $caloriesBurnedMax) {
-                        ForEach(1 ..< 41) {
-                            Text("\($0 * 50) calories")
-                        }
-                    }
+                }
+
+                // Button that turns off all off the filters
+                //
+                Button(action: {
+                    self.caloriesBurned.isApplied = false
+                    self.workoutDistance.isApplied = false
+                    self.workoutDuration.isApplied = false
+                    self.dateRangeFilter.isApplied = false
+                }) {
+                    Text("Clear all filters")
                 }
             }
             .navigationBarTitle(Text("Filters"), displayMode: .inline)
