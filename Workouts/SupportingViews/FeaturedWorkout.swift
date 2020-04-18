@@ -25,13 +25,12 @@ struct FeaturedWorkout: View {
                         .foregroundColor(.gray)
                 }
             }
+            .padding(.top)
             MapView(workout: workout)
                 .frame(height: 200)
-                .cornerRadius(12.0)
-            Divider()
-                .padding(.top)
+                .padding(.horizontal, -15)
+                .padding(.bottom, -6)
         }
-        .background(Color.init(.systemBackground))
     }
 
 }
