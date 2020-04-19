@@ -11,82 +11,15 @@ import HealthKit
 import CoreLocation
 
 class HealthKitAssistant {
+
     private enum HealthkitSetupError: Error {
       case notAvailableOnDevice
       case dataTypeNotAvailable
     }
 
-    // MARK: Get Workouts by Activity Type
-    //
-    func getWorkoutsByType(type: HKWorkoutActivityType, completion: @escaping ([HKWorkout]?, Error?) -> Void) {
-
-        checkAccess() { success, error in
-
-            if !success || error != nil {
-                completion(nil, error)
-                return
-            }
-            
-            let predicate = HKQuery.predicateForWorkouts(with: type)
-            let sortDescriptor = NSSortDescriptor(key: HKSampleSortIdentifierEndDate, ascending: false)
-
-            let query = HKSampleQuery(
-                sampleType: .workoutType(),
-                predicate: predicate,
-                limit: 100,
-                sortDescriptors: [sortDescriptor]) { (query, samples, error) in
-                    if error != nil {
-                        completion(nil, error)
-                        return
-                    }
-
-                    DispatchQueue.main.async {
-                        if let workoutData = samples as? [HKWorkout] {
-                            completion(workoutData, nil)
-                        }
-                    }
-                }
-            HKHealthStore().execute(query)
-        }
-    }
-    // MARK: Get workouts regardless of type
-    //
-    func getWorkouts(predicates: [NSPredicate], completion: @escaping ([HKWorkout]?, Error?) -> Void) {
-            checkAccess() { success, error in
-
-                if !success || error != nil {
-                    completion(nil, error)
-                    return
-                }
-            
-                let compound = NSCompoundPredicate(andPredicateWithSubpredicates: predicates)
-                let sortDescriptor = NSSortDescriptor(key: HKSampleSortIdentifierEndDate, ascending: false)
-                
-                let query = HKSampleQuery(
-                    sampleType: .workoutType(),
-                    predicate: compound,
-                    limit: 100,
-                    sortDescriptors: [sortDescriptor]) { (query, samples, error) in
-                        
-                        if error != nil {
-                            completion(nil, error)
-                            return
-                        }
-
-                        DispatchQueue.main.async {
-                            if let workoutData = samples as? [HKWorkout] {
-                                completion(workoutData, nil)
-                            }
-                        }
-                    }
-                
-                HKHealthStore().execute(query)
-            }
-        }
-    
     // MARK: Get workouts with predicates for each activity type
     //
-    func getWorkoutsByTypes(types: [HKWorkoutActivityType], predicates: [NSPredicate], completion: @escaping ([HKWorkout]?, Error?) -> Void) {
+    func getWorkouts(types: [HKWorkoutActivityType], predicates: [NSPredicate], completion: @escaping ([HKWorkout]?, Error?) -> Void) {
         checkAccess() { success, error in
 
             if !success || error != nil {
@@ -119,11 +52,6 @@ class HealthKitAssistant {
                         if let data = samples as? [HKWorkout] {
                             workoutData += data
                         }
-//                        DispatchQueue.main.async {
-//                            if let workoutData = samples as? [HKWorkout] {
-//                                //completion(workoutData, nil)
-//                            }
-//                        }
                     }
                 HKHealthStore().execute(query)
             }
@@ -134,6 +62,31 @@ class HealthKitAssistant {
             }
             
         }
+    }
+    
+    // MARK: Get Featured Workout
+    func getFeaturedWorkout(completion: @escaping (HKWorkout?, Error?) -> Void) {
+        // Query for workouts done in last week, take the first one
+        //
+        let predicate = HKQuery.predicateForSamples(withStart: Date().hoursBeforeNow(hr: 24*7), end: Date(), options: [])
+        let sortDescriptor = NSSortDescriptor(key: HKSampleSortIdentifierEndDate, ascending: false)
+
+        let query = HKSampleQuery(
+            sampleType: .workoutType(),
+            predicate: predicate,
+            limit: 1,
+            sortDescriptors: [sortDescriptor]) { (query, samples, error) in
+                
+                if error != nil {
+                    completion(nil, error)
+                    return
+                }
+
+                if let data = samples as? [HKWorkout] {
+                    completion(data.first, error)
+                }
+            }
+        HKHealthStore().execute(query)
     }
 
     // MARK: Check Privacy and Device HealthKit Capabilities

@@ -9,31 +9,8 @@
 import SwiftUI
 import HealthKit
 
-struct NumericWorkoutFilter {
-    var value: Double
-    var isApplied: Bool
-    var predicate: NSPredicate?
-
-    init(defaultValue: Double, isApplied: Bool) {
-        self.value = defaultValue
-        self.isApplied = isApplied
-    }
-}
-struct DateRangeWorkoutFilter {
-    var startDate: Date
-    var endDate: Date
-    var isApplied: Bool
-    var predicate: NSPredicate?
-    
-    init(startDate: Date, endDate: Date, isApplied: Bool) {
-        self.startDate = startDate
-        self.endDate = endDate
-        self.isApplied = isApplied
-    }
-}
-
 struct FilterView: View {
-    @EnvironmentObject private var userData: UserData
+    @EnvironmentObject private var workoutData: WorkoutData
 
     var workouts = HKWorkoutActivityType.allCases.map { $0.workoutTypeMetadata.activityTypeDescription }
     
@@ -43,12 +20,12 @@ struct FilterView: View {
     // State variables
     //
     @State private var dateRangeFilter = DateRangeWorkoutFilter(startDate: Date(), endDate: Date(), isApplied: false)
-    @State private var caloriesBurned = NumericWorkoutFilter(defaultValue: 500, isApplied: false)
-    @State private var workoutDistance = NumericWorkoutFilter(defaultValue: 5, isApplied: false)
-    @State private var workoutDuration = NumericWorkoutFilter(defaultValue: 2, isApplied: false)
+    @State private var caloriesBurned = CaloriesWorkoutFilter(defaultValue: 500, isApplied: false)
+    @State private var workoutDistance = DistanceWorkoutFilter(defaultValue: 5, isApplied: false)
+    @State private var workoutDuration = DurationWorkoutFilter(defaultValue: 2, isApplied: false)
     
     var body: some View {
-        let durationString = "\(Int(workoutDuration.value)) hr \(Int(workoutDuration.value.truncatingRemainder(dividingBy: 1) * 60)) min"
+        let durationString = "\(Int(workoutDuration.value/3600)) hr \(Int(workoutDuration.value.truncatingRemainder(dividingBy: 1) * 60)) min"
         let distanceString = "\(String.init(format: "%.2f", workoutDistance.value)) miles"
         let caloriesString = "\(Int(caloriesBurned.value)) calories"
 
@@ -70,7 +47,7 @@ struct FilterView: View {
                 //
                 Section(header: ToggleableHeader(text: "Date 📅", switchValue: $dateRangeFilter.isApplied)) {
                     if dateRangeFilter.isApplied {
-                        DatePicker(selection: $dateRangeFilter.startDate, in: ...(Calendar.current.date(byAdding: .month, value: -12, to: Date()) ?? Date()), displayedComponents: .date) {
+                        DatePicker(selection: $dateRangeFilter.startDate, in: ...(Calendar.current.date(byAdding: .month, value: 12, to: Date()) ?? Date()), displayedComponents: .date) {
                             Text("From")
                         }
                         DatePicker(selection: $dateRangeFilter.endDate, in: ...(Calendar.current.date(byAdding: .month, value: 12, to: Date()) ?? Date()), displayedComponents: .date) {
@@ -94,7 +71,7 @@ struct FilterView: View {
                 // But it's not available in SwiftUI yet, how about a slider?
                 Section(header: ToggleableHeader(text: "Workout Duration ⏳ \(workoutDuration.isApplied ? durationString : "")", switchValue: $workoutDuration.isApplied)) {
                     if workoutDuration.isApplied {
-                        Slider(value: $workoutDuration.value, in: 0...5)
+                        Slider(value: $workoutDuration.value, in: 0...18000)
                             .transition(.slide)
                     }
                 }
@@ -127,16 +104,29 @@ struct FilterView: View {
                     Text("Done").bold()
                 })
         }.onAppear {
-//            self.selectedWorkouts = self.workouts.firstIndex(of: self.userData.activityTypeFilter.workoutTypeMetadata.activityTypeDescription) ?? 0
+            self.dateRangeFilter = self.workoutData.dateRangeFilter
+            self.workoutDuration = self.workoutData.durationFilter
+            self.caloriesBurned = self.workoutData.calorieFilter
+            self.workoutDistance = self.workoutData.distanceFilter
         }.onDisappear {
-//            self.userData.activityTypeFilter = HKWorkoutActivityType.allCases.filter { return $0.workoutTypeMetadata.activityTypeDescription == self.workouts[self.selectedWorkouts] }.first ?? .walking
-            self.userData.queryWorkouts()
+            self.workoutData.dateRangeFilter = self.dateRangeFilter
+            self.workoutData.distanceFilter = self.workoutDistance
+            self.workoutData.calorieFilter = self.caloriesBurned
+            self.workoutData.durationFilter = self.workoutDuration
+            
+            // i don't like updating these filters like this, i would
+            // much rather bind to the filters that I am setting in the workout
+            // data environment object, but not sure how to reconcile that with
+            // needing it for the state of this object. Come back to this
+            // after I do research.
+            
+            self.workoutData.queryWorkouts()
         }
     }
 }
 
 struct FilterView_Previews: PreviewProvider {
     static var previews: some View {
-        FilterView(showFilterView: .constant(false)).environmentObject(UserData())
+        FilterView(showFilterView: .constant(false)).environmentObject(WorkoutData())
     }
 }

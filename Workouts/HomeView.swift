@@ -10,7 +10,7 @@ import SwiftUI
 import HealthKit
 
 struct HomeView: View {
-    @EnvironmentObject var userData: UserData
+    @EnvironmentObject var workoutData: WorkoutData
 
     @State var showFilterView = false
     @State var showProfileView = false
@@ -20,7 +20,20 @@ struct HomeView: View {
     }
     
     var body: some View {
-        let featuredWorkout = userData.featuredWorkout // MARK: TODO <-- Emily come back to this
+        let featuredWorkout = workoutData.featuredWorkout
+        
+        let groupedWorkouts = Dictionary(grouping: self.workoutData.workouts, by: { ("\($0.startDate.month) \($0.startDate.year)") })
+        let sortedDictionaryKeys = groupedWorkouts.map { key, value in
+            return key
+        }.sorted(by: {
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "MM yyyy"
+            guard let dateOne = dateFormatter.date(from: $0), let dateTwo = dateFormatter.date(from: $1) else {
+                return true
+            }
+            
+            return dateOne > dateTwo
+        })
         
         return NavigationView {
             List {
@@ -40,18 +53,20 @@ struct HomeView: View {
                     }
                 }
                 
-                ForEach(userData.workoutsGroupedByDate.map { $0.key }, id: \.self) { key in
+                ForEach(sortedDictionaryKeys.map { $0 }, id: \.self) { key in
                     Section(header: VStack {
                         Text(key)
                             .padding(.all)
                             .font(.system(size: 21, weight: .medium))
                             .frame(width: UIScreen.main.bounds.width, alignment: .leading)
                     }) {
-                        ForEach(self.userData.workoutsGroupedByDate[key] ?? [HKWorkout](), id: \.self) { workout in
-                            NavigationLink(destination: WorkoutDetail(workout: workout)) {
-                                WorkoutRow(workout: workout)
+                        if groupedWorkouts[key] != nil {
+                            ForEach(groupedWorkouts[key]!, id: \.self) { workout in
+                                NavigationLink(destination: WorkoutDetail(workout: workout)) {
+                                    WorkoutRow(workout: workout)
+                                }
+                                .padding(.vertical, 8.0)
                             }
-                            .padding(.vertical, 8.0)
                         }
                     }
                 }
@@ -71,7 +86,7 @@ struct HomeView: View {
                 }) {
                     Image(systemName: "line.horizontal.3.decrease.circle").imageScale(.large)
                 }.sheet(isPresented: $showFilterView) {
-                    FilterView(showFilterView: self.$showFilterView).environmentObject(self.userData)
+                    FilterView(showFilterView: self.$showFilterView).environmentObject(self.workoutData)
                 }
             )
         }
@@ -81,6 +96,6 @@ struct HomeView: View {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        HomeView().environmentObject(UserData())
+        HomeView().environmentObject(WorkoutData())
     }
 }
