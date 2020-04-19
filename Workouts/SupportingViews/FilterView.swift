@@ -20,9 +20,9 @@ struct FilterView: View {
     // State variables
     //
     @State private var dateRangeFilter = DateRangeWorkoutFilter(startDate: Date(), endDate: Date(), isApplied: false)
-    @State private var caloriesBurned = CaloriesWorkoutFilter(defaultValue: 500, isApplied: false)
-    @State private var workoutDistance = DistanceWorkoutFilter(defaultValue: 5, isApplied: false)
-    @State private var workoutDuration = DurationWorkoutFilter(defaultValue: 2, isApplied: false)
+    @State private var caloriesBurned = CaloriesWorkoutFilter(value: 500, isApplied: false)
+    @State private var workoutDistance = DistanceWorkoutFilter(value: 5, isApplied: false)
+    @State private var workoutDuration = DurationWorkoutFilter(value: 2, isApplied: false)
     
     var body: some View {
         let durationString = "\(Int(workoutDuration.value/3600)) hr \(Int(workoutDuration.value.truncatingRemainder(dividingBy: 1) * 60)) min"

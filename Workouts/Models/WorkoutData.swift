@@ -26,9 +26,9 @@ class WorkoutData: ObservableObject {
     @Published var appliedFilters: [NSPredicate] = [NSPredicate]()
     
     var dateRangeFilter = DateRangeWorkoutFilter(startDate: Date(), endDate: Date(), isApplied: false)
-    var calorieFilter = CaloriesWorkoutFilter(defaultValue: 500, isApplied: false)
-    var distanceFilter = DistanceWorkoutFilter(defaultValue: 10, isApplied: false)
-    var durationFilter = DurationWorkoutFilter(defaultValue: 2, isApplied: false)
+    var calorieFilter = CaloriesWorkoutFilter(value: 500, isApplied: false)
+    var distanceFilter = DistanceWorkoutFilter(value: 10, isApplied: false)
+    var durationFilter = DurationWorkoutFilter(value: 2, isApplied: false)
     
     private var healthKitAssistant = HealthKitAssistant()
 

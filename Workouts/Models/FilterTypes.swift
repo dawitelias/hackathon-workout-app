@@ -15,22 +15,12 @@ struct DistanceWorkoutFilter {
     var predicate: NSPredicate {
         return HKQuery.predicateForWorkouts(with: .lessThanOrEqualTo, totalDistance: HKQuantity(unit: .mile(), doubleValue: value))
     }
-
-    init(defaultValue: Double, isApplied: Bool) {
-        self.value = defaultValue
-        self.isApplied = isApplied
-    }
 }
 struct CaloriesWorkoutFilter {
     var value: Double
     var isApplied: Bool
     var predicate: NSPredicate {
         return HKQuery.predicateForWorkouts(with: .lessThanOrEqualTo, totalEnergyBurned: HKQuantity(unit: .kilocalorie(), doubleValue: value))
-    }
-
-    init(defaultValue: Double, isApplied: Bool) {
-        self.value = defaultValue
-        self.isApplied = isApplied
     }
 }
 struct DurationWorkoutFilter {
@@ -39,10 +29,6 @@ struct DurationWorkoutFilter {
     var predicate: NSPredicate {
         return HKQuery.predicateForWorkouts(with: .lessThanOrEqualTo, duration: value)
     }
-    init(defaultValue: Double, isApplied: Bool) {
-        self.value = defaultValue
-        self.isApplied = isApplied
-    }
 }
 struct DateRangeWorkoutFilter {
     var startDate: Date
@@ -50,11 +36,5 @@ struct DateRangeWorkoutFilter {
     var isApplied: Bool
     var predicate: NSPredicate {
         return HKQuery.predicateForSamples(withStart: startDate, end: endDate)
-    }
-    
-    init(startDate: Date, endDate: Date, isApplied: Bool) {
-        self.startDate = startDate
-        self.endDate = endDate
-        self.isApplied = isApplied
     }
 }
