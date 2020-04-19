@@ -64,7 +64,7 @@ class WorkoutData: ObservableObject {
             guard var workouts = results else {
                 return
             }
-            workouts.sort(by: { $1.startDate > $0.startDate })
+            workouts.sort(by: { $0.startDate > $1.startDate })
             self?.workouts = workouts
             self?.getFeaturedWorkout()
         }
