@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		A50E464A2449E76000D1F435 /* FeaturedWorkout.swift in Sources */ = {isa = PBXBuildFile; fileRef = A50E46492449E76000D1F435 /* FeaturedWorkout.swift */; };
+		A51CD178244E37630007E652 /* HorizontalScrollRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = A51CD177244E37630007E652 /* HorizontalScrollRow.swift */; };
 		A52F932524493C4900DDB791 /* ChuckNorris.swift in Sources */ = {isa = PBXBuildFile; fileRef = A52F932424493C4900DDB791 /* ChuckNorris.swift */; };
 		A52FBEF82447C84900016025 /* HealthKitAssistant.swift in Sources */ = {isa = PBXBuildFile; fileRef = A52FBEF72447C84900016025 /* HealthKitAssistant.swift */; };
 		A52FBEFA2447C89300016025 /* WorkoutRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = A52FBEF92447C89300016025 /* WorkoutRow.swift */; };
@@ -56,6 +57,7 @@
 
 /* Begin PBXFileReference section */
 		A50E46492449E76000D1F435 /* FeaturedWorkout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeaturedWorkout.swift; sourceTree = "<group>"; };
+		A51CD177244E37630007E652 /* HorizontalScrollRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorizontalScrollRow.swift; sourceTree = "<group>"; };
 		A52F932424493C4900DDB791 /* ChuckNorris.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChuckNorris.swift; sourceTree = "<group>"; };
 		A52FBEF72447C84900016025 /* HealthKitAssistant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthKitAssistant.swift; sourceTree = "<group>"; };
 		A52FBEF92447C89300016025 /* WorkoutRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutRow.swift; sourceTree = "<group>"; };
@@ -132,6 +134,7 @@
 				A50E46492449E76000D1F435 /* FeaturedWorkout.swift */,
 				A55C84E42449EC3F00D81C44 /* Blur.swift */,
 				A5AF6082244AAAAD00AB7E72 /* ToggleableHeader.swift */,
+				A51CD177244E37630007E652 /* HorizontalScrollRow.swift */,
 			);
 			path = SupportingViews;
 			sourceTree = "<group>";
@@ -382,6 +385,7 @@
 				A52FBEFE2447C91700016025 /* WorkoutDetail.swift in Sources */,
 				A52FBEFC2447C8F700016025 /* MapView.swift in Sources */,
 				A52FBEF82447C84900016025 /* HealthKitAssistant.swift in Sources */,
+				A51CD178244E37630007E652 /* HorizontalScrollRow.swift in Sources */,
 				AC46320E2447593700619284 /* HomeView.swift in Sources */,
 				A5B6CEE92448D30800CF2B86 /* CircleImage.swift in Sources */,
 			);
@@ -551,7 +555,7 @@
 				CODE_SIGN_ENTITLEMENTS = Workouts/Workouts.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"Workouts/Preview Content\"";
-				DEVELOPMENT_TEAM = DE63G2V7AY;
+				DEVELOPMENT_TEAM = ARSB35QAMQ;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = Workouts/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
@@ -559,7 +563,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.dawitelias.swiftui.HealthKitSwiftUI;
+				PRODUCT_BUNDLE_IDENTIFIER = com.echeroske.swiftui.HealthKitSwiftUI;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -573,7 +577,7 @@
 				CODE_SIGN_ENTITLEMENTS = Workouts/Workouts.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"Workouts/Preview Content\"";
-				DEVELOPMENT_TEAM = DE63G2V7AY;
+				DEVELOPMENT_TEAM = ARSB35QAMQ;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = Workouts/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
@@ -581,7 +585,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.dawitelias.swiftui.HealthKitSwiftUI;
+				PRODUCT_BUNDLE_IDENTIFIER = com.echeroske.swiftui.HealthKitSwiftUI;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
