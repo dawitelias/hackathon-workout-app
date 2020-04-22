@@ -30,6 +30,9 @@ extension Date {
         dateFormatter.timeStyle = .short
         return dateFormatter.string(from: self)
     }
+    func hoursBeforeNow(hr:TimeInterval) -> Date {
+        return self.addingTimeInterval(-3600 * hr)
+    }
 }
 
 extension TimeInterval {

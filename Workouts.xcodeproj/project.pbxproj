@@ -9,13 +9,19 @@
 /* Begin PBXBuildFile section */
 		A50E464A2449E76000D1F435 /* FeaturedWorkout.swift in Sources */ = {isa = PBXBuildFile; fileRef = A50E46492449E76000D1F435 /* FeaturedWorkout.swift */; };
 		A52F932524493C4900DDB791 /* ChuckNorris.swift in Sources */ = {isa = PBXBuildFile; fileRef = A52F932424493C4900DDB791 /* ChuckNorris.swift */; };
-		A52FBEF52447C81E00016025 /* UserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = A52FBEF42447C81E00016025 /* UserData.swift */; };
 		A52FBEF82447C84900016025 /* HealthKitAssistant.swift in Sources */ = {isa = PBXBuildFile; fileRef = A52FBEF72447C84900016025 /* HealthKitAssistant.swift */; };
 		A52FBEFA2447C89300016025 /* WorkoutRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = A52FBEF92447C89300016025 /* WorkoutRow.swift */; };
 		A52FBEFC2447C8F700016025 /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A52FBEFB2447C8F700016025 /* MapView.swift */; };
 		A52FBEFE2447C91700016025 /* WorkoutDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = A52FBEFD2447C91700016025 /* WorkoutDetail.swift */; };
 		A52FBF012447D6ED00016025 /* HKWorkout+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A52FBF002447D6ED00016025 /* HKWorkout+Extensions.swift */; };
 		A55C84E52449EC3F00D81C44 /* Blur.swift in Sources */ = {isa = PBXBuildFile; fileRef = A55C84E42449EC3F00D81C44 /* Blur.swift */; };
+		A582894D244F7B7C00B7B6B0 /* FilterPill.swift in Sources */ = {isa = PBXBuildFile; fileRef = A582894C244F7B7C00B7B6B0 /* FilterPill.swift */; };
+		A582894F244F8A6100B7B6B0 /* Color+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A582894E244F8A6100B7B6B0 /* Color+Extensions.swift */; };
+		A5828951244F94C600B7B6B0 /* NewActivityTypeFilterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5828950244F94C600B7B6B0 /* NewActivityTypeFilterView.swift */; };
+		A5828953244FC15600B7B6B0 /* MultiSelect.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5828952244FC15600B7B6B0 /* MultiSelect.swift */; };
+		A5AF6083244AAAAD00AB7E72 /* ToggleableHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5AF6082244AAAAD00AB7E72 /* ToggleableHeader.swift */; };
+		A5AF6085244BAA1200AB7E72 /* WorkoutData.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5AF6084244BAA1200AB7E72 /* WorkoutData.swift */; };
+		A5AF6087244BAA3900AB7E72 /* FilterTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5AF6086244BAA3900AB7E72 /* FilterTypes.swift */; };
 		A5B6CEE32448913300CF2B86 /* Date+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B6CEE22448913300CF2B86 /* Date+Extensions.swift */; };
 		A5B6CEE52448AB2D00CF2B86 /* HKWorkoutActivityType+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B6CEE42448AB2D00CF2B86 /* HKWorkoutActivityType+Extension.swift */; };
 		A5B6CEE92448D30800CF2B86 /* CircleImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B6CEE82448D30800CF2B86 /* CircleImage.swift */; };
@@ -55,13 +61,19 @@
 /* Begin PBXFileReference section */
 		A50E46492449E76000D1F435 /* FeaturedWorkout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeaturedWorkout.swift; sourceTree = "<group>"; };
 		A52F932424493C4900DDB791 /* ChuckNorris.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChuckNorris.swift; sourceTree = "<group>"; };
-		A52FBEF42447C81E00016025 /* UserData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserData.swift; sourceTree = "<group>"; };
 		A52FBEF72447C84900016025 /* HealthKitAssistant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthKitAssistant.swift; sourceTree = "<group>"; };
 		A52FBEF92447C89300016025 /* WorkoutRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutRow.swift; sourceTree = "<group>"; };
 		A52FBEFB2447C8F700016025 /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
 		A52FBEFD2447C91700016025 /* WorkoutDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutDetail.swift; sourceTree = "<group>"; };
 		A52FBF002447D6ED00016025 /* HKWorkout+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HKWorkout+Extensions.swift"; sourceTree = "<group>"; };
 		A55C84E42449EC3F00D81C44 /* Blur.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Blur.swift; sourceTree = "<group>"; };
+		A582894C244F7B7C00B7B6B0 /* FilterPill.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterPill.swift; sourceTree = "<group>"; };
+		A582894E244F8A6100B7B6B0 /* Color+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Extensions.swift"; sourceTree = "<group>"; };
+		A5828950244F94C600B7B6B0 /* NewActivityTypeFilterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewActivityTypeFilterView.swift; sourceTree = "<group>"; };
+		A5828952244FC15600B7B6B0 /* MultiSelect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultiSelect.swift; sourceTree = "<group>"; };
+		A5AF6082244AAAAD00AB7E72 /* ToggleableHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToggleableHeader.swift; sourceTree = "<group>"; };
+		A5AF6084244BAA1200AB7E72 /* WorkoutData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutData.swift; sourceTree = "<group>"; };
+		A5AF6086244BAA3900AB7E72 /* FilterTypes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterTypes.swift; sourceTree = "<group>"; };
 		A5B6CEE22448913300CF2B86 /* Date+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extensions.swift"; sourceTree = "<group>"; };
 		A5B6CEE42448AB2D00CF2B86 /* HKWorkoutActivityType+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HKWorkoutActivityType+Extension.swift"; sourceTree = "<group>"; };
 		A5B6CEE82448D30800CF2B86 /* CircleImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleImage.swift; sourceTree = "<group>"; };
@@ -127,6 +139,10 @@
 				A5B6CEEA2448D91100CF2B86 /* ShareSheet.swift */,
 				A50E46492449E76000D1F435 /* FeaturedWorkout.swift */,
 				A55C84E42449EC3F00D81C44 /* Blur.swift */,
+				A5AF6082244AAAAD00AB7E72 /* ToggleableHeader.swift */,
+				A582894C244F7B7C00B7B6B0 /* FilterPill.swift */,
+				A5828950244F94C600B7B6B0 /* NewActivityTypeFilterView.swift */,
+				A5828952244FC15600B7B6B0 /* MultiSelect.swift */,
 			);
 			path = SupportingViews;
 			sourceTree = "<group>";
@@ -134,7 +150,8 @@
 		A52FBEF32447C81000016025 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				A52FBEF42447C81E00016025 /* UserData.swift */,
+				A5AF6084244BAA1200AB7E72 /* WorkoutData.swift */,
+				A5AF6086244BAA3900AB7E72 /* FilterTypes.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -148,6 +165,7 @@
 				A5B6CEE42448AB2D00CF2B86 /* HKWorkoutActivityType+Extension.swift */,
 				A5B6CEEC2448F30300CF2B86 /* MapImageGenerator.swift */,
 				A52F932424493C4900DDB791 /* ChuckNorris.swift */,
+				A582894E244F8A6100B7B6B0 /* Color+Extensions.swift */,
 			);
 			path = HelpersAndExtensions;
 			sourceTree = "<group>";
@@ -360,13 +378,19 @@
 				AC46323A2447712700619284 /* FilterView.swift in Sources */,
 				A52FBEFA2447C89300016025 /* WorkoutRow.swift in Sources */,
 				A52F932524493C4900DDB791 /* ChuckNorris.swift in Sources */,
+				A5828953244FC15600B7B6B0 /* MultiSelect.swift in Sources */,
 				A5B6CEED2448F30300CF2B86 /* MapImageGenerator.swift in Sources */,
 				A5B6CEE52448AB2D00CF2B86 /* HKWorkoutActivityType+Extension.swift in Sources */,
+				A5828951244F94C600B7B6B0 /* NewActivityTypeFilterView.swift in Sources */,
+				A582894F244F8A6100B7B6B0 /* Color+Extensions.swift in Sources */,
 				A50E464A2449E76000D1F435 /* FeaturedWorkout.swift in Sources */,
 				A5B6CEE32448913300CF2B86 /* Date+Extensions.swift in Sources */,
 				AC46320A2447593700619284 /* AppDelegate.swift in Sources */,
+				A5AF6083244AAAAD00AB7E72 /* ToggleableHeader.swift in Sources */,
+				A5AF6087244BAA3900AB7E72 /* FilterTypes.swift in Sources */,
 				A55C84E52449EC3F00D81C44 /* Blur.swift in Sources */,
-				A52FBEF52447C81E00016025 /* UserData.swift in Sources */,
+				A582894D244F7B7C00B7B6B0 /* FilterPill.swift in Sources */,
+				A5AF6085244BAA1200AB7E72 /* WorkoutData.swift in Sources */,
 				A52FBF012447D6ED00016025 /* HKWorkout+Extensions.swift in Sources */,
 				A5B6CEEB2448D91100CF2B86 /* ShareSheet.swift in Sources */,
 				AC4632402447863600619284 /* ProfileView.swift in Sources */,
@@ -543,7 +567,7 @@
 				CODE_SIGN_ENTITLEMENTS = Workouts/Workouts.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"Workouts/Preview Content\"";
-				DEVELOPMENT_TEAM = DE63G2V7AY;
+				DEVELOPMENT_TEAM = ARSB35QAMQ;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = Workouts/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
@@ -551,7 +575,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.dawitelias.swiftui.HealthKitSwiftUI;
+				PRODUCT_BUNDLE_IDENTIFIER = com.echeroske.swiftui.HealthKitSwiftUI;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -565,7 +589,7 @@
 				CODE_SIGN_ENTITLEMENTS = Workouts/Workouts.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"Workouts/Preview Content\"";
-				DEVELOPMENT_TEAM = DE63G2V7AY;
+				DEVELOPMENT_TEAM = ARSB35QAMQ;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = Workouts/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
@@ -573,7 +597,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.dawitelias.swiftui.HealthKitSwiftUI;
+				PRODUCT_BUNDLE_IDENTIFIER = com.echeroske.swiftui.HealthKitSwiftUI;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

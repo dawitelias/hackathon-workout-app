@@ -28,6 +28,7 @@ struct WorkoutDetail: View {
 
         return VStack(spacing: 0) {
             MapView(workout: workout)
+
             VStack(alignment: .leading) {
                 // header
                 HStack {

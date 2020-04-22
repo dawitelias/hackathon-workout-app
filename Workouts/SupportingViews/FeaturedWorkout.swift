@@ -26,7 +26,7 @@ struct FeaturedWorkout: View {
                 }
             }
             .padding(.top)
-            MapView(workout: workout)
+            MapView(workout: workout, startAnnotation: StartAnnotation(), endAnnotation: EndAnnotation())
                 .frame(height: 200)
                 .padding(.horizontal, -15)
                 .padding(.bottom, -6)
