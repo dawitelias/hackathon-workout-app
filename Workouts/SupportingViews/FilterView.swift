@@ -19,11 +19,12 @@ struct FilterView: View {
     
     // State variables
     //
-    @State private var dateRangeFilter = DateRangeWorkoutFilter(startDate: Date(), endDate: Date(), isApplied: false)
-    @State private var caloriesBurned = CaloriesWorkoutFilter(value: 500, isApplied: false)
-    @State private var workoutDistance = DistanceWorkoutFilter(value: 5, isApplied: false)
-    @State private var workoutDuration = DurationWorkoutFilter(value: 2, isApplied: false)
-    
+    @State private var dateRangeFilter = DateRangeWorkoutFilter(startDate: Date(), endDate: Date(), isApplied: false, color: .green)
+    @State private var caloriesBurned = CaloriesWorkoutFilter(value: 0, isApplied: false, color: .red)
+    @State private var workoutDistance = DistanceWorkoutFilter(value: 0, isApplied: false, color: .blue)
+    @State private var workoutDuration = DurationWorkoutFilter(value: 0, isApplied: false, color: .purple)
+    @State private var allFiltersOn = false
+
     var body: some View {
         let durationString = "\(Int(workoutDuration.value/3600)) hr \(Int(workoutDuration.value.truncatingRemainder(dividingBy: 1) * 60)) min"
         let distanceString = "\(String.init(format: "%.2f", workoutDistance.value)) miles"
@@ -34,18 +35,19 @@ struct FilterView: View {
                 // Workout types is kind of a required filter, since we have to query by activity type
                 // so, that's why I didn't wrap this guy in a hidable filter option
                 //
-                Section {
-                    Picker("Workout Types", selection: $selectedWorkouts) {
-                        ForEach(0 ..< workouts.count) {
-                            Text(self.workouts[$0])
-
+                Section(header: NewActivityTypeFilterView().environmentObject(self.workoutData)) {
+                    ScrollView(.horizontal, showsIndicators: false) {
+                        HStack(alignment: .top, spacing: 1) {
+                            ForEach(self.workoutData.activeActivityTypeFilters, id: \.self) { filter in
+                                FilterPill(activityFilter: filter).environmentObject(self.workoutData)
+                            }
                         }
                     }
                 }
                 
                 // Select date you want to show
                 //
-                Section(header: ToggleableHeader(text: "Date 📅", switchValue: $dateRangeFilter.isApplied)) {
+                Section(header: ToggleableHeader(text: "Date 📅", currentValueText: nil, switchValue: $dateRangeFilter.isApplied)) {
                     if dateRangeFilter.isApplied {
                         DatePicker(selection: $dateRangeFilter.startDate, in: ...(Calendar.current.date(byAdding: .month, value: 12, to: Date()) ?? Date()), displayedComponents: .date) {
                             Text("From")
@@ -59,7 +61,7 @@ struct FilterView: View {
                 // Select distance range
                 //
                 // maybe this is conditionally visible based on certain types of workouts (e.g., runs, swims, bike rides, etc.)
-                Section(header: ToggleableHeader(text: "Workout Distance (miles) 📏 \(workoutDistance.isApplied ? distanceString : "")", switchValue: $workoutDistance.isApplied)) {
+                Section(header: ToggleableHeader(text: "Workout Distance (miles) 📏", currentValueText: workoutDistance.isApplied ? distanceString : nil, switchValue: $workoutDistance.isApplied)) {
                     if workoutDistance.isApplied {
                         Slider(value: $workoutDistance.value, in: 0...50)
                             .transition(.slide)
@@ -69,32 +71,33 @@ struct FilterView: View {
                 // Select duration
                 // Would be nice to use a countdown timer (UIDatePicker.Mode.countDownTimer)
                 // But it's not available in SwiftUI yet, how about a slider?
-                Section(header: ToggleableHeader(text: "Workout Duration ⏳ \(workoutDuration.isApplied ? durationString : "")", switchValue: $workoutDuration.isApplied)) {
+                Section(header: ToggleableHeader(text: "Workout Duration ⏳", currentValueText: workoutDuration.isApplied ? durationString : nil, switchValue: $workoutDuration.isApplied)) {
                     if workoutDuration.isApplied {
                         Slider(value: $workoutDuration.value, in: 0...18000)
-                            .transition(.slide)
+                            .transition(.scale)
                     }
                 }
 
                 
                 // Select calorie range
                 //
-                Section(header: ToggleableHeader(text: "Calories Burned 🥵 \(caloriesBurned.isApplied ? caloriesString : "")", switchValue: $caloriesBurned.isApplied)) {
+                Section(header: ToggleableHeader(text: "Calories Burned 🥵", currentValueText: caloriesBurned.isApplied ? caloriesString : nil, switchValue: $caloriesBurned.isApplied)) {
                     if caloriesBurned.isApplied {
                         Slider(value: $caloriesBurned.value, in: 0...2000)
-                            .transition(.asymmetric(insertion: .move(edge: .leading), removal: .slide))
+                            .transition(.opacity)
                     }
                 }
 
                 // Button that turns off all off the filters
                 //
                 Button(action: {
-                    self.caloriesBurned.isApplied = false
-                    self.workoutDistance.isApplied = false
-                    self.workoutDuration.isApplied = false
-                    self.dateRangeFilter.isApplied = false
+                    self.allFiltersOn = !self.allFiltersOn
+                    self.caloriesBurned.isApplied = self.allFiltersOn
+                    self.workoutDistance.isApplied = self.allFiltersOn
+                    self.workoutDuration.isApplied = self.allFiltersOn
+                    self.dateRangeFilter.isApplied = self.allFiltersOn
                 }) {
-                    Text("Clear all filters")
+                    Text("Toggle All Filters \(!self.allFiltersOn ? "On ✅ " : "Off 🚫")").foregroundColor(.blue)
                 }
             }
             .navigationBarTitle(Text("Filters"), displayMode: .inline)

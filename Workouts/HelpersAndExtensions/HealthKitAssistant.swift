@@ -19,7 +19,7 @@ class HealthKitAssistant {
 
     // MARK: Get workouts with predicates for each activity type
     //
-    func getWorkouts(types: [HKWorkoutActivityType], predicates: [NSPredicate], completion: @escaping ([HKWorkout]?, Error?) -> Void) {
+    func getWorkouts(types: [ActivityTypeFilter], predicates: [NSPredicate], completion: @escaping ([HKWorkout]?, Error?) -> Void) {
         checkAccess() { success, error in
 
             if !success || error != nil {
@@ -32,7 +32,7 @@ class HealthKitAssistant {
             
             types.forEach { activityType in
                 var summedPredicates = predicates
-                summedPredicates.append(HKQuery.predicateForWorkouts(with: activityType))
+                summedPredicates.append(HKQuery.predicateForWorkouts(with: activityType.value))
                 let compound = NSCompoundPredicate(andPredicateWithSubpredicates: summedPredicates)
                 let sortDescriptor = NSSortDescriptor(key: HKSampleSortIdentifierEndDate, ascending: false)
                 
@@ -42,16 +42,18 @@ class HealthKitAssistant {
                     predicate: compound,
                     limit: 100,
                     sortDescriptors: [sortDescriptor]) { (query, samples, error) in
-                        dispatchGroup.leave()
                         
                         if error != nil {
+                            dispatchGroup.leave()
                             completion(nil, error)
                             return
                         }
 
                         if let data = samples as? [HKWorkout] {
-                            workoutData += data
+                            // workoutData += data Note* I ocassionaly get badAccess error thrown here crashing the app (only on app startup), very hard to repro going to try another way of copying over these array contents and see if I see the same error popup again.
+                            workoutData.append(contentsOf: data)
                         }
+                        dispatchGroup.leave()
                     }
                 HKHealthStore().execute(query)
             }

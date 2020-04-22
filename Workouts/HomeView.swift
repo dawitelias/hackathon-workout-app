@@ -52,6 +52,27 @@ struct HomeView: View {
                         }
                     }
                 }
+
+// THIS FEATURE IS IN PROGRESS....
+//                if self.workoutData.activeActivityTypeFilters.count > 0 || self.workoutData.appliedFilters.count > 0 {
+//                    Section(header: VStack {
+//                        Text("Currently Applied Filters")
+//                            .padding(.all)
+//                            .font(.system(size: 21, weight: .medium))
+//                            .frame(width: UIScreen.main.bounds.width, alignment: .leading)
+//                    }) {
+//                        ScrollView(.horizontal, showsIndicators: false) {
+//                            HStack(alignment: .top, spacing: 1) {
+//                                ForEach(self.workoutData.activeActivityTypeFilters, id: \.self) { filter in
+//                                    FilterPill(activityFilter: filter, pillColor: .red).environmentObject(self.workoutData)
+//                                }
+//                                ForEach(self.workoutData.appliedFilters, id: \.self) { filter in
+//                                    FilterPill(activityFilter: filter, pillColor: .red).environmentObject(self.workoutData)
+//                                }
+//                            }
+//                        }
+//                    }
+//                }
                 
                 ForEach(sortedDictionaryKeys.map { $0 }, id: \.self) { key in
                     Section(header: VStack {
@@ -90,7 +111,7 @@ struct HomeView: View {
                 }
             )
         }
-        .accentColor(Color.pink)
+        .accentColor(appAccentColor)
     }
 }
 
