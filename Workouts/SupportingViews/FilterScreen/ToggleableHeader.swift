@@ -18,8 +18,6 @@ struct ToggleableHeader: View {
             Toggle(isOn: $switchValue) {
                 VStack(alignment: .leading, spacing: nil) {
                     Text(text)
-                       .padding(.top, 20)
-                       .padding(.bottom, 5)
                        .font(.system(size: 18, weight: .regular))
 
                     if currentValueText != nil {

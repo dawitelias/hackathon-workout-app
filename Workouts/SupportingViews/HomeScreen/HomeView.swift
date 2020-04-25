@@ -107,7 +107,7 @@ struct HomeView: View {
                 }) {
                     Image(systemName: "line.horizontal.3.decrease.circle").imageScale(.large)
                 }.sheet(isPresented: $showFilterView) {
-                    FilterView(showFilterView: self.$showFilterView).environmentObject(self.workoutData)
+                    FilterHome(showFilterView: self.$showFilterView).environmentObject(self.workoutData)
                 }
             )
         }

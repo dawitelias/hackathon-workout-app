@@ -8,7 +8,7 @@
 
 import SwiftUI
 
-struct MultiSelect: View {
+struct WorkoutsMultiSelect: View {
     @EnvironmentObject var workoutData: WorkoutData
 
     var body: some View {
@@ -19,19 +19,27 @@ struct MultiSelect: View {
                 }) {
                     HStack {
                         Text(item.value.workoutTypeMetadata.activityTypeDescription)
+                            .foregroundColor(Color(UIColor.label))
                         Spacer()
                         if item.isApplied {
                             Image(systemName: "checkmark")
+                                .accentColor(/*@START_MENU_TOKEN@*/.pink/*@END_MENU_TOKEN@*/)
                         }
                     }
                 }
             }
-        }
+        }.listStyle(GroupedListStyle()).environment(\.horizontalSizeClass, .regular)
+        .navigationBarItems(trailing: Button(action: {
+            //self.showFilterView = false
+            print("select all/none of workout types")
+        }) {
+            Text("Select All").foregroundColor(Color.pink).bold()
+        })
     }
 }
 
 struct MultiSelect_Previews: PreviewProvider {
     static var previews: some View {
-        MultiSelect().environmentObject(WorkoutData())
+        WorkoutsMultiSelect().environmentObject(WorkoutData())
     }
 }
