@@ -19,6 +19,7 @@
 		A52FBEFC2447C8F700016025 /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A52FBEFB2447C8F700016025 /* MapView.swift */; };
 		A52FBEFE2447C91700016025 /* WorkoutDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = A52FBEFD2447C91700016025 /* WorkoutDetail.swift */; };
 		A52FBF012447D6ED00016025 /* HKWorkout+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A52FBF002447D6ED00016025 /* HKWorkout+Extensions.swift */; };
+		A546226C24550BF3003BA285 /* GradientPolyline.swift in Sources */ = {isa = PBXBuildFile; fileRef = A546226B24550BF3003BA285 /* GradientPolyline.swift */; };
 		A55C84E52449EC3F00D81C44 /* Blur.swift in Sources */ = {isa = PBXBuildFile; fileRef = A55C84E42449EC3F00D81C44 /* Blur.swift */; };
 		A582894D244F7B7C00B7B6B0 /* FilterPill.swift in Sources */ = {isa = PBXBuildFile; fileRef = A582894C244F7B7C00B7B6B0 /* FilterPill.swift */; };
 		A582894F244F8A6100B7B6B0 /* Color+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A582894E244F8A6100B7B6B0 /* Color+Extensions.swift */; };
@@ -74,6 +75,7 @@
 		A52FBEFB2447C8F700016025 /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
 		A52FBEFD2447C91700016025 /* WorkoutDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutDetail.swift; sourceTree = "<group>"; };
 		A52FBF002447D6ED00016025 /* HKWorkout+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HKWorkout+Extensions.swift"; sourceTree = "<group>"; };
+		A546226B24550BF3003BA285 /* GradientPolyline.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientPolyline.swift; sourceTree = "<group>"; };
 		A55C84E42449EC3F00D81C44 /* Blur.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Blur.swift; sourceTree = "<group>"; };
 		A582894C244F7B7C00B7B6B0 /* FilterPill.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterPill.swift; sourceTree = "<group>"; };
 		A582894E244F8A6100B7B6B0 /* Color+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Extensions.swift"; sourceTree = "<group>"; };
@@ -216,6 +218,7 @@
 				A5B6CEEC2448F30300CF2B86 /* MapImageGenerator.swift */,
 				A52F932424493C4900DDB791 /* ChuckNorris.swift */,
 				A582894E244F8A6100B7B6B0 /* Color+Extensions.swift */,
+				A546226B24550BF3003BA285 /* GradientPolyline.swift */,
 			);
 			path = HelpersAndExtensions;
 			sourceTree = "<group>";
@@ -430,6 +433,7 @@
 				A5221E72245462DB005416BC /* DistanceFilter.swift in Sources */,
 				A5B6CEED2448F30300CF2B86 /* MapImageGenerator.swift in Sources */,
 				A5B6CEE52448AB2D00CF2B86 /* HKWorkoutActivityType+Extension.swift in Sources */,
+				A546226C24550BF3003BA285 /* GradientPolyline.swift in Sources */,
 				A582894F244F8A6100B7B6B0 /* Color+Extensions.swift in Sources */,
 				A50E464A2449E76000D1F435 /* FeaturedWorkout.swift in Sources */,
 				A5221E74245462ED005416BC /* DurationFilter.swift in Sources */,

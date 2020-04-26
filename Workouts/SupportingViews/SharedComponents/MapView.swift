@@ -24,7 +24,6 @@ class EndAnnotation: NSObject, MKAnnotation {
     var leftImageName: String?
 }
 
-
 struct MapView: UIViewRepresentable {
     var workout: HKWorkout
     let mapViewDelegate = MapViewDelegate()
@@ -74,18 +73,38 @@ struct MapView: UIViewRepresentable {
         }
 
         if let myRoute = self.route {
-            let polyline = MKGeodesicPolyline(coordinates: myRoute.map { return CLLocationCoordinate2D(latitude: $0.coordinate.latitude, longitude: $0.coordinate.longitude) }, count: myRoute.count)
-            uiView.setVisibleMapRect(polyline.boundingMapRect, animated: false)
-            uiView.addOverlay(polyline)
+            guard let maxVelocity = myRoute.max(by: { return $0.speed < $1.speed })?.speed, let minVelocity = myRoute.min(by: { return $0.speed < $1.speed })?.speed else {
+                return
+            }
+            
+            // If our location data doesn't have speed information associated with the route, then we just want to render out a plain orange? line
+            //
+            if maxVelocity == -1 && minVelocity == -1 {
+                let polyline = MKGeodesicPolyline(coordinates: myRoute.map { return CLLocationCoordinate2D(latitude: $0.coordinate.latitude, longitude: $0.coordinate.longitude) }, count: myRoute.count)
+                uiView.setVisibleMapRect(polyline.boundingMapRect, animated: false)
+                uiView.addOverlay(polyline)
+            } else {
+                let polyline = GradientPolyline(locations: myRoute, maxVelocity: maxVelocity, minVelocity: minVelocity)
+                uiView.setVisibleMapRect(polyline.boundingMapRect, animated: false)
+                uiView.addOverlay(polyline)
+            }
         }
     }
 }
 
 class MapViewDelegate: NSObject, MKMapViewDelegate {
     func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
+
+        if overlay is GradientPolyline {
+            let renderer = GradidentPolylineRenderer(overlay: overlay)
+            renderer.lineWidth = 7
+            return renderer
+        }
+
         let renderer = MKPolylineRenderer(overlay: overlay)
-        renderer.fillColor = UIColor.yellow.withAlphaComponent(0.5)
+        renderer.lineWidth = 5
         renderer.strokeColor = UIColor.orange.withAlphaComponent(0.8)
+
         return renderer
     }
 
@@ -112,6 +131,7 @@ class MapViewDelegate: NSObject, MKMapViewDelegate {
         startAnnotationView.glyphImage = UIImage(named: "RouteStart")!
         startAnnotationView.glyphTintColor = UIColor.white
         startAnnotationView.titleVisibility = .hidden
+        startAnnotationView.displayPriority = .required
         
         if let leftImage = annotation.leftImageName {
             startAnnotationView.leftCalloutAccessoryView = UIImageView(image: UIImage(named: leftImage)!)
@@ -129,6 +149,7 @@ class MapViewDelegate: NSObject, MKMapViewDelegate {
         endAnnotationView.glyphImage = UIImage(named: "RouteEnd")!
         endAnnotationView.glyphTintColor = UIColor.white
         endAnnotationView.titleVisibility = .hidden
+        endAnnotationView.displayPriority = .required
         
         if let leftImage = annotation.leftImageName {
             endAnnotationView.leftCalloutAccessoryView = UIImageView(image: UIImage(named: leftImage)!)
