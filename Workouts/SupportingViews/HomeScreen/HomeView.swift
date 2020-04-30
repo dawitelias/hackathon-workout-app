@@ -12,6 +12,8 @@ import HealthKit
 struct HomeView: View {
     @EnvironmentObject var workoutData: WorkoutData
 
+    @Environment(\.presentationMode) var presentation
+
     @State var showFilterView = false
     @State var showProfileView = false
     
