@@ -76,7 +76,14 @@ class GradidentPolylineRenderer: MKPolylineRenderer {
                 // we take the point in between then to use as a control that lets us see approximately where the user
                 // would have walked. https://developer.apple.com/documentation/uikit/uibezierpath/1624351-addquadcurve
                 //
-                path.addQuadCurve(to: point, control: controlPoint)
+                if index + 1 != self.polyline.pointCount {
+                    let nextPoint = self.point(for: self.polyline.points()[index + 1])
+                    let overLapX = (point.x - nextPoint.x)/2
+                    let overLapY = (point.y - nextPoint.y)/2
+                    path.addQuadCurve(to: CGPoint(x: point.x - overLapX, y: point.y - overLapY), control: controlPoint)
+                } else {
+                    path.addQuadCurve(to: point, control: controlPoint)
+                }
                 
                 let colors = [prevColor!, currentColor!] as CFArray
                 let baseWidth = self.lineWidth / zoomScale

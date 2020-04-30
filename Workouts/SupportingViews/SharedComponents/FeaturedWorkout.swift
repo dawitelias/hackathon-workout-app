@@ -11,8 +11,21 @@ import HealthKit
 
 struct FeaturedWorkout: View {
     var workout: HKWorkout
+    @State var workoutHasRouteData = false
 
     var body: some View {
+        workout.getWorkoutLocationData() { results, error in
+            if let err = error {
+                print(err.localizedDescription)
+                return
+            }
+            if let locations = results {
+                if locations.count > 0 {
+                    self.workoutHasRouteData = true
+                }
+            }
+        }
+        
         return VStack(alignment: .leading) {
             HStack {
                 CircleImage(image: Image(workout.workoutActivityType.workoutTypeMetadata.systemIconName))
@@ -26,10 +39,19 @@ struct FeaturedWorkout: View {
                 }
             }
             .padding(.top)
-            MapView(workout: workout, startAnnotation: StartAnnotation(), endAnnotation: EndAnnotation())
-                .frame(height: 200)
-                .padding(.horizontal, -15)
-                .padding(.bottom, -6)
+            if workoutHasRouteData {
+                MapView(workout: workout, startAnnotation: StartAnnotation(), endAnnotation: EndAnnotation())
+                    .frame(height: 200)
+                    .padding(.horizontal, -15)
+                    .padding(.bottom, -6)
+            } else {
+                Image("goodWork") // temporary image until we decide what to do artwise here. I have a few ideas.
+                    .resizable()
+                    .frame(height: 200)
+                    .padding(.horizontal, -15)
+                    .padding(.bottom, -6)
+            }
+            
         }
     }
 

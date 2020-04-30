@@ -20,6 +20,8 @@
 		A52FBEFE2447C91700016025 /* WorkoutDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = A52FBEFD2447C91700016025 /* WorkoutDetail.swift */; };
 		A52FBF012447D6ED00016025 /* HKWorkout+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A52FBF002447D6ED00016025 /* HKWorkout+Extensions.swift */; };
 		A546226C24550BF3003BA285 /* GradientPolyline.swift in Sources */ = {isa = PBXBuildFile; fileRef = A546226B24550BF3003BA285 /* GradientPolyline.swift */; };
+		A546226E2455223F003BA285 /* DailyWorkout.swift in Sources */ = {isa = PBXBuildFile; fileRef = A546226D2455223F003BA285 /* DailyWorkout.swift */; };
+		A54622762459C7A4003BA285 /* DailySummary.swift in Sources */ = {isa = PBXBuildFile; fileRef = A54622752459C7A4003BA285 /* DailySummary.swift */; };
 		A55C84E52449EC3F00D81C44 /* Blur.swift in Sources */ = {isa = PBXBuildFile; fileRef = A55C84E42449EC3F00D81C44 /* Blur.swift */; };
 		A582894D244F7B7C00B7B6B0 /* FilterPill.swift in Sources */ = {isa = PBXBuildFile; fileRef = A582894C244F7B7C00B7B6B0 /* FilterPill.swift */; };
 		A582894F244F8A6100B7B6B0 /* Color+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A582894E244F8A6100B7B6B0 /* Color+Extensions.swift */; };
@@ -76,6 +78,8 @@
 		A52FBEFD2447C91700016025 /* WorkoutDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutDetail.swift; sourceTree = "<group>"; };
 		A52FBF002447D6ED00016025 /* HKWorkout+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HKWorkout+Extensions.swift"; sourceTree = "<group>"; };
 		A546226B24550BF3003BA285 /* GradientPolyline.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientPolyline.swift; sourceTree = "<group>"; };
+		A546226D2455223F003BA285 /* DailyWorkout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyWorkout.swift; sourceTree = "<group>"; };
+		A54622752459C7A4003BA285 /* DailySummary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailySummary.swift; sourceTree = "<group>"; };
 		A55C84E42449EC3F00D81C44 /* Blur.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Blur.swift; sourceTree = "<group>"; };
 		A582894C244F7B7C00B7B6B0 /* FilterPill.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterPill.swift; sourceTree = "<group>"; };
 		A582894E244F8A6100B7B6B0 /* Color+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Extensions.swift"; sourceTree = "<group>"; };
@@ -161,6 +165,7 @@
 				A55C84E42449EC3F00D81C44 /* Blur.swift */,
 				A52FBEFB2447C8F700016025 /* MapView.swift */,
 				A50E46492449E76000D1F435 /* FeaturedWorkout.swift */,
+				A546226D2455223F003BA285 /* DailyWorkout.swift */,
 			);
 			path = SharedComponents;
 			sourceTree = "<group>";
@@ -190,6 +195,7 @@
 		A52FBEF22447BF9E00016025 /* SupportingViews */ = {
 			isa = PBXGroup;
 			children = (
+				A54622742459C77E003BA285 /* DailySummaryScreen */,
 				A5199FCD2454870E002474AD /* HomeScreen */,
 				A5199FCC245486FA002474AD /* ProfileScreen */,
 				A5221E6C24545ED6005416BC /* FilterScreen */,
@@ -221,6 +227,14 @@
 				A546226B24550BF3003BA285 /* GradientPolyline.swift */,
 			);
 			path = HelpersAndExtensions;
+			sourceTree = "<group>";
+		};
+		A54622742459C77E003BA285 /* DailySummaryScreen */ = {
+			isa = PBXGroup;
+			children = (
+				A54622752459C7A4003BA285 /* DailySummary.swift */,
+			);
+			path = DailySummaryScreen;
 			sourceTree = "<group>";
 		};
 		AC4631FD2447593700619284 = {
@@ -446,12 +460,14 @@
 				A5221E76245462FE005416BC /* CaloriesFilter.swift in Sources */,
 				A5AF6085244BAA1200AB7E72 /* WorkoutData.swift in Sources */,
 				A52FBF012447D6ED00016025 /* HKWorkout+Extensions.swift in Sources */,
+				A546226E2455223F003BA285 /* DailyWorkout.swift in Sources */,
 				A5B6CEEB2448D91100CF2B86 /* ShareSheet.swift in Sources */,
 				A5221E6E24545F00005416BC /* FilterHome.swift in Sources */,
 				AC4632402447863600619284 /* ProfileView.swift in Sources */,
 				AC46320C2447593700619284 /* SceneDelegate.swift in Sources */,
 				A5221E70245462B4005416BC /* DateFilter.swift in Sources */,
 				A52FBEFE2447C91700016025 /* WorkoutDetail.swift in Sources */,
+				A54622762459C7A4003BA285 /* DailySummary.swift in Sources */,
 				A52FBEFC2447C8F700016025 /* MapView.swift in Sources */,
 				A52FBEF82447C84900016025 /* HealthKitAssistant.swift in Sources */,
 				AC46320E2447593700619284 /* HomeView.swift in Sources */,

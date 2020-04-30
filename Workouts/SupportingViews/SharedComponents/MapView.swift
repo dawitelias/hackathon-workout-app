@@ -97,7 +97,7 @@ class MapViewDelegate: NSObject, MKMapViewDelegate {
 
         if overlay is GradientPolyline {
             let renderer = GradidentPolylineRenderer(overlay: overlay)
-            renderer.lineWidth = 7
+            renderer.lineWidth = 8
             return renderer
         }
 
