@@ -23,6 +23,13 @@
 		A546226E2455223F003BA285 /* DailyWorkout.swift in Sources */ = {isa = PBXBuildFile; fileRef = A546226D2455223F003BA285 /* DailyWorkout.swift */; };
 		A54622762459C7A4003BA285 /* DailySummary.swift in Sources */ = {isa = PBXBuildFile; fileRef = A54622752459C7A4003BA285 /* DailySummary.swift */; };
 		A55C84E52449EC3F00D81C44 /* Blur.swift in Sources */ = {isa = PBXBuildFile; fileRef = A55C84E42449EC3F00D81C44 /* Blur.swift */; };
+		A562B6BA245A6F4200742ECF /* SectionHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = A562B6B9245A6F4200742ECF /* SectionHeader.swift */; };
+		A562B6C0245A724E00742ECF /* AboutScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = A562B6BF245A724E00742ECF /* AboutScreen.swift */; };
+		A562B6C2245A729400742ECF /* DataAndPrivacy.swift in Sources */ = {isa = PBXBuildFile; fileRef = A562B6C1245A729400742ECF /* DataAndPrivacy.swift */; };
+		A562B6C4245A72C900742ECF /* Feedback.swift in Sources */ = {isa = PBXBuildFile; fileRef = A562B6C3245A72C900742ECF /* Feedback.swift */; };
+		A562B6C6245A780900742ECF /* HealthInfoScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = A562B6C5245A780900742ECF /* HealthInfoScreen.swift */; };
+		A562B6C8245A786700742ECF /* WeeklySummary.swift in Sources */ = {isa = PBXBuildFile; fileRef = A562B6C7245A786700742ECF /* WeeklySummary.swift */; };
+		A562B6CA245A789E00742ECF /* Badges.swift in Sources */ = {isa = PBXBuildFile; fileRef = A562B6C9245A789E00742ECF /* Badges.swift */; };
 		A582894D244F7B7C00B7B6B0 /* FilterPill.swift in Sources */ = {isa = PBXBuildFile; fileRef = A582894C244F7B7C00B7B6B0 /* FilterPill.swift */; };
 		A582894F244F8A6100B7B6B0 /* Color+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A582894E244F8A6100B7B6B0 /* Color+Extensions.swift */; };
 		A5828953244FC15600B7B6B0 /* WorkoutsMultiSelect.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5828952244FC15600B7B6B0 /* WorkoutsMultiSelect.swift */; };
@@ -81,6 +88,13 @@
 		A546226D2455223F003BA285 /* DailyWorkout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyWorkout.swift; sourceTree = "<group>"; };
 		A54622752459C7A4003BA285 /* DailySummary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailySummary.swift; sourceTree = "<group>"; };
 		A55C84E42449EC3F00D81C44 /* Blur.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Blur.swift; sourceTree = "<group>"; };
+		A562B6B9245A6F4200742ECF /* SectionHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionHeader.swift; sourceTree = "<group>"; };
+		A562B6BF245A724E00742ECF /* AboutScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutScreen.swift; sourceTree = "<group>"; };
+		A562B6C1245A729400742ECF /* DataAndPrivacy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataAndPrivacy.swift; sourceTree = "<group>"; };
+		A562B6C3245A72C900742ECF /* Feedback.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Feedback.swift; sourceTree = "<group>"; };
+		A562B6C5245A780900742ECF /* HealthInfoScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthInfoScreen.swift; sourceTree = "<group>"; };
+		A562B6C7245A786700742ECF /* WeeklySummary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeeklySummary.swift; sourceTree = "<group>"; };
+		A562B6C9245A789E00742ECF /* Badges.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Badges.swift; sourceTree = "<group>"; };
 		A582894C244F7B7C00B7B6B0 /* FilterPill.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterPill.swift; sourceTree = "<group>"; };
 		A582894E244F8A6100B7B6B0 /* Color+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Extensions.swift"; sourceTree = "<group>"; };
 		A5828952244FC15600B7B6B0 /* WorkoutsMultiSelect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutsMultiSelect.swift; sourceTree = "<group>"; };
@@ -142,6 +156,8 @@
 		A5199FCC245486FA002474AD /* ProfileScreen */ = {
 			isa = PBXGroup;
 			children = (
+				A562B6BC245A722E00742ECF /* AppInfoRelated */,
+				A562B6BB245A722500742ECF /* ProfileRelated */,
 				AC46323F2447863600619284 /* ProfileView.swift */,
 			);
 			path = ProfileScreen;
@@ -166,6 +182,7 @@
 				A52FBEFB2447C8F700016025 /* MapView.swift */,
 				A50E46492449E76000D1F435 /* FeaturedWorkout.swift */,
 				A546226D2455223F003BA285 /* DailyWorkout.swift */,
+				A562B6B9245A6F4200742ECF /* SectionHeader.swift */,
 			);
 			path = SharedComponents;
 			sourceTree = "<group>";
@@ -235,6 +252,26 @@
 				A54622752459C7A4003BA285 /* DailySummary.swift */,
 			);
 			path = DailySummaryScreen;
+			sourceTree = "<group>";
+		};
+		A562B6BB245A722500742ECF /* ProfileRelated */ = {
+			isa = PBXGroup;
+			children = (
+				A562B6C5245A780900742ECF /* HealthInfoScreen.swift */,
+				A562B6C7245A786700742ECF /* WeeklySummary.swift */,
+				A562B6C9245A789E00742ECF /* Badges.swift */,
+			);
+			path = ProfileRelated;
+			sourceTree = "<group>";
+		};
+		A562B6BC245A722E00742ECF /* AppInfoRelated */ = {
+			isa = PBXGroup;
+			children = (
+				A562B6BF245A724E00742ECF /* AboutScreen.swift */,
+				A562B6C1245A729400742ECF /* DataAndPrivacy.swift */,
+				A562B6C3245A72C900742ECF /* Feedback.swift */,
+			);
+			path = AppInfoRelated;
 			sourceTree = "<group>";
 		};
 		AC4631FD2447593700619284 = {
@@ -444,19 +481,25 @@
 				A52FBEFA2447C89300016025 /* WorkoutRow.swift in Sources */,
 				A52F932524493C4900DDB791 /* ChuckNorris.swift in Sources */,
 				A5828953244FC15600B7B6B0 /* WorkoutsMultiSelect.swift in Sources */,
+				A562B6C6245A780900742ECF /* HealthInfoScreen.swift in Sources */,
 				A5221E72245462DB005416BC /* DistanceFilter.swift in Sources */,
 				A5B6CEED2448F30300CF2B86 /* MapImageGenerator.swift in Sources */,
 				A5B6CEE52448AB2D00CF2B86 /* HKWorkoutActivityType+Extension.swift in Sources */,
 				A546226C24550BF3003BA285 /* GradientPolyline.swift in Sources */,
+				A562B6BA245A6F4200742ECF /* SectionHeader.swift in Sources */,
+				A562B6C0245A724E00742ECF /* AboutScreen.swift in Sources */,
 				A582894F244F8A6100B7B6B0 /* Color+Extensions.swift in Sources */,
 				A50E464A2449E76000D1F435 /* FeaturedWorkout.swift in Sources */,
 				A5221E74245462ED005416BC /* DurationFilter.swift in Sources */,
+				A562B6C4245A72C900742ECF /* Feedback.swift in Sources */,
 				A5B6CEE32448913300CF2B86 /* Date+Extensions.swift in Sources */,
 				AC46320A2447593700619284 /* AppDelegate.swift in Sources */,
 				A5AF6083244AAAAD00AB7E72 /* ToggleableHeader.swift in Sources */,
 				A5AF6087244BAA3900AB7E72 /* FilterTypes.swift in Sources */,
+				A562B6C8245A786700742ECF /* WeeklySummary.swift in Sources */,
 				A55C84E52449EC3F00D81C44 /* Blur.swift in Sources */,
 				A582894D244F7B7C00B7B6B0 /* FilterPill.swift in Sources */,
+				A562B6CA245A789E00742ECF /* Badges.swift in Sources */,
 				A5221E76245462FE005416BC /* CaloriesFilter.swift in Sources */,
 				A5AF6085244BAA1200AB7E72 /* WorkoutData.swift in Sources */,
 				A52FBF012447D6ED00016025 /* HKWorkout+Extensions.swift in Sources */,
@@ -465,6 +508,7 @@
 				A5221E6E24545F00005416BC /* FilterHome.swift in Sources */,
 				AC4632402447863600619284 /* ProfileView.swift in Sources */,
 				AC46320C2447593700619284 /* SceneDelegate.swift in Sources */,
+				A562B6C2245A729400742ECF /* DataAndPrivacy.swift in Sources */,
 				A5221E70245462B4005416BC /* DateFilter.swift in Sources */,
 				A52FBEFE2447C91700016025 /* WorkoutDetail.swift in Sources */,
 				A54622762459C7A4003BA285 /* DailySummary.swift in Sources */,

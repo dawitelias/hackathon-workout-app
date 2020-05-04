@@ -40,17 +40,12 @@ struct HomeView: View {
         
         return NavigationView {
             List {
-                // If the user has done multiple workouts today, they we want to show them a horizontal scroll view of the workouts that
+                // If the user has done multiple workouts today, we want to show them a horizontal scroll view of the workouts that
                 // they have done, otherwise, if they have only done one workout or they haven't done a workout at all today, then we will
                 // fall back to showing the featured workout
                 //
                 if workoutsDoneToday != nil && workoutsDoneToday!.count > 1 {
-                    Section(header: VStack {
-                        Text("Your workouts today 🏅")
-                            .padding(.all)
-                            .font(.system(size: 21, weight: .medium))
-                            .frame(width: UIScreen.main.bounds.width, alignment: .leading)
-                    }) {
+                    Section(header: SectionHeader(text: "Your workouts today 🏅")) {
                         VStack(alignment: .leading, spacing: nil) {
                             ScrollView(.horizontal, showsIndicators: true) {
                                 HStack(alignment: .top, spacing: 20) {
@@ -68,12 +63,7 @@ struct HomeView: View {
                         }
                     }
                 } else if featuredWorkout != nil {
-                    Section(header: VStack {
-                        Text("Your latest workout 🏅")
-                            .padding(.all)
-                            .font(.system(size: 21, weight: .medium))
-                            .frame(width: UIScreen.main.bounds.width, alignment: .leading)
-                    }) {
+                    Section(header: SectionHeader(text: "Your latest workout 🏅")) {
                         ZStack {
                             FeaturedWorkout(workout: featuredWorkout!)
                             NavigationLink(destination: WorkoutDetail(workout: featuredWorkout!)) {

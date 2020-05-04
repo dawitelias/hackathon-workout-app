@@ -40,7 +40,7 @@ struct DailySummary: View {
                             .font(.callout)
                             .foregroundColor(Color.gray)
                         Text("\(String.init(format: "%.0f", totalCalories)) cal")
-                            .font(.system(.largeTitle, design: .rounded))
+                            .font(.system(.largeTitle))
                             .fontWeight(.bold)
                     }
                     VStack(alignment: .leading) {
@@ -48,7 +48,7 @@ struct DailySummary: View {
                             .font(.callout)
                             .foregroundColor(Color.gray)
                         Text("\(workoutTimeString)")
-                            .font(.system(.largeTitle, design: .rounded))
+                            .font(.system(.largeTitle))
                             .fontWeight(.bold)
                     }
                     
@@ -57,7 +57,7 @@ struct DailySummary: View {
                             .font(.callout)
                             .foregroundColor(Color.gray)
                         Text("\(String.init(format: "%.0f", totalDistance)) miles")
-                            .font(.system(.largeTitle, design: .rounded))
+                            .font(.system(.largeTitle))
                             .fontWeight(.bold)
                     }
                 }

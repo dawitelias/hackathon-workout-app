@@ -14,49 +14,39 @@ struct ProfileView: View {
 
     var body: some View {
         NavigationView {
-            Form {
-                Button(action: {
-                    // your action here
-                    self.authorizeHealthKit()
-                }) {
-                    HStack {
-                        Spacer()
-                        Text("Authorize HealthKit").bold()
-                        Spacer()
+            List {
+                Section(header: EmptyView()) {
+                    NavigationLink(destination: HealthInfoScreen()) {
+                        Text("Health Info")
+                    }
+                    NavigationLink(destination: WeeklySummary()) {
+                        Text("Weekly Summary")
+                    }
+                    NavigationLink(destination: Badges()) {
+                        Text("Badges")
+                    }
+                }
+                Section(header: SectionHeader(text: "App Info")) {
+                    NavigationLink(destination: AboutScreen()) {
+                        Text("About")
+                    }
+                    NavigationLink(destination: DataAndPrivacy()) {
+                        Text("Data and Privacy")
+                    }
+                    NavigationLink(destination: Feedback()) {
+                        Text("Feedback")
                     }
                 }
             }
-            .navigationBarTitle(Text("Profile"), displayMode: .inline)
-                .navigationBarItems(trailing: Button(action: {
-                    self.showProfileView = false
-                }) {
-                    Text("Done").bold()
-                })
+            .listStyle(GroupedListStyle()).environment(\.horizontalSizeClass, .regular)
+            .navigationBarTitle(Text("Profile"), displayMode: .large)
+            .navigationBarItems(trailing: Button(action: {
+                self.showProfileView = false
+            }) {
+                Text("Done").foregroundColor(Color.pink).bold()
+            })
         }
     }
-    
-    private func authorizeHealthKit() {
-        // Note - I went ahead a coded this up so that as soon as we try and access the user health data
-        // to display on the front page of the app we prompt for permission from the user to read their data
-
-//      HealthKitAssistant.authorizeHealthKit { (authorized, error) in
-//
-//    guard authorized else {
-//          let baseMessage = "HealthKit Authorization Failed"
-//
-//          if let error = error {
-//            print("\(baseMessage). Reason: \(error.localizedDescription)")
-//          } else {
-//            print(baseMessage)
-//          }
-//
-//          return
-//        }
-//
-//        print("HealthKit Successfully Authorized.")
-//      }
-    }
-    
 }
 
 struct ProfileView_Previews: PreviewProvider {

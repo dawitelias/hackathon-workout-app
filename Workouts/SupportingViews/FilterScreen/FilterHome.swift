@@ -78,7 +78,7 @@ struct FilterHome: View {
                 }
                 
             }.listStyle(GroupedListStyle()).environment(\.horizontalSizeClass, .regular)
-            .navigationBarTitle(Text("Filters"), displayMode: .inline)
+            .navigationBarTitle(Text("Filters"), displayMode: .large)
             .navigationBarItems(trailing: Button(action: {
                 self.showFilterView = false
             }) {
