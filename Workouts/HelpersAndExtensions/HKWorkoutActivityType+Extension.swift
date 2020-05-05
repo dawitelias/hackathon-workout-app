@@ -28,78 +28,105 @@ extension HKWorkoutActivityType {
     //
     static var allCases: [HKWorkoutActivityType] {
         return [
+
+            // Sports
+            //
             .americanFootball,
-            .archery,
             .australianFootball,
+            .volleyball,
             .badminton,
             .baseball,
             .basketball,
-            .barre,
-            .bowling,
-            .boxing,
-            .climbing,
-            .coreTraining,
-            .crossCountrySkiing,
-            .crossTraining,
-            .curling,
-            .cycling,
-            .dance,
-            .discSports,
-            .downhillSkiing,
-            .elliptical,
-            .equestrianSports,
-            .fencing,
-            .fishing,
-            .fitnessGaming,
-            .flexibility,
-            .functionalStrengthTraining,
-            .golf,
-            .gymnastics,
-            .handball,
-            .handCycling,
-            .hiking,
-            .highIntensityIntervalTraining,
             .hockey,
-            .hunting,
-            .jumpRope,
-            .kickboxing,
+            .soccer,
             .lacrosse,
-            .martialArts,
-            .mindAndBody,
-            .mixedCardio,
-            .paddleSports,
-            .pilates,
-            .play,
-            .preparationAndRecovery,
+            .golf,
+            .softball,
+            .bowling,
             .racquetball,
             .rowing,
             .rugby,
-            .running,
-            .sailing,
+            .discSports,
+            .curling,
+            .equestrianSports,
+            .fencing,
+            .squash,
+            .tableTennis,
+            .handball,
+            
+            // Outdoorsy things
+            //
+            .archery,
+            .hunting,
+            .fishing,
+            .climbing,
+            
+            // Random
+            //
+            .play,
+            .fitnessGaming,
+            
+            // Gym Rat Activities
+            //
+            .highIntensityIntervalTraining,
+            .coreTraining,
+            .crossTraining,
+            .preparationAndRecovery,
+            .flexibility,
+            .functionalStrengthTraining,
+            .traditionalStrengthTraining,
+            
+            // Snow Sports
+            //
             .skatingSports,
             .snowSports,
-            .soccer,
-            .softball,
+            .downhillSkiing,
+            .crossCountrySkiing,
             .snowboarding,
-            .squash,
+            
+            // Water Sports
+            //
+            .swimming,
+            .sailing,
+            .surfingSports,
+            .waterFitness,
+            .waterSports,
+            .waterPolo,
+            .paddleSports,
+            
+            // Coordinated things
+            //
+            .wrestling,
+            .yoga,
+            .barre,
+            .boxing,
+            .taiChi,
+            .dance,
+            .martialArts,
+            .mindAndBody,
+            .gymnastics,
+            .pilates,
+            .jumpRope,
+            .kickboxing,
+            
+            // Cardio
+            //
+            .walking,
+            .trackAndField,
+            .hiking,
+            .cycling,
+            .running,
+            .mixedCardio,
+            .elliptical,
             .stairs,
             .stairClimbing,
             .stepTraining,
-            .surfingSports,
-            .swimming,
-            .tableTennis,
-            .taiChi,
-            .trackAndField,
-            .traditionalStrengthTraining,
-            .volleyball,
-            .walking,
-            .waterFitness,
-            .waterPolo,
-            .waterSports,
+            .handCycling,
+            
+            // Wheelchair
+            //
             .wheelchairWalkPace,
             .wheelchairRunPace,
-            .wrestling,
-            .yoga
         ]
     }
 

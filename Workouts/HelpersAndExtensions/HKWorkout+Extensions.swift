@@ -59,4 +59,10 @@ extension HKWorkout {
             }
         }
     }
+    
+    // Coming soon... to be displayed in a nice visualization
+    //
+    func getWorkoutHeartRateData() {
+        
+    }
 }

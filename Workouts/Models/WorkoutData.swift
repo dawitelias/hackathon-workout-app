@@ -15,6 +15,11 @@ class WorkoutData: ObservableObject {
     // we show the most recent activity that they finished on a map on the hompage
     //
     @Published var featuredWorkout: HKWorkout?
+    
+    // We want to show the user all of the workouts that they've done today, if they've done multiple,
+    // otherwise, we will just fall back to displaying the 'featured' workout - which queries for the whole week
+    //
+    @Published var workoutsForToday: [HKWorkout]?
 
     // These are all of the workouts calculated with the current predicates applied in flat array and grouped by date
     //
@@ -101,6 +106,7 @@ class WorkoutData: ObservableObject {
             workouts.sort(by: { $0.startDate > $1.startDate })
             self?.workouts = workouts
             self?.getFeaturedWorkout()
+            self?.getWorkoutsForToday()
         }
     }
 
@@ -115,6 +121,18 @@ class WorkoutData: ObservableObject {
             }
             DispatchQueue.main.async {
                 self.featuredWorkout = featuredWorkout
+            }
+        }
+    }
+    
+    private func getWorkoutsForToday() {
+        healthKitAssistant.getWorkoutsDoneToday { workouts, error in
+            if let error = error {
+                print(error.localizedDescription)
+                return
+            }
+            DispatchQueue.main.async {
+                self.workoutsForToday = workouts
             }
         }
     }

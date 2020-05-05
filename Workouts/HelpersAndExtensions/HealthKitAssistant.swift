@@ -58,12 +58,38 @@ class HealthKitAssistant {
                 HKHealthStore().execute(query)
             }
             
-            // notify main dispatch queue with workout data, call completion
             dispatchGroup.notify(queue: .main) {
                 completion(workoutData, nil)
             }
             
         }
+    }
+    
+    // MARK: Get Workouts Done Today
+    func getWorkoutsDoneToday(completion: @escaping ([HKWorkout]?, Error?) -> Void) {
+        // Query for workouts done in since midnight, return all of them
+        //
+        let cal = Calendar(identifier: .gregorian)
+        let midnight = cal.startOfDay(for: Date())
+        let predicate = HKQuery.predicateForSamples(withStart: midnight, end: Date(), options: [])
+        let sortDescriptor = NSSortDescriptor(key: HKSampleSortIdentifierEndDate, ascending: false)
+
+        let query = HKSampleQuery(
+            sampleType: .workoutType(),
+            predicate: predicate,
+            limit: 10,
+            sortDescriptors: [sortDescriptor]) { (query, samples, error) in
+                
+                if error != nil {
+                    completion(nil, error)
+                    return
+                }
+
+                if let data = samples as? [HKWorkout] {
+                    completion(data, error)
+                }
+            }
+        HKHealthStore().execute(query)
     }
     
     // MARK: Get Featured Workout
