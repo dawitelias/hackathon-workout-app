@@ -26,11 +26,13 @@ struct DailyWorkout: View {
 
                     Text("\(workoutHrAndMin)")
                         .font(.title)
+                        .fontWeight(.heavy)
                         .foregroundColor(Color(UIColor.label))
                     
                     if workout.totalEnergyBurned != nil {
                         Text("\(Int(workout.totalEnergyBurned!.doubleValue(for: .kilocalorie()))) cal")
                             .font(.title)
+                            .fontWeight(.heavy)
                             .foregroundColor(Color(UIColor.label))
                         
                     }
