@@ -32,8 +32,7 @@ struct WorkoutDetail: View {
             VStack(alignment: .leading) {
                 // header
                 HStack {
-                    CircleImage(image: Image(workout.workoutActivityType.workoutTypeMetadata.systemIconName))
-                        .padding(EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 10))
+                    Icon(image: Image(workout.workoutActivityType.workoutTypeMetadata.systemIconName), mainColor: workout.workoutActivityType.workoutTypeMetadata.mainColor, highlightColor: workout.workoutActivityType.workoutTypeMetadata.highlightColor, size: 35)
 
                     VStack(alignment: .leading) {
                         Text(workout.workoutActivityType.workoutTypeMetadata.activityTypeDescription)

@@ -28,7 +28,7 @@ struct FeaturedWorkout: View {
         
         return VStack(alignment: .leading) {
             HStack {
-                CircleImage(image: Image(workout.workoutActivityType.workoutTypeMetadata.systemIconName))
+                Icon(image: Image(workout.workoutActivityType.workoutTypeMetadata.systemIconName), mainColor: workout.workoutActivityType.workoutTypeMetadata.mainColor, highlightColor: workout.workoutActivityType.workoutTypeMetadata.highlightColor, size: 35)
                 VStack(alignment: .leading) {
                     Text(workout.workoutActivityType.workoutTypeMetadata.activityTypeDescription)
                         .font(.headline)

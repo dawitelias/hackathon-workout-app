@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		A50E464A2449E76000D1F435 /* FeaturedWorkout.swift in Sources */ = {isa = PBXBuildFile; fileRef = A50E46492449E76000D1F435 /* FeaturedWorkout.swift */; };
+		A51514482460F1B800D4D643 /* Icon.swift in Sources */ = {isa = PBXBuildFile; fileRef = A51514472460F1B800D4D643 /* Icon.swift */; };
 		A5221E6E24545F00005416BC /* FilterHome.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5221E6D24545F00005416BC /* FilterHome.swift */; };
 		A5221E70245462B4005416BC /* DateFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5221E6F245462B4005416BC /* DateFilter.swift */; };
 		A5221E72245462DB005416BC /* DistanceFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5221E71245462DB005416BC /* DistanceFilter.swift */; };
@@ -31,7 +32,6 @@
 		A562B6C8245A786700742ECF /* WeeklySummary.swift in Sources */ = {isa = PBXBuildFile; fileRef = A562B6C7245A786700742ECF /* WeeklySummary.swift */; };
 		A562B6CA245A789E00742ECF /* Badges.swift in Sources */ = {isa = PBXBuildFile; fileRef = A562B6C9245A789E00742ECF /* Badges.swift */; };
 		A582894D244F7B7C00B7B6B0 /* FilterPill.swift in Sources */ = {isa = PBXBuildFile; fileRef = A582894C244F7B7C00B7B6B0 /* FilterPill.swift */; };
-		A582894F244F8A6100B7B6B0 /* Color+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A582894E244F8A6100B7B6B0 /* Color+Extensions.swift */; };
 		A5828953244FC15600B7B6B0 /* WorkoutsMultiSelect.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5828952244FC15600B7B6B0 /* WorkoutsMultiSelect.swift */; };
 		A5AF6083244AAAAD00AB7E72 /* ToggleableHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5AF6082244AAAAD00AB7E72 /* ToggleableHeader.swift */; };
 		A5AF6085244BAA1200AB7E72 /* WorkoutData.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5AF6084244BAA1200AB7E72 /* WorkoutData.swift */; };
@@ -73,6 +73,7 @@
 
 /* Begin PBXFileReference section */
 		A50E46492449E76000D1F435 /* FeaturedWorkout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeaturedWorkout.swift; sourceTree = "<group>"; };
+		A51514472460F1B800D4D643 /* Icon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Icon.swift; sourceTree = "<group>"; };
 		A5221E6D24545F00005416BC /* FilterHome.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterHome.swift; sourceTree = "<group>"; };
 		A5221E6F245462B4005416BC /* DateFilter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateFilter.swift; sourceTree = "<group>"; };
 		A5221E71245462DB005416BC /* DistanceFilter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DistanceFilter.swift; sourceTree = "<group>"; };
@@ -96,7 +97,6 @@
 		A562B6C7245A786700742ECF /* WeeklySummary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeeklySummary.swift; sourceTree = "<group>"; };
 		A562B6C9245A789E00742ECF /* Badges.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Badges.swift; sourceTree = "<group>"; };
 		A582894C244F7B7C00B7B6B0 /* FilterPill.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterPill.swift; sourceTree = "<group>"; };
-		A582894E244F8A6100B7B6B0 /* Color+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Extensions.swift"; sourceTree = "<group>"; };
 		A5828952244FC15600B7B6B0 /* WorkoutsMultiSelect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutsMultiSelect.swift; sourceTree = "<group>"; };
 		A5AF6082244AAAAD00AB7E72 /* ToggleableHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToggleableHeader.swift; sourceTree = "<group>"; };
 		A5AF6084244BAA1200AB7E72 /* WorkoutData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutData.swift; sourceTree = "<group>"; };
@@ -183,6 +183,7 @@
 				A50E46492449E76000D1F435 /* FeaturedWorkout.swift */,
 				A546226D2455223F003BA285 /* DailyWorkout.swift */,
 				A562B6B9245A6F4200742ECF /* SectionHeader.swift */,
+				A51514472460F1B800D4D643 /* Icon.swift */,
 			);
 			path = SharedComponents;
 			sourceTree = "<group>";
@@ -240,7 +241,6 @@
 				A5B6CEE42448AB2D00CF2B86 /* HKWorkoutActivityType+Extension.swift */,
 				A5B6CEEC2448F30300CF2B86 /* MapImageGenerator.swift */,
 				A52F932424493C4900DDB791 /* ChuckNorris.swift */,
-				A582894E244F8A6100B7B6B0 /* Color+Extensions.swift */,
 				A546226B24550BF3003BA285 /* GradientPolyline.swift */,
 			);
 			path = HelpersAndExtensions;
@@ -487,8 +487,8 @@
 				A5B6CEE52448AB2D00CF2B86 /* HKWorkoutActivityType+Extension.swift in Sources */,
 				A546226C24550BF3003BA285 /* GradientPolyline.swift in Sources */,
 				A562B6BA245A6F4200742ECF /* SectionHeader.swift in Sources */,
+				A51514482460F1B800D4D643 /* Icon.swift in Sources */,
 				A562B6C0245A724E00742ECF /* AboutScreen.swift in Sources */,
-				A582894F244F8A6100B7B6B0 /* Color+Extensions.swift in Sources */,
 				A50E464A2449E76000D1F435 /* FeaturedWorkout.swift in Sources */,
 				A5221E74245462ED005416BC /* DurationFilter.swift in Sources */,
 				A562B6C4245A72C900742ECF /* Feedback.swift in Sources */,

@@ -110,7 +110,7 @@ struct HomeView: View {
                 }
             )
         }
-        .accentColor(appAccentColor)
+        .accentColor(.pink)
     }
 }
 

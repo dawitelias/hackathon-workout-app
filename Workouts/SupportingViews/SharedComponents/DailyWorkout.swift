@@ -19,38 +19,33 @@ struct DailyWorkout: View {
         let workoutHrAndMin = workout.duration.getHoursAndMinutesString()
 
         return HStack {
-            VStack {
-                Image(workout.workoutActivityType.workoutTypeMetadata.systemIconName)
-                    .resizable()
-                    .clipShape(Circle())
-                    .overlay(Circle().stroke(Color(UIColor.systemFill), lineWidth: 10))
-                    .padding(.top, 10)
-                    .padding(.trailing, 5)
-                    .padding(.leading, 5)
-                    .padding(.bottom, 10)
-            }
-            .padding(.top, 10)
-            .padding(.bottom, 10)
-            .padding(.leading, 10)
-
             VStack(alignment: .leading, spacing: 5) {
                 Text(workout.workoutActivityType.workoutTypeMetadata.activityTypeDescription)
-                    .font(.callout)
-                    .fontWeight(.thin)
-                    .foregroundColor(Color.gray)
-                    .fixedSize()
-
-                Text("\(distanceString)")
-                    .font(.callout)
+                    .font(.largeTitle)
+                    .fontWeight(.heavy)
+                    .foregroundColor(workout.workoutActivityType.workoutTypeMetadata.highlightColor)
 
                 Text("\(workoutHrAndMin)")
-                    .font(.callout)
+                    .font(.headline)
+                    .foregroundColor(Color(UIColor.label))
+                
+                if workout.totalEnergyBurned != nil {
+                    Text("\(workout.totalEnergyBurned!.doubleValue(for: .kilocalorie())) cal")
+                        .font(.headline)
+                        .foregroundColor(Color(UIColor.label))
+                    
+                }
+                
+                
             }
-            .padding(.top, 10)
-            .padding(.bottom, 10)
-            .padding(.trailing, 30)
+            .padding()
+            .frame(width: 200, height: nil, alignment: .center)
         }
-        .background(Color(UIColor.systemFill))
+        .background(LinearGradient(
+            gradient: .init(colors: [workout.workoutActivityType.workoutTypeMetadata.mainColor, workout.workoutActivityType.workoutTypeMetadata.highlightColor]),
+            startPoint: .init(x: 0.0, y: 0.0),
+            endPoint: .init(x: 0.1, y: 1)
+        ))
         .cornerRadius(5)
     }
 }

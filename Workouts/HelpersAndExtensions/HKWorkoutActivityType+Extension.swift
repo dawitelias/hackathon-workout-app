@@ -13,12 +13,14 @@ import SwiftUI
 struct WorkoutTypeMetadata {
     var systemIconName: String
     var activityTypeDescription: String
-    var activityColor: Color
+    var mainColor: Color
+    var highlightColor: Color
     
-    init(icon: String, description: String, color: Color) {
+    init(icon: String, description: String, mainColor: Color, highlightColor: Color) {
         self.systemIconName = icon
         self.activityTypeDescription = description
-        self.activityColor = color
+        self.mainColor = mainColor
+        self.highlightColor = highlightColor
     }
 }
 
@@ -53,6 +55,7 @@ extension HKWorkoutActivityType {
             .squash,
             .tableTennis,
             .handball,
+            .tennis,
             
             // Outdoorsy things
             //
@@ -61,12 +64,12 @@ extension HKWorkoutActivityType {
             .fishing,
             .climbing,
             
-            // Random
+            // Random - Purples
             //
             .play,
             .fitnessGaming,
             
-            // Gym Rat Activities
+            // Gym Rat Activities - Oranges
             //
             .highIntensityIntervalTraining,
             .coreTraining,
@@ -76,7 +79,7 @@ extension HKWorkoutActivityType {
             .functionalStrengthTraining,
             .traditionalStrengthTraining,
             
-            // Snow Sports
+            // Snow Sports - Blues
             //
             .skatingSports,
             .snowSports,
@@ -84,7 +87,7 @@ extension HKWorkoutActivityType {
             .crossCountrySkiing,
             .snowboarding,
             
-            // Water Sports
+            // Water Sports - Blues
             //
             .swimming,
             .sailing,
@@ -137,376 +140,479 @@ extension HKWorkoutActivityType {
      */
     var workoutTypeMetadata: WorkoutTypeMetadata {
         switch self {
+        // Sports
+        //
         case .americanFootball:
             return WorkoutTypeMetadata(
-                icon: "Kettlebell",
+                icon: "Football",
                 description: "American Football",
-                color: Color.getFlatUIColor())
-        case .archery:
-            return WorkoutTypeMetadata(
-                icon: "Kettlebell",
-                description: "Archery",
-                color: Color.getFlatUIColor())
+                mainColor: Color("A_1"),
+                highlightColor: Color("A_2"))
         case .australianFootball:
             return WorkoutTypeMetadata(
-                icon: "Kettlebell",
+                icon: "Football",
                 description: "Australian Football",
-                color: Color.getFlatUIColor())
-        case .badminton:
-            return WorkoutTypeMetadata(
-                icon: "Kettlebell",
-                description: "Badmiton",
-                color: Color.getFlatUIColor())
-        case .baseball:
-            return WorkoutTypeMetadata(
-                icon: "Kettlebell",
-                description: "Baseball",
-                color: Color.getFlatUIColor())
-        case .basketball:
-            return WorkoutTypeMetadata(
-                icon: "Kettlebell",
-                description: "Basketball",
-                color: Color.getFlatUIColor())
-        case .bowling:
-            return WorkoutTypeMetadata(
-                icon: "Kettlebell",
-                description: "Bowling",
-                color: Color.getFlatUIColor())
-        case .boxing:
-            return WorkoutTypeMetadata(
-                icon: "Kettlebell",
-                description: "Boxing",
-                color: Color.getFlatUIColor())
-        case .climbing:
-            return WorkoutTypeMetadata(
-                icon: "Kettlebell",
-                description: "Climbing",
-                color: Color.getFlatUIColor())
-        case .crossTraining:
-            return WorkoutTypeMetadata(
-                icon: "Kettlebell",
-                description: "Cross Training",
-                color: Color.getFlatUIColor())
-        case .curling:
-            return WorkoutTypeMetadata(
-                icon: "Kettlebell",
-                description: "Curling",
-                color: Color.getFlatUIColor())
-        case .cycling:
-            return WorkoutTypeMetadata(
-                icon: "Biking",
-                description: "Cycling",
-                color: Color.getFlatUIColor())
-        case .dance:
-            return WorkoutTypeMetadata(
-                icon: "Kettlebell",
-                description: "Dance",
-                color: Color.getFlatUIColor())
-        case .elliptical:
-            return WorkoutTypeMetadata(
-                icon: "Kettlebell",
-                description: "Elliptical",
-                color: Color.getFlatUIColor())
-        case .equestrianSports:
-            return WorkoutTypeMetadata(
-                icon: "Kettlebell",
-                description: "Equestrian Sports",
-                color: Color.getFlatUIColor())
-        case .fencing:
-            return WorkoutTypeMetadata(
-                icon: "Kettlebell",
-                description: "Fencing",
-                color: Color.getFlatUIColor())
-        case .fishing:
-            return WorkoutTypeMetadata(
-                icon: "Kettlebell",
-                description: "Fishing",
-                color: Color.getFlatUIColor())
-        case .functionalStrengthTraining:
-            return WorkoutTypeMetadata(
-                icon: "Kettlebell",
-                description: "Strength Training",
-                color: Color.getFlatUIColor())
-        case .golf:
-            return WorkoutTypeMetadata(
-                icon: "Kettlebell",
-                description: "Golf",
-                color: Color.getFlatUIColor())
-        case .gymnastics:
-            return WorkoutTypeMetadata(
-                icon: "Kettlebell",
-                description: "Gymnastics",
-                color: Color.getFlatUIColor())
-        case .handball:
-            return WorkoutTypeMetadata(
-                icon: "Kettlebell",
-                description: "Handball",
-                color: Color.getFlatUIColor())
-        case .hiking:
-            return WorkoutTypeMetadata(
-                icon: "Kettlebell",
-                description: "Hiking",
-                color: Color.getFlatUIColor())
-        case .hockey:
-            return WorkoutTypeMetadata(
-                icon: "Kettlebell",
-                description: "Hockey",
-                color: Color.getFlatUIColor())
-        case .hunting:
-            return WorkoutTypeMetadata(
-                icon: "Kettlebell",
-                description: "Hunting",
-                color: Color.getFlatUIColor())
-        case .lacrosse:
-            return WorkoutTypeMetadata(
-                icon: "Kettlebell",
-                description: "Lacrosse",
-                color: Color.getFlatUIColor())
-        case .martialArts:
-            return WorkoutTypeMetadata(
-                icon: "Kettlebell",
-                description: "Martial Arts",
-                color: Color.getFlatUIColor())
-        case .mindAndBody:
-            return WorkoutTypeMetadata(
-                icon: "Kettlebell",
-                description: "Mind and Body",
-                color: Color.getFlatUIColor())
-        case .paddleSports:
-            return WorkoutTypeMetadata(
-                icon: "Kettlebell",
-                description: "Paddle Sports",
-                color: Color.getFlatUIColor())
-        case .play:
-            return WorkoutTypeMetadata(
-                icon: "Kettlebell",
-                description: "Play",
-                color: Color.getFlatUIColor())
-        case .preparationAndRecovery:
-            return WorkoutTypeMetadata(
-                icon: "Kettlebell",
-                description: "Preparation and Recovery",
-                color: Color.getFlatUIColor())
-        case .racquetball:
-            return WorkoutTypeMetadata(
-                icon: "Kettlebell",
-                description: "Raquetball",
-                color: Color.getFlatUIColor())
-        case .rowing:
-            return WorkoutTypeMetadata(
-                icon: "Kettlebell",
-                description: "Rowing",
-                color: Color.getFlatUIColor())
-        case .rugby:
-            return WorkoutTypeMetadata(
-                icon: "Kettlebell",
-                description: "Rugby",
-                color: Color.getFlatUIColor())
-        case .running:
-            return WorkoutTypeMetadata(
-                icon: "Running",
-                description: "Running",
-                color: Color.getFlatUIColor())
-        case .sailing:
-            return WorkoutTypeMetadata(
-                icon: "Kettlebell",
-                description: "Sailing",
-                color: Color.getFlatUIColor())
-        case .skatingSports:
-            return WorkoutTypeMetadata(
-                icon: "Kettlebell",
-                description: "Skating Sports",
-                color: Color.getFlatUIColor())
-        case .snowSports:
-            return WorkoutTypeMetadata(
-                icon: "Kettlebell",
-                description: "Snow Sports",
-                color: Color.getFlatUIColor())
-        case .soccer:
-            return WorkoutTypeMetadata(
-                icon: "Kettlebell",
-                description: "Soccer",
-                color: Color.getFlatUIColor())
-        case .softball:
-            return WorkoutTypeMetadata(
-                icon: "Kettlebell",
-                description: "Softball",
-                color: Color.getFlatUIColor())
-        case .squash:
-            return WorkoutTypeMetadata(
-                icon: "Kettlebell",
-                description: "Squash",
-                color: Color.getFlatUIColor())
-        case .stairClimbing:
-            return WorkoutTypeMetadata(
-                icon: "Kettlebell",
-                description: "Stair Climbing",
-                color: Color.getFlatUIColor())
-        case .surfingSports:
-            return WorkoutTypeMetadata(
-                icon: "Kettlebell",
-                description: "Surfing Sports",
-                color: Color.getFlatUIColor())
-        case .swimming:
-            return WorkoutTypeMetadata(
-                icon: "Kettlebell",
-                description: "Swimming",
-                color: Color.getFlatUIColor())
-        case .tableTennis:
-            return WorkoutTypeMetadata(
-                icon: "Kettlebell",
-                description: "Table Tennis",
-                color: Color.getFlatUIColor())
-        case .tennis:
-            return WorkoutTypeMetadata(
-                icon: "Kettlebell",
-                description: "Tennis",
-                color: Color.getFlatUIColor())
-        case .trackAndField:
-            return WorkoutTypeMetadata(
-                icon: "Kettlebell",
-                description: "Track and Field",
-                color: Color.getFlatUIColor())
-        case .traditionalStrengthTraining:
-            return WorkoutTypeMetadata(
-                icon: "Kettlebell",
-                description: "Traditional Strength Training",
-                color: Color.getFlatUIColor())
+                mainColor: Color("B_1"),
+                highlightColor: Color("B_2"))
         case .volleyball:
             return WorkoutTypeMetadata(
-                icon: "Kettlebell",
+                icon: "Volleyball",
                 description: "Volleyball",
-                color: Color.getFlatUIColor())
-        case .walking:
+                mainColor: Color("C_1"),
+                highlightColor: Color("C_2"))
+        case .badminton:
             return WorkoutTypeMetadata(
-                icon: "Walking",
-                description: "Walking",
-                color: Color.getFlatUIColor())
-        case .waterFitness:
+                icon: "Badminton",
+                description: "Badminton",
+                mainColor: Color("D_1"),
+                highlightColor: Color("D_2"))
+        case .baseball:
             return WorkoutTypeMetadata(
-                icon: "Kettlebell",
-                description: "Water Fitness",
-                color: Color.getFlatUIColor())
-        case .waterPolo:
+                icon: "Baseball",
+                description: "Baseball",
+                mainColor: Color("E_1"),
+                highlightColor: Color("E_2"))
+        case .basketball:
             return WorkoutTypeMetadata(
-                icon: "Kettlebell",
-                description: "Water Polo",
-                color: Color.getFlatUIColor())
-        case .waterSports:
+                icon: "Basketball",
+                description: "Basketball",
+                mainColor: Color("F_1"),
+                highlightColor: Color("F_2"))
+        case .hockey:
             return WorkoutTypeMetadata(
-                icon: "Kettlebell",
-                description: "Water Sports",
-                color: Color.getFlatUIColor())
-        case .wrestling:
+                icon: "Hockey",
+                description: "Hockey",
+                mainColor: Color("G_1"),
+                highlightColor: Color("G_2"))
+        case .soccer:
             return WorkoutTypeMetadata(
-                icon: "Kettlebell",
-                description: "Wrestling",
-                color: Color.getFlatUIColor())
-        case .yoga:
+                icon: "Soccer",
+                description: "Soccer",
+                mainColor: Color("H_1"),
+                highlightColor: Color("H_2"))
+        case .lacrosse:
             return WorkoutTypeMetadata(
-                icon: "Kettlebell",
-                description: "Yoga",
-                color: Color.getFlatUIColor())
-        case .barre:
+                icon: "Lacrosse",
+                description: "Lacrosse",
+                mainColor: Color("I_1"),
+                highlightColor: Color("I_2"))
+        case .golf:
             return WorkoutTypeMetadata(
-                icon: "Kettlebell",
-                description: "Barre",
-                color: Color.getFlatUIColor())
-        case .coreTraining:
+                icon: "Golf",
+                description: "Golf",
+                mainColor: Color("J_1"),
+                highlightColor: Color("J_2"))
+        case .softball:
             return WorkoutTypeMetadata(
-                icon: "Kettlebell",
-                description: "Core Training",
-                color: Color.getFlatUIColor())
-        case .crossCountrySkiing:
+                icon: "Softball",
+                description: "Softball",
+                mainColor: Color("K_1"),
+                highlightColor: Color("K_2"))
+        case .bowling:
             return WorkoutTypeMetadata(
-                icon: "Kettlebell",
-                description: "Cross Country Skiing",
-                color: Color.getFlatUIColor())
-        case .downhillSkiing:
+                icon: "Bowling",
+                description: "Bowling",
+                mainColor: Color("L_1"),
+                highlightColor: Color("L_2"))
+        case .racquetball:
             return WorkoutTypeMetadata(
-                icon: "Kettlebell",
-                description: "Downhill Skiing",
-                color: Color.getFlatUIColor())
-        case .flexibility:
+                icon: "RacquetBall",
+                description: "Raquetball",
+                mainColor: Color("M_1"),
+                highlightColor: Color("M_2"))
+        case .rowing:
             return WorkoutTypeMetadata(
-                icon: "Kettlebell",
-                description: "Flexibility",
-                color: Color.getFlatUIColor())
-        case .highIntensityIntervalTraining:
-            return WorkoutTypeMetadata(
-                icon: "Kettlebell",
-                description: "HIIT",
-                color: Color.getFlatUIColor())
-        case .jumpRope:
-            return WorkoutTypeMetadata(
-                icon: "Kettlebell",
-                description: "Jump Rope",
-                color: Color.getFlatUIColor())
-        case .kickboxing:
-            return WorkoutTypeMetadata(
-                icon: "Kickboxing",
-                description: "Kickboxing",
-                color: Color.getFlatUIColor())
-        case .pilates:
-            return WorkoutTypeMetadata(
-                icon: "Kettlebell",
-                description: "Pilates",
-                color: Color.getFlatUIColor())
-        case .snowboarding:
-            return WorkoutTypeMetadata(
-                icon: "Kettlebell",
-                description: "Snowboarding",
-                color: Color.getFlatUIColor())
-        case .stairs:
-            return WorkoutTypeMetadata(
-                icon: "Kettlebell",
-                description: "Stairs",
-                color: Color.getFlatUIColor())
-        case .stepTraining:
-            return WorkoutTypeMetadata(
-                icon: "Kettlebell",
-                description: "Step Training",
-                color: Color.getFlatUIColor())
-        case .wheelchairWalkPace:
-            return WorkoutTypeMetadata(
-                icon: "Kettlebell",
-                description: "Wheelchair Walk Pace",
-                color: Color.getFlatUIColor())
-        case .wheelchairRunPace:
-            return WorkoutTypeMetadata(
-                icon: "Kettlebell",
-                description: "Wheelchair Run Pace",
-                color: Color.getFlatUIColor())
-        case .taiChi:
-            return WorkoutTypeMetadata(
-                icon: "Kettlebell",
-                description: "Tai Chi",
-                color: Color.getFlatUIColor())
-        case .mixedCardio:
-            return WorkoutTypeMetadata(
-                icon: "Kettlebell",
-                description: "Mixed Cardio",
-                color: Color.getFlatUIColor())
-        case .handCycling:
-            return WorkoutTypeMetadata(
-                icon: "Kettlebell",
-                description: "Hand Cycling",
-                color: Color.getFlatUIColor())
+                icon: "Rowing",
+                description: "Rowing",
+                mainColor: Color("N_1"),
+                highlightColor: Color("N_2"))
+        case .rugby:
+           return WorkoutTypeMetadata(
+               icon: "Rugby",
+               description: "Rugby",
+               mainColor: Color("O_1"),
+               highlightColor: Color("O_2"))
         case .discSports:
             return WorkoutTypeMetadata(
-                icon: "Kettlebell",
+                icon: "DiscSports",
                 description: "Disc Sports",
-                color: Color.getFlatUIColor())
+                mainColor: Color("P_1"),
+                highlightColor: Color("P_2"))
+        case .curling:
+            return WorkoutTypeMetadata(
+                icon: "Curling",
+                description: "Curling",
+                mainColor: Color("Q_1"),
+                highlightColor: Color("Q_2"))
+        case .equestrianSports:
+            return WorkoutTypeMetadata(
+                icon: "EquestrianSports",
+                description: "Equestrian Sports",
+                mainColor: Color("R_1"),
+                highlightColor: Color("R_2"))
+        case .fencing:
+            return WorkoutTypeMetadata(
+                icon: "Fencing",
+                description: "Fencing",
+                mainColor: Color("S_1"),
+                highlightColor: Color("S_2"))
+        case .squash:
+            return WorkoutTypeMetadata(
+                icon: "Squash",
+                description: "Squash",
+                mainColor: Color("T_1"),
+                highlightColor: Color("T_2"))
+        case .tableTennis:
+           return WorkoutTypeMetadata(
+               icon: "TableTennis",
+               description: "Table Tennis",
+               mainColor: Color("U_1"),
+               highlightColor: Color("U_2"))
+        case .handball:
+            return WorkoutTypeMetadata(
+                icon: "HandBall",
+                description: "Handball",
+                mainColor: Color("V_1"),
+                highlightColor: Color("V_2"))
+        case .tennis:
+            return WorkoutTypeMetadata(
+                icon: "RacquetBall",
+                description: "Tennis",
+                mainColor: Color("W_1"),
+                highlightColor: Color("W_2"))
+            
+        // Outdoorsy Things
+        //
+        case .archery:
+            return WorkoutTypeMetadata(
+                icon: "Archery",
+                description: "Archery",
+                mainColor: Color("F_1"),
+                highlightColor: Color("F_2"))
+        case .hunting:
+            return WorkoutTypeMetadata(
+                icon: "Hunting",
+                description: "Hunting",
+                mainColor: Color("G_1"),
+                highlightColor: Color("G_2"))
+        case .fishing:
+            return WorkoutTypeMetadata(
+                icon: "Fishing",
+                description: "Fishing",
+                mainColor: Color("H_1"),
+                highlightColor: Color("H_2"))
+        case .climbing:
+            return WorkoutTypeMetadata(
+                icon: "Climbing",
+                description: "Climbing",
+                mainColor: Color("I_1"),
+                highlightColor: Color("I_2"))
+        
+        // Other
+        //
+        case .play:
+            return WorkoutTypeMetadata(
+                icon: "Play",
+                description: "Play",
+                mainColor: Color("AM_1"),
+                highlightColor: Color("AM_2"))
         case .fitnessGaming:
             return WorkoutTypeMetadata(
-                icon: "Kettlebell",
+                icon: "FitnessGaming",
                 description: "Fitness Gaming",
-                color: Color.getFlatUIColor())
+                mainColor: Color("AN_1"),
+                highlightColor: Color("AN_2"))
+        
+        // Gym Rat Activities
+        //
+        case .highIntensityIntervalTraining:
+            return WorkoutTypeMetadata(
+                icon: "hiit",
+                description: "HIIT",
+                mainColor: Color("AJ_1"),
+                highlightColor: Color("AJ_2"))
+        case .coreTraining:
+            return WorkoutTypeMetadata(
+                icon: "CoreTraining",
+                description: "Core Training",
+                mainColor: Color("AK_1"),
+                highlightColor: Color("AK_2"))
+        case .crossTraining:
+            return WorkoutTypeMetadata(
+                icon: "Elliptical",
+                description: "Cross Training",
+                mainColor: Color("AL_1"),
+                highlightColor: Color("AL_2"))
+        case .preparationAndRecovery:
+            return WorkoutTypeMetadata(
+                icon: "MindAndBody",
+                description: "Preparation and Recovery",
+                mainColor: Color("AW_1"),
+                highlightColor: Color("AW_2"))
+        case .flexibility:
+            return WorkoutTypeMetadata(
+                icon: "Yoga",
+                description: "Flexibility",
+                mainColor: Color("AX_1"),
+                highlightColor: Color("AX_2"))
+        case .functionalStrengthTraining:
+            return WorkoutTypeMetadata(
+                icon: "StrengthTraining",
+                description: "Strength Training",
+                mainColor: Color("AY_1"),
+                highlightColor: Color("AY_2"))
+        case .traditionalStrengthTraining:
+            return WorkoutTypeMetadata(
+                icon: "StrengthTraining",
+                description: "Traditional Strength Training",
+                mainColor: Color("AZ_1"),
+                highlightColor: Color("AZ_2"))
+
+        // Snow Sports
+        //
+        case .skatingSports:
+            return WorkoutTypeMetadata(
+                icon: "Skating",
+                description: "Skating Sports",
+                mainColor: Color("Z_1"),
+                highlightColor: Color("Z_2"))
+        case .snowSports:
+            return WorkoutTypeMetadata(
+                icon: "SnowSports",
+                description: "Snow Sports",
+                mainColor: Color("AA_1"),
+                highlightColor: Color("AA_2"))
+        case .downhillSkiing:
+            return WorkoutTypeMetadata(
+                icon: "DownhillSkiing",
+                description: "Downhill Skiing",
+                mainColor: Color("AB_1"),
+                highlightColor: Color("AB_2"))
+        case .crossCountrySkiing:
+            return WorkoutTypeMetadata(
+                icon: "CrossCountrySkiing",
+                description: "Cross Country Skiing",
+                mainColor: Color("AC_1"),
+                highlightColor: Color("AC_2"))
+        case .snowboarding:
+            return WorkoutTypeMetadata(
+                icon: "Snowboarding",
+                description: "Snowboarding",
+                mainColor: Color("AD_1"),
+                highlightColor: Color("AD_2"))
+
+        // Water Sports
+        //
+        case .swimming:
+            return WorkoutTypeMetadata(
+                icon: "Swimming",
+                description: "Swimming",
+                mainColor: Color("S_1"),
+                highlightColor: Color("S_2"))
+        case .sailing:
+            return WorkoutTypeMetadata(
+                icon: "Sailing",
+                description: "Sailing",
+                mainColor: Color("T_1"),
+                highlightColor: Color("T_2"))
+        case .surfingSports:
+            return WorkoutTypeMetadata(
+                icon: "Surfing",
+                description: "Surfing Sports",
+                mainColor: Color("U_1"),
+                highlightColor: Color("U_2"))
+        case .waterFitness: // MARK: This one needs color separate from watersports colors
+            return WorkoutTypeMetadata(
+                icon: "WaterSports",
+                description: "Water Fitness",
+                mainColor: Color("V_1"),
+                highlightColor: Color("V_2"))
+        case .waterPolo:
+            return WorkoutTypeMetadata(
+                icon: "WaterPolo",
+                description: "Water Polo",
+                mainColor: Color("W_1"),
+                highlightColor: Color("W_2"))
+        case .paddleSports:
+            return WorkoutTypeMetadata(
+                icon: "PaddleSports",
+                description: "Paddle Sports",
+                mainColor: Color("X_1"),
+                highlightColor: Color("X_2"))
+        case .waterSports:
+            return WorkoutTypeMetadata(
+                icon: "WaterSports",
+                description: "Water Sports",
+                mainColor: Color("Y_1"),
+                highlightColor: Color("Y_2"))
+                
+        // Coordinated things
+        //
+        case .wrestling:
+            return WorkoutTypeMetadata(
+                icon: "Wrestling",
+                description: "Wrestling",
+                mainColor: Color("AO_1"),
+                highlightColor: Color("AO_2"))
+        case .yoga:
+            return WorkoutTypeMetadata(
+                icon: "Yoga",
+                description: "Yoga",
+                mainColor: Color("AP_1"),
+                highlightColor: Color("AP_2"))
+        case .barre:
+            return WorkoutTypeMetadata(
+                icon: "TaiChi",
+                description: "Barre",
+                mainColor: Color("AQ_1"),
+                highlightColor: Color("AQ_2"))
+        case .boxing:
+            return WorkoutTypeMetadata(
+                icon: "Boxing",
+                description: "Boxing",
+                mainColor: Color("AR_1"),
+                highlightColor: Color("AR_2"))
+        case .taiChi:
+            return WorkoutTypeMetadata(
+                icon: "TaiChi",
+                description: "Tai Chi",
+                mainColor: Color("AS_1"),
+                highlightColor: Color("AS_2"))
+        case .dance:
+            return WorkoutTypeMetadata(
+                icon: "Dance",
+                description: "Dance",
+                mainColor: Color("AT_1"),
+                highlightColor: Color("AT_2"))
+        case .martialArts:
+            return WorkoutTypeMetadata(
+                icon: "MartialArts",
+                description: "Martial Arts",
+                mainColor: Color("AU_1"),
+                highlightColor: Color("AU_2"))
+        case .mindAndBody:
+            return WorkoutTypeMetadata(
+                icon: "MindAndBody",
+                description: "Mind and Body",
+                mainColor: Color("AV_1"),
+                highlightColor: Color("AV_2"))
+        case .gymnastics:
+            return WorkoutTypeMetadata(
+                icon: "Gymnastics",
+                description: "Gymnastics",
+                mainColor: Color("AE_1"),
+                highlightColor: Color("AE_2"))
+        case .pilates:
+            return WorkoutTypeMetadata(
+                icon: "Pilates",
+                description: "Pilates",
+                mainColor: Color("AF_1"),
+                highlightColor: Color("AF_2"))
+        case .jumpRope:
+            return WorkoutTypeMetadata(
+                icon: "JumpRope",
+                description: "Jump Rope",
+                mainColor: Color("AG_1"),
+                highlightColor: Color("AG_2"))
+        case .kickboxing:
+            return WorkoutTypeMetadata(
+                icon: "KickBoxing",
+                description: "Kickboxing",
+                mainColor: Color("AH_1"),
+                highlightColor: Color("AH_2"))
+            
+        // Cardio
+        //
+        case .walking:
+             return WorkoutTypeMetadata(
+                 icon: "Walking",
+                 description: "Walking",
+                 mainColor: Color("AE_1"),
+                 highlightColor: Color("AE_2"))
+         case .trackAndField:
+             return WorkoutTypeMetadata(
+                 icon: "TrackAndField",
+                 description: "Track and Field",
+                 mainColor: Color("AF_1"),
+                 highlightColor: Color("AF_2"))
+         case .hiking:
+            return WorkoutTypeMetadata(
+                icon: "Hiking",
+                description: "Hiking",
+                mainColor: Color("AG_1"),
+                highlightColor: Color("AG_2"))
+         case .running:
+             return WorkoutTypeMetadata(
+                 icon: "Running",
+                 description: "Running",
+                 mainColor: Color("AH_1"),
+                 highlightColor: Color("AH_2"))
+         case .mixedCardio:
+             return WorkoutTypeMetadata(
+                 icon: "MixedCardio",
+                 description: "Mixed Cardio",
+                 mainColor: Color("AI_1"),
+                 highlightColor: Color("AI_2"))
+         case .cycling:
+             return WorkoutTypeMetadata(
+                 icon: "Cycling",
+                 description: "Cycling",
+                 mainColor: Color("AJ_1"),
+                 highlightColor: Color("AJ_2"))
+         case .elliptical:
+             return WorkoutTypeMetadata(
+                 icon: "Elliptical",
+                 description: "Elliptical",
+                 mainColor: Color("AK_1"),
+                 highlightColor: Color("AK_2"))
+         case .stairs:
+             return WorkoutTypeMetadata(
+                 icon: "Stairs",
+                 description: "Stairs",
+                 mainColor: Color("AL_1"),
+                 highlightColor: Color("AL_2"))
+         case .stairClimbing:
+             return WorkoutTypeMetadata(
+                 icon: "Stairs",
+                 description: "Stair Climbing",
+                 mainColor: Color("AM_1"),
+                 highlightColor: Color("AM_2"))
+        case .stepTraining:
+            return WorkoutTypeMetadata(
+                icon: "Stairs",
+                description: "Step Training",
+                mainColor: Color("AN_1"),
+                highlightColor: Color("AN_2"))
+         case .handCycling:
+             return WorkoutTypeMetadata(
+                 icon: "Cycling",
+                 description: "Hand Cycling",
+                 mainColor: Color("AO_1"),
+                 highlightColor: Color("AO_2"))
+
+        // Wheelchair
+        //
+        case .wheelchairWalkPace:
+            return WorkoutTypeMetadata(
+                icon: "WheelchairWalkPace",
+                description: "Wheelchair Walk Pace",
+                mainColor: Color("BA_1"),
+                highlightColor: Color("BA_2"))
+        case .wheelchairRunPace:
+            return WorkoutTypeMetadata(
+                icon: "WheelchairRunPace",
+                description: "Wheelchair Run Pace",
+                mainColor: Color("BB_1"),
+                highlightColor: Color("BB_2"))
+        
+        // Default
+        //
         default:
             return WorkoutTypeMetadata(
-                icon: "Kettlebell",
+                icon: "StrengthTraining",
                 description: "Other",
-                color: Color.getFlatUIColor())
+                mainColor: Color("AO_1"),
+                highlightColor: Color("AO_2"))
         }
     }
 

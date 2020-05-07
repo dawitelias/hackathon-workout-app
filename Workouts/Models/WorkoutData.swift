@@ -36,10 +36,10 @@ class WorkoutData: ObservableObject {
 
     @Published var appliedFilters: [WorkoutFilter] = [WorkoutFilter]()
     
-    var dateRangeFilter = DateRangeWorkoutFilter(startDate: Date(), endDate: Date(), isApplied: false, color: Color.getFlatUIColor())
-    var calorieFilter = CaloriesWorkoutFilter(value: 500, isApplied: false, color: Color.getFlatUIColor())
-    var distanceFilter = DistanceWorkoutFilter(value: 10, isApplied: false, color: Color.getFlatUIColor())
-    var durationFilter = DurationWorkoutFilter(value: 9000, isApplied: false, color: Color.getFlatUIColor())
+    var dateRangeFilter = DateRangeWorkoutFilter(startDate: Date(), endDate: Date(), isApplied: false, color: Color("D_2"))
+    var calorieFilter = CaloriesWorkoutFilter(value: 500, isApplied: false, color: Color("A_2"))
+    var distanceFilter = DistanceWorkoutFilter(value: 10, isApplied: false, color: Color("C_2"))
+    var durationFilter = DurationWorkoutFilter(value: 9000, isApplied: false, color: Color("B_2"))
     
     private var healthKitAssistant = HealthKitAssistant()
 
@@ -54,7 +54,7 @@ class WorkoutData: ObservableObject {
         // instantiate all of our activity type filters now
         //
         var allActivityFilters = HKWorkoutActivityType.allCases.map {
-            return ActivityTypeFilter(value: $0, isApplied: defaultActivityTypeFilters.contains($0) ? true : false, color: Color.getFlatUIColor())
+            return ActivityTypeFilter(value: $0, isApplied: defaultActivityTypeFilters.contains($0) ? true : false, color: Color("D_2"))
         }
         
         // Sort them alphabetically
