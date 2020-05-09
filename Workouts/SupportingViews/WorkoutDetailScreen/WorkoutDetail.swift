@@ -25,6 +25,24 @@ struct WorkoutDetail: View {
         let distanceString = "\(String.init(format: "%.0f", workoutDistance))mi"
         let workoutTimer = workout.duration.getTimerStyleActivityDurationString()
         let workoutHrAndMin = workout.duration.getHoursAndMinutesString()
+        
+        if route == nil {
+            workout.getWorkoutLocationData { route, error in
+                if let err = error {
+                    print("error fetching route data")
+                    return
+                }
+                self.route = route
+            }
+        }
+        
+        var altitudeData: [Double]?
+        if let path = route, path.count > 0 {
+            altitudeData = path.map { item in
+                print(item.altitude)
+                return item.altitude
+            }
+        }
 
         return VStack(spacing: 0) {
             MapView(workout: workout)
@@ -45,6 +63,12 @@ struct WorkoutDetail: View {
                 }
                 
                 Divider()
+                
+                if altitudeData != nil {
+                    Graph(rawData: altitudeData!).frame(width: nil, height: 100, alignment: .center).background(Color.pink)
+                } else {
+                    Text("AltitudeData was nil")
+                }
                 
                 // metrics.. all static right now..
                 // should add some extension styles to encourage reusability
