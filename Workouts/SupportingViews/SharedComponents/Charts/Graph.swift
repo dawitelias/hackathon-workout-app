@@ -30,56 +30,44 @@ func convertDataToRange(incrementAmount: Int, data: [Double]) -> [Range<Double>]
     return ranges
 }
 
-extension Animation {
-    static func ripple(index: Int) -> Animation {
-        Animation.spring(dampingFraction: 0.5)
-            .speed(2)
-            .delay(0.03 * Double(index))
-    }
-}
-
 struct Graph: View {
     var rawData: [Double]
-    
-    var color: Color = .gray
+    var capsuleColor: Color = .gray
+    var backgroundColor: Color = .black
     
     var body: some View {
         let screenWidth = UIScreen.main.bounds.width
         let incrementAmount = (Double(rawData.count)/Double(screenWidth)) * 5
         let data = convertDataToRange(incrementAmount: Int(incrementAmount) + 1, data: rawData)
 
-        let overallRange = rawData.min()!..<rawData.max()!
+        let overallRange = (rawData.min() ?? 0)..<(rawData.max() ?? 0)
         let overallMagnitude = overallRange.upperBound - overallRange.lowerBound
         let maxMagnitude = data.map { range in
             return range.upperBound - range.lowerBound
-        }.max()!
+        }.max() ?? 0
 
-        let heightRatio = (1 - CGFloat(maxMagnitude / Double(overallMagnitude))) / 2
-
+        let heightRatio = (1 - CGFloat(maxMagnitude / Double(overallMagnitude)))
+        
         return GeometryReader { proxy in
-            VStack {
-                HStack(alignment: .bottom, spacing: proxy.size.width / 200) {
+            VStack(alignment: .center, spacing: nil) {
+                HStack(alignment: .center, spacing: proxy.size.width / 200) {
                     ForEach(data.indices) { index in
                         GraphCapsule(
                             index: index,
                             height: proxy.size.height,
                             range: data[index],
                             overallRange: overallRange)
-                        .colorMultiply(self.color)
-                        .transition(.slide)
-                        .animation(.ripple(index: index))
+                        .colorMultiply(self.capsuleColor)
                     }
-                    .offset(x: -10, y: proxy.size.height * heightRatio)
-
-                    VStack(alignment: .leading) {
-                        Text("test")
-                        Spacer()
-                        Spacer()
-                        Spacer()
-                        Text("test2")
-                    }.offset(x: -20)
-                }
-                Text("Elevation Profile")
+                    .offset(x: 0, y: proxy.size.height * heightRatio)
+                    
+                    // TODO: Add in timestamps on x axis
+                    //
+                    
+                    
+                    // TODO: Add in min and max values on y axis
+                    //
+                }.padding()
             }
             
         }.padding()
@@ -94,7 +82,8 @@ struct Graph_Previews: PreviewProvider {
                 12.0,
                 6.0,
                 4.0
-            ]).frame(height: 200)
+            ],
+            capsuleColor: .pink, backgroundColor: .black).frame(height: 200)
         }
     }
 }

@@ -26,6 +26,7 @@ class EndAnnotation: NSObject, MKAnnotation {
 
 struct MapView: UIViewRepresentable {
     var workout: HKWorkout
+    var isUserInteractionEnabled: Bool
     let mapViewDelegate = MapViewDelegate()
     
     @State var route: [CLLocation]? = nil
@@ -58,7 +59,9 @@ struct MapView: UIViewRepresentable {
                 self.endAnnotation = endPointAnnotation
             }
         }
-        return MKMapView(frame: .zero)
+        let mapView = MKMapView(frame: .zero)
+        mapView.isUserInteractionEnabled = isUserInteractionEnabled
+        return mapView
     }
 
     func updateUIView(_ uiView: MKMapView, context: Context) {
@@ -161,6 +164,6 @@ class MapViewDelegate: NSObject, MKMapViewDelegate {
 
 struct MapView_Previews: PreviewProvider {
     static var previews: some View {
-        MapView(workout: HKWorkout(activityType: .running, start: Date(), end: Date()), startAnnotation: StartAnnotation(), endAnnotation: EndAnnotation())
+        MapView(workout: HKWorkout(activityType: .running, start: Date(), end: Date()), isUserInteractionEnabled: true, startAnnotation: StartAnnotation(), endAnnotation: EndAnnotation())
     }
 }

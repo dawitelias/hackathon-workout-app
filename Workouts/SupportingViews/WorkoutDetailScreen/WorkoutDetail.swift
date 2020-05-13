@@ -18,6 +18,7 @@ struct WorkoutDetail: View {
 
     @State var route: [CLLocation]? = nil
     @State var showShareSheet: Bool = false
+    @State var selectedChart: Int = 0
 
     var body: some View {
         let workoutDistance = workout.totalDistance?.doubleValue(for: .mile()) ?? 0
@@ -28,8 +29,8 @@ struct WorkoutDetail: View {
         
         if route == nil {
             workout.getWorkoutLocationData { route, error in
-                if let err = error {
-                    print("error fetching route data")
+                if error != nil {
+                    print(error!.localizedDescription)
                     return
                 }
                 self.route = route
@@ -37,15 +38,23 @@ struct WorkoutDetail: View {
         }
         
         var altitudeData: [Double]?
+        var velocityData: [Double]?
+        var heartRateData: [Double]?
+        var coordinates: [CLLocationCoordinate2D]?
         if let path = route, path.count > 0 {
             altitudeData = path.map { item in
-                print(item.altitude)
                 return item.altitude
+            }
+            coordinates = path.map { return $0.coordinate }
+            velocityData = path.map { item in
+                return item.speed
             }
         }
 
+        
         return VStack(spacing: 0) {
-            MapView(workout: workout)
+            MapView(workout: workout, isUserInteractionEnabled: false)
+            //EsriMapView(route: coordinates)
 
             VStack(alignment: .leading) {
                 // header
@@ -64,11 +73,23 @@ struct WorkoutDetail: View {
                 
                 Divider()
                 
-                if altitudeData != nil {
-                    Graph(rawData: altitudeData!).frame(width: nil, height: 100, alignment: .center).background(Color.pink)
-                } else {
-                    Text("AltitudeData was nil")
+                if selectedChart == 0 && altitudeData != nil {
+                    Graph(rawData: altitudeData!).frame(width: nil, height: 100, alignment: .center)
                 }
+                if selectedChart == 1 && velocityData != nil {
+                   Graph(rawData: velocityData!).frame(width: nil, height: 100, alignment: .center)
+                }
+                Picker(selection: $selectedChart, label: Text("What is your favorite color?")) {
+                    if altitudeData != nil {
+                        Text("Elevation").tag(0)
+                    }
+                    if velocityData != nil {
+                        Text("Speed").tag(1)
+                    }
+                    if heartRateData != nil {
+                        Text("HeartRate").tag(2)
+                    }
+                }.pickerStyle(SegmentedPickerStyle())
                 
                 // metrics.. all static right now..
                 // should add some extension styles to encourage reusability

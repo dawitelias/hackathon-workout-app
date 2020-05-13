@@ -421,7 +421,7 @@ extension HKWorkoutActivityType {
                 description: "Surfing Sports",
                 mainColor: Color("U_1"),
                 highlightColor: Color("U_2"))
-        case .waterFitness: // MARK: This one needs color separate from watersports colors
+        case .waterFitness:
             return WorkoutTypeMetadata(
                 icon: "WaterSports",
                 description: "Water Fitness",

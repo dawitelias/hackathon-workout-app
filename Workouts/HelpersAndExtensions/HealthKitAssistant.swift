@@ -129,7 +129,8 @@ class HealthKitAssistant {
                 let bodyMass = HKObjectType.quantityType(forIdentifier: .bodyMass),
                 let activeEnergy = HKObjectType.quantityType(forIdentifier: .activeEnergyBurned),
                 let cyclingDistance = HKObjectType.quantityType(forIdentifier: .distanceCycling),
-                let walkingAndRunningDistance = HKObjectType.quantityType(forIdentifier: .distanceWalkingRunning) else {
+                let walkingAndRunningDistance = HKObjectType.quantityType(forIdentifier: .distanceWalkingRunning),
+                let heartRate = HKObjectType.quantityType(forIdentifier: .heartRate) else {
             
                 completion(false, HealthkitSetupError.dataTypeNotAvailable)
                 return
@@ -147,6 +148,7 @@ class HealthKitAssistant {
             activeEnergy,
             cyclingDistance,
             walkingAndRunningDistance,
+            heartRate,
             HKObjectType.workoutType(),
             HKSeriesType.workoutRoute()]
         

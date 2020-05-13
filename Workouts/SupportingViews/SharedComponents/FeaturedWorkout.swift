@@ -40,7 +40,7 @@ struct FeaturedWorkout: View {
             }
             .padding(.top)
             if workoutHasRouteData {
-                MapView(workout: workout, startAnnotation: StartAnnotation(), endAnnotation: EndAnnotation())
+                MapView(workout: workout, isUserInteractionEnabled: false, startAnnotation: StartAnnotation(), endAnnotation: EndAnnotation())
                     .frame(height: 200)
                     .padding(.horizontal, -15)
                     .padding(.bottom, -6)
