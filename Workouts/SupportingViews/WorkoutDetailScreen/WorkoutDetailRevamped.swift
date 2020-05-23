@@ -122,37 +122,39 @@ struct WorkoutDetailRevamped: View {
                 // Show pace data, elevation data and HR data
                 //
                 VStack(alignment: .leading) {
-                    Text("Data Visualization")
-                        .font(.headline)
-                        .fontWeight(.heavy)
-                        .padding()
-
                     if selectedChart == 0 && route != nil {
                         VStack {
-                            ElevationChart(elevationData: route!)
-                        }.frame(width: nil, height: 150)
+                            ElevationChart(routeData: route!)
+                        }.frame(width: nil, height: 200)
                     }
-                    if selectedChart == 1 && velocityData != nil {
+                    if selectedChart == 1 && route != nil {
                         VStack {
-                            Graph(rawData: velocityData!)
-                        }.frame(width: nil, height: 150)
+                            SpeedChart(routeData: route!)
+                        }.frame(width: nil, height: 200)
                     }
                     if selectedChart == 2 && workoutHRData != nil {
                         VStack {
-                            Graph(rawData: workoutHRData!)
-                        }.frame(width: nil, height: 150)
+                            HeartRateChart(heartRateData: workoutHRData!)
+                        }.frame(width: nil, height: 200)
                     }
-                    Picker(selection: $selectedChart, label: Text("What is your favorite color?")) {
-                        if altitudeData != nil {
-                            Text("Elevation").tag(0)
+
+                    // Only show the picker of there are multiple things to pick from
+                    //
+                    if workoutHRData != nil && route != nil && route!.count != 0 {
+                        Picker(selection: $selectedChart, label: Text("What is your favorite color?")) {
+                            if altitudeData != nil {
+                                Text("Elevation").tag(0)
+                            }
+                            if velocityData != nil {
+                                Text("Speed").tag(1)
+                            }
+                            if self.workoutHRData != nil {
+                                Text("Heart Rate").tag(2)
+                            }
                         }
-                        if velocityData != nil {
-                            Text("Speed").tag(1)
-                        }
-                        if self.workoutHRData != nil {
-                            Text("Heart Rate").tag(2)
-                        }
-                    }.pickerStyle(SegmentedPickerStyle())
+                        .pickerStyle(SegmentedPickerStyle())
+                        .padding()
+                    }
                 }
             }
         }

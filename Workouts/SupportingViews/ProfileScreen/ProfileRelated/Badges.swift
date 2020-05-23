@@ -10,7 +10,7 @@ import SwiftUI
 
 struct Badges: View {
     var body: some View {
-        Text("I've always wanted to do badges... I will implement. I think there should be two different types, lifetime (ie running a marathon) and weekly/goal type repeating badges")
+        Text("Coming soon.")
         .navigationBarTitle(Text("Badges"), displayMode: .large)
     }
 }

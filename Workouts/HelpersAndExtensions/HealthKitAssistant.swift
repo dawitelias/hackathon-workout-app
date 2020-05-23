@@ -40,7 +40,7 @@ class HealthKitAssistant {
                 let query = HKSampleQuery(
                     sampleType: .workoutType(),
                     predicate: compound,
-                    limit: 100,
+                    limit: HKObjectQueryNoLimit,
                     sortDescriptors: [sortDescriptor]) { (query, samples, error) in
                         
                         if error != nil {

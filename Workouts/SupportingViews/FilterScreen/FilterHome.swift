@@ -19,10 +19,6 @@ struct FilterHome: View {
                     NavigationLink(destination: WorkoutsMultiSelect().environmentObject(workoutData)) {
                         HStack {
                             Text("Workouts")
-                            Spacer()
-                            Text("All workouts")
-                                .font(.footnote)
-                                .foregroundColor(Color.gray)
                         }
                     }
                 }

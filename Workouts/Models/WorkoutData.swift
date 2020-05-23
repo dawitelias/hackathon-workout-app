@@ -36,10 +36,10 @@ class WorkoutData: ObservableObject {
 
     @Published var appliedFilters: [WorkoutFilter] = [WorkoutFilter]()
     
-    var dateRangeFilter = DateRangeWorkoutFilter(startDate: Date(), endDate: Date(), isApplied: false, color: Color("D_2"))
-    var calorieFilter = CaloriesWorkoutFilter(value: 500, isApplied: false, color: Color("A_2"))
-    var distanceFilter = DistanceWorkoutFilter(value: 10, isApplied: false, color: Color("C_2"))
-    var durationFilter = DurationWorkoutFilter(value: 9000, isApplied: false, color: Color("B_2"))
+    var dateRangeFilter = DateRangeWorkoutFilter(startDate: Date(), endDate: Date(), isApplied: false)
+    var calorieFilter = CaloriesWorkoutFilter(value: 500, isApplied: false)
+    var distanceFilter = DistanceWorkoutFilter(value: 10, isApplied: false)
+    var durationFilter = DurationWorkoutFilter(value: 9000, isApplied: false)
     
     private var healthKitAssistant = HealthKitAssistant()
 
@@ -70,7 +70,21 @@ class WorkoutData: ObservableObject {
         }
         queryWorkouts()
     }
-    
+    func toggleWorkoutFilterApplied(filter: WorkoutFilter) {
+        switch filter.filterID {
+        case "distance":
+            distanceFilter.isApplied.toggle()
+        case "calories":
+            calorieFilter.isApplied.toggle()
+        case "duration":
+            durationFilter.isApplied.toggle()
+        case "dateRange":
+            dateRangeFilter.isApplied.toggle()
+        default:
+            print("unknown filter found.")
+        }
+        queryWorkouts()
+    }
     func resetAllFilters() {
         setDefaultActivityTypeFilters()
         self.appliedFilters = [WorkoutFilter]()

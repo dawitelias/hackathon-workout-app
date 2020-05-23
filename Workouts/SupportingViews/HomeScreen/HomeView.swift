@@ -73,6 +73,35 @@ struct HomeView: View {
                     }
                 }
 
+                // If there ARE active filters, we should show some indication to the users, so that they understand why
+                // their list might look different
+                //
+                if self.workoutData.appliedFilters.count > 0 {
+                    Section(header: VStack {
+                        Text("Currently Applied Filters")
+                            .padding(.all)
+                            .font(.system(size: 21, weight: .medium))
+                            .frame(width: UIScreen.main.bounds.width, alignment: .leading)
+                    }) {
+                        ScrollView(.horizontal, showsIndicators: false) {
+                            HStack(alignment: .top, spacing: 1) {
+                                if self.workoutData.dateRangeFilter.isApplied {
+                                    FilterPill(activityFilter: self.workoutData.dateRangeFilter)
+                                }
+                                if self.workoutData.calorieFilter.isApplied {
+                                   FilterPill(activityFilter: self.workoutData.calorieFilter)
+                                }
+                                if self.workoutData.distanceFilter.isApplied {
+                                   FilterPill(activityFilter: self.workoutData.distanceFilter)
+                                }
+                                if self.workoutData.durationFilter.isApplied {
+                                   FilterPill(activityFilter: self.workoutData.durationFilter)
+                                }
+                            }
+                        }
+                    }
+                }
+
                 ForEach(sortedDictionaryKeys.map { $0 }, id: \.self) { key in
                     Section(header: VStack {
                         Text(key)

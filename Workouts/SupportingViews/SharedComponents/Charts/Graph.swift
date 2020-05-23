@@ -41,36 +41,26 @@ struct Graph: View {
         let data = convertDataToRange(incrementAmount: Int(incrementAmount) + 1, data: rawData)
 
         let overallRange = (rawData.min() ?? 0)..<(rawData.max() ?? 0)
-        let overallMagnitude = overallRange.upperBound - overallRange.lowerBound
-        let maxMagnitude = data.map { range in
-            return range.upperBound - range.lowerBound
-        }.max() ?? 0
 
-        let heightRatio = (1 - CGFloat(maxMagnitude / Double(overallMagnitude)))
-        
         return GeometryReader { proxy in
             VStack(alignment: .center, spacing: nil) {
-                HStack(alignment: .center, spacing: proxy.size.width / 200) {
-                    ForEach(data.indices) { index in
-                        GraphCapsule(
-                            index: index,
-                            height: proxy.size.height,
-                            range: data[index],
-                            overallRange: overallRange)
-                        .colorMultiply(self.capsuleColor)
+                HStack(alignment: .bottom) {
+                    HStack(alignment: .center, spacing: proxy.size.width / 200) {
+                        ForEach(data.indices) { index in
+                            GraphCapsule(
+                                index: index,
+                                height: proxy.size.height,
+                                range: data[index],
+                                overallRange: overallRange)
+                            .colorMultiply(self.capsuleColor)
+                        }
                     }
-                    .offset(x: 0, y: proxy.size.height * heightRatio)
-                    
-                    // TODO: Add in timestamps on x axis
-                    //
-                    
-                    
-                    // TODO: Add in min and max values on y axis
-                    //
-                }.padding()
+                    .padding(.top, 30)
+                    .padding(.leading, 20)
+                    .padding(.trailing, 20)
+                }
             }
-            
-        }.padding()
+        }
     }
 }
 

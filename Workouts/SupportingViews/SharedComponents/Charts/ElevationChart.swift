@@ -10,18 +10,42 @@ import SwiftUI
 import CoreLocation
 
 struct ElevationChart: View {
-    var elevationData: [CLLocation]
+    var routeData: [CLLocation]
     var body: some View {
-        let data = elevationData.map { return $0.altitude }
+        let data = routeData.map { return $0.altitude }
+        var netElevationGain: Double = 0
+        if data.count > 0 {
+            let startingElevation = data[0]
+            let endingElevation = data[data.count - 1]
+            netElevationGain = endingElevation - startingElevation
+        }
 
-        return ZStack {
-            Graph(rawData: data, capsuleColor: .orange, backgroundColor: .black)
+        return VStack(alignment: .leading) {
+            Text("Elevation Profile")
+                .font(.headline)
+                .fontWeight(.heavy)
+                .padding()
+
+            if data.count != 0 {
+                Graph(rawData: data, capsuleColor: Color("V_1"), backgroundColor: Color(UIColor.systemBackground))
+                HStack(alignment: .center) {
+                    Text("Net elevation gain:")
+                        .font(.footnote)
+                        .padding(.leading, 20)
+                        .foregroundColor(Color.gray)
+                    Text("\(netElevationGain >= 0 ? "+" : "")\(Int(metersToFeet(meters: netElevationGain))) ft")
+                        .font(.footnote)
+                        .foregroundColor(netElevationGain >= 0 ? Color.green : Color.red)
+                }
+            } else {
+                Text("No elevation data to Preview 😢")
+            }
         }
     }
 }
 
 struct ElevationChart_Previews: PreviewProvider {
     static var previews: some View {
-        ElevationChart(elevationData: [CLLocation(latitude: 0, longitude: 0)]) // TODO: come up with better preview data
+        ElevationChart(routeData: [CLLocation(latitude: 0, longitude: 0)]) // TODO: come up with better preview data
     }
 }

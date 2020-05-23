@@ -11,9 +11,7 @@ import SwiftUI
 struct AboutScreen: View {
     var body: some View {
         VStack {
-            Text("A note about the app and stuff. ")
-            Text("I think we should take a tip from Jeff and Justin and link out to our twitter pages here.")
-            Text("If we throw together a website (need to for AppStore) - link to it here - any social media stuff")
+            Text("Coming soon.")
         }
     }
 }

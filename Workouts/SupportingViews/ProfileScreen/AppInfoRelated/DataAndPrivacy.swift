@@ -10,7 +10,7 @@ import SwiftUI
 
 struct DataAndPrivacy: View {
     var body: some View {
-        Text("Tell users how to adjust their healthkit privacy settings and the information shared with this app")
+        Text("Coming soon.")
     }
 }
 

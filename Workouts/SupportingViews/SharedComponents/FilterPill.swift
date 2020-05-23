@@ -10,24 +10,24 @@ import SwiftUI
 
 struct FilterPill: View {
     @EnvironmentObject private var workoutData: WorkoutData
-    var activityFilter: ActivityTypeFilter
+    var activityFilter: WorkoutFilter
 
     var body: some View {
         HStack {
-            Text(activityFilter.value.workoutTypeMetadata.activityTypeDescription)
+            Text(activityFilter.filterDescription)
                 .foregroundColor(.white)
                 .padding(EdgeInsets(top: 5, leading: 10, bottom: 5, trailing: 0))
                 .font(.body)
                 .fixedSize(horizontal: false, vertical: true)
             Button(action: {
-                self.workoutData.toggleActivityFilterApplied(filter: self.activityFilter)
+                self.workoutData.toggleWorkoutFilterApplied(filter: self.activityFilter)
             }) {
                 Image(systemName: "xmark")
                     .foregroundColor(.white)
                     .imageScale(.small)
             }.padding(EdgeInsets(top: 5, leading: 5, bottom: 5, trailing: 10))
         }
-        .background(self.activityFilter.color.opacity(0.8))
+        .background(self.activityFilter.color)
         .cornerRadius(20)
         .padding(2)
     }
@@ -35,6 +35,6 @@ struct FilterPill: View {
 
 struct FilterPill_Previews: PreviewProvider {
     static var previews: some View {
-        FilterPill(activityFilter: ActivityTypeFilter(value: .running, isApplied: true, color: .blue)).environmentObject(WorkoutData())
+        FilterPill(activityFilter: ActivityTypeFilter(value: .running, isApplied: true, color: .blue) as! WorkoutFilter).environmentObject(WorkoutData())
     }
 }

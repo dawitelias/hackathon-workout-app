@@ -10,7 +10,7 @@ import SwiftUI
 
 struct Feedback: View {
     var body: some View {
-        Text("Give people a way to provide feedback about the app - maybe they will do this instead of roasting us on the app store")
+        Text("Coming soon.")
     }
 }
 

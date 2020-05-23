@@ -10,7 +10,7 @@ import SwiftUI
 
 struct CaloriesFilter: View {
     @EnvironmentObject var workoutData: WorkoutData
-    @State private var caloriesFilter = CaloriesWorkoutFilter(value: 0, isApplied: false, color: .red)
+    @State private var caloriesFilter = CaloriesWorkoutFilter(value: 0, isApplied: false)
 
     var body: some View {
         let caloriesString = "\(Int(caloriesFilter.value)) cal"

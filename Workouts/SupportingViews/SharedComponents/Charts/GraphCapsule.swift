@@ -17,7 +17,7 @@ struct GraphCapsule: View {
     var overallRange: Range<Double>
     
     var heightRatio: CGFloat {
-        max(CGFloat((range.upperBound - range.lowerBound) / (overallRange.upperBound - overallRange.lowerBound)), 0.15)
+        max(CGFloat((range.upperBound - range.lowerBound) / (overallRange.upperBound - overallRange.lowerBound)), 0.05)
     }
     
     var offsetRatio: CGFloat {
@@ -28,7 +28,7 @@ struct GraphCapsule: View {
         Capsule()
             .fill(Color.white)
             .frame(height: height * heightRatio)
-            .offset(x: 0, y: height * -offsetRatio)
+            .offset(x: 0, y: height * -offsetRatio/3)
     }
 }
 
