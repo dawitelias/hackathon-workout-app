@@ -12,11 +12,13 @@ import HealthKit
 struct FeaturedWorkout: View {
     var workout: HKWorkout
     @State var workoutHasRouteData = false
+    @State var isLoading = true
 
     var body: some View {
         let workoutHrAndMin = workout.duration.getHoursAndMinutesString()
         
         workout.getWorkoutLocationData() { results, error in
+            self.isLoading = false
             if let err = error {
                 print(err.localizedDescription)
                 return
@@ -29,63 +31,67 @@ struct FeaturedWorkout: View {
         }
         
         return VStack(alignment: .leading) {
-            if workoutHasRouteData {
-                HStack {
-                    Icon(image: Image(workout.workoutActivityType.workoutTypeMetadata.systemIconName), mainColor: workout.workoutActivityType.workoutTypeMetadata.mainColor, highlightColor: workout.workoutActivityType.workoutTypeMetadata.highlightColor, size: 35)
-                    VStack(alignment: .leading) {
-                        Text(workout.workoutActivityType.workoutTypeMetadata.activityTypeDescription)
-                            .font(.headline)
-                            .fontWeight(.semibold)
-                        Text("\(workout.endDate.date)")
-                            .font(.subheadline)
-                            .foregroundColor(.gray)
-                    }
-                }
-                .padding(.top)
-                MapView(workout: workout, isUserInteractionEnabled: false, startAnnotation: StartAnnotation(), endAnnotation: EndAnnotation())
-                    .frame(height: 200)
-                    .padding(.horizontal, -15)
-                    .padding(.bottom, -6)
+            if isLoading {
+                Text("Loading...")
+                    .frame(height: 250)
             } else {
-                HStack {
-                    ZStack(alignment: .topLeading) {
-                        VStack(alignment: .leading, spacing: 5) {
+                if workoutHasRouteData {
+                    HStack {
+                        Icon(image: Image(workout.workoutActivityType.workoutTypeMetadata.systemIconName), mainColor: workout.workoutActivityType.workoutTypeMetadata.mainColor, highlightColor: workout.workoutActivityType.workoutTypeMetadata.highlightColor, size: 35)
+                        VStack(alignment: .leading) {
                             Text(workout.workoutActivityType.workoutTypeMetadata.activityTypeDescription)
-                                .font(.largeTitle)
-                                .fontWeight(.heavy)
-                                .foregroundColor(workout.workoutActivityType.workoutTypeMetadata.highlightColor)
-                                .fixedSize()
+                                .font(.headline)
+                                .fontWeight(.semibold)
+                            Text("\(workout.endDate.date)")
+                                .font(.subheadline)
+                                .foregroundColor(.gray)
+                        }
+                    }
+                    .padding(.top)
+                    MapView(workout: workout, isUserInteractionEnabled: false, startAnnotation: StartAnnotation(), endAnnotation: EndAnnotation())
+                        .frame(height: 200)
+                        .padding(.horizontal, -15)
+                        .padding(.bottom, -6)
+                } else {
+                    HStack {
+                        ZStack(alignment: .topLeading) {
+                            VStack(alignment: .leading, spacing: 5) {
+                                Text(workout.workoutActivityType.workoutTypeMetadata.activityTypeDescription)
+                                    .font(.largeTitle)
+                                    .fontWeight(.heavy)
+                                    .foregroundColor(workout.workoutActivityType.workoutTypeMetadata.highlightColor)
+                                    .fixedSize()
 
-                            Text("\(workoutHrAndMin)")
-                                .font(.largeTitle)
-                                .fontWeight(.heavy)
-                                .foregroundColor(Color(UIColor.label))
-                            
-                            if workout.totalEnergyBurned != nil {
-                                Text("\(Int(workout.totalEnergyBurned!.doubleValue(for: .kilocalorie()))) cal")
+                                Text("\(workoutHrAndMin)")
                                     .font(.largeTitle)
                                     .fontWeight(.heavy)
                                     .foregroundColor(Color(UIColor.label))
-                                
+
+                                if workout.totalEnergyBurned != nil {
+                                    Text("\(Int(workout.totalEnergyBurned!.doubleValue(for: .kilocalorie()))) cal")
+                                        .font(.largeTitle)
+                                        .fontWeight(.heavy)
+                                        .foregroundColor(Color(UIColor.label))
+
+                                }
+
+
                             }
-                            
-                            
+                            .frame(width: 300, height: nil, alignment: .leading)
+                            .padding(.leading, 20)
+                            .padding(.top, 20)
+
+                            VStack(alignment: .trailing, spacing: nil) {
+                                Image(workout.workoutActivityType.workoutTypeMetadata.systemIconName)
+                                    .foregroundColor(workout.workoutActivityType.workoutTypeMetadata.highlightColor)
+                                    .opacity(0.2)
+                            }.offset(x: 100, y: 0)
                         }
-                        .frame(width: 300, height: nil, alignment: .leading)
-                        .padding(.leading, 20)
-                        .padding(.top, 20)
-                        
-                        VStack(alignment: .trailing, spacing: nil) {
-                            Image(workout.workoutActivityType.workoutTypeMetadata.systemIconName)
-                                .foregroundColor(workout.workoutActivityType.workoutTypeMetadata.highlightColor)
-                                .opacity(0.2)
-                        }.offset(x: 100, y: 0)
                     }
-                    
+                    .cornerRadius(5)
+                    .frame(height: 200)
                 }
-                .cornerRadius(5)
             }
-            
         }
     }
 

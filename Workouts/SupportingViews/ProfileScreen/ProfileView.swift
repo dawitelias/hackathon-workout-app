@@ -30,9 +30,6 @@ struct ProfileView: View {
                     NavigationLink(destination: AboutScreen()) {
                         Text("About")
                     }
-                    NavigationLink(destination: DataAndPrivacy()) {
-                        Text("Data and Privacy")
-                    }
                     NavigationLink(destination: Feedback()) {
                         Text("Feedback")
                     }
