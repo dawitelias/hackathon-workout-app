@@ -16,15 +16,16 @@ struct ProfileView: View {
         NavigationView {
             List {
                 Section(header: EmptyView()) {
-                    NavigationLink(destination: HealthInfoScreen()) {
-                        Text("Health Info")
-                    }
-                    NavigationLink(destination: WeeklySummary()) {
-                        Text("Weekly Summary")
-                    }
-                    NavigationLink(destination: Badges()) {
-                        Text("Badges")
-                    }
+                    Text("Profile information coming soon...")
+//                    NavigationLink(destination: HealthInfoScreen()) {
+//                        Text("Health Info")
+//                    }
+//                    NavigationLink(destination: WeeklySummary()) {
+//                        Text("Weekly Summary")
+//                    }
+//                    NavigationLink(destination: Badges()) {
+//                        Text("Badges")
+//                    }
                 }
                 Section(header: SectionHeader(text: "App Info")) {
                     NavigationLink(destination: AboutScreen()) {
