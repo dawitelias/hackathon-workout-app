@@ -47,13 +47,13 @@ struct MapView: UIViewRepresentable {
                 startPointAnnotation.coordinate = startCoordinate.coordinate
                 startPointAnnotation.subtitle = startCoordinate.timestamp.date
                 startPointAnnotation.title = "Started: \(self.workout.workoutActivityType.workoutTypeMetadata.activityTypeDescription) 💪"
-                startPointAnnotation.leftImageName = self.workout.workoutActivityType.workoutTypeMetadata.systemIconName
+                //startPointAnnotation.leftImageName = self.workout.workoutActivityType.workoutTypeMetadata.systemIconName
                 
                 let endPointAnnotation = EndAnnotation()
                 endPointAnnotation.coordinate = endCoordinate.coordinate
                 endPointAnnotation.subtitle = endCoordinate.timestamp.date
                 endPointAnnotation.title = "Finished: \(self.workout.workoutActivityType.workoutTypeMetadata.activityTypeDescription) 🏅"
-                endPointAnnotation.leftImageName = self.workout.workoutActivityType.workoutTypeMetadata.systemIconName
+                //endPointAnnotation.leftImageName = self.workout.workoutActivityType.workoutTypeMetadata.systemIconName
                 
                 self.startAnnotation = startPointAnnotation
                 self.endAnnotation = endPointAnnotation

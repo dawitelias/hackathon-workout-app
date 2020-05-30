@@ -7,12 +7,23 @@
 //
 
 import UIKit
+import ArcGIS
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        
+        //license the app with the supplied License key
+        do {
+         let result = try AGSArcGISRuntimeEnvironment.setLicenseKey("runtimelite,1000,rud6315953372,none,GB2PMD17JYJ3R6EJM010")
+            print("License Result : \(result.licenseStatus)")
+        }
+        catch let error as NSError {
+         print("error: \(error)")
+        }
+        
         return true
     }
 

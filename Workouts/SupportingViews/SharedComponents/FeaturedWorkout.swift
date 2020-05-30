@@ -8,24 +8,29 @@
 
 import SwiftUI
 import HealthKit
+import CoreLocation
 
 struct FeaturedWorkout: View {
     var workout: HKWorkout
     @State var workoutHasRouteData = false
+    @State var route: [CLLocation]? = nil
     @State var isLoading = true
 
     var body: some View {
         let workoutHrAndMin = workout.duration.getHoursAndMinutesString()
         
-        workout.getWorkoutLocationData() { results, error in
-            self.isLoading = false
-            if let err = error {
-                print(err.localizedDescription)
-                return
-            }
-            if let locations = results {
-                if locations.count > 0 {
-                    self.workoutHasRouteData = true
+        if route == nil {
+            workout.getWorkoutLocationData() { results, error in
+                self.isLoading = false
+                if let err = error {
+                    print(err.localizedDescription)
+                    return
+                }
+                if let locations = results {
+                    self.route = locations
+                    if locations.count > 0 {
+                        self.workoutHasRouteData = true
+                    }
                 }
             }
         }
@@ -48,7 +53,7 @@ struct FeaturedWorkout: View {
                         }
                     }
                     .padding(.top)
-                    MapView(workout: workout, isUserInteractionEnabled: false, startAnnotation: StartAnnotation(), endAnnotation: EndAnnotation())
+                    EsriMapView(route: self.route, isUserInteractionEnabled: false)
                         .frame(height: 200)
                         .padding(.horizontal, -15)
                         .padding(.bottom, -6)

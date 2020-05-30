@@ -11,32 +11,29 @@ import HealthKit
 import CoreLocation
 import MapKit
 
-var generatedSharedMapImage: UIImage = UIImage()
-
 struct FullScreenMapView: View {
-    let workout: HKWorkout
+    let route: [CLLocation]
     @State var showShareSheet: Bool = false
     
     var body: some View {
-        VStack {
-            MapView(workout: workout, isUserInteractionEnabled: true)
+        
+        return VStack {
+            EsriMapView(route: route, isUserInteractionEnabled: true)
         }
         .edgesIgnoringSafeArea(.vertical)
         .navigationBarItems(trailing:
             Button(action: {
                 if self.showShareSheet == false {
-                    self.workout.getWorkoutLocationData { route, error in
-                        guard let workoutRoute = route else {
+                    MapImageGenerator.generateMapImageWithRoute(route: self.route) {
+                        image, error in
+                        if let error = error {
+                            print(error.localizedDescription)
+                        }
+                        guard let generatedImage = image else {
                             return
                         }
-                        MapImageGenerator.generateMapImageWithRoute(route: workoutRoute) {
-                            image, error in
-                            guard let generatedImage = image else {
-                                return
-                            }
-                            generatedMapImage = generatedImage
-                            self.showShareSheet.toggle()
-                        }
+                        generatedMapImage = generatedImage
+                        self.showShareSheet.toggle()
                     }
                 } else {
                     self.showShareSheet.toggle()
@@ -44,7 +41,8 @@ struct FullScreenMapView: View {
             }) {
                 Image(systemName: "square.and.arrow.up").imageScale(.large)
             }.sheet(isPresented: $showShareSheet) {
-                ShareSheet(activityItems: [generatedSharedMapImage])
+                ShareSheet(activityItems: [generatedMapImage,
+                "\(ChuckNorris.getRandomChuckNorrisQuote())"])
             }
         )
     }
@@ -52,6 +50,11 @@ struct FullScreenMapView: View {
 
 struct FullScreenMapView_Previews: PreviewProvider {
     static var previews: some View {
-        FullScreenMapView(workout: HKWorkout(activityType: .running, start: Date(), end: Date()))
+        FullScreenMapView(route: [
+            CLLocation(latitude: 70.2568, longitude: 43.6591),
+            CLLocation(latitude: 70.2578, longitude: 43.65978),
+            CLLocation(latitude: 70.2548, longitude: 43.6548),
+            CLLocation(latitude: 70.2538, longitude: 43.6538),
+        ])
     }
 }

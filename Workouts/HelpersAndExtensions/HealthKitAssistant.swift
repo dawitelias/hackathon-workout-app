@@ -92,6 +92,53 @@ class HealthKitAssistant {
         HKHealthStore().execute(query)
     }
     
+    // Get workouts over time interval in neat buckets
+    //
+    func getWorkoutsDonePastWeek(completion: @escaping ([[HKWorkout]?]?, Error?) -> Void) {
+        //let results= [[HKWorkout]?]
+        
+        let numberOfDaysBack = 7
+        let startDate = Date().hoursBeforeNow(hr: 24 * Double(numberOfDaysBack))
+        
+        // For each day we want to get all of the workouts for each day
+        // Shove all of these async calls into a dispatch group, call completion when they've all finished
+        //
+        let dispatchGroup = DispatchGroup()
+        var workoutResults = [[HKWorkout]]()
+
+        for i in 0...(numberOfDaysBack + 1) {
+            dispatchGroup.enter()
+            let start = startDate.advanced(by: 60 * 60 * 24 * Double(i))
+            let end = startDate.advanced(by: 60 * 60 * 24 * Double(i + 1))
+            let predicate = HKQuery.predicateForSamples(withStart: start, end: end, options: [])
+            let sortDescriptor = NSSortDescriptor(key: HKSampleSortIdentifierEndDate, ascending: false)
+            let query = HKSampleQuery(
+                sampleType: .workoutType(),
+                predicate: predicate,
+                limit: HKObjectQueryNoLimit,
+                sortDescriptors: [sortDescriptor]) { (query, samples, error) in
+                    
+                    if error != nil {
+                        dispatchGroup.leave()
+                        return
+                    }
+
+                    if let data = samples as? [HKWorkout] {
+                        workoutResults.append(data)
+                        dispatchGroup.leave()
+                    }
+                }
+            HKHealthStore().execute(query)
+        }
+        
+        dispatchGroup.notify(queue: .main) {
+            // TODO: need to sory these workouts by date since async calls doesn't guarantee we will
+            // get them back in the right order.
+            //
+            completion(workoutResults, nil)
+        }
+    }
+    
     // MARK: Get Featured Workout
     func getFeaturedWorkout(completion: @escaping (HKWorkout?, Error?) -> Void) {
         // Query for workouts done in last week, take the first one
@@ -165,4 +212,13 @@ class HealthKitAssistant {
             completion(false, HealthkitSetupError.notAvailableOnDevice)
         }
     }
+    
+    func getDateOfBirth() -> String {
+        return "test"
+    }
+    
+    func getBiologicalSex() -> String {
+        return "test"
+    }
+    
 }

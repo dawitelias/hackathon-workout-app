@@ -2,6 +2,10 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>NSHealthUpdateUsageDescription</key>
+    <string>We need permissions to access your HealthKit data so that we can display detailed information about your workouts.</string>
+    <key>NSPhotoLibraryAddUsageDescription</key>
+    <string>We need permissions to access your photo library so that you can save this workout to your photos.</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleExecutable</key>

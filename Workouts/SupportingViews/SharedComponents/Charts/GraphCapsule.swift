@@ -28,7 +28,7 @@ struct GraphCapsule: View {
         Capsule()
             .fill(Color.white)
             .frame(height: height * heightRatio)
-            .offset(x: 0, y: height * -offsetRatio/3)
+            .offset(x: 0, y: height * -offsetRatio/2)
     }
 }
 

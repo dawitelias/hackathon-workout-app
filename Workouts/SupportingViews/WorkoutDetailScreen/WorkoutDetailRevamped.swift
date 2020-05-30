@@ -22,7 +22,7 @@ struct WorkoutDetailRevamped: View {
 
     var body: some View {
         let workoutDistance = workout.totalDistance?.doubleValue(for: .mile()) ?? 0
-        let distanceString = "\(String.init(format: "%.0f", workoutDistance))mi"
+        let distanceString = "\(String.init(format: "%.2f", workoutDistance))mi"
         let workoutTimer = workout.duration.getTimerStyleActivityDurationString()
         let workoutHrAndMin = workout.duration.getHoursAndMinutesString()
         
@@ -79,7 +79,7 @@ struct WorkoutDetailRevamped: View {
                     VStack(alignment: .leading) {
                         Text("Total Time")
                         Text(workoutTimer)
-                            .font(.largeTitle)
+                            .font(.title)
                             .fontWeight(.regular)
                             .foregroundColor(workout.workoutActivityType.workoutTypeMetadata.mainColor)
                     }
@@ -87,7 +87,7 @@ struct WorkoutDetailRevamped: View {
                     VStack(alignment: .leading) {
                         Text("Calories")
                         Text("\(workout.totalEnergyBurned?.doubleValue(for: .kilocalorie()) ?? 0, specifier: "%.0f")cal")
-                            .font(.largeTitle)
+                            .font(.title)
                             .fontWeight(.regular)
                             .foregroundColor(workout.workoutActivityType.workoutTypeMetadata.mainColor)
                     }
@@ -96,7 +96,7 @@ struct WorkoutDetailRevamped: View {
                         VStack(alignment: .leading) {
                             Text("Distance")
                             Text(distanceString)
-                                .font(.largeTitle)
+                                .font(.title)
                                 .fontWeight(.regular)
                                 .foregroundColor(workout.workoutActivityType.workoutTypeMetadata.mainColor)
                         }
@@ -108,10 +108,10 @@ struct WorkoutDetailRevamped: View {
                 //
                 if route != nil && route!.count != 0 {
                     VStack(alignment: .leading) {
-                        NavigationLink(destination: FullScreenMapView(workout: workout)) {
-                            MapView(workout: workout, isUserInteractionEnabled: false)
-                            .frame(width: nil, height: 200, alignment: .center)
-                            .cornerRadius(20)
+                        NavigationLink(destination: FullScreenMapView(route: route!)) {
+                            EsriMapView(route: route!)
+                                .frame(width: nil, height: 200, alignment: .center)
+                                .cornerRadius(20)
                         }
                         
                     }
@@ -134,7 +134,7 @@ struct WorkoutDetailRevamped: View {
                     }
                     if selectedChart == 2 && workoutHRData != nil {
                         VStack {
-                            HeartRateChart(heartRateData: workoutHRData!)
+                            HeartRateChart(heartRateData: workoutHRData!.reversed())
                         }.frame(width: nil, height: 200)
                     }
 

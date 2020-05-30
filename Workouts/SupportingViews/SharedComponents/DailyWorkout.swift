@@ -14,6 +14,8 @@ struct DailyWorkout: View {
 
     var body: some View {
         let workoutHrAndMin = workout.duration.getHoursAndMinutesString()
+        let workoutDistance = workout.totalDistance?.doubleValue(for: .mile()) ?? 0
+        let distanceString = "\(String.init(format: "%.2f", workoutDistance))mi"
 
         return HStack {
             ZStack(alignment: .topLeading) {
@@ -29,14 +31,18 @@ struct DailyWorkout: View {
                         .fontWeight(.heavy)
                         .foregroundColor(Color(UIColor.label))
                     
-                    if workout.totalEnergyBurned != nil {
+                    if workout.totalDistance != nil {
+                        Text(distanceString)
+                            .font(.title)
+                            .fontWeight(.heavy)
+                            .foregroundColor(Color(UIColor.label))
+                    } else if workout.totalEnergyBurned != nil {
                         Text("\(Int(workout.totalEnergyBurned!.doubleValue(for: .kilocalorie()))) cal")
                             .font(.title)
                             .fontWeight(.heavy)
                             .foregroundColor(Color(UIColor.label))
                         
                     }
-                    
                     
                 }
                 .frame(width: 200, height: nil, alignment: .leading)
