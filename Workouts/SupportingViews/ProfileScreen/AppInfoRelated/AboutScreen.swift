@@ -27,8 +27,8 @@ struct AboutScreen: View {
                     AboutPageCard(
                         imageName: "dawit",
                         fullName: "Dawit Elias",
-                        twitterScreenName: "Dawit",
-                        linkedInProfileID: "emily-cheroske-37476b165")
+                        twitterScreenName: nil,
+                        linkedInProfileID: nil)
                         .padding()
                 }
                 Spacer()

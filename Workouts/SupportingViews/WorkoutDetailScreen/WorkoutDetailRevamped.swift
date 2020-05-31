@@ -109,9 +109,14 @@ struct WorkoutDetailRevamped: View {
                 if route != nil && route!.count != 0 {
                     VStack(alignment: .leading) {
                         NavigationLink(destination: FullScreenMapView(route: route!)) {
-                            EsriMapView(route: route!)
-                                .frame(width: nil, height: 200, alignment: .center)
-                                .cornerRadius(20)
+                            VStack {
+                                EsriMapView(route: route!)
+                                    .frame(width: nil, height: 200, alignment: .center)
+                                    .cornerRadius(20)
+                                Text("(tap to expand)")
+                                    .font(.callout)
+                            }
+                            
                         }
                         
                     }

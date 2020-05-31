@@ -12,7 +12,8 @@ import CoreLocation
 struct ElevationChart: View {
     var routeData: [CLLocation]
     var body: some View {
-        let data = routeData.map { return $0.altitude }
+        var data = routeData.map { return $0.altitude }
+        data = data.filter { return $0 > 0 && $0 != nil }
         var netElevationGain: Double = 0
         if data.count > 0 {
             let startingElevation = data[0]
@@ -39,6 +40,7 @@ struct ElevationChart: View {
                 }
             } else {
                 Text("No elevation data to Preview 😢")
+                    .padding()
             }
         }
     }

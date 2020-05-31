@@ -12,5 +12,5 @@ func metersToFeet(meters: Double) -> Double {
     return meters * 3.28084
 }
 func metersPerSecondToMinPerMile(pace: Double) -> Double {
-    return 5280 / (pace * 196.82)
+    return (5280 / (pace * 196.82)) > 0 ? (5280 / (pace * 196.82)) : 0
 }

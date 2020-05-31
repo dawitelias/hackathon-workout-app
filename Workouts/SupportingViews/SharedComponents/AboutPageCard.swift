@@ -12,8 +12,8 @@ import UIKit
 struct AboutPageCard: View {
     var imageName: String
     var fullName: String
-    var twitterScreenName: String
-    var linkedInProfileID: String
+    var twitterScreenName: String? = nil
+    var linkedInProfileID: String? = nil
     
     var body: some View {
         VStack {
@@ -27,39 +27,43 @@ struct AboutPageCard: View {
                     .font(.headline)
                     .fontWeight(.heavy)
                 HStack {
-                    Button(action: {
-                        let application = UIApplication.shared
-                        
-                        if let url = URL(string: "https://twitter.com/\(self.twitterScreenName)"), application.canOpenURL(url) {
-                            application.open(url as URL)
-                        } else {
-                            // ALERT the user that they can't open the URL
-                        }
-                    }) {
-                        Image("Twitter_Logo")
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
-                            .frame(width: 30, height: 30)
-                            .clipShape(Circle())
-                    }.padding(.trailing, 5)
-
-                    Button(action: {
-                        let application = UIApplication.shared
-                        
-                        // If you have the linked in app installed on your phone this will open in app instead
-                        // of through the browser
-                        //
-                        if let url = URL(string: "https://www.linkedin.com/in/\(self.linkedInProfileID)"), application.canOpenURL(url) {
-                            application.open(url as URL)
-                        } else {
-                            // ALERT the user that they can't open the URL
-                        }
-                    }) {
-                        Image("LinkedIn_Logo")
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
-                            .frame(width: 30, height: 30)
-                    }.padding(.leading, 5)
+                    if self.twitterScreenName != nil {
+                        Button(action: {
+                            let application = UIApplication.shared
+                            
+                            if let url = URL(string: "https://twitter.com/\(self.twitterScreenName!)"), application.canOpenURL(url) {
+                                application.open(url as URL)
+                            } else {
+                                // ALERT the user that they can't open the URL
+                            }
+                        }) {
+                            Image("Twitter_Logo")
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
+                                .frame(width: 30, height: 30)
+                                .clipShape(Circle())
+                        }.padding(.trailing, 5)
+                    }
+                    
+                    if self.linkedInProfileID != nil {
+                        Button(action: {
+                            let application = UIApplication.shared
+                            
+                            // If you have the linked in app installed on your phone this will open in app instead
+                            // of through the browser
+                            //
+                            if let url = URL(string: "https://www.linkedin.com/in/\(self.linkedInProfileID!)"), application.canOpenURL(url) {
+                                application.open(url as URL)
+                            } else {
+                                // ALERT the user that they can't open the URL
+                            }
+                        }) {
+                            Image("LinkedIn_Logo")
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
+                                .frame(width: 30, height: 30)
+                        }.padding(.leading, 5)
+                    }
                 }
             }//.offset(y: -30)
         }

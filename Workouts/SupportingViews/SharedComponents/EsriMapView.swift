@@ -15,7 +15,7 @@ struct EsriMapView: UIViewRepresentable {
     var isUserInteractionEnabled: Bool = false
 
     @Environment(\.colorScheme) var colorScheme
-    
+
     func makeUIView(context: Context) -> AGSMapView {
         let mapView = AGSMapView(frame: .zero)
         mapView.isAttributionTextVisible = false
@@ -23,7 +23,6 @@ struct EsriMapView: UIViewRepresentable {
         return mapView
     }
     func updateUIView(_ uiView: AGSMapView, context: Context) {
-
         let darkBasemapURL = "https://emilcheroske.maps.arcgis.com/home/item.html?id=6f4816759ad34e66b2b5a1c15e51f8e0"
         let lightBasemapURL = "https://emilcheroske.maps.arcgis.com/home/item.html?id=1becad86ac93425eb3fd2343e4507359"
         guard let url = colorScheme == .dark ? URL(string: darkBasemapURL) : URL(string: lightBasemapURL) else {
@@ -37,9 +36,15 @@ struct EsriMapView: UIViewRepresentable {
         uiView.map = map
         uiView.isUserInteractionEnabled = isUserInteractionEnabled
 
+        guard let maxVelocity = route?.max(by: { return $0.speed < $1.speed })?.speed, let minVelocity = route?.min(by: { return $0.speed < $1.speed })?.speed else {
+            return
+        }
+
         // Define a line symbol for the route
         //
-        let color = isUserInteractionEnabled ? UIColor.lightGray.withAlphaComponent(0.15) : UIColor.clear
+        var color = isUserInteractionEnabled ? UIColor.lightGray.withAlphaComponent(0.15) : UIColor.clear
+        color = maxVelocity != -1 && minVelocity != -1 ? color : .orange
+
         let lineSymbol = AGSSimpleLineSymbol(style: AGSSimpleLineSymbolStyle.solid, color: color, width: 5)
         let graphicsOverlay = AGSGraphicsOverlay()
         graphicsOverlay.renderer = AGSSimpleRenderer(symbol: lineSymbol)
@@ -58,19 +63,6 @@ struct EsriMapView: UIViewRepresentable {
                 uiView.setViewpoint(AGSViewpoint(targetExtent: targetExtent))
             }
         }
-
-
-        let pointsCollectionTable = self.pointsCollectionTable()
-        let featureCollection = AGSFeatureCollection(featureCollectionTables: [pointsCollectionTable])
-        let featureCollectionLayer = AGSFeatureCollectionLayer(featureCollection: featureCollection)
-        // Wait for the layer
-        featureCollectionLayer.load { error in
-            if let error = error {
-                print(error.localizedDescription)
-                return
-            }
-            uiView.map?.operationalLayers.add(featureCollectionLayer)
-        }
         
         // Add in the start and end graphics
         if let firstPoint = route?.first?.coordinate, let lastPoint = route?.last?.coordinate {
@@ -85,6 +77,22 @@ struct EsriMapView: UIViewRepresentable {
 
             graphicsOverlay.graphics.add(startGraphic)
             graphicsOverlay.graphics.add(endGraphic)
+        }
+
+        if maxVelocity == -1 && minVelocity == -1 {
+            return
+        }
+
+        let pointsCollectionTable = self.pointsCollectionTable()
+        let featureCollection = AGSFeatureCollection(featureCollectionTables: [pointsCollectionTable])
+        let featureCollectionLayer = AGSFeatureCollectionLayer(featureCollection: featureCollection)
+        // Wait for the layer
+        featureCollectionLayer.load { error in
+            if let error = error {
+                print(error.localizedDescription)
+                return
+            }
+            uiView.map?.operationalLayers.add(featureCollectionLayer)
         }
     }
     private func pointsCollectionTable() -> AGSFeatureCollectionTable {

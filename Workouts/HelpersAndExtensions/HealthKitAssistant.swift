@@ -20,7 +20,7 @@ class HealthKitAssistant {
     // MARK: Get workouts with predicates for each activity type
     //
     func getWorkouts(types: [ActivityTypeFilter], predicates: [NSPredicate], completion: @escaping ([HKWorkout]?, Error?) -> Void) {
-        checkAccess() { success, error in
+        HealthKitAssistant.checkAccess() { success, error in
 
             if !success || error != nil {
                 completion(nil, error)
@@ -140,6 +140,7 @@ class HealthKitAssistant {
     }
     
     // MARK: Get Featured Workout
+    //
     func getFeaturedWorkout(completion: @escaping (HKWorkout?, Error?) -> Void) {
         // Query for workouts done in last week, take the first one
         //
@@ -166,14 +167,15 @@ class HealthKitAssistant {
 
     // MARK: Check Privacy and Device HealthKit Capabilities
     //
-    private func checkAccess(completion: @escaping (Bool, Error?) -> Void) {
+    static public func checkAccess(completion: @escaping (Bool, Error?) -> Void) {
         
-        guard let dateOfBirth = HKObjectType.characteristicType(forIdentifier: .dateOfBirth),
-                let bloodType = HKObjectType.characteristicType(forIdentifier: .bloodType),
-                let biologicalSex = HKObjectType.characteristicType(forIdentifier: .biologicalSex),
-                let bodyMassIndex = HKObjectType.quantityType(forIdentifier: .bodyMassIndex),
-                let height = HKObjectType.quantityType(forIdentifier: .height),
-                let bodyMass = HKObjectType.quantityType(forIdentifier: .bodyMass),
+        guard
+                // let dateOfBirth = HKObjectType.characteristicType(forIdentifier: .dateOfBirth),
+                // let bloodType = HKObjectType.characteristicType(forIdentifier: .bloodType),
+                // let biologicalSex = HKObjectType.characteristicType(forIdentifier: .biologicalSex),
+                // let bodyMassIndex = HKObjectType.quantityType(forIdentifier: .bodyMassIndex),
+                // let height = HKObjectType.quantityType(forIdentifier: .height),
+                // let bodyMass = HKObjectType.quantityType(forIdentifier: .bodyMass),
                 let activeEnergy = HKObjectType.quantityType(forIdentifier: .activeEnergyBurned),
                 let cyclingDistance = HKObjectType.quantityType(forIdentifier: .distanceCycling),
                 let walkingAndRunningDistance = HKObjectType.quantityType(forIdentifier: .distanceWalkingRunning),
@@ -186,12 +188,12 @@ class HealthKitAssistant {
         // Health Kit Data Types we request permission to read
         //
         let healthKitTypesToRead: Set<HKObjectType> = [
-            dateOfBirth,
-            bloodType,
-            biologicalSex,
-            bodyMassIndex,
-            height,
-            bodyMass,
+            // dateOfBirth,
+            // bloodType,
+            // biologicalSex,
+            // bodyMassIndex,
+            // height,
+            // bodyMass,
             activeEnergy,
             cyclingDistance,
             walkingAndRunningDistance,

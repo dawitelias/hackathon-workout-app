@@ -13,7 +13,8 @@ struct SpeedChart: View {
     var routeData: [CLLocation]
     
     var body: some View {
-        let data = routeData.map { return $0.speed }
+        var data = routeData.map { return $0.speed }
+        data = data.filter { return $0 > 0 && $0 != nil }
         let sumArray = data.reduce(0, +)
         let average = sumArray/Double(data.count)
         
@@ -37,6 +38,7 @@ struct SpeedChart: View {
                 }
             } else {
                 Text("No data on speed is available. 😢")
+                    .padding()
             }
         }
     }

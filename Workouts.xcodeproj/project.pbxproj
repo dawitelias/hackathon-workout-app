@@ -33,6 +33,7 @@
 		A546226E2455223F003BA285 /* DailyWorkout.swift in Sources */ = {isa = PBXBuildFile; fileRef = A546226D2455223F003BA285 /* DailyWorkout.swift */; };
 		A54622762459C7A4003BA285 /* DailySummary.swift in Sources */ = {isa = PBXBuildFile; fileRef = A54622752459C7A4003BA285 /* DailySummary.swift */; };
 		A54A7E402481ADB200358DFB /* FullScreenMapRevamped.swift in Sources */ = {isa = PBXBuildFile; fileRef = A54A7E3F2481ADB200358DFB /* FullScreenMapRevamped.swift */; };
+		A54A7E4324840B4900358DFB /* LandingPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = A54A7E4224840B4900358DFB /* LandingPage.swift */; };
 		A55C84E52449EC3F00D81C44 /* Blur.swift in Sources */ = {isa = PBXBuildFile; fileRef = A55C84E42449EC3F00D81C44 /* Blur.swift */; };
 		A562B6BA245A6F4200742ECF /* SectionHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = A562B6B9245A6F4200742ECF /* SectionHeader.swift */; };
 		A562B6C0245A724E00742ECF /* AboutScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = A562B6BF245A724E00742ECF /* AboutScreen.swift */; };
@@ -120,6 +121,7 @@
 		A546226D2455223F003BA285 /* DailyWorkout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyWorkout.swift; sourceTree = "<group>"; };
 		A54622752459C7A4003BA285 /* DailySummary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailySummary.swift; sourceTree = "<group>"; };
 		A54A7E3F2481ADB200358DFB /* FullScreenMapRevamped.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullScreenMapRevamped.swift; sourceTree = "<group>"; };
+		A54A7E4224840B4900358DFB /* LandingPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LandingPage.swift; sourceTree = "<group>"; };
 		A55C84E42449EC3F00D81C44 /* Blur.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Blur.swift; sourceTree = "<group>"; };
 		A562B6B9245A6F4200742ECF /* SectionHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionHeader.swift; sourceTree = "<group>"; };
 		A562B6BF245A724E00742ECF /* AboutScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutScreen.swift; sourceTree = "<group>"; };
@@ -285,6 +287,7 @@
 		A52FBEF22447BF9E00016025 /* SupportingViews */ = {
 			isa = PBXGroup;
 			children = (
+				A54A7E4124840B2500358DFB /* HealthKitPermissions */,
 				A5D8CD0F2468807000DC54FA /* FullScreenMap */,
 				A54622742459C77E003BA285 /* DailySummaryScreen */,
 				A5199FCD2454870E002474AD /* HomeScreen */,
@@ -339,6 +342,14 @@
 				A54622752459C7A4003BA285 /* DailySummary.swift */,
 			);
 			path = DailySummaryScreen;
+			sourceTree = "<group>";
+		};
+		A54A7E4124840B2500358DFB /* HealthKitPermissions */ = {
+			isa = PBXGroup;
+			children = (
+				A54A7E4224840B4900358DFB /* LandingPage.swift */,
+			);
+			path = HealthKitPermissions;
 			sourceTree = "<group>";
 		};
 		A562B6BB245A722500742ECF /* ProfileRelated */ = {
@@ -693,6 +704,7 @@
 				A5828953244FC15600B7B6B0 /* WorkoutsMultiSelect.swift in Sources */,
 				A5D8CD082468440900DC54FA /* SpeedChart.swift in Sources */,
 				A562B6C6245A780900742ECF /* HealthInfoScreen.swift in Sources */,
+				A54A7E4324840B4900358DFB /* LandingPage.swift in Sources */,
 				A5221E72245462DB005416BC /* DistanceFilter.swift in Sources */,
 				A5B6CEED2448F30300CF2B86 /* MapImageGenerator.swift in Sources */,
 				A5B6CEE52448AB2D00CF2B86 /* HKWorkoutActivityType+Extension.swift in Sources */,
@@ -906,6 +918,7 @@
 				CODE_SIGN_ENTITLEMENTS = Workouts/Workouts.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_ASSET_PATHS = "\"Workouts/Preview Content\"";
 				DEVELOPMENT_TEAM = UHCTQ8X679;
 				ENABLE_PREVIEWS = YES;
@@ -915,6 +928,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 1.01;
 				PRODUCT_BUNDLE_IDENTIFIER = com.emilycheroske.workoutsapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = WorkoutsAppDevelopment;
@@ -931,6 +945,7 @@
 				CODE_SIGN_ENTITLEMENTS = Workouts/Workouts.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_ASSET_PATHS = "\"Workouts/Preview Content\"";
 				DEVELOPMENT_TEAM = UHCTQ8X679;
 				ENABLE_PREVIEWS = YES;
@@ -940,6 +955,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 1.01;
 				PRODUCT_BUNDLE_IDENTIFIER = com.emilycheroske.workoutsapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = WorkoutsAppDevelopment;

@@ -9,7 +9,7 @@ struct MailView: UIViewControllerRepresentable {
     @Environment(\.presentationMode) var presentation
     @Binding var result: Result<MFMailComposeResult, Error>?
     
-    var recipientEmail: String = "emily@portal.org"
+    var recipientEmail: String = "emilycheroske@protonmail.com"
     var subjectLine: String = "WorkoutsApp Feedback"
 
     class Coordinator: NSObject, MFMailComposeViewControllerDelegate {
