@@ -15,12 +15,10 @@ struct LandingPage: View {
                 Text("Welcome to the Workouts App!")
                     .font(.largeTitle)
                     .fontWeight(.heavy)
-                    .padding()
                     .foregroundColor(.white)
                     .fixedSize(horizontal: false, vertical: true)
 
-                Text("In order for Workouts App to work, you need to grant the app permissions to read your health data. After that you're ready to rock and roll! 🚀 💥 ")
-                    .padding()
+                Text("Please grant Workouts permission to read your workout data from HealthKit. Without it, the app is very boring. ❤️")
                     .foregroundColor(.white)
                     .fixedSize(horizontal: false, vertical: true)
 
@@ -60,8 +58,7 @@ struct LandingPage: View {
                         .border(Color.white, width: 1)
                 }
             }
-            .padding(.top, 30)
-            .padding(.bottom, 30)
+            .padding(30)
             .background(Color(red: 0, green: 0, blue: 0, opacity: 0.7))
             
         }
