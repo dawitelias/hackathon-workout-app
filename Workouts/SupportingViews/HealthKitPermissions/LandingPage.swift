@@ -20,6 +20,7 @@ struct LandingPage: View {
 
                 Text("Please grant Workouts permission to read your workout data from HealthKit. Without it, the app is very boring. ❤️")
                     .foregroundColor(.white)
+                    .multilineTextAlignment(.center)
                     .fixedSize(horizontal: false, vertical: true)
 
                 Button(action: {

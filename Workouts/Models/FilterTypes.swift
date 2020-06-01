@@ -37,7 +37,7 @@ struct DistanceWorkoutFilter: WorkoutFilter {
     }
     var filterDescription: String {
         get {
-            return ">= \(value) mi"
+            return "\(value) mi +"
         }
     }
     var predicate: NSPredicate {
@@ -55,7 +55,7 @@ struct CaloriesWorkoutFilter: WorkoutFilter {
     }
     var filterDescription: String {
         get {
-            return ">= \(Int(value)) cal"
+            return "\(Int(value)) cal +"
         }
     }
     var predicate: NSPredicate {
@@ -73,7 +73,7 @@ struct DurationWorkoutFilter: WorkoutFilter {
     }
     var filterDescription: String {
         get {
-            return ">= \(TimeInterval(value).getHoursAndMinutesString()) sec"
+            return "\(TimeInterval(value).getHoursAndMinutesString()) +"
         }
     }
     var predicate: NSPredicate {

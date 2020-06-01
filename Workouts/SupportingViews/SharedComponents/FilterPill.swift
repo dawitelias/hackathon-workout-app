@@ -17,7 +17,7 @@ struct FilterPill: View {
             Text(activityFilter.filterDescription)
                 .foregroundColor(.white)
                 .padding(EdgeInsets(top: 5, leading: 10, bottom: 5, trailing: 0))
-                .font(.body)
+                .font(.footnote)
                 .fixedSize(horizontal: false, vertical: true)
             Button(action: {
                 self.workoutData.toggleWorkoutFilterApplied(filter: self.activityFilter)
