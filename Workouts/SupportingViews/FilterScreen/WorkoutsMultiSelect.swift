@@ -31,12 +31,6 @@ struct WorkoutsMultiSelect: View {
         }
         .listStyle(GroupedListStyle()).environment(\.horizontalSizeClass, .regular)
         .navigationBarTitle("Workout Types")
-//        .navigationBarItems(trailing: Button(action: {
-//            //self.showFilterView = false
-//            print("select all/none of workout types")
-//        }) {
-//            Text("Select All").foregroundColor(Color.pink).bold()
-//        })
     }
 }
 

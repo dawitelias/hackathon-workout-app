@@ -49,7 +49,7 @@ class WorkoutData: ObservableObject {
     }
     
     private func setDefaultActivityTypeFilters() {
-        let defaultActivityTypeFilters: [HKWorkoutActivityType] = [.walking, .running, .cycling, .yoga]
+        let defaultActivityTypeFilters = [HKWorkoutActivityType]()
 
         // instantiate all of our activity type filters now
         //
@@ -109,18 +109,38 @@ class WorkoutData: ObservableObject {
 
     func queryWorkouts() {
         getAppliedFilters()
-        healthKitAssistant.getWorkouts(types: activeActivityTypeFilters, predicates: appliedFilters.map { $0.predicate }) { [weak self] results, error in
-            if let error = error {
-                print(error.localizedDescription)
-                return
+        if activeActivityTypeFilters.count == 0 {
+            healthKitAssistant.getAllWorkouts(predicates: appliedFilters.map { $0.predicate }) { [weak self] results, error in
+                if let error = error {
+                    print(error.localizedDescription)
+                    return
+                }
+                guard var workouts = results else {
+                    return
+                }
+                workouts.sort(by: { $0.startDate > $1.startDate })
+                DispatchQueue.main.async {
+                    self?.workouts = workouts
+                    self?.getFeaturedWorkout()
+                    self?.getWorkoutsForToday()
+                }
             }
-            guard var workouts = results else {
-                return
+        } else {
+            healthKitAssistant.getWorkoutsByType(types: activeActivityTypeFilters, predicates: appliedFilters.map { $0.predicate }) { [weak self] results, error in
+                if let error = error {
+                    print(error.localizedDescription)
+                    return
+                }
+                guard var workouts = results else {
+                    return
+                }
+                workouts.sort(by: { $0.startDate > $1.startDate })
+                DispatchQueue.main.async {
+                    self?.workouts = workouts
+                    self?.getFeaturedWorkout()
+                    self?.getWorkoutsForToday()
+                }
             }
-            workouts.sort(by: { $0.startDate > $1.startDate })
-            self?.workouts = workouts
-            self?.getFeaturedWorkout()
-            self?.getWorkoutsForToday()
         }
     }
 

@@ -76,7 +76,7 @@ struct HomeView: View {
                 // If there ARE active filters, we should show some indication to the users, so that they understand why
                 // their list might look different
                 //
-                if self.workoutData.appliedFilters.count > 0 {
+                if self.workoutData.appliedFilters.count > 0 || self.workoutData.activeActivityTypeFilters.count > 0 {
                     Section(header: VStack {
                         Text("Currently Applied Filters")
                             .padding(.all)
@@ -85,6 +85,9 @@ struct HomeView: View {
                     }) {
                         ScrollView(.horizontal, showsIndicators: false) {
                             HStack(alignment: .top, spacing: 1) {
+                                ForEach(self.workoutData.activeActivityTypeFilters, id: \.self) { item in
+                                    ActivityTypeFilterPill(activityTypeFilter: item)
+                                }
                                 if self.workoutData.dateRangeFilter.isApplied {
                                     FilterPill(activityFilter: self.workoutData.dateRangeFilter)
                                 }
@@ -128,7 +131,7 @@ struct HomeView: View {
                 }) {
                     Image(systemName: "person.circle").imageScale(.large)
                 }.sheet(isPresented: $showProfileView) {
-                    ProfileView(showProfileView: self.$showProfileView)
+                    ProfileView(showProfileView: self.$showProfileView).environmentObject(self.workoutData)
                 }, trailing:
                 Button(action: {
                     self.showFilterView.toggle()

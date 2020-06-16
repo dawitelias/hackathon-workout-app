@@ -81,6 +81,7 @@ struct WorkoutDetailRevamped: View {
                         Text(workoutTimer)
                             .font(.title)
                             .fontWeight(.regular)
+                            .minimumScaleFactor(0.01)
                             .foregroundColor(workout.workoutActivityType.workoutTypeMetadata.mainColor)
                     }
                     Spacer()
@@ -89,6 +90,7 @@ struct WorkoutDetailRevamped: View {
                         Text("\(workout.totalEnergyBurned?.doubleValue(for: .kilocalorie()) ?? 0, specifier: "%.0f")cal")
                             .font(.title)
                             .fontWeight(.regular)
+                            .minimumScaleFactor(0.01)
                             .foregroundColor(workout.workoutActivityType.workoutTypeMetadata.mainColor)
                     }
                     Spacer()
@@ -98,6 +100,7 @@ struct WorkoutDetailRevamped: View {
                             Text(distanceString)
                                 .font(.title)
                                 .fontWeight(.regular)
+                                .minimumScaleFactor(0.01)
                                 .foregroundColor(workout.workoutActivityType.workoutTypeMetadata.mainColor)
                         }
                     }

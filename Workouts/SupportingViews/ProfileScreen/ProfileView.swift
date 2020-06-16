@@ -7,36 +7,27 @@
 //
 
 import SwiftUI
+import HealthKit
 
 struct ProfileView: View {
-    
     @Binding var showProfileView: Bool
 
     var body: some View {
-        NavigationView {
-            List {
-                Section(header: EmptyView()) {
-                    Text("Profile information coming soon...")
-//                    NavigationLink(destination: HealthInfoScreen()) {
-//                        Text("Health Info")
-//                    }
-//                    NavigationLink(destination: WeeklySummary()) {
-//                        Text("Weekly Summary")
-//                    }
-//                    NavigationLink(destination: Badges()) {
-//                        Text("Badges")
-//                    }
-                }
-                Section(header: SectionHeader(text: "App Info")) {
-                    NavigationLink(destination: AboutScreen()) {
-                        Text("About")
-                    }
-                    NavigationLink(destination: Feedback()) {
-                        Text("Feedback")
+        return NavigationView {
+            VStack {
+                CommitStyleChart()
+                List {
+                    Section(header: SectionHeader(text: "App Info")) {
+                        NavigationLink(destination: AboutScreen()) {
+                            Text("About")
+                        }
+                        NavigationLink(destination: Feedback()) {
+                            Text("Feedback")
+                        }
                     }
                 }
+                .listStyle(GroupedListStyle()).environment(\.horizontalSizeClass, .regular)
             }
-            .listStyle(GroupedListStyle()).environment(\.horizontalSizeClass, .regular)
             .navigationBarTitle(Text("Profile"), displayMode: .large)
             .navigationBarItems(trailing: Button(action: {
                 self.showProfileView = false

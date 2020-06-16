@@ -19,7 +19,7 @@ class HealthKitAssistant {
 
     // MARK: Get workouts with predicates for each activity type
     //
-    func getWorkouts(types: [ActivityTypeFilter], predicates: [NSPredicate], completion: @escaping ([HKWorkout]?, Error?) -> Void) {
+    func getWorkoutsByType(types: [ActivityTypeFilter], predicates: [NSPredicate], completion: @escaping ([HKWorkout]?, Error?) -> Void) {
         HealthKitAssistant.checkAccess() { success, error in
 
             if !success || error != nil {
@@ -29,7 +29,7 @@ class HealthKitAssistant {
 
             let dispatchGroup = DispatchGroup()
             var workoutData = [HKWorkout]()
-            
+
             types.forEach { activityType in
                 var summedPredicates = predicates
                 summedPredicates.append(HKQuery.predicateForWorkouts(with: activityType.value))
@@ -65,6 +65,27 @@ class HealthKitAssistant {
         }
     }
     
+    func getAllWorkouts(predicates: [NSPredicate], completion: @escaping ([HKWorkout]?, Error?) -> Void) {
+        let sortDescriptor = NSSortDescriptor(key: HKSampleSortIdentifierEndDate, ascending: false)
+
+        let query = HKSampleQuery(
+            sampleType: .workoutType(),
+            predicate: NSCompoundPredicate(andPredicateWithSubpredicates: predicates),
+            limit: HKObjectQueryNoLimit,
+            sortDescriptors: [sortDescriptor]) { (query, samples, error) in
+                
+                if error != nil {
+                    completion(nil, error)
+                    return
+                }
+
+                if let data = samples as? [HKWorkout] {
+                    completion(data, nil)
+                }
+            }
+        HKHealthStore().execute(query)
+    }
+    
     // MARK: Get Workouts Done Today
     func getWorkoutsDoneToday(completion: @escaping ([HKWorkout]?, Error?) -> Void) {
         // Query for workouts done in since midnight, return all of them
@@ -95,10 +116,11 @@ class HealthKitAssistant {
     // Get workouts over time interval in neat buckets
     //
     func getWorkoutsDonePastWeek(completion: @escaping ([[HKWorkout]?]?, Error?) -> Void) {
-        //let results= [[HKWorkout]?]
-        
+
+        // Get the date 7 days back
+        //
         let numberOfDaysBack = 7
-        let startDate = Date().hoursBeforeNow(hr: 24 * Double(numberOfDaysBack))
+        let startDate = Calendar.current.date(byAdding: .day, value: -numberOfDaysBack, to: Date())
         
         // For each day we want to get all of the workouts for each day
         // Shove all of these async calls into a dispatch group, call completion when they've all finished
@@ -108,8 +130,8 @@ class HealthKitAssistant {
 
         for i in 0...(numberOfDaysBack + 1) {
             dispatchGroup.enter()
-            let start = startDate.advanced(by: 60 * 60 * 24 * Double(i))
-            let end = startDate.advanced(by: 60 * 60 * 24 * Double(i + 1))
+            let start = startDate?.advanced(by: 60 * 60 * 24 * Double(i)) ?? Date()
+            let end = startDate?.advanced(by: 60 * 60 * 24 * Double(i + 1)) ?? Date()
             let predicate = HKQuery.predicateForSamples(withStart: start, end: end, options: [])
             let sortDescriptor = NSSortDescriptor(key: HKSampleSortIdentifierEndDate, ascending: false)
             let query = HKSampleQuery(
@@ -164,6 +186,42 @@ class HealthKitAssistant {
             }
         HKHealthStore().execute(query)
     }
+    
+    // MARK: Get Number of Workouts per day
+    //
+    static func getNumWorkoutsPerDay(numMonthsBack: Int, completion: @escaping ([Date: [HKWorkout]]?, Error?) -> Void) {
+        // Get the date 3 months back
+        //
+        let date = Calendar.current.date(byAdding: .month, value: -numMonthsBack, to: Date())
+        
+        // Query the workouts for this timeframe
+        //
+        let predicate = HKQuery.predicateForSamples(withStart: date, end: Date(), options: [])
+        let sortDescriptor = NSSortDescriptor(key: HKSampleSortIdentifierEndDate, ascending: false)
+        let query = HKSampleQuery(
+            sampleType: .workoutType(),
+            predicate: predicate,
+            limit: HKObjectQueryNoLimit,
+            sortDescriptors: [sortDescriptor]) { (query, samples, error) in
+                
+                if error != nil {
+                    completion(nil, error)
+                    return
+                }
+
+                if let data = samples as? [HKWorkout] {
+                    let empty: [Date: [HKWorkout]] = [:]
+                    let grouped = data.reduce(into: empty) { acc, cur in
+                        let components = Calendar.current.dateComponents([.year, .month, .day], from: cur.startDate)
+                        let date = Calendar.current.date(from: components)!
+                        let existing = acc[date] ?? []
+                        acc[date] = existing + [cur]
+                    }
+                    completion(grouped, nil)
+                }
+            }
+        HKHealthStore().execute(query)
+    }
 
     // MARK: Check Privacy and Device HealthKit Capabilities
     //
@@ -214,13 +272,4 @@ class HealthKitAssistant {
             completion(false, HealthkitSetupError.notAvailableOnDevice)
         }
     }
-    
-    func getDateOfBirth() -> String {
-        return "test"
-    }
-    
-    func getBiologicalSex() -> String {
-        return "test"
-    }
-    
 }

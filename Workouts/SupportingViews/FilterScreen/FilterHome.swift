@@ -13,12 +13,23 @@ struct FilterHome: View {
     @Binding var showFilterView: Bool
     
     var body: some View {
+        var workoutsIndicationText = "Multiple"
+        if self.workoutData.activeActivityTypeFilters.count == 0 {
+            workoutsIndicationText = "None"
+        } else if self.workoutData.activeActivityTypeFilters.count == 1 {
+            workoutsIndicationText = self.workoutData.activeActivityTypeFilters[0].value.workoutTypeMetadata.activityTypeDescription
+        }
+
         return NavigationView {
             List {
                 Section {
                     NavigationLink(destination: WorkoutsMultiSelect().environmentObject(workoutData)) {
                         HStack {
                             Text("Workouts")
+                            Spacer()
+                            Text(workoutsIndicationText)
+                                .font(.footnote)
+                                .foregroundColor(Color.gray)
                         }
                     }
                 }
@@ -66,6 +77,9 @@ struct FilterHome: View {
                         self.workoutData.durationFilter.isApplied = false
                         self.workoutData.calorieFilter.isApplied = false
                         self.workoutData.dateRangeFilter.isApplied = false
+                        self.workoutData.activeActivityTypeFilters.forEach { filter in
+                            self.workoutData.toggleActivityFilterApplied(filter: filter)
+                        }
                         self.workoutData.queryWorkouts()
                     }) {
                         Text("Clear all filters")

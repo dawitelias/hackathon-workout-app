@@ -59,6 +59,8 @@
 		A5D8CD0A2468441700DC54FA /* HeartRateChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5D8CD092468441700DC54FA /* HeartRateChart.swift */; };
 		A5D8CD0C2468621E00DC54FA /* WorkoutDetailRevamped.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5D8CD0B2468621E00DC54FA /* WorkoutDetailRevamped.swift */; };
 		A5D8CD0E2468806100DC54FA /* FullScreenMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5D8CD0D2468806100DC54FA /* FullScreenMapView.swift */; };
+		A5F5A71F24871E110051C7BB /* ActivityTypeFilterPill.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5F5A71E24871E110051C7BB /* ActivityTypeFilterPill.swift */; };
+		A5F5A721248737670051C7BB /* CommitStyleChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5F5A720248737670051C7BB /* CommitStyleChart.swift */; };
 		AC46320A2447593700619284 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC4632092447593700619284 /* AppDelegate.swift */; };
 		AC46320C2447593700619284 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC46320B2447593700619284 /* SceneDelegate.swift */; };
 		AC46320E2447593700619284 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC46320D2447593700619284 /* HomeView.swift */; };
@@ -147,6 +149,8 @@
 		A5D8CD092468441700DC54FA /* HeartRateChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeartRateChart.swift; sourceTree = "<group>"; };
 		A5D8CD0B2468621E00DC54FA /* WorkoutDetailRevamped.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutDetailRevamped.swift; sourceTree = "<group>"; };
 		A5D8CD0D2468806100DC54FA /* FullScreenMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullScreenMapView.swift; sourceTree = "<group>"; };
+		A5F5A71E24871E110051C7BB /* ActivityTypeFilterPill.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityTypeFilterPill.swift; sourceTree = "<group>"; };
+		A5F5A720248737670051C7BB /* CommitStyleChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommitStyleChart.swift; sourceTree = "<group>"; };
 		AC4632062447593700619284 /* Workouts.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Workouts.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AC4632092447593700619284 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		AC46320B2447593700619284 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -232,21 +236,22 @@
 		A5199FCE24548717002474AD /* SharedComponents */ = {
 			isa = PBXGroup;
 			children = (
-				A52F368B247B186F008DE35B /* Badges */,
-				A5328BE6246575A500EDE94C /* Charts */,
+				A5F5A71E24871E110051C7BB /* ActivityTypeFilterPill.swift */,
+				A52F3687247ABB00008DE35B /* AboutPageCard.swift */,
+				A55C84E42449EC3F00D81C44 /* Blur.swift */,
+				A5B6CEE82448D30800CF2B86 /* CircleImage.swift */,
+				A546226D2455223F003BA285 /* DailyWorkout.swift */,
+				A5D8CD032467751000DC54FA /* EsriMapView.swift */,
+				A50E46492449E76000D1F435 /* FeaturedWorkout.swift */,
+				A582894C244F7B7C00B7B6B0 /* FilterPill.swift */,
+				A51514472460F1B800D4D643 /* Icon.swift */,
+				A52F3689247B0657008DE35B /* MailView.swift */,
+				A52FBEFB2447C8F700016025 /* MapView.swift */,
+				A562B6B9245A6F4200742ECF /* SectionHeader.swift */,
 				A5B6CEEA2448D91100CF2B86 /* ShareSheet.swift */,
 				A52FBEF92447C89300016025 /* WorkoutRow.swift */,
-				A5B6CEE82448D30800CF2B86 /* CircleImage.swift */,
-				A582894C244F7B7C00B7B6B0 /* FilterPill.swift */,
-				A55C84E42449EC3F00D81C44 /* Blur.swift */,
-				A52FBEFB2447C8F700016025 /* MapView.swift */,
-				A50E46492449E76000D1F435 /* FeaturedWorkout.swift */,
-				A546226D2455223F003BA285 /* DailyWorkout.swift */,
-				A562B6B9245A6F4200742ECF /* SectionHeader.swift */,
-				A51514472460F1B800D4D643 /* Icon.swift */,
-				A5D8CD032467751000DC54FA /* EsriMapView.swift */,
-				A52F3687247ABB00008DE35B /* AboutPageCard.swift */,
-				A52F3689247B0657008DE35B /* MailView.swift */,
+				A52F368B247B186F008DE35B /* Badges */,
+				A5328BE6246575A500EDE94C /* Charts */,
 			);
 			path = SharedComponents;
 			sourceTree = "<group>";
@@ -332,6 +337,7 @@
 				A5D8CD05246843FF00DC54FA /* ElevationChart.swift */,
 				A5D8CD072468440900DC54FA /* SpeedChart.swift */,
 				A5D8CD092468441700DC54FA /* HeartRateChart.swift */,
+				A5F5A720248737670051C7BB /* CommitStyleChart.swift */,
 			);
 			path = Charts;
 			sourceTree = "<group>";
@@ -707,6 +713,7 @@
 				A54A7E4324840B4900358DFB /* LandingPage.swift in Sources */,
 				A5221E72245462DB005416BC /* DistanceFilter.swift in Sources */,
 				A5B6CEED2448F30300CF2B86 /* MapImageGenerator.swift in Sources */,
+				A5F5A71F24871E110051C7BB /* ActivityTypeFilterPill.swift in Sources */,
 				A5B6CEE52448AB2D00CF2B86 /* HKWorkoutActivityType+Extension.swift in Sources */,
 				A546226C24550BF3003BA285 /* GradientPolyline.swift in Sources */,
 				A562B6BA245A6F4200742ECF /* SectionHeader.swift in Sources */,
@@ -724,6 +731,7 @@
 				A55C84E52449EC3F00D81C44 /* Blur.swift in Sources */,
 				A582894D244F7B7C00B7B6B0 /* FilterPill.swift in Sources */,
 				A54A7E402481ADB200358DFB /* FullScreenMapRevamped.swift in Sources */,
+				A5F5A721248737670051C7BB /* CommitStyleChart.swift in Sources */,
 				A5D8CD0E2468806100DC54FA /* FullScreenMapView.swift in Sources */,
 				A5D8CD06246843FF00DC54FA /* ElevationChart.swift in Sources */,
 				A5D8CD0C2468621E00DC54FA /* WorkoutDetailRevamped.swift in Sources */,
@@ -918,7 +926,7 @@
 				CODE_SIGN_ENTITLEMENTS = Workouts/Workouts.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_ASSET_PATHS = "\"Workouts/Preview Content\"";
 				DEVELOPMENT_TEAM = UHCTQ8X679;
 				ENABLE_PREVIEWS = YES;
@@ -928,12 +936,12 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.01;
+				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.emilycheroske.workoutsapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = WorkoutsAppDevelopment;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -945,7 +953,7 @@
 				CODE_SIGN_ENTITLEMENTS = Workouts/Workouts.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_ASSET_PATHS = "\"Workouts/Preview Content\"";
 				DEVELOPMENT_TEAM = UHCTQ8X679;
 				ENABLE_PREVIEWS = YES;
@@ -955,12 +963,12 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.01;
+				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.emilycheroske.workoutsapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = WorkoutsAppDevelopment;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

@@ -48,6 +48,7 @@ struct EsriMapView: UIViewRepresentable {
         let lineSymbol = AGSSimpleLineSymbol(style: AGSSimpleLineSymbolStyle.solid, color: color, width: 5)
         let graphicsOverlay = AGSGraphicsOverlay()
         graphicsOverlay.renderer = AGSSimpleRenderer(symbol: lineSymbol)
+        uiView.graphicsOverlays.remove(graphicsOverlay)
         uiView.graphicsOverlays.add(graphicsOverlay)
 
         // If we have received route data, add the graphic to the layer
