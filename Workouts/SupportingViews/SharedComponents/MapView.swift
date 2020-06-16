@@ -26,6 +26,7 @@ class EndAnnotation: NSObject, MKAnnotation {
 
 struct MapView: UIViewRepresentable {
     var workout: HKWorkout
+    var isUserInteractionEnabled: Bool
     let mapViewDelegate = MapViewDelegate()
     
     @State var route: [CLLocation]? = nil
@@ -46,19 +47,21 @@ struct MapView: UIViewRepresentable {
                 startPointAnnotation.coordinate = startCoordinate.coordinate
                 startPointAnnotation.subtitle = startCoordinate.timestamp.date
                 startPointAnnotation.title = "Started: \(self.workout.workoutActivityType.workoutTypeMetadata.activityTypeDescription) 💪"
-                startPointAnnotation.leftImageName = self.workout.workoutActivityType.workoutTypeMetadata.systemIconName
+                //startPointAnnotation.leftImageName = self.workout.workoutActivityType.workoutTypeMetadata.systemIconName
                 
                 let endPointAnnotation = EndAnnotation()
                 endPointAnnotation.coordinate = endCoordinate.coordinate
                 endPointAnnotation.subtitle = endCoordinate.timestamp.date
                 endPointAnnotation.title = "Finished: \(self.workout.workoutActivityType.workoutTypeMetadata.activityTypeDescription) 🏅"
-                endPointAnnotation.leftImageName = self.workout.workoutActivityType.workoutTypeMetadata.systemIconName
+                //endPointAnnotation.leftImageName = self.workout.workoutActivityType.workoutTypeMetadata.systemIconName
                 
                 self.startAnnotation = startPointAnnotation
                 self.endAnnotation = endPointAnnotation
             }
         }
-        return MKMapView(frame: .zero)
+        let mapView = MKMapView(frame: .zero)
+        mapView.isUserInteractionEnabled = isUserInteractionEnabled
+        return mapView
     }
 
     func updateUIView(_ uiView: MKMapView, context: Context) {
@@ -161,6 +164,6 @@ class MapViewDelegate: NSObject, MKMapViewDelegate {
 
 struct MapView_Previews: PreviewProvider {
     static var previews: some View {
-        MapView(workout: HKWorkout(activityType: .running, start: Date(), end: Date()), startAnnotation: StartAnnotation(), endAnnotation: EndAnnotation())
+        MapView(workout: HKWorkout(activityType: .running, start: Date(), end: Date()), isUserInteractionEnabled: true, startAnnotation: StartAnnotation(), endAnnotation: EndAnnotation())
     }
 }

@@ -70,7 +70,7 @@ struct DailySummary: View {
                     ForEach(workouts, id: \.self) { workout in
                         ZStack {
                             FeaturedWorkout(workout: workout)
-                            NavigationLink(destination: WorkoutDetail(workout: workout)) {
+                            NavigationLink(destination: WorkoutDetailRevamped(workout: workout)) {
                                 EmptyView()
                             }.padding()
                         }.padding()

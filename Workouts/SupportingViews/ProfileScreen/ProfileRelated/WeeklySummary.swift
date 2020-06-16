@@ -10,7 +10,7 @@ import SwiftUI
 
 struct WeeklySummary: View {
     var body: some View {
-        Text("Data showing number of days exercised per week... that kind of thing. Seems like there's a lot of opportunity to explore this idea more.")
+        Text("Coming soon.")
             .navigationBarTitle(Text("Weekly Summary"), displayMode: .large)
     }
 }

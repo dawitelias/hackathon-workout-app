@@ -50,7 +50,7 @@ struct HomeView: View {
                             ScrollView(.horizontal, showsIndicators: true) {
                                 HStack(alignment: .top, spacing: 20) {
                                     ForEach(workoutsDoneToday!, id: \.self) { workout in
-                                        NavigationLink(destination: WorkoutDetail(workout: workout)) {
+                                        NavigationLink(destination: WorkoutDetailRevamped(workout: workout)) {
                                             DailyWorkout(workout: workout)
                                         }.buttonStyle(PlainButtonStyle())
                                     }
@@ -66,8 +66,40 @@ struct HomeView: View {
                     Section(header: SectionHeader(text: "Your latest workout 🏅")) {
                         ZStack {
                             FeaturedWorkout(workout: featuredWorkout!)
-                            NavigationLink(destination: WorkoutDetail(workout: featuredWorkout!)) {
+                            NavigationLink(destination: WorkoutDetailRevamped(workout: featuredWorkout!)) {
                                 EmptyView()
+                            }
+                        }
+                    }
+                }
+
+                // If there ARE active filters, we should show some indication to the users, so that they understand why
+                // their list might look different
+                //
+                if self.workoutData.appliedFilters.count > 0 || self.workoutData.activeActivityTypeFilters.count > 0 {
+                    Section(header: VStack {
+                        Text("Currently Applied Filters")
+                            .padding(.all)
+                            .font(.system(size: 21, weight: .medium))
+                            .frame(width: UIScreen.main.bounds.width, alignment: .leading)
+                    }) {
+                        ScrollView(.horizontal, showsIndicators: false) {
+                            HStack(alignment: .top, spacing: 1) {
+                                ForEach(self.workoutData.activeActivityTypeFilters, id: \.self) { item in
+                                    ActivityTypeFilterPill(activityTypeFilter: item)
+                                }
+                                if self.workoutData.dateRangeFilter.isApplied {
+                                    FilterPill(activityFilter: self.workoutData.dateRangeFilter)
+                                }
+                                if self.workoutData.calorieFilter.isApplied {
+                                   FilterPill(activityFilter: self.workoutData.calorieFilter)
+                                }
+                                if self.workoutData.distanceFilter.isApplied {
+                                   FilterPill(activityFilter: self.workoutData.distanceFilter)
+                                }
+                                if self.workoutData.durationFilter.isApplied {
+                                   FilterPill(activityFilter: self.workoutData.durationFilter)
+                                }
                             }
                         }
                     }
@@ -82,7 +114,7 @@ struct HomeView: View {
                     }) {
                         if groupedWorkouts[key] != nil {
                             ForEach(groupedWorkouts[key]!, id: \.self) { workout in
-                                NavigationLink(destination: WorkoutDetail(workout: workout)) {
+                                NavigationLink(destination: WorkoutDetailRevamped(workout: workout)) {
                                     WorkoutRow(workout: workout)
                                 }
                                 .padding(.vertical, 8.0)
@@ -99,7 +131,7 @@ struct HomeView: View {
                 }) {
                     Image(systemName: "person.circle").imageScale(.large)
                 }.sheet(isPresented: $showProfileView) {
-                    ProfileView(showProfileView: self.$showProfileView)
+                    ProfileView(showProfileView: self.$showProfileView).environmentObject(self.workoutData)
                 }, trailing:
                 Button(action: {
                     self.showFilterView.toggle()
@@ -110,7 +142,7 @@ struct HomeView: View {
                 }
             )
         }
-        .accentColor(appAccentColor)
+        .accentColor(.pink)
     }
 }
 

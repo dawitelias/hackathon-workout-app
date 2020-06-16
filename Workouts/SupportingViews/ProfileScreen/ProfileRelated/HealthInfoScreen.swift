@@ -15,10 +15,8 @@ struct HealthInfoScreen: View {
 //    @State var bloodType: HKBloodType
 
     var body: some View {
-        return List {
-            Text("Age: 23")
-            Text("Gender: F")
-            Text("Blood Type: no idea")
+        return VStack {
+            Text("Coming soon.")
         }
         .navigationBarTitle(Text("Health Info"), displayMode: .large)
     }

@@ -19,6 +19,11 @@ extension Date {
         dateFormatter.dateFormat = "MMMM"
         return dateFormatter.string(from: self)
     }
+    var day: String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "dd"
+        return dateFormatter.string(from: self)
+    }
     var year: String {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "YYYY"

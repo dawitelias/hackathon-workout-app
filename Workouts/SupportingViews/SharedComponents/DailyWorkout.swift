@@ -13,44 +13,51 @@ struct DailyWorkout: View {
     var workout: HKWorkout
 
     var body: some View {
-        let workoutDistance = workout.totalDistance?.doubleValue(for: .mile()) ?? 0
-
-        let distanceString = "\(String.init(format: "%.0f", workoutDistance)) mile"
         let workoutHrAndMin = workout.duration.getHoursAndMinutesString()
+        let workoutDistance = workout.totalDistance?.doubleValue(for: .mile()) ?? 0
+        let distanceString = "\(String.init(format: "%.2f", workoutDistance))mi"
 
         return HStack {
-            VStack {
-                Image(workout.workoutActivityType.workoutTypeMetadata.systemIconName)
-                    .resizable()
-                    .clipShape(Circle())
-                    .overlay(Circle().stroke(Color(UIColor.systemFill), lineWidth: 10))
-                    .padding(.top, 10)
-                    .padding(.trailing, 5)
-                    .padding(.leading, 5)
-                    .padding(.bottom, 10)
+            ZStack(alignment: .topLeading) {
+                VStack(alignment: .leading, spacing: 5) {
+                    Text(workout.workoutActivityType.workoutTypeMetadata.activityTypeDescription)
+                        .font(.largeTitle)
+                        .fontWeight(.heavy)
+                        .foregroundColor(workout.workoutActivityType.workoutTypeMetadata.highlightColor)
+                        .fixedSize()
+
+                    Text("\(workoutHrAndMin)")
+                        .font(.title)
+                        .fontWeight(.heavy)
+                        .foregroundColor(Color(UIColor.label))
+                    
+                    if workout.totalDistance != nil {
+                        Text(distanceString)
+                            .font(.title)
+                            .fontWeight(.heavy)
+                            .foregroundColor(Color(UIColor.label))
+                    } else if workout.totalEnergyBurned != nil {
+                        Text("\(Int(workout.totalEnergyBurned!.doubleValue(for: .kilocalorie()))) cal")
+                            .font(.title)
+                            .fontWeight(.heavy)
+                            .foregroundColor(Color(UIColor.label))
+                        
+                    }
+                    
+                }
+                .frame(width: 200, height: nil, alignment: .leading)
+                .padding(.leading, 20)
+                .padding(.top, 20)
+                
+                VStack(alignment: .trailing, spacing: nil) {
+                    Image(workout.workoutActivityType.workoutTypeMetadata.systemIconName)
+                        .foregroundColor(workout.workoutActivityType.workoutTypeMetadata.highlightColor)
+                        .opacity(0.2)
+                }.offset(x: 70, y: 0)
             }
-            .padding(.top, 10)
-            .padding(.bottom, 10)
-            .padding(.leading, 10)
-
-            VStack(alignment: .leading, spacing: 5) {
-                Text(workout.workoutActivityType.workoutTypeMetadata.activityTypeDescription)
-                    .font(.callout)
-                    .fontWeight(.thin)
-                    .foregroundColor(Color.gray)
-                    .fixedSize()
-
-                Text("\(distanceString)")
-                    .font(.callout)
-
-                Text("\(workoutHrAndMin)")
-                    .font(.callout)
-            }
-            .padding(.top, 10)
-            .padding(.bottom, 10)
-            .padding(.trailing, 30)
+            
         }
-        .background(Color(UIColor.systemFill))
+        .background(Color(UIColor.tertiarySystemFill))
         .cornerRadius(5)
     }
 }

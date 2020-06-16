@@ -10,7 +10,7 @@ import SwiftUI
 
 struct DateFilter: View {
     @EnvironmentObject var workoutData: WorkoutData
-    @State private var dateRangeFilter = DateRangeWorkoutFilter(startDate: Date(), endDate: Date(), isApplied: false, color: .green)
+    @State private var dateRangeFilter = DateRangeWorkoutFilter(startDate: Date(), endDate: Date(), isApplied: false)
 
     var body: some View {
         return VStack {
@@ -29,7 +29,7 @@ struct DateFilter: View {
                 
             }
             .navigationBarTitle("Date")
-            .listStyle(GroupedListStyle()).environment(\.horizontalSizeClass, .regular).frame(width: nil, height: nil, alignment: .top)
+            .listStyle(GroupedListStyle()).environment(\.horizontalSizeClass, .regular).frame(width: nil, height: nil, alignment: .center)
         }.onAppear {
             self.dateRangeFilter = self.workoutData.dateRangeFilter
         }.onDisappear {

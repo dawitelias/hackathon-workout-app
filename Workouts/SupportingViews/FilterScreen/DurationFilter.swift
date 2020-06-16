@@ -10,7 +10,7 @@ import SwiftUI
 
 struct DurationFilter: View {
     @EnvironmentObject var workoutData: WorkoutData
-    @State private var workoutDuration = DurationWorkoutFilter(value: 0, isApplied: false, color: .red)
+    @State private var workoutDuration = DurationWorkoutFilter(value: 0, isApplied: false)
 
     var body: some View {
         let durationString = "\(Int(workoutDuration.value/3600)) hr \(Int((workoutDuration.value/3600).truncatingRemainder(dividingBy: 1) * 60)) min"

@@ -10,7 +10,7 @@ import SwiftUI
 
 struct DistanceFilter: View {
     @EnvironmentObject var workoutData: WorkoutData
-    @State private var workoutDistance = DistanceWorkoutFilter(value: 0, isApplied: false, color: .blue)
+    @State private var workoutDistance = DistanceWorkoutFilter(value: 0, isApplied: false)
 
     var body: some View {
         return VStack {

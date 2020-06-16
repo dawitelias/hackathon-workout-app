@@ -60,9 +60,42 @@ extension HKWorkout {
         }
     }
     
-    // Coming soon... to be displayed in a nice visualization
-    //
-    func getWorkoutHeartRateData() {
+    func getWeatherHumidity() -> Double? {
+        let humidityKey = "HKWeatherHumidity"
+        return (self.metadata?[humidityKey] as? HKQuantity)?.doubleValue(for: .percent()) ?? 0
+    }
+    
+    func getWeatherTemperature() -> Double? {
+        let temperatureKey = "HKWeatherTemperature"
+        return (self.metadata?[temperatureKey] as? HKQuantity)?.doubleValue(for: .degreeFahrenheit()) ?? 0
+    }
+    
+    func getWorkoutHeartRateData(completion: @escaping ([Double]?, Error?) -> Void) {
+        let startDate = self.startDate
+        let endDate = self.endDate
+
+        let predicate = HKQuery.predicateForSamples(withStart: startDate, end: endDate, options: .strictEndDate)
+        let sortDescriptors = [NSSortDescriptor(key: HKSampleSortIdentifierEndDate, ascending: false)]
         
+        guard let sampleType = HKObjectType
+          .quantityType(forIdentifier: .heartRate) else {
+            
+          return
+        }
+        
+        let heartRateQuery = HKSampleQuery(sampleType: sampleType, predicate: predicate, limit: Int(HKObjectQueryNoLimit), sortDescriptors: sortDescriptors) { query, results, error  in
+            if let error = error {
+                completion(nil, error)
+                return
+            }
+            let heartRateUnit: HKUnit = HKUnit.count().unitDivided(by: HKUnit.minute())
+            let results: [Double]? = results?.map { item in
+                guard let currData:HKQuantitySample = item as? HKQuantitySample else { return 0 }
+                return currData.quantity.doubleValue(for: heartRateUnit)
+            }
+            
+            completion(results, nil)
+        }
+        HKHealthStore().execute(heartRateQuery)
     }
 }

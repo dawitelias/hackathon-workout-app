@@ -10,11 +10,44 @@ import SwiftUI
 
 struct AboutScreen: View {
     var body: some View {
-        VStack {
-            Text("A note about the app and stuff. ")
-            Text("I think we should take a tip from Jeff and Justin and link out to our twitter pages here.")
-            Text("If we throw together a website (need to for AppStore) - link to it here - any social media stuff")
+        ScrollView {
+            VStack {
+                Text("This project started off as a simple hackathon app - and has been too much fun to stop working on. 🔥🔥🔥")
+                    .padding()
+                HStack {
+                    AboutPageCard(
+                        imageName: "emily",
+                        fullName: "Emily Cheroske",
+                        twitterScreenName: "EmilyCheroske",
+                        linkedInProfileID: "emily-cheroske-37476b165")
+                        .padding()
+
+                    Spacer()
+
+                    AboutPageCard(
+                        imageName: "dawit",
+                        fullName: "Dawit Elias",
+                        twitterScreenName: "https://twitter.com/da_weet",
+                        linkedInProfileID: "https://www.linkedin.com/in/dawitelias/")
+                        .padding()
+                }
+                Spacer()
+                VStack {
+                    Text("Like our work?")
+                        .font(.title)
+                        .fontWeight(.bold)
+                    Button(action: {
+                        let url = URL(string: "itms-apps:itunes.apple.com/us/app/apple-store/id/12345?mt=8&action=write-review")!
+                        UIApplication.shared.openURL(url)
+                    }) {
+                        Text("Let us know by leaving a review! ☕️😃")
+                            .font(.headline)
+                    }
+                    
+                }.frame(height: 200).padding()
+            }
         }
+        .navigationBarTitle("About the Project")
     }
 }
 
