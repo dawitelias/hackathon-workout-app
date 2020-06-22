@@ -10,9 +10,16 @@ import SwiftUI
 import ArcGIS
 import CoreLocation
 
+var lightOrDark: ColorScheme?
+
 struct EsriMapView: UIViewRepresentable {
     var route: [CLLocation]?
     var isUserInteractionEnabled: Bool = false
+
+    let darkBasemapURL = "https://emilcheroske.maps.arcgis.com/home/item.html?id=6f4816759ad34e66b2b5a1c15e51f8e0"
+    let lightBasemapURL = "https://emilcheroske.maps.arcgis.com/home/item.html?id=1becad86ac93425eb3fd2343e4507359"
+    
+   // var operationalLayerData: AGS
 
     @Environment(\.colorScheme) var colorScheme
 
@@ -20,22 +27,34 @@ struct EsriMapView: UIViewRepresentable {
         let mapView = AGSMapView(frame: .zero)
         mapView.isAttributionTextVisible = false
 
+        lightOrDark = colorScheme
+        if let url = colorScheme == .dark ? URL(string: darkBasemapURL) : URL(string: lightBasemapURL) {
+            let vectorTiledLayer = AGSArcGISVectorTiledLayer(url: url)
+            let basemap = AGSBasemap(baseLayer: vectorTiledLayer)
+
+            let map = AGSMap(basemap: basemap)
+
+            mapView.map = map
+            mapView.isUserInteractionEnabled = isUserInteractionEnabled
+
+            drawRoute(uiView: mapView)
+        }
+
         return mapView
     }
     func updateUIView(_ uiView: AGSMapView, context: Context) {
-        let darkBasemapURL = "https://emilcheroske.maps.arcgis.com/home/item.html?id=6f4816759ad34e66b2b5a1c15e51f8e0"
-        let lightBasemapURL = "https://emilcheroske.maps.arcgis.com/home/item.html?id=1becad86ac93425eb3fd2343e4507359"
-        guard let url = colorScheme == .dark ? URL(string: darkBasemapURL) : URL(string: lightBasemapURL) else {
-            return
+        if lightOrDark != nil && lightOrDark != colorScheme {
+            lightOrDark = colorScheme
+            if let url = colorScheme == .dark ? URL(string: darkBasemapURL) : URL(string: lightBasemapURL) {
+                let vectorTiledLayer = AGSArcGISVectorTiledLayer(url: url)
+                let basemap = AGSBasemap(baseLayer: vectorTiledLayer)
+    
+                uiView.map?.basemap = basemap
+                uiView.reloadInputViews()
+            }
         }
-        let vectorTiledLayer = AGSArcGISVectorTiledLayer(url: url)
-        let basemap = AGSBasemap(baseLayer: vectorTiledLayer)
-
-        let map = AGSMap(basemap: basemap)
-
-        uiView.map = map
-        uiView.isUserInteractionEnabled = isUserInteractionEnabled
-
+    }
+    private func drawRoute(uiView: AGSMapView) {
         guard let maxVelocity = route?.max(by: { return $0.speed < $1.speed })?.speed, let minVelocity = route?.min(by: { return $0.speed < $1.speed })?.speed else {
             return
         }
@@ -145,7 +164,7 @@ struct EsriMapView: UIViewRepresentable {
             workoutRoute = workoutRoute.filter { item in
                 return item.horizontalAccuracy > 0 && item.coordinate.latitude != 0 && item.coordinate.longitude != 0
             }
-            let density = Double(workoutRoute.count)/1000.0 // ? may  need to up this if memory is an issue
+            let density = Double(workoutRoute.count)/2000.0 // ? may  need to up this if memory is an issue
             let stepCount = density < 1 ? 1 : Int(density)
             
             for index in stride(from: 0, to: workoutRoute.count - stepCount, by: stepCount) {

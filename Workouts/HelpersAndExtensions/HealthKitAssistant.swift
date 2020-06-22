@@ -187,12 +187,13 @@ class HealthKitAssistant {
         HKHealthStore().execute(query)
     }
     
-    // MARK: Get Number of Workouts per day
+    // MARK: Get Number of Workouts per day in a grouped format
     //
-    static func getNumWorkoutsPerDay(numMonthsBack: Int, completion: @escaping ([Date: [HKWorkout]]?, Error?) -> Void) {
+    static func getNumWorkoutsPerDay(numMonthsBack: Int, plusDays: Int, completion: @escaping ([Date: [HKWorkout]]?, Error?) -> Void) {
         // Get the date 3 months back
         //
-        let date = Calendar.current.date(byAdding: .month, value: -numMonthsBack, to: Date())
+        var date = Calendar.current.date(byAdding: .month, value: -numMonthsBack, to: Date())
+        date = date?.advanced(by: -Double((plusDays + 1) * 24 * 60 * 60))
         
         // Query the workouts for this timeframe
         //
@@ -213,9 +214,9 @@ class HealthKitAssistant {
                     let empty: [Date: [HKWorkout]] = [:]
                     let grouped = data.reduce(into: empty) { acc, cur in
                         let components = Calendar.current.dateComponents([.year, .month, .day], from: cur.startDate)
-                        let date = Calendar.current.date(from: components)!
-                        let existing = acc[date] ?? []
-                        acc[date] = existing + [cur]
+                        let d = Calendar.current.date(from: components)!
+                        let existing = acc[d] ?? []
+                        acc[d] = existing + [cur]
                     }
                     completion(grouped, nil)
                 }

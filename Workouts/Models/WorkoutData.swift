@@ -41,11 +41,16 @@ class WorkoutData: ObservableObject {
     var distanceFilter = DistanceWorkoutFilter(value: 10, isApplied: false)
     var durationFilter = DurationWorkoutFilter(value: 9000, isApplied: false)
     
+    var totalWorkoutsAllTime: Int?
+    var totalWorkoutsThisMonth: Int?
+    var totalWorkoutsThisWeek: Int?
+    
     private var healthKitAssistant = HealthKitAssistant()
 
     init() {
         setDefaultActivityTypeFilters()
         queryWorkouts()
+        queryWorkoutCounts()
     }
     
     private func setDefaultActivityTypeFilters() {
@@ -106,6 +111,21 @@ class WorkoutData: ObservableObject {
         }
         self.appliedFilters = filters
     }
+    
+    func queryWorkoutCounts() {
+        let oneWeekAgo = Calendar.current.date(byAdding: .weekOfYear, value: -1, to: Date())!
+        let oneMonthAgo = Calendar.current.date(byAdding: .month, value: -1, to: Date())!
+
+        healthKitAssistant.getAllWorkouts(predicates: []) { results, error in
+            self.totalWorkoutsAllTime = results?.count ?? 0
+            self.totalWorkoutsThisMonth = results?.filter { item in
+                return item.startDate > oneMonthAgo
+            }.count
+            self.totalWorkoutsThisWeek = results?.filter { item in
+                return item.startDate > oneWeekAgo
+            }.count
+        }
+    }
 
     func queryWorkouts() {
         getAppliedFilters()
@@ -117,6 +137,12 @@ class WorkoutData: ObservableObject {
                 }
                 guard var workouts = results else {
                     return
+                }
+                // Filter out workouts in the future???
+                //
+                let currentDate = Date()
+                workouts = workouts.filter { item in
+                    return item.startDate < currentDate
                 }
                 workouts.sort(by: { $0.startDate > $1.startDate })
                 DispatchQueue.main.async {

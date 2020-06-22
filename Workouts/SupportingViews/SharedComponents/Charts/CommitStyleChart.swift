@@ -60,14 +60,29 @@ struct CommitStyleChart: View {
         let weekdays = [
             "Sun",
             "Mon",
-            "Tues",
+            "Tue",
             "Wed",
-            "Thurs",
+            "Thu",
             "Fri",
             "Sat"
         ]
+        
+        var dateWorkoutsDict = [Date: Int]()
 
-        HealthKitAssistant.getNumWorkoutsPerDay(numMonthsBack: numMonthsBack) { results, error in
+        var startDate = Calendar.current.date(byAdding: .month, value: -numMonthsBack, to: Date())!
+        let firstDate = startDate
+        let endDate = Calendar.current.date(byAdding: .day, value: -1, to: Date())!
+
+        let weekFormatter = DateFormatter()
+        weekFormatter.dateFormat = "EEE"
+
+        let weekDayOfStartDate = weekFormatter.string(from: startDate)
+        let numDaysToAdd = weekdays.firstIndex(of: weekDayOfStartDate)!
+        let timeInt = Double(numDaysToAdd ?? 0 * 24 * 3600)
+        startDate = startDate.advanced(by: -timeInt)
+        startDate = Calendar.current.date(byAdding: .day, value: -(numDaysToAdd + 1), to: startDate)!
+        
+        HealthKitAssistant.getNumWorkoutsPerDay(numMonthsBack: numMonthsBack, plusDays: numDaysToAdd ?? 0) { results, error in
             if let error = error {
                 print(error.localizedDescription)
                 return
@@ -75,21 +90,16 @@ struct CommitStyleChart: View {
             self.groupedWorkouts = results
         }
         
-        var dateWorkoutsDict = [Date: Int]()
-
-        var startDate = Calendar.current.date(byAdding: .month, value: -numMonthsBack, to: Date())!
-        let endDate = Calendar.current.date(byAdding: .day, value: -1, to: Date())!
-        
         if let value = self.groupedWorkouts?.filter({ $0.key.day == startDate.day && $0.key.month == startDate.month }).first {
             dateWorkoutsDict[value.key] = value.value.count
         }
         
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "MMM"
+        let monthFormatter = DateFormatter()
+        monthFormatter.dateFormat = "MMM"
 
         while startDate < endDate {
-            if !months.contains(dateFormatter.string(from: startDate)) {
-                months.append(dateFormatter.string(from: startDate))
+            if !months.contains(monthFormatter.string(from: startDate)) {
+                months.append(monthFormatter.string(from: startDate))
             }
             startDate = Calendar.current.date(byAdding: .day, value: 1, to: startDate)!
             if let value = self.groupedWorkouts?.filter({ $0.key.day == startDate.day && $0.key.month == startDate.month }).first {
@@ -140,7 +150,13 @@ struct CommitStyleChart: View {
             }
         }
 
-        return VStack(alignment: .center) {
+        return VStack(alignment: .leading) {
+            Text("Overview of the past \(numMonthsBack) months.")
+                .fontWeight(.semibold)
+                .font(.headline)
+                .padding()
+                .fixedSize(horizontal: false, vertical: true)
+
             HStack(alignment: .bottom) {
                 ForEach(months, id: \.self) { month in
                     HStack {
@@ -151,7 +167,7 @@ struct CommitStyleChart: View {
                         Spacer()
                     }
                 }
-            }.frame(width: width - 20).padding(.leading, 10)
+            }.frame(width: width - 20).padding(.leading, 45)
             HStack {
                 Spacer()
                 // Weekday y axis
