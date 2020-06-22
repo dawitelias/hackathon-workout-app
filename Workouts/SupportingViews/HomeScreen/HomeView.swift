@@ -143,6 +143,12 @@ struct HomeView: View {
             )
         }
         .accentColor(.pink)
+        .onReceive(NotificationCenter.default.publisher(for: UIApplication.willEnterForegroundNotification)) { _ in
+            // Update the view with refreshed data if the user has say, backgrounded the app, gone to do a workout and then
+            // re-opened the app. We should also implement a pull down to refresh.
+            //
+            self.workoutData.queryWorkouts()
+        }
     }
 }
 
