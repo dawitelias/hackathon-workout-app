@@ -193,7 +193,7 @@ class HealthKitAssistant {
         // Get the date 3 months back
         //
         var date = Calendar.current.date(byAdding: .month, value: -numMonthsBack, to: Date())
-        date = date?.advanced(by: -Double((plusDays + 1) * 24 * 60 * 60))
+        date = date?.advanced(by: -Double(plusDays * 24 * 60 * 60))
         
         // Query the workouts for this timeframe
         //

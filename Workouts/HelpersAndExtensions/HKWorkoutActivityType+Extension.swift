@@ -327,7 +327,7 @@ extension HKWorkoutActivityType {
         //
         case .highIntensityIntervalTraining:
             return WorkoutTypeMetadata(
-                icon: "hiit",
+                icon: "Hiit",
                 description: "HIIT",
                 mainColor: Color("AJ_1"),
                 highlightColor: Color("AJ_2"))

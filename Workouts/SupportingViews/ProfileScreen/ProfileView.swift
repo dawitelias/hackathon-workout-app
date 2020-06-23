@@ -19,6 +19,14 @@ struct ProfileView: View {
             VStack {
                 CommitStyleChart()
                     .padding(.top, 20)
+                
+// WARNING!!! If you want to generate two years of mock data, then uncomment this button and press it but do so knowing code to erase the mock
+// data has NOT been written.. so you'd have to find a way to do that yourself.
+//                Button(action: {
+//                    MockDataHelper.populateFakeData()
+//                }) {
+//                    Text("Careful,.... generate mock data")
+//                }
 
                 HStack {
                     VStack(alignment: .leading) {

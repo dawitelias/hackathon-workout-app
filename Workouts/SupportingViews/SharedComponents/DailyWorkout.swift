@@ -17,14 +17,14 @@ struct DailyWorkout: View {
         let workoutDistance = workout.totalDistance?.doubleValue(for: .mile()) ?? 0
         let distanceString = "\(String.init(format: "%.2f", workoutDistance))mi"
 
-        return HStack {
+        return HStack(alignment: .top) {
             ZStack(alignment: .topLeading) {
                 VStack(alignment: .leading, spacing: 5) {
                     Text(workout.workoutActivityType.workoutTypeMetadata.activityTypeDescription)
-                        .font(.largeTitle)
+                        .font(.title)
                         .fontWeight(.heavy)
                         .foregroundColor(workout.workoutActivityType.workoutTypeMetadata.highlightColor)
-                        .fixedSize()
+                        .fixedSize(horizontal: false, vertical: true)
 
                     Text("\(workoutHrAndMin)")
                         .font(.title)
@@ -45,9 +45,9 @@ struct DailyWorkout: View {
                     }
                     
                 }
-                .frame(width: 200, height: nil, alignment: .leading)
+                .frame(width: 200, height: 180, alignment: .leading)
                 .padding(.leading, 20)
-                .padding(.top, 20)
+                .padding(.top, 10)
                 
                 VStack(alignment: .trailing, spacing: nil) {
                     Image(workout.workoutActivityType.workoutTypeMetadata.systemIconName)

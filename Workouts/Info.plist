@@ -31,6 +31,8 @@
 	<string>We'll use your health information to display your workouts</string>
 	<key>NSHealthUpdateUsageDescription</key>
 	<string>We need permissions to access your HealthKit data so that we can display detailed information about your workouts.</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>We need permissions to access your location so that we can display your position on the map.</string>
 	<key>NSPhotoLibraryAddUsageDescription</key>
 	<string>We need permissions to access your photo library so that you can save this workout to your photos.</string>
 	<key>UIApplicationSceneManifest</key>

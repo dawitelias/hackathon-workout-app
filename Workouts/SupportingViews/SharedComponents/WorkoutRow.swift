@@ -18,10 +18,18 @@ struct WorkoutRow: View {
             Icon(image: Image(workout.workoutActivityType.workoutTypeMetadata.systemIconName), mainColor: workout.workoutActivityType.workoutTypeMetadata.mainColor, highlightColor: workout.workoutActivityType.workoutTypeMetadata.highlightColor, size: 35)
             VStack(alignment: .leading) {
                 HStack {
-                    Text(workout.workoutActivityType.workoutTypeMetadata.activityTypeDescription) // ^^
-                    Text("·   " + workout.startDate.weekday)
-                    .font(.caption)
-                    .foregroundColor(Color.gray)
+                    Text(workout.workoutActivityType.workoutTypeMetadata.activityTypeDescription)
+                        .lineLimit(1)
+                        .fixedSize(horizontal: false, vertical: true)
+                        
+                    Text("·")
+                        .font(.caption)
+                        .foregroundColor(Color.gray)
+                        .fixedSize()
+                    Text("\(workout.startDate.weekday)")
+                        .font(.caption)
+                        .foregroundColor(Color.gray)
+                        .fixedSize()
                 }
                 Text("\(workout.totalEnergyBurned?.doubleValue(for: .kilocalorie()) ?? 0, specifier: "%.0f")cal")
                     .font(.system(.largeTitle, design: .rounded))

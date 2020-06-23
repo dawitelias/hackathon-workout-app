@@ -25,18 +25,19 @@ struct HomeView: View {
         let featuredWorkout = workoutData.featuredWorkout
         let workoutsDoneToday = workoutData.workoutsForToday
         
-        let groupedWorkouts = Dictionary(grouping: self.workoutData.workouts, by: { ("\($0.startDate.month) \($0.startDate.year)") })
-        let sortedDictionaryKeys = groupedWorkouts.map { key, value in
-            return key
-        }.sorted(by: {
-            let dateFormatter = DateFormatter()
-            dateFormatter.dateFormat = "MM yyyy"
-            guard let dateOne = dateFormatter.date(from: $0), let dateTwo = dateFormatter.date(from: $1) else {
-                return true
-            }
-            
-            return dateOne > dateTwo
-        })
+        let empty: [Date: [HKWorkout]] = [:]
+        let grouped = self.workoutData.workouts.reduce(into: empty) { acc, cur in
+            let components = Calendar.current.dateComponents([.year, .month], from: cur.startDate)
+            let d = Calendar.current.date(from: components)!
+            let existing = acc[d] ?? []
+            acc[d] = existing + [cur]
+        }
+
+        let sortedDictionaryKeys = grouped.map { date in
+            return date.key
+        }.sorted {
+            return $0 > $1
+        }
         
         return NavigationView {
             List {
@@ -105,15 +106,15 @@ struct HomeView: View {
                     }
                 }
 
-                ForEach(sortedDictionaryKeys.map { $0 }, id: \.self) { key in
+                ForEach(sortedDictionaryKeys, id: \.self) { key in
                     Section(header: VStack {
-                        Text(key)
+                        Text("\(key.month) \(key.year)")
                             .padding(.all)
                             .font(.system(size: 21, weight: .medium))
                             .frame(width: UIScreen.main.bounds.width, alignment: .leading)
                     }) {
-                        if groupedWorkouts[key] != nil {
-                            ForEach(groupedWorkouts[key]!, id: \.self) { workout in
+                        if grouped[key] != nil {
+                            ForEach(grouped[key]!, id: \.self) { workout in
                                 NavigationLink(destination: WorkoutDetailRevamped(workout: workout)) {
                                     WorkoutRow(workout: workout)
                                 }

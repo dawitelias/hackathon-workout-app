@@ -70,17 +70,16 @@ struct CommitStyleChart: View {
         var dateWorkoutsDict = [Date: Int]()
 
         var startDate = Calendar.current.date(byAdding: .month, value: -numMonthsBack, to: Date())!
-        let firstDate = startDate
         let endDate = Calendar.current.date(byAdding: .day, value: -1, to: Date())!
 
         let weekFormatter = DateFormatter()
         weekFormatter.dateFormat = "EEE"
 
         let weekDayOfStartDate = weekFormatter.string(from: startDate)
-        let numDaysToAdd = weekdays.firstIndex(of: weekDayOfStartDate)!
-        let timeInt = Double(numDaysToAdd ?? 0 * 24 * 3600)
+        let numDaysToAdd = weekdays.firstIndex(of: weekDayOfStartDate)
+        let timeInt = Double(numDaysToAdd ?? 0)
         startDate = startDate.advanced(by: -timeInt)
-        startDate = Calendar.current.date(byAdding: .day, value: -(numDaysToAdd + 1), to: startDate)!
+        startDate = Calendar.current.date(byAdding: .day, value: -(numDaysToAdd ?? 0 + 1), to: startDate)!
         
         HealthKitAssistant.getNumWorkoutsPerDay(numMonthsBack: numMonthsBack, plusDays: numDaysToAdd ?? 0) { results, error in
             if let error = error {

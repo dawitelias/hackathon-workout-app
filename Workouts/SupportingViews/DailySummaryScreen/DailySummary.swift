@@ -68,12 +68,9 @@ struct DailySummary: View {
                         .frame(width: UIScreen.main.bounds.width, alignment: .leading)
                 }) {
                     ForEach(workouts, id: \.self) { workout in
-                        ZStack {
-                            FeaturedWorkout(workout: workout)
-                            NavigationLink(destination: WorkoutDetailRevamped(workout: workout)) {
-                                EmptyView()
-                            }.padding()
-                        }.padding()
+                        NavigationLink(destination: WorkoutDetailRevamped(workout: workout)) {
+                            WorkoutRow(workout: workout)
+                        }.padding(.vertical, 8.0)
                     }
                 }
             }
