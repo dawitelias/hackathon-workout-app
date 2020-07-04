@@ -12,12 +12,83 @@ import CoreLocation
 
 var lightOrDark: ColorScheme?
 
+var selectedRoute: [AGSFeature] = [AGSFeature]() {
+    didSet {
+        selectedRoute.removeDuplicates()
+        selectedRoute.sort { f1, f2 in
+            return f1.attributes["PointIndex"] as! Int > f2.attributes["PointIndex"] as! Int
+        }
+    }
+}
+
+class EsriMapViewDelegate: NSObject, AGSGeoViewTouchDelegate {
+
+    func selectFeatures(feature: AGSFeature, featureLayer: AGSFeatureLayer) {
+        // If there is only one point in our existing segment, then just append this point and
+        // select it without doing anything else,
+        //
+        if selectedRoute.count == 0 {
+            selectedRoute.append(feature)
+            featureLayer.select(feature)
+            return
+        }
+        
+        // We can assume the user has already defined a starting point for the segment - now we can
+        // continue with the logic to highlight/select wherever else they tap
+        //
+        let startValue = selectedRoute[Int(selectedRoute.count/2)].attributes["PointIndex"] as! Int
+        let endValue = feature.attributes["PointIndex"] as! Int
+
+        let queryParams = AGSQueryParameters()
+        queryParams.whereClause = "PointIndex BETWEEN \(startValue < endValue ? startValue : endValue) AND \(endValue > startValue ? endValue : startValue)"
+
+        featureLayer.featureTable?.queryFeatures(with: queryParams) { multipleResults, error in
+            if let error = error {
+                print(error)
+                return
+            }
+            if let agsfeatures = multipleResults?.featureEnumerator().allObjects {
+                if !agsfeatures.isEmpty {
+                    featureLayer.select(agsfeatures)
+                    selectedRoute.append(contentsOf: agsfeatures)
+                }
+            }
+        }
+        
+    }
+
+    func geoView(_ geoView: AGSGeoView, didTapAtScreenPoint screenPoint: CGPoint, mapPoint: AGSPoint) {
+
+        if let mapView = geoView as? AGSMapView {
+
+            mapView.identifyLayers(atScreenPoint: screenPoint, tolerance: 12, returnPopupsOnly: false, maximumResultsPerLayer: 10) { (results: [AGSIdentifyLayerResult]?, error: Error?) in
+                if let error = error {
+                    print(error.localizedDescription)
+                    return
+                }
+                
+                if let featureCollectionLayer = mapView.map?.operationalLayers.firstObject as? AGSFeatureCollectionLayer, let featureLayer = featureCollectionLayer.layers.first {
+                    if let res = results?.first, let feature = res.sublayerResults.first?.geoElements.first as? AGSFeature {
+                        self.selectFeatures(feature: feature, featureLayer: featureLayer)
+                    }
+                }
+                
+            }
+        }
+    }
+    deinit {
+        selectedRoute = [AGSFeature]()
+    }
+}
+
 struct EsriMapView: UIViewRepresentable {
     var route: [CLLocation]?
     var isUserInteractionEnabled: Bool = false
 
     let darkBasemapURL = "https://emilcheroske.maps.arcgis.com/home/item.html?id=6f4816759ad34e66b2b5a1c15e51f8e0"
     let lightBasemapURL = "https://emilcheroske.maps.arcgis.com/home/item.html?id=1becad86ac93425eb3fd2343e4507359"
+
+    let esriMapViewDelegate = EsriMapViewDelegate()
     
    // var operationalLayerData: AGS
 
@@ -26,6 +97,8 @@ struct EsriMapView: UIViewRepresentable {
     func makeUIView(context: Context) -> AGSMapView {
         let mapView = AGSMapView(frame: .zero)
         mapView.isAttributionTextVisible = false
+        mapView.touchDelegate = esriMapViewDelegate
+        mapView.selectionProperties.color = .cyan
 
         lightOrDark = colorScheme
         if let url = colorScheme == .dark ? URL(string: darkBasemapURL) : URL(string: lightBasemapURL) {
@@ -54,6 +127,7 @@ struct EsriMapView: UIViewRepresentable {
             }
         }
     }
+    
     private func drawRoute(uiView: AGSMapView) {
         guard let maxVelocity = route?.max(by: { return $0.speed < $1.speed })?.speed, let minVelocity = route?.min(by: { return $0.speed < $1.speed })?.speed else {
             return
@@ -106,6 +180,7 @@ struct EsriMapView: UIViewRepresentable {
         let pointsCollectionTable = self.pointsCollectionTable()
         let featureCollection = AGSFeatureCollection(featureCollectionTables: [pointsCollectionTable])
         let featureCollectionLayer = AGSFeatureCollectionLayer(featureCollection: featureCollection)
+
         // Wait for the layer
         featureCollectionLayer.load { error in
             if let error = error {
@@ -121,10 +196,12 @@ struct EsriMapView: UIViewRepresentable {
         let speedField = AGSField(fieldType: .double, name: "Speed", alias: "Speed", length: 100, domain: nil, editable: true, allowNull: true)
         let elevationField = AGSField(fieldType: .double, name: "Elevation", alias: "Elevation", length: 100, domain: nil, editable: true, allowNull: true)
         let timestamp = AGSField(fieldType: .date, name: "Timestamp", alias: "Timestamp", length: 100, domain: nil, editable: true, allowNull: true)
+        let indexField = AGSField(fieldType: .int32, name: "PointIndex", alias: "PointIndex", length: 100, domain: nil, editable: true, allowNull: false)
         
         fields.append(speedField)
         fields.append(elevationField)
         fields.append(timestamp)
+        fields.append(indexField)
 
         // initialize feature collection table with the fields created
         // and geometry type as Point
@@ -173,6 +250,8 @@ struct EsriMapView: UIViewRepresentable {
                 pointFeature.geometry = point
                 pointFeature.attributes["Elevation"] = workoutRoute[index].altitude
                 pointFeature.attributes["Speed"] = workoutRoute[index].speed
+                //pointFeature.attributes["Course"] = workoutRoute[index].course
+                pointFeature.attributes["PointIndex"] = index
                 pointFeature.attributes["Timestamp"] = workoutRoute[index].timestamp
                 pointsCollectionTable.add(pointFeature, completion: nil)
             }
@@ -190,5 +269,6 @@ struct EsriMapView_Previews: PreviewProvider {
             CLLocation(latitude: 70.2548, longitude: 43.6548),
             CLLocation(latitude: 70.2538, longitude: 43.6538),
         ], isUserInteractionEnabled: true)
+            .previewDevice("iPhone 11")
     }
 }
