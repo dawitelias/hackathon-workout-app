@@ -53,7 +53,7 @@ struct FeaturedWorkout: View {
                         }
                     }
                     .padding(.top)
-                    EsriMapView(route: self.route, isUserInteractionEnabled: false)
+                    EsriMapCard(route: self.route)
                         .frame(height: 200)
                         .padding(.horizontal, -15)
                         .padding(.bottom, -6)

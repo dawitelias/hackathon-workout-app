@@ -35,6 +35,11 @@ extension Date {
         dateFormatter.timeStyle = .short
         return dateFormatter.string(from: self)
     }
+    var hHmMsS: String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "HH:mm:ss a"
+        return dateFormatter.string(from: self)
+    }
     func hoursBeforeNow(hr:TimeInterval) -> Date {
         return self.addingTimeInterval(-3600 * hr)
     }

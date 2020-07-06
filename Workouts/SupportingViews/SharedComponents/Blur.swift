@@ -9,10 +9,11 @@ import SwiftUI
 
 struct Blur: UIViewRepresentable {
 
-    var style: UIBlurEffect.Style = .systemUltraThinMaterial
+    var style: UIBlurEffect.Style = .systemChromeMaterial
 
     func makeUIView(context: Context) -> UIVisualEffectView {
-        return UIVisualEffectView(effect: UIBlurEffect(style: style))
+        let vibrancyEffect = UIVibrancyEffect(blurEffect: UIBlurEffect(style: style))
+        return UIVisualEffectView(effect: vibrancyEffect)
     }
 
     func updateUIView(_ uiView: UIVisualEffectView, context: Context) {

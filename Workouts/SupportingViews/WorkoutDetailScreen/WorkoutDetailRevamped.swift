@@ -113,7 +113,7 @@ struct WorkoutDetailRevamped: View {
                     VStack(alignment: .leading) {
                         NavigationLink(destination: FullScreenMapView(route: route!)) {
                             VStack {
-                                EsriMapView(route: route!)
+                                EsriMapCard(route: route!)
                                     .frame(width: nil, height: 200, alignment: .center)
                                     .cornerRadius(20)
                                 Text("(tap to expand)")

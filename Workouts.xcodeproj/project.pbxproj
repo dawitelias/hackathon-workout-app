@@ -33,7 +33,6 @@
 		A546226C24550BF3003BA285 /* GradientPolyline.swift in Sources */ = {isa = PBXBuildFile; fileRef = A546226B24550BF3003BA285 /* GradientPolyline.swift */; };
 		A546226E2455223F003BA285 /* DailyWorkout.swift in Sources */ = {isa = PBXBuildFile; fileRef = A546226D2455223F003BA285 /* DailyWorkout.swift */; };
 		A54622762459C7A4003BA285 /* DailySummary.swift in Sources */ = {isa = PBXBuildFile; fileRef = A54622752459C7A4003BA285 /* DailySummary.swift */; };
-		A54A7E402481ADB200358DFB /* FullScreenMapRevamped.swift in Sources */ = {isa = PBXBuildFile; fileRef = A54A7E3F2481ADB200358DFB /* FullScreenMapRevamped.swift */; };
 		A54A7E4324840B4900358DFB /* LandingPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = A54A7E4224840B4900358DFB /* LandingPage.swift */; };
 		A55C84E52449EC3F00D81C44 /* Blur.swift in Sources */ = {isa = PBXBuildFile; fileRef = A55C84E42449EC3F00D81C44 /* Blur.swift */; };
 		A562B6BA245A6F4200742ECF /* SectionHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = A562B6B9245A6F4200742ECF /* SectionHeader.swift */; };
@@ -45,6 +44,8 @@
 		A5780C6424A1891A00D79927 /* MockDataHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5780C6324A1891A00D79927 /* MockDataHelper.swift */; };
 		A582894D244F7B7C00B7B6B0 /* FilterPill.swift in Sources */ = {isa = PBXBuildFile; fileRef = A582894C244F7B7C00B7B6B0 /* FilterPill.swift */; };
 		A5828953244FC15600B7B6B0 /* WorkoutsMultiSelect.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5828952244FC15600B7B6B0 /* WorkoutsMultiSelect.swift */; };
+		A5A4DC3624B258E300FA7580 /* EsriMapCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5A4DC3524B258E300FA7580 /* EsriMapCard.swift */; };
+		A5A4DC3824B29D2F00FA7580 /* PopupPanel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5A4DC3724B29D2F00FA7580 /* PopupPanel.swift */; };
 		A5A7FCBB2479717B00247C24 /* UnitConversion.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5A7FCBA2479717B00247C24 /* UnitConversion.swift */; };
 		A5AF6083244AAAAD00AB7E72 /* ToggleableHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5AF6082244AAAAD00AB7E72 /* ToggleableHeader.swift */; };
 		A5AF6085244BAA1200AB7E72 /* WorkoutData.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5AF6084244BAA1200AB7E72 /* WorkoutData.swift */; };
@@ -125,7 +126,6 @@
 		A546226B24550BF3003BA285 /* GradientPolyline.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientPolyline.swift; sourceTree = "<group>"; };
 		A546226D2455223F003BA285 /* DailyWorkout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyWorkout.swift; sourceTree = "<group>"; };
 		A54622752459C7A4003BA285 /* DailySummary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailySummary.swift; sourceTree = "<group>"; };
-		A54A7E3F2481ADB200358DFB /* FullScreenMapRevamped.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullScreenMapRevamped.swift; sourceTree = "<group>"; };
 		A54A7E4224840B4900358DFB /* LandingPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LandingPage.swift; sourceTree = "<group>"; };
 		A55C84E42449EC3F00D81C44 /* Blur.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Blur.swift; sourceTree = "<group>"; };
 		A562B6B9245A6F4200742ECF /* SectionHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionHeader.swift; sourceTree = "<group>"; };
@@ -137,6 +137,8 @@
 		A5780C6324A1891A00D79927 /* MockDataHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockDataHelper.swift; sourceTree = "<group>"; };
 		A582894C244F7B7C00B7B6B0 /* FilterPill.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterPill.swift; sourceTree = "<group>"; };
 		A5828952244FC15600B7B6B0 /* WorkoutsMultiSelect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutsMultiSelect.swift; sourceTree = "<group>"; };
+		A5A4DC3524B258E300FA7580 /* EsriMapCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EsriMapCard.swift; sourceTree = "<group>"; };
+		A5A4DC3724B29D2F00FA7580 /* PopupPanel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopupPanel.swift; sourceTree = "<group>"; };
 		A5A7FCBA2479717B00247C24 /* UnitConversion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnitConversion.swift; sourceTree = "<group>"; };
 		A5AF6082244AAAAD00AB7E72 /* ToggleableHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToggleableHeader.swift; sourceTree = "<group>"; };
 		A5AF6084244BAA1200AB7E72 /* WorkoutData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutData.swift; sourceTree = "<group>"; };
@@ -240,12 +242,12 @@
 		A5199FCE24548717002474AD /* SharedComponents */ = {
 			isa = PBXGroup;
 			children = (
+				A5A4DC3424B258B100FA7580 /* MapComponents */,
 				A5F5A71E24871E110051C7BB /* ActivityTypeFilterPill.swift */,
 				A52F3687247ABB00008DE35B /* AboutPageCard.swift */,
 				A55C84E42449EC3F00D81C44 /* Blur.swift */,
 				A5B6CEE82448D30800CF2B86 /* CircleImage.swift */,
 				A546226D2455223F003BA285 /* DailyWorkout.swift */,
-				A5D8CD032467751000DC54FA /* EsriMapView.swift */,
 				A50E46492449E76000D1F435 /* FeaturedWorkout.swift */,
 				A582894C244F7B7C00B7B6B0 /* FilterPill.swift */,
 				A51514472460F1B800D4D643 /* Icon.swift */,
@@ -383,11 +385,20 @@
 			path = AppInfoRelated;
 			sourceTree = "<group>";
 		};
+		A5A4DC3424B258B100FA7580 /* MapComponents */ = {
+			isa = PBXGroup;
+			children = (
+				A5D8CD032467751000DC54FA /* EsriMapView.swift */,
+				A5A4DC3524B258E300FA7580 /* EsriMapCard.swift */,
+				A5A4DC3724B29D2F00FA7580 /* PopupPanel.swift */,
+			);
+			path = MapComponents;
+			sourceTree = "<group>";
+		};
 		A5D8CD0F2468807000DC54FA /* FullScreenMap */ = {
 			isa = PBXGroup;
 			children = (
 				A5D8CD0D2468806100DC54FA /* FullScreenMapView.swift */,
-				A54A7E3F2481ADB200358DFB /* FullScreenMapRevamped.swift */,
 			);
 			path = FullScreenMap;
 			sourceTree = "<group>";
@@ -711,6 +722,7 @@
 				A52FBEFA2447C89300016025 /* WorkoutRow.swift in Sources */,
 				A5D8CD0A2468441700DC54FA /* HeartRateChart.swift in Sources */,
 				A5A7FCBB2479717B00247C24 /* UnitConversion.swift in Sources */,
+				A5A4DC3824B29D2F00FA7580 /* PopupPanel.swift in Sources */,
 				A5D8CD042467751000DC54FA /* EsriMapView.swift in Sources */,
 				A52F932524493C4900DDB791 /* ChuckNorris.swift in Sources */,
 				A5828953244FC15600B7B6B0 /* WorkoutsMultiSelect.swift in Sources */,
@@ -723,6 +735,7 @@
 				A5B6CEE52448AB2D00CF2B86 /* HKWorkoutActivityType+Extension.swift in Sources */,
 				A546226C24550BF3003BA285 /* GradientPolyline.swift in Sources */,
 				A562B6BA245A6F4200742ECF /* SectionHeader.swift in Sources */,
+				A5A4DC3624B258E300FA7580 /* EsriMapCard.swift in Sources */,
 				A51514482460F1B800D4D643 /* Icon.swift in Sources */,
 				A562B6C0245A724E00742ECF /* AboutScreen.swift in Sources */,
 				A50E464A2449E76000D1F435 /* FeaturedWorkout.swift in Sources */,
@@ -736,7 +749,6 @@
 				A562B6C8245A786700742ECF /* WeeklySummary.swift in Sources */,
 				A55C84E52449EC3F00D81C44 /* Blur.swift in Sources */,
 				A582894D244F7B7C00B7B6B0 /* FilterPill.swift in Sources */,
-				A54A7E402481ADB200358DFB /* FullScreenMapRevamped.swift in Sources */,
 				A5F5A721248737670051C7BB /* CommitStyleChart.swift in Sources */,
 				A5D8CD0E2468806100DC54FA /* FullScreenMapView.swift in Sources */,
 				A5B3497924AFCAA200EDD653 /* Array+Extensions.swift in Sources */,
