@@ -263,6 +263,10 @@ struct EsriMapView: UIViewRepresentable {
                         print(error.localizedDescription)
                         return
                     }
+                    
+                    if results?.count == 0 {
+                        self.parent.selectedSegment.removeAll()
+                    }
     
                     if let featureCollectionLayer = mapView.map?.operationalLayers.firstObject as? AGSFeatureCollectionLayer, let featureLayer = featureCollectionLayer.layers.first {
                         if let res = results?.first, let feature = res.sublayerResults.first?.geoElements.first as? AGSFeature {

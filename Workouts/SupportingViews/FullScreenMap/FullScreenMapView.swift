@@ -21,6 +21,11 @@ struct FullScreenMapView: View {
         return ZStack(alignment: .bottom) {
             EsriMapView(route: route, isUserInteractionEnabled: true, selectedSegment: $selectedSegment)
             
+            if selectedSegment.count == 1 {
+                CompleteSegmentPopup()
+                    .transition(.slide)
+                    .offset(x: 0, y: -40)
+            }
             if selectedSegment.count > 1 {
                 PopupPanel(selectedSegment: $selectedSegment)
                     .transition(.slide)

@@ -62,6 +62,7 @@
 		A5D8CD0A2468441700DC54FA /* HeartRateChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5D8CD092468441700DC54FA /* HeartRateChart.swift */; };
 		A5D8CD0C2468621E00DC54FA /* WorkoutDetailRevamped.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5D8CD0B2468621E00DC54FA /* WorkoutDetailRevamped.swift */; };
 		A5D8CD0E2468806100DC54FA /* FullScreenMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5D8CD0D2468806100DC54FA /* FullScreenMapView.swift */; };
+		A5DC18F524B41BF800E4EE8C /* CompleteSegmentPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5DC18F424B41BF800E4EE8C /* CompleteSegmentPopup.swift */; };
 		A5F5A71F24871E110051C7BB /* ActivityTypeFilterPill.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5F5A71E24871E110051C7BB /* ActivityTypeFilterPill.swift */; };
 		A5F5A721248737670051C7BB /* CommitStyleChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5F5A720248737670051C7BB /* CommitStyleChart.swift */; };
 		AC46320A2447593700619284 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC4632092447593700619284 /* AppDelegate.swift */; };
@@ -155,6 +156,7 @@
 		A5D8CD092468441700DC54FA /* HeartRateChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeartRateChart.swift; sourceTree = "<group>"; };
 		A5D8CD0B2468621E00DC54FA /* WorkoutDetailRevamped.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutDetailRevamped.swift; sourceTree = "<group>"; };
 		A5D8CD0D2468806100DC54FA /* FullScreenMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullScreenMapView.swift; sourceTree = "<group>"; };
+		A5DC18F424B41BF800E4EE8C /* CompleteSegmentPopup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompleteSegmentPopup.swift; sourceTree = "<group>"; };
 		A5F5A71E24871E110051C7BB /* ActivityTypeFilterPill.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityTypeFilterPill.swift; sourceTree = "<group>"; };
 		A5F5A720248737670051C7BB /* CommitStyleChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommitStyleChart.swift; sourceTree = "<group>"; };
 		AC4632062447593700619284 /* Workouts.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Workouts.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -391,6 +393,7 @@
 				A5D8CD032467751000DC54FA /* EsriMapView.swift */,
 				A5A4DC3524B258E300FA7580 /* EsriMapCard.swift */,
 				A5A4DC3724B29D2F00FA7580 /* PopupPanel.swift */,
+				A5DC18F424B41BF800E4EE8C /* CompleteSegmentPopup.swift */,
 			);
 			path = MapComponents;
 			sourceTree = "<group>";
@@ -760,6 +763,7 @@
 				A5221E76245462FE005416BC /* CaloriesFilter.swift in Sources */,
 				A5AF6085244BAA1200AB7E72 /* WorkoutData.swift in Sources */,
 				A5328BEA2465760900EDE94C /* Graph.swift in Sources */,
+				A5DC18F524B41BF800E4EE8C /* CompleteSegmentPopup.swift in Sources */,
 				A52FBF012447D6ED00016025 /* HKWorkout+Extensions.swift in Sources */,
 				A546226E2455223F003BA285 /* DailyWorkout.swift in Sources */,
 				A5B6CEEB2448D91100CF2B86 /* ShareSheet.swift in Sources */,
