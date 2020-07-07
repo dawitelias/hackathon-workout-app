@@ -12,13 +12,21 @@ import CoreLocation
 
 var lightOrDark: ColorScheme?
 
+enum WorkoutRouteAttributes: String {
+    case elevation = "Elevation"
+    case speed = "Speed"
+    case index = "PointIndex"
+    case timestamp = "Timestamp"
+}
+enum BasemapUrls: String {
+    case light = "https://emilcheroske.maps.arcgis.com/home/item.html?id=1becad86ac93425eb3fd2343e4507359"
+    case dark = "https://emilcheroske.maps.arcgis.com/home/item.html?id=6f4816759ad34e66b2b5a1c15e51f8e0"
+}
+
 struct EsriMapView: UIViewRepresentable {
     
     var route: [CLLocation]?
     var isUserInteractionEnabled: Bool = false
-
-    let darkBasemapURL = "https://emilcheroske.maps.arcgis.com/home/item.html?id=6f4816759ad34e66b2b5a1c15e51f8e0"
-    let lightBasemapURL = "https://emilcheroske.maps.arcgis.com/home/item.html?id=1becad86ac93425eb3fd2343e4507359"
 
     @Environment(\.colorScheme) var colorScheme
     @Binding var selectedSegment: [AGSFeature]
@@ -34,7 +42,7 @@ struct EsriMapView: UIViewRepresentable {
         mapView.selectionProperties.color = .cyan
 
         lightOrDark = colorScheme
-        if let url = colorScheme == .dark ? URL(string: darkBasemapURL) : URL(string: lightBasemapURL) {
+        if let url = colorScheme == .dark ? URL(string: BasemapUrls.dark.rawValue) : URL(string: BasemapUrls.light.rawValue) {
             let vectorTiledLayer = AGSArcGISVectorTiledLayer(url: url)
             let basemap = AGSBasemap(baseLayer: vectorTiledLayer)
 
@@ -56,7 +64,7 @@ struct EsriMapView: UIViewRepresentable {
         }
         if lightOrDark != nil && lightOrDark != colorScheme {
             lightOrDark = colorScheme
-            if let url = colorScheme == .dark ? URL(string: darkBasemapURL) : URL(string: lightBasemapURL) {
+            if let url = colorScheme == .dark ? URL(string: BasemapUrls.dark.rawValue) : URL(string: BasemapUrls.light.rawValue) {
                 let vectorTiledLayer = AGSArcGISVectorTiledLayer(url: url)
                 let basemap = AGSBasemap(baseLayer: vectorTiledLayer)
     
@@ -131,18 +139,16 @@ struct EsriMapView: UIViewRepresentable {
     private func pointsCollectionTable() -> AGSFeatureCollectionTable {
         //create schema for points feature collection table
         var fields = [AGSField]()
-        let speedField = AGSField(fieldType: .double, name: "Speed", alias: "Speed", length: 100, domain: nil, editable: true, allowNull: true)
-        let elevationField = AGSField(fieldType: .double, name: "Elevation", alias: "Elevation", length: 100, domain: nil, editable: true, allowNull: true)
-        let timestamp = AGSField(fieldType: .date, name: "Timestamp", alias: "Timestamp", length: 100, domain: nil, editable: true, allowNull: true)
-        let indexField = AGSField(fieldType: .int32, name: "PointIndex", alias: "PointIndex", length: 100, domain: nil, editable: true, allowNull: false)
+        let speedField = AGSField(fieldType: .double, name: WorkoutRouteAttributes.speed.rawValue, alias: WorkoutRouteAttributes.speed.rawValue, length: 100, domain: nil, editable: true, allowNull: true)
+        let elevationField = AGSField(fieldType: .double, name: WorkoutRouteAttributes.elevation.rawValue, alias: WorkoutRouteAttributes.elevation.rawValue, length: 100, domain: nil, editable: true, allowNull: true)
+        let timestamp = AGSField(fieldType: .date, name: WorkoutRouteAttributes.timestamp.rawValue, alias: WorkoutRouteAttributes.timestamp.rawValue, length: 100, domain: nil, editable: true, allowNull: true)
+        let indexField = AGSField(fieldType: .int32, name: WorkoutRouteAttributes.index.rawValue, alias: WorkoutRouteAttributes.index.rawValue, length: 100, domain: nil, editable: true, allowNull: false)
         
         fields.append(speedField)
         fields.append(elevationField)
         fields.append(timestamp)
         fields.append(indexField)
 
-        // initialize feature collection table with the fields created
-        // and geometry type as Point
         let pointsCollectionTable = AGSFeatureCollectionTable(fields: fields, geometryType: .point, spatialReference: .wgs84())
         
         // renderer
@@ -171,7 +177,7 @@ struct EsriMapView: UIViewRepresentable {
             classBreaks.append(AGSClassBreak(description: "\(i)", label: "\(i)", minValue: incrementAmount * Double(i), maxValue: (incrementAmount * Double(i)) + incrementAmount, symbol: AGSSimpleMarkerSymbol(style: .circle, color: colors[i], size: 5)))
         }
 
-        let renderer = AGSClassBreaksRenderer(fieldName: "Speed", classBreaks: classBreaks)
+        let renderer = AGSClassBreaksRenderer(fieldName: WorkoutRouteAttributes.speed.rawValue, classBreaks: classBreaks)
         pointsCollectionTable.renderer = renderer
         
         // Create a new point feature, provide geometry and attribute values
@@ -186,11 +192,10 @@ struct EsriMapView: UIViewRepresentable {
                 let pointFeature = pointsCollectionTable.createFeature()
                 let point = AGSPoint(clLocationCoordinate2D: workoutRoute[index].coordinate)
                 pointFeature.geometry = point
-                pointFeature.attributes["Elevation"] = workoutRoute[index].altitude
-                pointFeature.attributes["Speed"] = workoutRoute[index].speed
-                //pointFeature.attributes["Course"] = workoutRoute[index].course
-                pointFeature.attributes["PointIndex"] = index
-                pointFeature.attributes["Timestamp"] = workoutRoute[index].timestamp
+                pointFeature.attributes[WorkoutRouteAttributes.elevation.rawValue] = workoutRoute[index].altitude
+                pointFeature.attributes[WorkoutRouteAttributes.speed.rawValue] = workoutRoute[index].speed
+                pointFeature.attributes[WorkoutRouteAttributes.index.rawValue] = index
+                pointFeature.attributes[WorkoutRouteAttributes.timestamp.rawValue] = workoutRoute[index].timestamp
                 pointsCollectionTable.add(pointFeature, completion: nil)
             }
         }
@@ -218,11 +223,11 @@ struct EsriMapView: UIViewRepresentable {
             // We can assume the user has already defined a starting point for the segment - now we can
             // continue with the logic to highlight/select wherever else they tap
             //
-            let startValue = parent.selectedSegment[Int(parent.selectedSegment.count/2)].attributes["PointIndex"] as! Int
-            let endValue = feature.attributes["PointIndex"] as! Int
+            let startValue = parent.selectedSegment[Int(parent.selectedSegment.count/2)].attributes[WorkoutRouteAttributes.index.rawValue] as! Int
+            let endValue = feature.attributes[WorkoutRouteAttributes.index.rawValue] as! Int
     
             let queryParams = AGSQueryParameters()
-            queryParams.whereClause = "PointIndex BETWEEN \(startValue < endValue ? startValue : endValue) AND \(endValue > startValue ? endValue : startValue)"
+            queryParams.whereClause = "\(WorkoutRouteAttributes.index.rawValue) BETWEEN \(startValue < endValue ? startValue : endValue) AND \(endValue > startValue ? endValue : startValue)"
     
             featureLayer.featureTable?.queryFeatures(with: queryParams) { multipleResults, error in
                 if let error = error {
@@ -232,7 +237,17 @@ struct EsriMapView: UIViewRepresentable {
                 if let agsfeatures = multipleResults?.featureEnumerator().allObjects {
                     if !agsfeatures.isEmpty {
                         featureLayer.select(agsfeatures)
-                        self.parent.selectedSegment.append(contentsOf: agsfeatures)
+                        
+                        // Create a temp variable to hold our features so that we can perform
+                        // all of our operations without triggering a UI update
+                        //
+                        var temp = self.parent.selectedSegment
+                        temp.append(contentsOf: agsfeatures)
+                        temp.removeDuplicates()
+                        temp.sort { f1, f2 in
+                            return f1.attributes[WorkoutRouteAttributes.index.rawValue] as! Int > f2.attributes[WorkoutRouteAttributes.index.rawValue] as! Int
+                        }
+                        self.parent.selectedSegment = temp
                     }
                 }
             }

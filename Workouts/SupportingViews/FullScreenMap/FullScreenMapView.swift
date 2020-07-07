@@ -12,16 +12,6 @@ import CoreLocation
 import MapKit
 import ArcGIS
 
-extension AnyTransition {
-    static var moveAndFade: AnyTransition {
-        let insertion = AnyTransition.move(edge: .trailing)
-            .combined(with: .opacity)
-        let removal = AnyTransition.scale
-            .combined(with: .opacity)
-        return .asymmetric(insertion: insertion, removal: removal)
-    }
-}
-
 struct FullScreenMapView: View {
     let route: [CLLocation]
     @State var showShareSheet: Bool = false

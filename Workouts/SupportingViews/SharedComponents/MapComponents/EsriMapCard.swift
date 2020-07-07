@@ -27,10 +27,7 @@ struct EsriMapCard: UIViewRepresentable {
         // just use the saved image!!!
         //
         
-        
-        let darkBasemapURL = "https://emilcheroske.maps.arcgis.com/home/item.html?id=6f4816759ad34e66b2b5a1c15e51f8e0"
-        let lightBasemapURL = "https://emilcheroske.maps.arcgis.com/home/item.html?id=1becad86ac93425eb3fd2343e4507359"
-        guard let url = colorScheme == .dark ? URL(string: darkBasemapURL) : URL(string: lightBasemapURL) else {
+        guard let url = colorScheme == .dark ? URL(string: BasemapUrls.dark.rawValue) : URL(string: BasemapUrls.light.rawValue) else {
             return
         }
         let vectorTiledLayer = AGSArcGISVectorTiledLayer(url: url)
@@ -107,7 +104,7 @@ struct EsriMapCard: UIViewRepresentable {
     private func pointsCollectionTable() -> AGSFeatureCollectionTable {
         //create schema for points feature collection table
         var fields = [AGSField]()
-        let speedField = AGSField(fieldType: .double, name: "Speed", alias: "Speed", length: 100, domain: nil, editable: true, allowNull: true)
+        let speedField = AGSField(fieldType: .double, name: WorkoutRouteAttributes.speed.rawValue, alias: WorkoutRouteAttributes.speed.rawValue, length: 100, domain: nil, editable: true, allowNull: true)
         
         fields.append(speedField)
 
@@ -141,7 +138,7 @@ struct EsriMapCard: UIViewRepresentable {
             classBreaks.append(AGSClassBreak(description: "\(i)", label: "\(i)", minValue: incrementAmount * Double(i), maxValue: (incrementAmount * Double(i)) + incrementAmount, symbol: AGSSimpleMarkerSymbol(style: .circle, color: colors[i], size: 5)))
         }
 
-        let renderer = AGSClassBreaksRenderer(fieldName: "Speed", classBreaks: classBreaks)
+        let renderer = AGSClassBreaksRenderer(fieldName: WorkoutRouteAttributes.speed.rawValue, classBreaks: classBreaks)
         pointsCollectionTable.renderer = renderer
         
         // Create a new point feature, provide geometry and attribute values
@@ -156,7 +153,7 @@ struct EsriMapCard: UIViewRepresentable {
                 let pointFeature = pointsCollectionTable.createFeature()
                 let point = AGSPoint(clLocationCoordinate2D: workoutRoute[index].coordinate)
                 pointFeature.geometry = point
-                pointFeature.attributes["Speed"] = workoutRoute[index].speed
+                pointFeature.attributes[WorkoutRouteAttributes.speed.rawValue] = workoutRoute[index].speed
                 pointsCollectionTable.add(pointFeature, completion: nil)
             }
         }

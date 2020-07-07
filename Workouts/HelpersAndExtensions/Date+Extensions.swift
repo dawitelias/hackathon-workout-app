@@ -35,9 +35,9 @@ extension Date {
         dateFormatter.timeStyle = .short
         return dateFormatter.string(from: self)
     }
-    var hHmMsS: String {
+    var hourAndMin: String {
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "HH:mm:ss a"
+        dateFormatter.dateFormat = "hh:mm a"
         return dateFormatter.string(from: self)
     }
     func hoursBeforeNow(hr:TimeInterval) -> Date {
