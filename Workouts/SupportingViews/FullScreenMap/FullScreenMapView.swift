@@ -16,10 +16,11 @@ struct FullScreenMapView: View {
     let route: [CLLocation]
     @State var showShareSheet: Bool = false
     @State var selectedSegment: [AGSFeature] = [AGSFeature]()
+    @State var mapView: AGSMapView = AGSMapView(frame: .zero)
     
     var body: some View {
         return ZStack(alignment: .bottom) {
-            EsriMapView(route: route, isUserInteractionEnabled: true, selectedSegment: $selectedSegment)
+            EsriMapView(route: route, isUserInteractionEnabled: true, selectedSegment: $selectedSegment, mapView: $mapView)
             
             if selectedSegment.count == 1 {
                 CompleteSegmentPopup()
@@ -36,8 +37,7 @@ struct FullScreenMapView: View {
         .navigationBarItems(trailing:
             Button(action: {
                 if self.showShareSheet == false {
-                    MapImageGenerator.generateMapImageWithRoute(route: self.route) {
-                        image, error in
+                    self.mapView.exportImage { image, error in
                         if let error = error {
                             print(error.localizedDescription)
                         }

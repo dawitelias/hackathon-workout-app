@@ -24,19 +24,18 @@ enum BasemapUrls: String {
 }
 
 struct EsriMapView: UIViewRepresentable {
-    
     var route: [CLLocation]?
     var isUserInteractionEnabled: Bool = false
 
     @Environment(\.colorScheme) var colorScheme
     @Binding var selectedSegment: [AGSFeature]
+    @Binding var mapView: AGSMapView
 
     func makeCoordinator() -> Coordinator {
         Coordinator(self)
     }
 
     func makeUIView(context: Context) -> AGSMapView {
-        let mapView = AGSMapView(frame: .zero)
         mapView.isAttributionTextVisible = false
         mapView.touchDelegate = context.coordinator
         mapView.selectionProperties.color = .cyan
@@ -287,7 +286,7 @@ struct EsriMapView_Previews: PreviewProvider {
             CLLocation(latitude: 70.2578, longitude: 43.65978),
             CLLocation(latitude: 70.2548, longitude: 43.6548),
             CLLocation(latitude: 70.2538, longitude: 43.6538),
-        ], isUserInteractionEnabled: true, selectedSegment: .constant([AGSFeature]()))
+        ], isUserInteractionEnabled: true, selectedSegment: .constant([AGSFeature]()), mapView: .constant(AGSMapView(frame: .zero)))
             .previewDevice("iPhone 11")
     }
 }
