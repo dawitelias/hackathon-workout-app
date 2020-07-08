@@ -19,6 +19,23 @@ struct FullScreenMapView: View {
     @State var mapView: AGSMapView = AGSMapView(frame: .zero)
     
     var body: some View {
+        func getInfoText() -> String {
+            var value = ""
+            if selectedSegment.count > 1 {
+                let segmentStartDate = selectedSegment.last?.attributes[WorkoutRouteAttributes.timestamp.rawValue] as? Date ?? Date()
+                let segmentEndDate = selectedSegment.first?.attributes[WorkoutRouteAttributes.timestamp.rawValue] as? Date ?? Date()
+                let elapsedTime = abs(segmentStartDate.distance(to: segmentEndDate))
+                let elapsedTimeString = elapsedTime > 60 ? elapsedTime.getHoursAndMinutesString() : "\(Int(elapsedTime))s"
+                let segmentLength = getSegmentLength(segment: selectedSegment)
+
+                let formattedMileageString = String(format: "%.2f", segmentLength)
+                value = "Selected Segment: \(elapsedTimeString), \(formattedMileageString)mi, \(getPaceString(selectedSegment: selectedSegment))"
+            } else {
+                value = ChuckNorris.getRandomChuckNorrisQuote()
+            }
+
+            return value
+        }
         return ZStack(alignment: .bottom) {
             EsriMapView(route: route, isUserInteractionEnabled: true, selectedSegment: $selectedSegment, mapView: $mapView)
             
@@ -54,7 +71,7 @@ struct FullScreenMapView: View {
                 Image(systemName: "square.and.arrow.up").imageScale(.large)
             }.sheet(isPresented: $showShareSheet) {
                 ShareSheet(activityItems: [generatedMapImage,
-                "\(ChuckNorris.getRandomChuckNorrisQuote())"])
+                "\(getInfoText())"])
             }
         )
     }

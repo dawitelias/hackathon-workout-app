@@ -31,7 +31,7 @@ struct SpeedChart: View {
             if data.count > 0 {
                 Graph(rawData: data, capsuleColor: Color("K_1"))
                 HStack {
-                    Text("Average Pace: \(minValue)'\(secondsValue)'' /mi")
+                    Text("Average Pace: \(minValue)'\(String(format: "%02d", secondsValue))'' /mi")
                         .font(.footnote)
                         .padding(.leading, 20)
                         .foregroundColor(Color.gray)

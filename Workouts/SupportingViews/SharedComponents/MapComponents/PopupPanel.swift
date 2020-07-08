@@ -61,6 +61,14 @@ func getSegmentLength(segment: [AGSFeature]) -> Double {
     return lineLength
 }
 
+func getPaceString(selectedSegment: [AGSFeature]) -> String {
+    let averageSpeed = getAverageSpeed(segment: selectedSegment)
+    let minPerMilePace = metersPerSecondToMinPerMile(pace: averageSpeed)
+    let minValue = Int(minPerMilePace)
+    let secondsValue = Int(60 * minPerMilePace.truncatingRemainder(dividingBy: 1))
+    return "\(minValue)'\(String(format: "%02d", secondsValue))\" pace"
+}
+
 struct PopupPanel: View {
     @Binding var selectedSegment: [AGSFeature]
     @Environment(\.colorScheme) var colorScheme
@@ -74,9 +82,6 @@ struct PopupPanel: View {
         let segmentLength = getSegmentLength(segment: selectedSegment)
         
         let averageSpeed = getAverageSpeed(segment: selectedSegment)
-        let minPerMilePace = metersPerSecondToMinPerMile(pace: averageSpeed)
-        let minValue = Int(minPerMilePace)
-        let secondsValue = Int(60 * minPerMilePace.truncatingRemainder(dividingBy: 1))
         let mphValue = metersPerSecondToMPH(pace: averageSpeed)
         
         let elapsedTime = abs(segmentStartDate.distance(to: segmentEndDate))
@@ -110,7 +115,7 @@ struct PopupPanel: View {
                     Text("Average Speed:")
                         .font(.callout)
                         .fontWeight(.heavy)
-                    Text("\(minValue)'\(secondsValue)\" pace - \(String(format: "%.1f", mphValue)) mph")
+                    Text("\(getPaceString(selectedSegment: selectedSegment))\" pace - \(String(format: "%.1f", mphValue)) mph")
                         .font(.callout)
                         .fontWeight(.thin)
                 }.padding(.bottom, 5)
