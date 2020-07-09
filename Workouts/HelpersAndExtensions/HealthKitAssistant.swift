@@ -224,17 +224,47 @@ class HealthKitAssistant {
         HKHealthStore().execute(query)
     }
 
+    // MARK: Get Number of Workouts per week in a grouped format
+    //
+    static func getNumWorkoutsPerWeek(numMonthsBack: Int, completion: @escaping ([Date: [HKWorkout]]?, Error?) -> Void) {
+        // Get the date 3 months back
+        //
+        var date = Calendar.current.date(byAdding: .month, value: -numMonthsBack, to: Date())
+        
+        // Query the workouts for this timeframe
+        //
+        let predicate = HKQuery.predicateForSamples(withStart: date, end: Date(), options: [])
+        let sortDescriptor = NSSortDescriptor(key: HKSampleSortIdentifierEndDate, ascending: false)
+        let query = HKSampleQuery(
+            sampleType: .workoutType(),
+            predicate: predicate,
+            limit: HKObjectQueryNoLimit,
+            sortDescriptors: [sortDescriptor]) { (query, samples, error) in
+                
+                if error != nil {
+                    completion(nil, error)
+                    return
+                }
+
+                if let data = samples as? [HKWorkout] {
+                    let empty: [Date: [HKWorkout]] = [:]
+                    let grouped = data.reduce(into: empty) { acc, cur in
+                        let components = Calendar.current.dateComponents([.weekOfYear, .yearForWeekOfYear], from: cur.startDate)
+                        let d = Calendar.current.date(from: components)!
+                        let existing = acc[d] ?? []
+                        acc[d] = existing + [cur]
+                    }
+                    completion(grouped, nil)
+                }
+            }
+        HKHealthStore().execute(query)
+    }
+
     // MARK: Check Privacy and Device HealthKit Capabilities
     //
     static public func checkAccess(completion: @escaping (Bool, Error?) -> Void) {
         
         guard
-                // let dateOfBirth = HKObjectType.characteristicType(forIdentifier: .dateOfBirth),
-                // let bloodType = HKObjectType.characteristicType(forIdentifier: .bloodType),
-                // let biologicalSex = HKObjectType.characteristicType(forIdentifier: .biologicalSex),
-                // let bodyMassIndex = HKObjectType.quantityType(forIdentifier: .bodyMassIndex),
-                // let height = HKObjectType.quantityType(forIdentifier: .height),
-                // let bodyMass = HKObjectType.quantityType(forIdentifier: .bodyMass),
                 let activeEnergy = HKObjectType.quantityType(forIdentifier: .activeEnergyBurned),
                 let cyclingDistance = HKObjectType.quantityType(forIdentifier: .distanceCycling),
                 let walkingAndRunningDistance = HKObjectType.quantityType(forIdentifier: .distanceWalkingRunning),
@@ -247,12 +277,6 @@ class HealthKitAssistant {
         // Health Kit Data Types we request permission to read
         //
         let healthKitTypesToRead: Set<HKObjectType> = [
-            // dateOfBirth,
-            // bloodType,
-            // biologicalSex,
-            // bodyMassIndex,
-            // height,
-            // bodyMass,
             activeEnergy,
             cyclingDistance,
             walkingAndRunningDistance,

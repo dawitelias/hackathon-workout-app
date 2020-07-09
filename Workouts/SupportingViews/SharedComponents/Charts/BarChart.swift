@@ -9,6 +9,8 @@
 import SwiftUI
 
 struct Bar: View {
+    let dataItem: Int
+    let unit: String
     let width: CGFloat
     let height: CGFloat
     let startColor: Color
@@ -18,15 +20,16 @@ struct Bar: View {
         let colors = Gradient(colors: [self.startColor, self.endColor])
         
         return VStack(alignment: .center, spacing: 0) {
-            Text("\(Int(height))")
-                .font(.caption)
+            Text("\(dataItem)\(unit)")
+                .font(.footnote)
                 .foregroundColor(Color.gray)
-                .fixedSize()
-                .frame(width: width)
+                .minimumScaleFactor(0.005)
+                .lineLimit(1)
+                .frame(width: width - 8)
 
-            RoundedRectangle(cornerRadius: width/2, style: .circular)
+            RoundedRectangle(cornerRadius: width/4, style: .circular)
                 .fill(LinearGradient(gradient: colors, startPoint: .top, endPoint: .bottom))
-                .frame(width: CGFloat(width), height: CGFloat(height))
+                .frame(width: CGFloat(width/2), height: CGFloat(height), alignment: .center)
                 .foregroundColor(.pink)
         }
     }
@@ -42,14 +45,13 @@ struct XAxis: View {
         // on the x-axis because we have minimal screen space and we don't
         // want to shrink the text beyond recognition with larger datasets
         //
-        if labels.count > 4 {
-            let incrementAmount = Int(labels.count/4)
-            for i in 0...3 {
-                condensedLabels.append(labels[i*incrementAmount])
+        for i in 0...labels.count - 1 {
+            if i % 2 == 0 {
+                condensedLabels.append(labels[i])
             }
-        } else {
-            condensedLabels = labels
         }
+        condensedLabels.append(labels[labels.count - 1])
+
         return HStack {
             ForEach(condensedLabels, id: \.self) { label in
                 HStack {
@@ -57,7 +59,12 @@ struct XAxis: View {
                     VStack(alignment: .leading) {
                         Text(label)
                             .foregroundColor(Color.gray)
+                            .minimumScaleFactor(0.005)
+                            .lineLimit(1)
+                            .frame(width: 25, height: nil, alignment: .center)
                             .font(.system(size: 10))
+                            .offset(x: 0, y: -10)
+                            .rotationEffect(Angle.degrees(-30))
                     }
                     
                     Spacer()
@@ -68,14 +75,18 @@ struct XAxis: View {
 }
 struct BarChartMidSection: View {
     let data: [Int]
+    let unit: String
     let startColor: Color
     let endColor: Color
+    
+    @Environment(\.colorScheme) var colorScheme
 
     var body: some View {
         let max = data.max() ?? 0
-        let dataRange = CGFloat(max - (data.min() ?? 0))
+        let dataRange = CGFloat(max - 0)
         let barPadding: CGFloat = 1.0
         let chartPadding: CGFloat = CGFloat(data.count) * barPadding
+        let vLineColor = UIColor.lightGray.withAlphaComponent(colorScheme == .dark ? 0.3 : 0.7)
 
         return GeometryReader { g in
             ZStack(alignment: .bottom) {
@@ -90,7 +101,7 @@ struct BarChartMidSection: View {
                             }
                             Rectangle()
                                 .size(width: g.size.width, height: 0.5)
-                                .foregroundColor(.gray)
+                                .foregroundColor(Color(vLineColor))
                                  .frame(height: 0.5)
                                 .padding(0)
                         }
@@ -99,14 +110,16 @@ struct BarChartMidSection: View {
 
                 // Horizontal Stack for the Bars
                 //
-                HStack(alignment: .bottom, spacing: barPadding) {
+                HStack(alignment: .bottom, spacing: barPadding + 4) {
 
                     // Create the bars
                     //
                     ForEach(self.data, id: \.self) { item in
                         Bar(
-                            width: (g.size.width - chartPadding - 40)/CGFloat(self.data.count),
-                            height: ((g.size.height * 0.7) - chartPadding) * CGFloat(CGFloat(item)/dataRange),
+                            dataItem: item,
+                            unit: self.unit,
+                            width: (g.size.width - chartPadding)/CGFloat(self.data.count),
+                            height: ((g.size.height * 0.9) - chartPadding) * CGFloat(CGFloat(item)/dataRange),
                             startColor: self.startColor,
                             endColor: self.endColor
                         )
@@ -119,6 +132,7 @@ struct BarChartMidSection: View {
 
 struct BarChart: View {
     let chartTitle: String
+    let unit: String
     let labels: [String]
     let data: [Int]
     let startColor: Color
@@ -128,9 +142,13 @@ struct BarChart: View {
         return VStack(alignment: .leading) {
             Text("\(self.chartTitle)")
                 .font(.headline)
-                .fontWeight(.heavy)
-            BarChartMidSection(data: data, startColor: self.startColor, endColor: self.endColor)
+                .fontWeight(.light)
+                .padding([.leading])
+                .offset(x: 0, y: 10)
+            BarChartMidSection(data: data, unit: unit, startColor: self.startColor, endColor: self.endColor)
             XAxis(labels: labels)
+                .padding(.leading, 20)
+                .padding(.trailing, 20)
         }
     }
 }
@@ -139,6 +157,7 @@ struct BarChart_Previews: PreviewProvider {
     static var previews: some View {
         BarChart(
             chartTitle: "Bar chart in SwiftUI",
+            unit: "hi",
             labels: [
                 "Sat", "Sun", "Mon", "Tues", "Thu", "Fri", "Sat", "Sat", "Sun", "Mon", "Tues", "Thu", "Fri", "Sat"
             ],

@@ -43,6 +43,11 @@ extension Date {
     func hoursBeforeNow(hr:TimeInterval) -> Date {
         return self.addingTimeInterval(-3600 * hr)
     }
+    var weekAbbreviated: String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "MM/dd"
+        return dateFormatter.string(from: self)
+    }
 }
 
 extension TimeInterval {
