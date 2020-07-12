@@ -16,6 +16,8 @@ struct FeaturedWorkout: View {
     @State var route: [CLLocation]? = nil
     @State var isLoading = true
 
+    @Environment(\.colorScheme) var colorScheme
+
     var body: some View {
         let workoutHrAndMin = workout.duration.getHoursAndMinutesString()
         
@@ -53,10 +55,18 @@ struct FeaturedWorkout: View {
                         }
                     }
                     .padding(.top)
-                    EsriMapCard(route: self.route)
-                        .frame(height: 200)
-                        .padding(.horizontal, -15)
-                        .padding(.bottom, -6)
+                    if workout.getImageFromDocumentsDirectory(colorScheme: colorScheme) != nil {
+                        Image(uiImage: workout.getImageFromDocumentsDirectory(colorScheme: colorScheme)!)
+                            .resizable()
+                            .frame(height: 200)
+                            .padding(.horizontal, -15)
+                            .padding(.bottom, -6)
+                    } else {
+                        EsriMapCard(workout: workout, route: self.route)
+                            .frame(height: 200)
+                            .padding(.horizontal, -15)
+                            .padding(.bottom, -6)
+                    }
                 } else {
                     HStack {
                         ZStack(alignment: .topLeading) {

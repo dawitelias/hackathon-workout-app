@@ -5,18 +5,20 @@
 //  Created by Emily Cheroske on 7/5/20.
 //  Copyright © 2020 Dawit Elias. All rights reserved.
 //
-
+import Foundation
 import SwiftUI
 import ArcGIS
 import CoreLocation
+import HealthKit
 
 struct EsriMapCard: UIViewRepresentable {
+    var workout: HKWorkout
     var route: [CLLocation]?
+    let mapView = AGSMapView(frame: .zero)
 
     @Environment(\.colorScheme) var colorScheme
 
     func makeUIView(context: Context) -> AGSMapView {
-        let mapView = AGSMapView(frame: .zero)
         mapView.isAttributionTextVisible = false
 
         return mapView
@@ -146,7 +148,7 @@ struct EsriMapCard: UIViewRepresentable {
             workoutRoute = workoutRoute.filter { item in
                 return item.horizontalAccuracy > 0 && item.coordinate.latitude != 0 && item.coordinate.longitude != 0
             }
-            let density = Double(workoutRoute.count)/1000.0 // ? may  need to up this if memory is an issue
+            let density = Double(workoutRoute.count)/500.0
             let stepCount = density < 1 ? 1 : Int(density)
             
             for index in stride(from: 0, to: workoutRoute.count - stepCount, by: stepCount) {
@@ -160,15 +162,54 @@ struct EsriMapCard: UIViewRepresentable {
 
         return pointsCollectionTable
     }
+    // Coordinator code
+    //
+    func makeCoordinator() -> Coordinator {
+        Coordinator(self)
+    }
+    class Coordinator: NSObject {
+        var parent: EsriMapCard
+        private var drawStatusObservation: NSKeyValueObservation?
+        var numLayersDrawn = 0
+
+        init(_ item: EsriMapCard) {
+            self.parent = item
+            super.init()
+            drawStatusObservation = self.parent.mapView.observe(\.drawStatus, options: .initial) { [weak self] (mapView, _) in
+                if let drawStatus = self?.parent.mapView.drawStatus {
+                    switch drawStatus {
+                    case .completed:
+                        // We are currently adding 4 layers to the map
+                        // so this will fire FOUR times before the map is in a state
+                        // where we want to screenshot it
+                        //
+                        self?.numLayersDrawn += 1
+                        if let numLayersDrawn = self?.numLayersDrawn, numLayersDrawn == 4 {
+                            self?.parent.mapView.exportImage { image, error in
+                                if let colorScheme = self?.parent.colorScheme, let image = image {
+                                    self?.parent.workout.writeImageToDocumentsDirectory(image: image, colorScheme: colorScheme)
+                                }
+                            }
+                        }
+                    default:
+                        print("unknown draw state")
+                    }
+                }
+            }
+        }
+    }
 }
 
 struct EsriMapCard_Previews: PreviewProvider {
     static var previews: some View {
-        EsriMapCard(route: [
-            CLLocation(latitude: 70.2568, longitude: 43.6591),
-            CLLocation(latitude: 70.2578, longitude: 43.65978),
-            CLLocation(latitude: 70.2548, longitude: 43.6548),
-            CLLocation(latitude: 70.2538, longitude: 43.6538),
-        ])
+        EsriMapCard(
+            workout: HKWorkout(activityType: .coreTraining, start: Date(), end: Date()),
+            route: [
+                CLLocation(latitude: 70.2568, longitude: 43.6591),
+                CLLocation(latitude: 70.2578, longitude: 43.65978),
+                CLLocation(latitude: 70.2548, longitude: 43.6548),
+                CLLocation(latitude: 70.2538, longitude: 43.6538),
+            ]
+        )
     }
 }

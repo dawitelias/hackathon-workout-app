@@ -15,6 +15,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         
+        // Remove any image files older than 1 month
+        //
+        removeOldFiles()
+        
         //license the app with the supplied License key
         do {
          let result = try AGSArcGISRuntimeEnvironment.setLicenseKey("runtimelite,1000,rud6315953372,none,GB2PMD17JYJ3R6EJM010")

@@ -9,17 +9,15 @@
 import SwiftUI
 import CoreLocation
 
+
 struct ElevationChart: View {
     var routeData: [CLLocation]
     var body: some View {
         var data = routeData.map { return $0.altitude }
         data = data.filter { return $0 > 0 && $0 != nil }
-        var netElevationGain: Double = 0
-        if data.count > 0 {
-            let startingElevation = data[0]
-            let endingElevation = data[data.count - 1]
-            netElevationGain = endingElevation - startingElevation
-        }
+        let netElevationGain = getElevation(format: .net, segment: routeData)
+        let totalGain = getElevation(format: .gain, segment: routeData)
+        let totalLoss = getElevation(format: .loss, segment: routeData)
 
         return VStack(alignment: .leading) {
             Text("Elevation Profile")
@@ -30,13 +28,19 @@ struct ElevationChart: View {
             if data.count != 0 {
                 Graph(rawData: data, capsuleColor: Color("V_1"), backgroundColor: Color(UIColor.systemBackground))
                 HStack(alignment: .center) {
-                    Text("Net elevation gain:")
+                    Text("Net Elevation Gain:")
                         .font(.footnote)
                         .padding(.leading, 20)
                         .foregroundColor(Color.gray)
-                    Text("\(netElevationGain >= 0 ? "+" : "")\(Int(metersToFeet(meters: netElevationGain))) ft")
+                    Text("\(Int(netElevationGain))ft")
                         .font(.footnote)
-                        .foregroundColor(netElevationGain >= 0 ? Color.green : Color.red)
+                        .foregroundColor(Color.gray)
+                    Text("(+ \(Int(totalGain))ft")
+                        .font(.footnote)
+                        .foregroundColor(.green)
+                    Text("\(Int(totalLoss))ft)")
+                        .font(.footnote)
+                        .foregroundColor(.red)
                 }
             } else {
                 Text("No elevation data to Preview 😢")

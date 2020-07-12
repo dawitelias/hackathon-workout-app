@@ -184,9 +184,8 @@ struct EsriMapView: UIViewRepresentable {
             workoutRoute = workoutRoute.filter { item in
                 return item.horizontalAccuracy > 0 && item.coordinate.latitude != 0 && item.coordinate.longitude != 0
             }
-            let density = Double(workoutRoute.count)/2000.0 // ? may  need to up this if memory is an issue
-            let stepCount = density < 1 ? 1 : Int(density)
-            
+
+            let stepCount = 1
             for index in stride(from: 0, to: workoutRoute.count - stepCount, by: stepCount) {
                 let pointFeature = pointsCollectionTable.createFeature()
                 let point = AGSPoint(clLocationCoordinate2D: workoutRoute[index].coordinate)
@@ -206,8 +205,8 @@ struct EsriMapView: UIViewRepresentable {
     class Coordinator: NSObject, AGSGeoViewTouchDelegate {
         var parent: EsriMapView
 
-        init(_ pageViewController: EsriMapView) {
-            self.parent = pageViewController
+        init(_ item: EsriMapView) {
+            self.parent = item
         }
         func selectFeatures(feature: AGSFeature, featureLayer: AGSFeatureLayer) {
             // If there is only one point in our existing segment, then just append this point and

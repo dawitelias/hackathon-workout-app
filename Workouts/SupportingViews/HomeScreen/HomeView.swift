@@ -130,7 +130,7 @@ struct HomeView: View {
                 Button(action: {
                     self.showProfileView.toggle()
                 }) {
-                    Image(systemName: "person.circle").imageScale(.large)
+                    Image(systemName: "chart.bar").imageScale(.large)
                 }.sheet(isPresented: $showProfileView) {
                     ProfileView(showProfileView: self.$showProfileView).environmentObject(self.workoutData)
                 }, trailing:

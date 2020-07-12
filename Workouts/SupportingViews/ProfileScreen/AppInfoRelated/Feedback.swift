@@ -15,26 +15,20 @@ struct Feedback: View {
     
     var body: some View {
         ScrollView {
-            VStack {
-                Text("Clever you, you either found a bug or you have a great idea for a new feature! 😃😃😃")
-                    .font(.headline)
-                    .padding()
-                    .lineLimit(nil)
-
-                Text("Either way, we are always happy to hear from the folks who use our app and we want to make it a better experience for you!")
-                    .font(.headline)
-                    .padding()
-                    .lineLimit(nil)
-                
-                Text("Let us know what we can do by dropping us a line.")
-                    .font(.headline)
+            VStack(spacing: 20) {
+                Text("We want to improve the experience of our app so if you found a bug or have an idea for a new feature feel free to drop us a line!")
                     .padding()
                     .lineLimit(nil)
                 
                 if MFMailComposeViewController.canSendMail() {
-                    Button("Drop us a line...") {
+                    Button("Feedback") {
                         self.isShowingMailView.toggle()
                     }
+                        .foregroundColor(.white)
+                        .font(.title)
+                        .padding()
+                        .cornerRadius(5)
+                        .border(Color.white, width: 5)
                 } else {
                     Text("Can't send emails from this device")
                 }
@@ -43,7 +37,7 @@ struct Feedback: View {
         .sheet(isPresented: $isShowingMailView) {
             MailView(result: self.$result)
         }
-        .navigationBarTitle("Feedback")
+        .navigationBarTitle("How are we doing?")
     }
 }
 

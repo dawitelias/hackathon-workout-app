@@ -15,12 +15,8 @@ struct SpeedChart: View {
     var body: some View {
         var data = routeData.map { return $0.speed }
         data = data.filter { return $0 > 0 && $0 != nil }
-        let sumArray = data.reduce(0, +)
-        let average = sumArray/Double(data.count)
-        
-        let minPerMilePace = metersPerSecondToMinPerMile(pace: average)
-        let minValue = Int(minPerMilePace)
-        let secondsValue = Int(60 * minPerMilePace.truncatingRemainder(dividingBy: 1))
+        let averageSpeed = getAverageSpeed(segment: routeData)
+        let mphValue = metersPerSecondToMPH(pace: averageSpeed)
 
         return VStack(alignment: .leading) {
             Text("Workout Pace")
@@ -31,7 +27,7 @@ struct SpeedChart: View {
             if data.count > 0 {
                 Graph(rawData: data, capsuleColor: Color("K_1"))
                 HStack {
-                    Text("Average Pace: \(minValue)'\(String(format: "%02d", secondsValue))'' /mi")
+                    Text("Average Pace: \(getPaceString(route: routeData)) - \(String(format: "%.1f", mphValue)) mph")
                         .font(.footnote)
                         .padding(.leading, 20)
                         .foregroundColor(Color.gray)

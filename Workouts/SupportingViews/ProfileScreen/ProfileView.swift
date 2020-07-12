@@ -80,7 +80,7 @@ struct ProfileView: View {
                             data: self.caloriesValues,
                             startColor: Color("AM_1"),
                             endColor: Color("AM_2")
-                        ).frame(height: 220)
+                        ).frame(height: 270)
                     }
                     if selectedChart == 1 {
                         BarChart(
@@ -90,7 +90,7 @@ struct ProfileView: View {
                             data: self.distanceValues,
                             startColor: Color("X_1"),
                             endColor: Color("X_2")
-                        ).frame(height: 220)
+                        ).frame(height: 270)
                     }
                     if selectedChart == 2 {
                         BarChart(
@@ -100,7 +100,7 @@ struct ProfileView: View {
                             data: self.timeValues,
                             startColor: Color("B_1"),
                             endColor: Color("B_2")
-                        ).frame(height: 220)
+                        ).frame(height: 270)
                     }
                     Picker(selection: $selectedChart, label: Text("What is your favorite color?")) {
                         Text("Calories").tag(0)
@@ -116,13 +116,20 @@ struct ProfileView: View {
                 // This is for the workouts all time, this month, this week section
                 //
                 GeometryReader { g in
-                    VStack(alignment: .center) {
+                    VStack(alignment: .leading, spacing: 0) {
+                        Text("Your completed workouts:")
+                            .font(.headline)
+                            .fontWeight(.light)
+                            .padding([.leading, .top])
+                            .offset(x: 0, y: 10)
                         HStack {
                             VStack(alignment: .center) {
                                 Text("All Time 🔥")
                                     .lineLimit(1)
+                                    .minimumScaleFactor(0.01)
                                     .foregroundColor(Color.white)
                                     .padding(.top)
+                                    .frame(width: (g.size.width/3), height: nil, alignment: .center)
                                     .fixedSize(horizontal: false, vertical: true)
                                  Text("\(self.workoutData.totalWorkoutsAllTime ?? 0)")
                                     .font(.system(size: 100))
@@ -131,58 +138,35 @@ struct ProfileView: View {
                                     .foregroundColor(Color.white)
                                     .padding(.bottom)
                             }
-                            .frame(width: g.size.width/2, height: 120, alignment: .center)
+                            .frame(width: (g.size.width/2), height: 140, alignment: .center)
                             .background(LinearGradient(gradient: .init(colors: [Color("X_1"), Color("X_2")]), startPoint: .top, endPoint: .bottom))
                             .cornerRadius(5)
                             .shadow(radius: 1)
-                             
+
                             VStack {
                                 VStack(alignment: .center) {
                                     Text("This Month")
+                                        .foregroundColor(Color(UIColor.tertiaryLabel))
                                     Text("\(self.workoutData.totalWorkoutsThisMonth ?? 0)")
                                         .font(.title)
                                         .fontWeight(.heavy)
                                         .minimumScaleFactor(0.01)
-                                        .foregroundColor(Color("B_1"))
                                 }
                                 Spacer()
                                 VStack(alignment: .center) {
                                     Text("This Week")
+                                        .foregroundColor(Color(UIColor.tertiaryLabel))
                                      Text("\(self.workoutData.totalWorkoutsThisWeek ?? 0)")
                                         .font(.title)
                                         .fontWeight(.heavy)
                                         .minimumScaleFactor(0.01)
-                                        .foregroundColor(Color("AM_1"))
                                 }
                             }
-                            .frame(width: g.size.width/2, height: 120, alignment: .center)
-                        }.padding()
-
-                         VStack {
-                             Section(header: SectionHeader(text: "App Info")) {
-                                 NavigationLink(destination: AboutScreen()) {
-                                     Text("About")
-                                 }
-                                 NavigationLink(destination: Feedback()) {
-                                     Text("Feedback")
-                                 }
-                             }
-                         }
+                            .frame(width: g.size.width/3, height: 120, alignment: .center)
+                        }.padding([.top, .leading, .trailing])
                     }
                 }
 
-                
-//                List {
-//                    Section(header: SectionHeader(text: "App Info")) {
-//                        NavigationLink(destination: AboutScreen()) {
-//                            Text("About")
-//                        }
-//                        NavigationLink(destination: Feedback()) {
-//                            Text("Feedback")
-//                        }
-//                    }
-//                }
-//                .listStyle(GroupedListStyle()).environment(\.horizontalSizeClass, .regular)
             }
             .navigationBarTitle(Text("Workout History"), displayMode: .large)
             .navigationBarItems(trailing: Button(action: {

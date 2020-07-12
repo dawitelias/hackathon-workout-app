@@ -20,6 +20,8 @@ struct WorkoutDetailRevamped: View {
     @State var workoutHRData: [Double]? = nil
     @State var selectedChart: Int = 2 // HR Chart selected by default
 
+    @Environment(\.colorScheme) var colorScheme
+
     var body: some View {
         let workoutDistance = workout.totalDistance?.doubleValue(for: .mile()) ?? 0
         let distanceString = "\(String.init(format: "%.2f", workoutDistance))mi"
@@ -113,14 +115,21 @@ struct WorkoutDetailRevamped: View {
                     VStack(alignment: .leading) {
                         NavigationLink(destination: FullScreenMapView(route: route!)) {
                             VStack {
-                                EsriMapCard(route: route!)
-                                    .frame(width: nil, height: 200, alignment: .center)
-                                    .cornerRadius(20)
+                                if workout.getImageFromDocumentsDirectory(colorScheme: colorScheme) != nil {
+                                    Image(uiImage: workout.getImageFromDocumentsDirectory(colorScheme: colorScheme)!)
+                                        .resizable()
+                                        .frame(height: 200)
+                                        .cornerRadius(20)
+                                } else {
+                                    EsriMapCard(workout: workout, route: route!)
+                                        .frame(width: nil, height: 200, alignment: .center)
+                                        .cornerRadius(20)
+                                }
                                 Text("(tap to expand)")
                                     .font(.callout)
                             }
                             
-                        }
+                        }.buttonStyle(PlainButtonStyle())
                         
                     }
                     .padding(.leading, 5)

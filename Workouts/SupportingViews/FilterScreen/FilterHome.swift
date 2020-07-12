@@ -87,6 +87,15 @@ struct FilterHome: View {
                     }
                 }
                 
+                Section(header: SectionHeader(text: "App Info")) {
+                    NavigationLink(destination: AboutScreen()) {
+                        Text("About")
+                    }
+                    NavigationLink(destination: Feedback()) {
+                        Text("Feedback")
+                    }
+                }
+                
             }.listStyle(GroupedListStyle()).environment(\.horizontalSizeClass, .regular)
             .navigationBarTitle(Text("Filters"), displayMode: .large)
             .navigationBarItems(trailing: Button(action: {

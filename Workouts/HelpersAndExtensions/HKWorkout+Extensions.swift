@@ -5,6 +5,9 @@
 //  Created by Emily Cheroske on 4/15/20.
 //  Copyright © 2020 Dawit Elias. All rights reserved.
 //
+import Foundation
+import UIKit
+import SwiftUI
 import HealthKit
 import CoreLocation
 
@@ -97,5 +100,27 @@ extension HKWorkout {
             completion(results, nil)
         }
         HKHealthStore().execute(heartRateQuery)
+    }
+
+    func writeImageToDocumentsDirectory(image: UIImage, colorScheme: ColorScheme) {
+        let imageName = "\(self.uuid)_\(colorScheme == .dark ? "dark" : "light").png"
+        let imageURL = getDocumentsDirectory().appendingPathComponent(imageName)
+        if let data = image.pngData() {
+            do {
+                try data.write(to: imageURL, options: .atomic)
+            } catch {
+                print("error writing image: \(error.localizedDescription)")
+            }
+        }
+    }
+    func getImageFromDocumentsDirectory(colorScheme: ColorScheme) -> UIImage? {
+        var imageView: UIImage? = nil
+        let mapImagePath = "\(self.uuid)_\(colorScheme == .dark ? "dark" : "light").png"
+        var mapCardPhotosPath = getDocumentsDirectory().appendingPathComponent(mapImagePath)
+        
+        if FileManager.default.fileExists(atPath: mapCardPhotosPath.path) {
+            imageView = UIImage(contentsOfFile: mapCardPhotosPath.path)
+        }
+        return imageView
     }
 }
