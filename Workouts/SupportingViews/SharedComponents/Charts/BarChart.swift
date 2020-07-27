@@ -73,6 +73,87 @@ struct XAxis: View {
         }
     }
 }
+struct XAxisGridLines: View {
+    @Environment(\.colorScheme) var colorScheme
+
+    var numLines: Int
+    var xStart: Double
+
+    var body: some View {
+        let gridColor = UIColor.lightGray.withAlphaComponent(colorScheme == .dark ? 0.1 : 0.7)
+
+        return GeometryReader { g in
+            ForEach(0...self.numLines - 1, id: \.self) { i in
+                VStack {
+                    Path { path in
+                        path.move(to: CGPoint(x: CGFloat(self.xStart) + g.size.width/CGFloat(self.numLines) * CGFloat(i), y: 0))
+                        path.addLine(to: CGPoint(x: CGFloat(self.xStart) + g.size.width/CGFloat(self.numLines) * CGFloat(i), y: g.size.height))
+                    }
+                    .stroke(style: StrokeStyle(lineWidth: 1))
+                    .foregroundColor(Color(gridColor))
+                }
+                .foregroundColor(Color(gridColor))
+                .frame(width: g.size.width,height: 0.5)
+                .padding(0)
+            }
+        }
+    }
+}
+struct YAxisGridLines: View {
+    @Environment(\.colorScheme) var colorScheme
+
+    var numLines: Int
+    
+    // User is optionally allowed to pass in info for axis labels
+    //
+    var withLabels: Bool? = nil
+    var maxValue: Double? = nil
+    var minValue: Double? = nil
+    var unit: String? = nil
+
+    var body: some View {
+        let gridColor = UIColor.lightGray.withAlphaComponent(colorScheme == .dark ? 0.3 : 0.7)
+        
+        let increment = ((maxValue ?? 0) - (minValue ?? 0))/Double(numLines)
+
+        return GeometryReader { g in
+            ZStack(alignment: .leading) {
+            // VStack for the lines behind the bars
+            //
+            VStack(alignment: .center) {
+                //Spacer()
+                ForEach(0...self.numLines, id: \.self) { i in
+                    VStack(alignment: .leading, spacing: 0) {
+                        if i != 0 {
+                            Spacer()
+                        }
+                        if i != 0 && self.withLabels != nil && self.withLabels! == true && self.unit != nil && self.minValue != nil {
+                            Text("\(Int(increment * Double(self.numLines - i) + self.minValue!)) \(self.unit!)")
+                                .font(.caption)
+                                .fontWeight(.thin)
+                                .minimumScaleFactor(0.01)
+                                .padding(.leading, 5)
+                                .foregroundColor(Color.gray)
+                                .frame(height: g.size.height/CGFloat(2 * self.numLines))
+                        }
+                        VStack {
+                            Path{ path in
+                                path.move(to: CGPoint(x: 0, y: 0))
+                                path.addLine(to: CGPoint(x: g.size.width, y: 0))
+                            }
+                            .stroke(style: StrokeStyle( lineWidth: 1, dash: [1]))
+                            .foregroundColor(Color(gridColor))
+                        }
+                        .foregroundColor(Color(gridColor))
+                        .frame(width: g.size.width,height: 0.5)
+                        .padding(0)
+                    }
+                }
+            }
+        }
+    }
+    }
+}
 struct BarChartMidSection: View {
     let data: [Int]
     let unit: String
@@ -86,27 +167,12 @@ struct BarChartMidSection: View {
         let dataRange = CGFloat(max - 0)
         let barPadding: CGFloat = 1.0
         let chartPadding: CGFloat = CGFloat(data.count) * barPadding
-        let vLineColor = UIColor.lightGray.withAlphaComponent(colorScheme == .dark ? 0.3 : 0.7)
+        
 
         return GeometryReader { g in
             ZStack(alignment: .bottom) {
-                // VStack for the lines behind the bars
-                //
-                VStack(alignment: .center) {
-                    //Spacer()
-                    ForEach(0...5, id: \.self) { i in
-                        VStack {
-                            if i != 0 {
-                                Spacer()
-                            }
-                            Rectangle()
-                                .size(width: g.size.width, height: 0.5)
-                                .foregroundColor(Color(vLineColor))
-                                 .frame(height: 0.5)
-                                .padding(0)
-                        }
-                    }
-                }
+
+                YAxisGridLines(numLines: 5)
 
                 // Horizontal Stack for the Bars
                 //

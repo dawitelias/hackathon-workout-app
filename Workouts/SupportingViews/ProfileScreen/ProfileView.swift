@@ -22,51 +22,59 @@ struct ProfileView: View {
 
     var body: some View {
 
-        HealthKitAssistant.getNumWorkoutsPerWeek(numMonthsBack: 3) { results, error in
-            if let error = error {
-                print(error.localizedDescription)
-                return
-            }
-            let res = results?.sorted(by: { $0.0 < $1.0 })
+        if self.chartsDateLabels.count == 0 && self.timeValues.count == 0 && self.distanceValues.count == 0 && self.caloriesValues.count == 0 {
+            let numMonthsBack = 3
 
-            var calorieResults = [Date: Double]()
-            var distanceResults = [Date: Double]()
-            var timeResults = [Date: TimeInterval]()
-
-            if var startDate = res?.first?.key {
-
-                // We need to increment the start date by 1 week, access the value in the original results and append it to our final results, and if it doesn't exist, we need to add the incremented date with a 0
-                while startDate < Date() {
-                    if let theWorkouts = results?[startDate] {
-                        calorieResults[startDate] = 0
-                        timeResults[startDate] = 0
-                        distanceResults[startDate] = 0
-
-                        for i in 0...theWorkouts.count - 1 {
-                            calorieResults[startDate]! += theWorkouts[i].totalEnergyBurned?.doubleValue(for: .kilocalorie()) ?? 0.0
-                            timeResults[startDate]! += theWorkouts[i].duration
-                            distanceResults[startDate]! += theWorkouts[i].totalDistance?.doubleValue(for: .mile()) ?? 0
-                        }
-                        
-                    } else {
-                        calorieResults[startDate] = 0
-                        distanceResults[startDate] = 0
-                        timeResults[startDate] = 0
-                    }
-                    startDate = Calendar.current.date(byAdding: .weekOfYear, value: 1, to: startDate)!
+            HealthKitAssistant.getNumWorkoutsPerWeek(numMonthsBack: numMonthsBack) { results, error in
+                if let error = error {
+                    print(error.localizedDescription)
+                    return
                 }
-            }
+                let res = results?.sorted(by: { $0.0 < $1.0 })
 
-            let sortedCals = calorieResults.sorted(by: { $0.key > $1.key }).reversed()
-            let sortedDist = distanceResults.sorted(by: { $0.key > $1.key }).reversed()
-            let sortedTime = timeResults.sorted(by: { $0.key > $1.key }).reversed()
+                var calorieResults = [Date: Double]()
+                var distanceResults = [Date: Double]()
+                var timeResults = [Date: TimeInterval]()
 
-            self.chartsDateLabels = sortedTime.map { $0.key.weekAbbreviated }
-            self.timeValues = sortedTime.map { totalSeconds in
-                return Int(round(totalSeconds.value / 3600.0)) // <- convert to hours
+                let components = Calendar.current.dateComponents([.weekOfYear, .yearForWeekOfYear], from: Calendar.current.date(byAdding: .month, value: -numMonthsBack, to: Date())!)
+
+                if var startDate = Calendar.current.date(from: components) {
+
+                    // We need to increment the start date by 1 week, access the value in the original results and append it to our final results, and if it doesn't exist, we need to add the incremented date with a 0
+                    while startDate < Date() {
+                        if let theWorkouts = results?[startDate] {
+                            calorieResults[startDate] = 0
+                            timeResults[startDate] = 0
+                            distanceResults[startDate] = 0
+
+                            for i in 0...theWorkouts.count - 1 {
+                                calorieResults[startDate]! += theWorkouts[i].totalEnergyBurned?.doubleValue(for: .kilocalorie()) ?? 0.0
+                                timeResults[startDate]! += theWorkouts[i].duration
+                                distanceResults[startDate]! += theWorkouts[i].totalDistance?.doubleValue(for: .mile()) ?? 0
+                            }
+                            
+                        } else {
+                            calorieResults[startDate] = 0
+                            distanceResults[startDate] = 0
+                            timeResults[startDate] = 0
+                        }
+                        let newDate = Calendar.current.date(byAdding: .weekOfYear, value: 1, to: startDate)!
+                        let newDateComponents = Calendar.current.dateComponents([.weekOfYear, .yearForWeekOfYear], from: newDate)
+                        startDate = Calendar.current.date(from: newDateComponents)!
+                    }
+                }
+
+                let sortedCals = calorieResults.sorted(by: { $0.key > $1.key }).reversed()
+                let sortedDist = distanceResults.sorted(by: { $0.key > $1.key }).reversed()
+                let sortedTime = timeResults.sorted(by: { $0.key > $1.key }).reversed()
+
+                self.chartsDateLabels = sortedTime.map { $0.key.weekAbbreviated }
+                self.timeValues = sortedTime.map { totalSeconds in
+                    return Int(round(totalSeconds.value / 3600.0)) // <- convert to hours
+                }
+                self.caloriesValues = sortedCals.map { Int(round($0.value)) }
+                self.distanceValues = sortedDist.map { Int(round($0.value)) }
             }
-            self.caloriesValues = sortedCals.map { Int(round($0.value)) }
-            self.distanceValues = sortedDist.map { Int(round($0.value)) }
         }
 
         return NavigationView {

@@ -55,7 +55,7 @@ struct PopupPanel: View {
                     Text("Average Speed:")
                         .font(.callout)
                         .fontWeight(.heavy)
-                    Text("\(getPaceString(selectedSegment: selectedSegment))\" pace - \(String(format: "%.1f", mphValue)) mph")
+                    Text("\(getPaceString(selectedSegment: selectedSegment)) - \(String(format: "%.1f", mphValue)) mph")
                         .font(.callout)
                         .fontWeight(.thin)
                 }.padding(.bottom, 5)
@@ -79,10 +79,8 @@ struct PopupPanel: View {
                     .padding(.top)
             }.padding([.leading, .trailing, .bottom])
         }
-        .frame(width: UIScreen.main.bounds.width - 16, height: nil, alignment: .center)
-        .background(Color(UIColor.secondarySystemBackground)
-            .cornerRadius(10)
-        .shadow(color: Color(colorScheme == .dark ? UIColor.black : UIColor.systemGray3), radius: 2, x: 1, y: 1)
+        .frame(width: UIScreen.main.bounds.width - 8, height: nil, alignment: .center)
+        .background(Blur().cornerRadius(5).shadow(color: Color(colorScheme == .dark ? UIColor.black : UIColor.systemGray3), radius: 2, x: 0, y: 0)
         )
         .padding()
     }

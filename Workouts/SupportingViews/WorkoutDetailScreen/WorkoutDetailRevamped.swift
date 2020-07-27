@@ -17,7 +17,7 @@ struct WorkoutDetailRevamped: View {
     let workout: HKWorkout
 
     @State var route: [CLLocation]? = nil
-    @State var workoutHRData: [Double]? = nil
+    @State var workoutHRData: [HeartRateReading] = [HeartRateReading]()
     @State var selectedChart: Int = 2 // HR Chart selected by default
 
     @Environment(\.colorScheme) var colorScheme
@@ -37,25 +37,25 @@ struct WorkoutDetailRevamped: View {
                 self.route = route
             }
         }
-        if workoutHRData == nil {
+        if workoutHRData.count == 0 {
             workout.getWorkoutHeartRateData() { results, error in
                 if let error = error {
                     // TODO: display to user
                     print(error.localizedDescription)
                     return
                 }
-                self.workoutHRData = results
+                if let heartRateResults = results {
+                    self.workoutHRData = heartRateResults
+                }
             }
         }
         
         var altitudeData: [Double]?
         var velocityData: [Double]?
-        var coordinates: [CLLocationCoordinate2D]?
         if let path = route, path.count > 0 {
             altitudeData = path.map { item in
                 return item.altitude
             }
-            coordinates = path.map { return $0.coordinate }
             velocityData = path.map { item in
                 return item.speed
             }
@@ -142,37 +142,38 @@ struct WorkoutDetailRevamped: View {
                     if selectedChart == 0 && route != nil {
                         VStack {
                             ElevationChart(routeData: route!)
-                        }.frame(width: nil, height: 200)
+                        }.frame(width: nil, height: 150)
                     }
                     if selectedChart == 1 && route != nil {
                         VStack {
                             SpeedChart(routeData: route!)
-                        }.frame(width: nil, height: 200)
+                        }.frame(width: nil, height: 150)
                     }
-                    if selectedChart == 2 && workoutHRData != nil {
+                    if selectedChart == 2 && workoutHRData.count > 2 {
                         VStack {
-                            HeartRateChart(heartRateData: workoutHRData!.reversed())
-                        }.frame(width: nil, height: 200)
+                            HeartRateChart(heartRateData: workoutHRData)
+                                .frame(width: nil, height: 150)
+                        }
                     }
 
                     // Only show the picker of there are multiple things to pick from
                     //
-                    if workoutHRData != nil && route != nil && route!.count != 0 {
-                        Picker(selection: $selectedChart, label: Text("What is your favorite color?")) {
+                    if workoutHRData.count > 0 && route != nil && route!.count != 0 {
+                        Picker(selection: $selectedChart, label: Text("Pick")) {
                             if altitudeData != nil {
                                 Text("Elevation").tag(0)
                             }
                             if velocityData != nil {
                                 Text("Speed").tag(1)
                             }
-                            if self.workoutHRData != nil {
+                            if self.workoutHRData.count > 0 {
                                 Text("Heart Rate").tag(2)
                             }
                         }
                         .pickerStyle(SegmentedPickerStyle())
                         .padding()
                     }
-                }
+                }.padding(.top, 20)
             }
         }
         .navigationBarTitle(Text(workout.workoutActivityType.workoutTypeMetadata.activityTypeDescription), displayMode: .large)

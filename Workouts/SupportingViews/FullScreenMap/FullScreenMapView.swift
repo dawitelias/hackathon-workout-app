@@ -12,12 +12,14 @@ import CoreLocation
 import MapKit
 import ArcGIS
 
+var generatedMapImage: UIImage = UIImage()
+
 struct FullScreenMapView: View {
     let route: [CLLocation]
     @State var showShareSheet: Bool = false
     @State var selectedSegment: [AGSFeature] = [AGSFeature]()
     @State var mapView: AGSMapView = AGSMapView(frame: .zero)
-    
+
     var body: some View {
         func getInfoText() -> String {
             var value = ""
@@ -42,12 +44,12 @@ struct FullScreenMapView: View {
             if selectedSegment.count == 1 {
                 CompleteSegmentPopup()
                     .transition(.slide)
-                    .offset(x: 0, y: -40)
+                    .offset(x: 0, y: -10)
             }
             if selectedSegment.count > 1 {
                 PopupPanel(selectedSegment: $selectedSegment)
                     .transition(.slide)
-                    .offset(x: 0, y: -40)
+                    .offset(x: 0, y: -10)
             }
         }
         .edgesIgnoringSafeArea(.vertical)

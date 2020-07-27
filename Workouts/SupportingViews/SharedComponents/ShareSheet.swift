@@ -33,6 +33,6 @@ struct ShareSheet: UIViewControllerRepresentable {
 }
 struct ShareSheet_Previews: PreviewProvider {
     static var previews: some View {
-        ShareSheet(activityItems: [Image("Running") as! AnyObject])
+        ShareSheet(activityItems: [Image("Running") as AnyObject])
     }
 }

@@ -9,20 +9,16 @@
 import SwiftUI
 
 struct HeartRateChart: View {
-    var heartRateData: [Double]
+    var heartRateData: [HeartRateReading]
 
     var body: some View {
-        let sumArray = heartRateData.reduce(0, +)
-        let average = heartRateData.count > 0 ? Int(sumArray/Double(heartRateData.count)) : 0
+        let heartRateValues = heartRateData.map { return Double($0.reading) }
+        let sumArray = heartRateValues.reduce(0, +)
+        let average = heartRateValues.count > 0 ? Int(Double(sumArray)/Double(heartRateValues.count)) : 0
 
         return VStack(alignment: .leading) {
-            Text("Heart Rate")
-                .font(.headline)
-                .fontWeight(.heavy)
-                .padding()
-
             if heartRateData.count > 0 {
-                Graph(rawData: heartRateData, capsuleColor: Color("AN_1"))
+                CapsuleGraph(data: heartRateValues, showAxisLabels: true, capsuleColor: Color("AN_1"), units: "bpm")
                 Text("Average HR: \(average) ❤️")
                     .font(.footnote)
                     .padding(.leading, 20)
@@ -37,6 +33,8 @@ struct HeartRateChart: View {
 
 struct HeartRateChart_Previews: PreviewProvider {
     static var previews: some View {
-        HeartRateChart(heartRateData: [66,67,70,77,80,77,65,63,62,60])
+        HeartRateChart(heartRateData: [
+            HeartRateReading(20, Date())
+        ])
     }
 }

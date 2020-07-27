@@ -73,7 +73,7 @@ extension HKWorkout {
         return (self.metadata?[temperatureKey] as? HKQuantity)?.doubleValue(for: .degreeFahrenheit()) ?? 0
     }
     
-    func getWorkoutHeartRateData(completion: @escaping ([Double]?, Error?) -> Void) {
+    func getWorkoutHeartRateData(completion: @escaping ([HeartRateReading]?, Error?) -> Void) {
         let startDate = self.startDate
         let endDate = self.endDate
 
@@ -92,9 +92,16 @@ extension HKWorkout {
                 return
             }
             let heartRateUnit: HKUnit = HKUnit.count().unitDivided(by: HKUnit.minute())
-            let results: [Double]? = results?.map { item in
-                guard let currData:HKQuantitySample = item as? HKQuantitySample else { return 0 }
-                return currData.quantity.doubleValue(for: heartRateUnit)
+            let results: [HeartRateReading]? = results?.reversed().map { item in
+                guard let currData:HKQuantitySample = item as? HKQuantitySample else {
+                    return HeartRateReading(0, item.startDate)
+                }
+                let reading = currData.quantity.doubleValue(for: heartRateUnit)
+                let dateRecorded = item.startDate
+                
+                print(item.startDate)
+
+                return HeartRateReading(Int(reading), dateRecorded)
             }
             
             completion(results, nil)
@@ -116,7 +123,7 @@ extension HKWorkout {
     func getImageFromDocumentsDirectory(colorScheme: ColorScheme) -> UIImage? {
         var imageView: UIImage? = nil
         let mapImagePath = "\(self.uuid)_\(colorScheme == .dark ? "dark" : "light").png"
-        var mapCardPhotosPath = getDocumentsDirectory().appendingPathComponent(mapImagePath)
+        let mapCardPhotosPath = getDocumentsDirectory().appendingPathComponent(mapImagePath)
         
         if FileManager.default.fileExists(atPath: mapCardPhotosPath.path) {
             imageView = UIImage(contentsOfFile: mapCardPhotosPath.path)

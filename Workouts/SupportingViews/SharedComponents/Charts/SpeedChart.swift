@@ -13,19 +13,14 @@ struct SpeedChart: View {
     var routeData: [CLLocation]
     
     var body: some View {
-        var data = routeData.map { return $0.speed }
+        var data = routeData.map { return metersPerSecondToMPH(pace: $0.speed) }
         data = data.filter { return $0 > 0 && $0 != nil }
         let averageSpeed = getAverageSpeed(segment: routeData)
         let mphValue = metersPerSecondToMPH(pace: averageSpeed)
 
         return VStack(alignment: .leading) {
-            Text("Workout Pace")
-                .font(.headline)
-                .fontWeight(.heavy)
-                .padding()
-
             if data.count > 0 {
-                Graph(rawData: data, capsuleColor: Color("K_1"))
+                CapsuleGraph(data: data, showAxisLabels: true, capsuleColor: Color("K_1"), units: "mph")
                 HStack {
                     Text("Average Pace: \(getPaceString(route: routeData)) - \(String(format: "%.1f", mphValue)) mph")
                         .font(.footnote)

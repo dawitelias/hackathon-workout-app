@@ -20,6 +20,10 @@ struct FeaturedWorkout: View {
 
     var body: some View {
         let workoutHrAndMin = workout.duration.getHoursAndMinutesString()
+        var distanceString = ""
+        if let dist = workout.totalDistance {
+            distanceString = "\(String.init(format: "%.2f", dist))mi"
+        }
         
         if route == nil {
             workout.getWorkoutLocationData() { results, error in
@@ -72,22 +76,28 @@ struct FeaturedWorkout: View {
                         ZStack(alignment: .topLeading) {
                             VStack(alignment: .leading, spacing: 5) {
                                 Text(workout.workoutActivityType.workoutTypeMetadata.activityTypeDescription)
-                                    .font(.largeTitle)
+                                    .font(.title)
                                     .fontWeight(.heavy)
                                     .foregroundColor(workout.workoutActivityType.workoutTypeMetadata.highlightColor)
-                                    .fixedSize()
+                                    .fixedSize(horizontal: false, vertical: true)
+                                    .minimumScaleFactor(0.01)
 
                                 Text("\(workoutHrAndMin)")
-                                    .font(.largeTitle)
+                                    .font(.title)
                                     .fontWeight(.heavy)
                                     .foregroundColor(Color(UIColor.label))
-
-                                if workout.totalEnergyBurned != nil {
-                                    Text("\(Int(workout.totalEnergyBurned!.doubleValue(for: .kilocalorie()))) cal")
-                                        .font(.largeTitle)
+                                
+                                if workout.totalDistance != nil {
+                                    Text(distanceString)
+                                        .font(.title)
                                         .fontWeight(.heavy)
                                         .foregroundColor(Color(UIColor.label))
-
+                                } else if workout.totalEnergyBurned != nil {
+                                    Text("\(Int(workout.totalEnergyBurned!.doubleValue(for: .kilocalorie()))) cal")
+                                        .font(.title)
+                                        .fontWeight(.heavy)
+                                        .foregroundColor(Color(UIColor.label))
+                                    
                                 }
 
 

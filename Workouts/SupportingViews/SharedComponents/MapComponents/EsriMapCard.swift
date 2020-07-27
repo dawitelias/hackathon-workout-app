@@ -148,7 +148,7 @@ struct EsriMapCard: UIViewRepresentable {
             workoutRoute = workoutRoute.filter { item in
                 return item.horizontalAccuracy > 0 && item.coordinate.latitude != 0 && item.coordinate.longitude != 0
             }
-            let density = Double(workoutRoute.count)/500.0
+            let density = Double(workoutRoute.count)/2000.0
             let stepCount = density < 1 ? 1 : Int(density)
             
             for index in stride(from: 0, to: workoutRoute.count - stepCount, by: stepCount) {

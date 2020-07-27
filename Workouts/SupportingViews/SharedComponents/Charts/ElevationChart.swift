@@ -13,20 +13,15 @@ import CoreLocation
 struct ElevationChart: View {
     var routeData: [CLLocation]
     var body: some View {
-        var data = routeData.map { return $0.altitude }
+        var data = routeData.map { return metersToFeet(meters: $0.altitude) }
         data = data.filter { return $0 > 0 && $0 != nil }
         let netElevationGain = getElevation(format: .net, segment: routeData)
         let totalGain = getElevation(format: .gain, segment: routeData)
         let totalLoss = getElevation(format: .loss, segment: routeData)
 
         return VStack(alignment: .leading) {
-            Text("Elevation Profile")
-                .font(.headline)
-                .fontWeight(.heavy)
-                .padding()
-
             if data.count != 0 {
-                Graph(rawData: data, capsuleColor: Color("V_1"), backgroundColor: Color(UIColor.systemBackground))
+                CapsuleGraph(data: data, showAxisLabels: true, capsuleColor: Color("V_1"), units: "feet")
                 HStack(alignment: .center) {
                     Text("Net Elevation Gain:")
                         .font(.footnote)

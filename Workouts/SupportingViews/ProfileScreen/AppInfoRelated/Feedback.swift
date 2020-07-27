@@ -24,11 +24,11 @@ struct Feedback: View {
                     Button("Feedback") {
                         self.isShowingMailView.toggle()
                     }
-                        .foregroundColor(.white)
+                        .foregroundColor(Color(UIColor.label))
                         .font(.title)
                         .padding()
                         .cornerRadius(5)
-                        .border(Color.white, width: 5)
+                    .border(Color(UIColor.label), width: 5)
                 } else {
                     Text("Can't send emails from this device")
                 }

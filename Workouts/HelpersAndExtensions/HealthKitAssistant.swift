@@ -229,7 +229,7 @@ class HealthKitAssistant {
     static func getNumWorkoutsPerWeek(numMonthsBack: Int, completion: @escaping ([Date: [HKWorkout]]?, Error?) -> Void) {
         // Get the date 3 months back
         //
-        var date = Calendar.current.date(byAdding: .month, value: -numMonthsBack, to: Date())
+        let date = Calendar.current.date(byAdding: .month, value: -numMonthsBack, to: Date())
         
         // Query the workouts for this timeframe
         //
