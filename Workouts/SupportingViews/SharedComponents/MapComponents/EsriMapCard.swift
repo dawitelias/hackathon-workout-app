@@ -25,10 +25,6 @@ struct EsriMapCard: UIViewRepresentable {
     }
     func updateUIView(_ uiView: AGSMapView, context: Context) {
         
-        // TODO: Save an image of this view, if the image exists, then DO NOT use the map,
-        // just use the saved image!!!
-        //
-        
         guard let url = colorScheme == .dark ? URL(string: BasemapUrls.dark.rawValue) : URL(string: BasemapUrls.light.rawValue) else {
             return
         }

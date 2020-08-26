@@ -13,7 +13,7 @@ import MapKit
 
 var generatedMapImageTwo: UIImage = UIImage()
 
-struct WorkoutDetailRevamped: View {
+struct WorkoutDetail: View {
     let workout: HKWorkout
 
     @State var route: [CLLocation]? = nil
@@ -180,8 +180,8 @@ struct WorkoutDetailRevamped: View {
     }
 }
 
-struct WorkoutDetailRevamped_Previews: PreviewProvider {
+struct WorkoutDetail_Previews: PreviewProvider {
     static var previews: some View {
-        WorkoutDetailRevamped(workout: HKWorkout(activityType: .running, start: Date(), end: Date()))
+        WorkoutDetail(workout: HKWorkout(activityType: .running, start: Date(), end: Date()))
     }
 }

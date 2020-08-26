@@ -65,7 +65,7 @@ struct AboutPageCard: View {
                         }.padding(.leading, 5)
                     }
                 }
-            }//.offset(y: -30)
+            }
         }
     }
 }

@@ -51,7 +51,7 @@ struct HomeView: View {
                             ScrollView(.horizontal, showsIndicators: true) {
                                 HStack(alignment: .top, spacing: 20) {
                                     ForEach(workoutsDoneToday!, id: \.self) { workout in
-                                        NavigationLink(destination: WorkoutDetailRevamped(workout: workout)) {
+                                        NavigationLink(destination: WorkoutDetail(workout: workout)) {
                                             DailyWorkout(workout: workout)
                                         }.buttonStyle(PlainButtonStyle())
                                     }
@@ -67,7 +67,7 @@ struct HomeView: View {
                     Section(header: SectionHeader(text: "Your latest workout 🏅")) {
                         ZStack {
                             FeaturedWorkout(workout: featuredWorkout!)
-                            NavigationLink(destination: WorkoutDetailRevamped(workout: featuredWorkout!)) {
+                            NavigationLink(destination: WorkoutDetail(workout: featuredWorkout!)) {
                                 EmptyView()
                             }
                         }
@@ -115,7 +115,7 @@ struct HomeView: View {
                     }) {
                         if grouped[key] != nil {
                             ForEach(grouped[key]!, id: \.self) { workout in
-                                NavigationLink(destination: WorkoutDetailRevamped(workout: workout)) {
+                                NavigationLink(destination: WorkoutDetail(workout: workout)) {
                                     WorkoutRow(workout: workout)
                                 }
                                 .padding(.vertical, 8.0)
