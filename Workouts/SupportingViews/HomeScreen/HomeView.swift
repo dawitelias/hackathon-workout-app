@@ -10,9 +10,10 @@ import SwiftUI
 import HealthKit
 
 struct HomeView: View {
-    @EnvironmentObject var workoutData: WorkoutData
 
     @Environment(\.presentationMode) var presentation
+
+    @EnvironmentObject var workoutData: WorkoutData
 
     @State var showFilterView = false
     @State var showProfileView = false
@@ -46,27 +47,44 @@ struct HomeView: View {
                 // fall back to showing the featured workout
                 //
                 if workoutsDoneToday != nil && workoutsDoneToday!.count > 1 {
+
                     Section(header: SectionHeader(text: "Your workouts today 🏅")) {
+
                         VStack(alignment: .leading, spacing: nil) {
+
                             ScrollView(.horizontal, showsIndicators: true) {
+
                                 HStack(alignment: .top, spacing: 20) {
+                                    
                                     ForEach(workoutsDoneToday!, id: \.self) { workout in
+
                                         NavigationLink(destination: WorkoutDetail(workout: workout)) {
+
                                             DailyWorkout(workout: workout)
+
                                         }.buttonStyle(PlainButtonStyle())
                                     }
+                                    
                                 }.padding(5)
+                                
                             }
+                            
                             NavigationLink(destination: DailySummary(workouts: workoutsDoneToday!)) {
                                 Text("View Daily Summary")
                                     .padding()
                             }
+                            
                         }
                     }
+
                 } else if featuredWorkout != nil {
+
                     Section(header: SectionHeader(text: "Your latest workout 🏅")) {
+
                         ZStack {
+
                             FeaturedWorkout(workout: featuredWorkout!)
+
                             NavigationLink(destination: WorkoutDetail(workout: featuredWorkout!)) {
                                 EmptyView()
                             }
@@ -107,14 +125,17 @@ struct HomeView: View {
                 }
 
                 ForEach(sortedDictionaryKeys, id: \.self) { key in
+
                     Section(header: VStack {
+
                         Text("\(key.month) \(key.year)")
-                            .padding(.all)
-                            .font(.system(size: 21, weight: .medium))
-                            .frame(width: UIScreen.main.bounds.width, alignment: .leading)
+
                     }) {
+
                         if grouped[key] != nil {
+
                             ForEach(grouped[key]!, id: \.self) { workout in
+                            
                                 NavigationLink(destination: WorkoutDetail(workout: workout)) {
                                     WorkoutRow(workout: workout)
                                 }
@@ -124,23 +145,29 @@ struct HomeView: View {
                     }
                 }
             }
-            .listStyle(GroupedListStyle()).environment(\.horizontalSizeClass, .regular)
+            .modifier(GroupedListModifier())
             .navigationBarTitle(Text("Workouts"))
             .navigationBarItems(leading:
+
                 Button(action: {
                     self.showProfileView.toggle()
                 }) {
-                    Image(systemName: "chart.bar").imageScale(.large)
+                
+                    Image(systemName: "calendar").imageScale(.large)
+                
                 }.sheet(isPresented: $showProfileView) {
-                    ProfileView(showProfileView: self.$showProfileView).environmentObject(self.workoutData)
+
+                    WorkoutHistoryView(viewModel: WorkoutHistoryViewModel(), showProfileView: self.$showProfileView)
+
                 }, trailing:
-                Button(action: {
-                    self.showFilterView.toggle()
-                }) {
-                    Image(systemName: "line.horizontal.3.decrease.circle").imageScale(.large)
-                }.sheet(isPresented: $showFilterView) {
-                    FilterHome(showFilterView: self.$showFilterView).environmentObject(self.workoutData)
-                }
+                    
+                    Button(action: {
+                        self.showFilterView.toggle()
+                    }) {
+                        Image(systemName: "line.horizontal.3.decrease.circle").imageScale(.large)
+                    }.sheet(isPresented: $showFilterView) {
+                        FilterHome(showFilterView: self.$showFilterView).environmentObject(self.workoutData)
+                    }
             )
         }
         .accentColor(.pink)

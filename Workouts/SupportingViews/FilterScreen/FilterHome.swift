@@ -96,7 +96,8 @@ struct FilterHome: View {
                     }
                 }
                 
-            }.listStyle(GroupedListStyle()).environment(\.horizontalSizeClass, .regular)
+            }
+            .modifier(GroupedListModifier())
             .navigationBarTitle(Text("Filters"), displayMode: .large)
             .navigationBarItems(trailing: Button(action: {
                 self.showFilterView = false

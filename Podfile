@@ -6,7 +6,7 @@ target 'Workouts' do
   use_frameworks!
 
   # Pods for Workouts
-  pod 'ArcGIS-Runtime-SDK-iOS', '~> 100.8'
+  pod 'ArcGIS-Runtime-SDK-iOS', '~> 100.9'
 
   target 'WorkoutsTests' do
     inherit! :search_paths

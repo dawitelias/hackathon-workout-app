@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 51;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -28,6 +28,10 @@
 		A546226E2455223F003BA285 /* DailyWorkout.swift in Sources */ = {isa = PBXBuildFile; fileRef = A546226D2455223F003BA285 /* DailyWorkout.swift */; };
 		A54622762459C7A4003BA285 /* DailySummary.swift in Sources */ = {isa = PBXBuildFile; fileRef = A54622752459C7A4003BA285 /* DailySummary.swift */; };
 		A54A7E4324840B4900358DFB /* LandingPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = A54A7E4224840B4900358DFB /* LandingPage.swift */; };
+		A5516D7E256058DA00BDAB2D /* SwiftUICharts in Frameworks */ = {isa = PBXBuildFile; productRef = A5516D7D256058DA00BDAB2D /* SwiftUICharts */; };
+		A5516D8325605D0600BDAB2D /* WorkoutHistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5516D8225605D0600BDAB2D /* WorkoutHistoryView.swift */; };
+		A5516D8825605D1400BDAB2D /* WorkoutHistoryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5516D8725605D1400BDAB2D /* WorkoutHistoryViewModel.swift */; };
+		A5516D8E2562158F00BDAB2D /* GroupedListModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5516D8D2562158F00BDAB2D /* GroupedListModifier.swift */; };
 		A553D4C724B91E8400F02007 /* RouteCalculationsHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A553D4C624B91E8400F02007 /* RouteCalculationsHelper.swift */; };
 		A553D4C924B9607B00F02007 /* FileHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A553D4C824B9607B00F02007 /* FileHelper.swift */; };
 		A55C84E52449EC3F00D81C44 /* Blur.swift in Sources */ = {isa = PBXBuildFile; fileRef = A55C84E42449EC3F00D81C44 /* Blur.swift */; };
@@ -117,6 +121,9 @@
 		A546226D2455223F003BA285 /* DailyWorkout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyWorkout.swift; sourceTree = "<group>"; };
 		A54622752459C7A4003BA285 /* DailySummary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailySummary.swift; sourceTree = "<group>"; };
 		A54A7E4224840B4900358DFB /* LandingPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LandingPage.swift; sourceTree = "<group>"; };
+		A5516D8225605D0600BDAB2D /* WorkoutHistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutHistoryView.swift; sourceTree = "<group>"; };
+		A5516D8725605D1400BDAB2D /* WorkoutHistoryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutHistoryViewModel.swift; sourceTree = "<group>"; };
+		A5516D8D2562158F00BDAB2D /* GroupedListModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupedListModifier.swift; sourceTree = "<group>"; };
 		A553D4C624B91E8400F02007 /* RouteCalculationsHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouteCalculationsHelper.swift; sourceTree = "<group>"; };
 		A553D4C824B9607B00F02007 /* FileHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileHelper.swift; sourceTree = "<group>"; };
 		A55C84E42449EC3F00D81C44 /* Blur.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Blur.swift; sourceTree = "<group>"; };
@@ -176,6 +183,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A5516D7E256058DA00BDAB2D /* SwiftUICharts in Frameworks */,
 				AC46323E244781E800619284 /* HealthKit.framework in Frameworks */,
 				4B73A6B52EF9B0C0AD711F96 /* Pods_Workouts.framework in Frameworks */,
 			);
@@ -219,6 +227,8 @@
 				A562B6BC245A722E00742ECF /* AppInfoRelated */,
 				A562B6BB245A722500742ECF /* ProfileRelated */,
 				AC46323F2447863600619284 /* ProfileView.swift */,
+				A5516D8225605D0600BDAB2D /* WorkoutHistoryView.swift */,
+				A5516D8725605D1400BDAB2D /* WorkoutHistoryViewModel.swift */,
 			);
 			path = ProfileScreen;
 			sourceTree = "<group>";
@@ -234,6 +244,7 @@
 		A5199FCE24548717002474AD /* SharedComponents */ = {
 			isa = PBXGroup;
 			children = (
+				A5516D8C2562157A00BDAB2D /* ViewModifiers */,
 				A5A4DC3424B258B100FA7580 /* MapComponents */,
 				A5F5A71E24871E110051C7BB /* ActivityTypeFilterPill.swift */,
 				A52F3687247ABB00008DE35B /* AboutPageCard.swift */,
@@ -342,6 +353,14 @@
 				A54A7E4224840B4900358DFB /* LandingPage.swift */,
 			);
 			path = HealthKitPermissions;
+			sourceTree = "<group>";
+		};
+		A5516D8C2562157A00BDAB2D /* ViewModifiers */ = {
+			isa = PBXGroup;
+			children = (
+				A5516D8D2562158F00BDAB2D /* GroupedListModifier.swift */,
+			);
+			path = ViewModifiers;
 			sourceTree = "<group>";
 		};
 		A562B6BB245A722500742ECF /* ProfileRelated */ = {
@@ -471,13 +490,16 @@
 				AC4632022447593700619284 /* Sources */,
 				AC4632032447593700619284 /* Frameworks */,
 				AC4632042447593700619284 /* Resources */,
-				C5576539BBC43F7231BF76B7 /* [CP] Embed Pods Frameworks */,
+				49D476F814BA60F288513632 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
 			name = Workouts;
+			packageProductDependencies = (
+				A5516D7D256058DA00BDAB2D /* SwiftUICharts */,
+			);
 			productName = Workouts;
 			productReference = AC4632062447593700619284 /* Workouts.app */;
 			productType = "com.apple.product-type.application";
@@ -509,7 +531,7 @@
 				AC4632232447593C00619284 /* Sources */,
 				AC4632242447593C00619284 /* Frameworks */,
 				AC4632252447593C00619284 /* Resources */,
-				99AB91AA647CF39322C27848 /* [CP] Embed Pods Frameworks */,
+				21CF2FC9FE0E449A5870EEDE /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -553,6 +575,9 @@
 				Base,
 			);
 			mainGroup = AC4631FD2447593700619284;
+			packageReferences = (
+				A5516D7C256058DA00BDAB2D /* XCRemoteSwiftPackageReference "ChartView" */,
+			);
 			productRefGroup = AC4632072447593700619284 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -614,6 +639,23 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
+		21CF2FC9FE0E449A5870EEDE /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Workouts-WorkoutsUITests/Pods-Workouts-WorkoutsUITests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Workouts-WorkoutsUITests/Pods-Workouts-WorkoutsUITests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Workouts-WorkoutsUITests/Pods-Workouts-WorkoutsUITests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		2FA36E8D86886D5BDC723B29 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -636,6 +678,23 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
+		49D476F814BA60F288513632 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Workouts/Pods-Workouts-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Workouts/Pods-Workouts-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Workouts/Pods-Workouts-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		4D22497FAE1DA1C04DC173FC /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -656,40 +715,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		99AB91AA647CF39322C27848 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Workouts-WorkoutsUITests/Pods-Workouts-WorkoutsUITests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Workouts-WorkoutsUITests/Pods-Workouts-WorkoutsUITests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Workouts-WorkoutsUITests/Pods-Workouts-WorkoutsUITests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		C5576539BBC43F7231BF76B7 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Workouts/Pods-Workouts-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Workouts/Pods-Workouts-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Workouts/Pods-Workouts-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -718,6 +743,7 @@
 				A51514482460F1B800D4D643 /* Icon.swift in Sources */,
 				A562B6C0245A724E00742ECF /* AboutScreen.swift in Sources */,
 				A50E464A2449E76000D1F435 /* FeaturedWorkout.swift in Sources */,
+				A5516D8325605D0600BDAB2D /* WorkoutHistoryView.swift in Sources */,
 				A5221E74245462ED005416BC /* DurationFilter.swift in Sources */,
 				A562B6C4245A72C900742ECF /* Feedback.swift in Sources */,
 				A5B6CEE32448913300CF2B86 /* Date+Extensions.swift in Sources */,
@@ -729,6 +755,7 @@
 				A5FB56A024BB7675001A2273 /* MapUseInstructions.swift in Sources */,
 				A55C84E52449EC3F00D81C44 /* Blur.swift in Sources */,
 				A530794124BFD9660086CF01 /* CapsuleGraph.swift in Sources */,
+				A5516D8E2562158F00BDAB2D /* GroupedListModifier.swift in Sources */,
 				A582894D244F7B7C00B7B6B0 /* FilterPill.swift in Sources */,
 				A5D8CD0E2468806100DC54FA /* FullScreenMapView.swift in Sources */,
 				A5B3497924AFCAA200EDD653 /* Array+Extensions.swift in Sources */,
@@ -744,6 +771,7 @@
 				A546226E2455223F003BA285 /* DailyWorkout.swift in Sources */,
 				A5B6CEEB2448D91100CF2B86 /* ShareSheet.swift in Sources */,
 				A5221E6E24545F00005416BC /* FilterHome.swift in Sources */,
+				A5516D8825605D1400BDAB2D /* WorkoutHistoryViewModel.swift in Sources */,
 				AC4632402447863600619284 /* ProfileView.swift in Sources */,
 				A553D4C724B91E8400F02007 /* RouteCalculationsHelper.swift in Sources */,
 				AC46320C2447593700619284 /* SceneDelegate.swift in Sources */,
@@ -1092,6 +1120,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		A5516D7C256058DA00BDAB2D /* XCRemoteSwiftPackageReference "ChartView" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/AppPear/ChartView";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.5.4;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		A5516D7D256058DA00BDAB2D /* SwiftUICharts */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A5516D7C256058DA00BDAB2D /* XCRemoteSwiftPackageReference "ChartView" */;
+			productName = SwiftUICharts;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = AC4631FE2447593700619284 /* Project object */;
 }

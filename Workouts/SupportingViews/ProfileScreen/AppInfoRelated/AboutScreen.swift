@@ -11,77 +11,7 @@ import SwiftUI
 struct AboutScreen: View {
     var body: some View {
         ScrollView(.vertical, showsIndicators: false) {
-            // TODO: WHEN THE APP IS FINISHED ADD IN SCREENSHOTS
-
-//            VStack(alignment: .leading, spacing: nil) {
-//                Text("Bringing GIS to your Workouts")
-//                    .font(.headline)
-//                    .fontWeight(.bold)
-//                Text("Explore your workout data in a new way by leveraging the power of GIS.")
-//                    .font(.callout)
-//                    .fontWeight(.thin)
-//                    .frame(height: 50)
-//                    .lineLimit(10)
-//            }.padding()
-//            Image("HighlightedRoute")
-//                .resizable()
-//                .scaledToFit()
-//                .frame(width: 200.0,height:400)
-//                .cornerRadius(20)
-//                .shadow(color: Color.gray, radius: 1, x: 0, y: 0)
-//
-//            VStack(alignment: .leading, spacing: nil) {
-//                Text("Advanced Filtering")
-//                    .font(.headline)
-//                    .fontWeight(.bold)
-//                Text("Now you can search by distance, calories, duration and more to find that workout you want to show off to your friends.")
-//                    .font(.callout)
-//                    .fontWeight(.thin)
-//                    .frame(height: 100)
-//                    .lineLimit(10)
-//            }.padding()
-//
-//            VStack(alignment: .leading, spacing: nil) {
-//                Text("Workout History")
-//                    .font(.headline)
-//                    .fontWeight(.bold)
-//                Text("Get a sense of the number of all time workouts you've completed, how many you've done this month, and how the week is going.")
-//                    .font(.callout)
-//                    .fontWeight(.thin)
-//                    .frame(height: 100)
-//                    .lineLimit(10)
-//            }.padding()
-//
-//            Image("WorkoutHistory")
-//                .resizable()
-//                .scaledToFit()
-//                .frame(width: 300.0,height:150)
-//                .cornerRadius(20)
-//                .shadow(color: Color.gray, radius: 1, x: 0, y: 0)
-//
-//            VStack(alignment: .leading, spacing: nil) {
-//                Text("Weekly Stats")
-//                    .font(.headline)
-//                    .fontWeight(.bold)
-//                Text("Get a high level overview of your weekly mileage, calories burned and time spend completing workouts.")
-//                    .font(.callout)
-//                    .fontWeight(.thin)
-//                    .frame(height: 100)
-//                    .lineLimit(10)
-//            }.padding()
-//
-//            Image("WeeklyStats")
-//                .resizable()
-//                .scaledToFit()
-//                .frame(width: 300.0,height:150)
-//                .cornerRadius(20)
-//                .shadow(color: Color.gray, radius: 1, x: 0, y: 0)
-//
-//            // Designer/developer section
-//            //
-//            Divider()
-//                .padding()
-            
+ 
             VStack {
                 Text("Designed By:")
                     .font(.title)

@@ -29,7 +29,7 @@ struct WorkoutsMultiSelect: View {
                 }
             }
         }
-        .listStyle(GroupedListStyle()).environment(\.horizontalSizeClass, .regular)
+        .modifier(GroupedListModifier())
         .navigationBarTitle("Workout Types")
     }
 }

@@ -10,6 +10,7 @@ import SwiftUI
 import HealthKit
 import CoreLocation
 import MapKit
+import SwiftUICharts
 
 var generatedMapImageTwo: UIImage = UIImage()
 
@@ -151,7 +152,7 @@ struct WorkoutDetail: View {
                     }
                     if selectedChart == 2 && workoutHRData.count > 2 {
                         VStack {
-                            HeartRateChart(heartRateData: workoutHRData)
+                            LineView(data: workoutHRData.map { Double($0.reading) }, title: "Heart Rate")
                                 .frame(width: nil, height: 150)
                         }
                     }

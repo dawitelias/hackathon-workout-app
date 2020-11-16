@@ -74,7 +74,7 @@ struct DailySummary: View {
                     }
                 }
             }
-            .listStyle(GroupedListStyle()).environment(\.horizontalSizeClass, .regular)
+            .modifier(GroupedListModifier())
             .navigationBarTitle(Text("Daily Summary"))
         }
     }

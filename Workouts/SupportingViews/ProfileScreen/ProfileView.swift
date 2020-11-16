@@ -8,6 +8,7 @@
 
 import SwiftUI
 import HealthKit
+import SwiftUICharts
 
 struct ProfileView: View {
     @EnvironmentObject private var workoutData: WorkoutData
@@ -81,6 +82,9 @@ struct ProfileView: View {
             ScrollView {
                 if self.chartsDateLabels.count != 0 && self.caloriesValues.count != 0 && self.timeValues.count != 0 && self.distanceValues.count != 0 {
                     if selectedChart == 0 {
+//                        BarChartView(data: ChartData(values: [("2018 Q4",63150), ("2019 Q1",50900), ("2019 Q2",77550), ("2019 Q3",79600), ("2019 Q4",92550)]), title: "Sales", legend: "Quarterly")
+//                            .frame(width: nil, height: 270)
+
                         BarChart(
                             chartTitle: "Weekly Calorie Expenditure (kcal)",
                             unit: "",

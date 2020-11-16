@@ -14,22 +14,26 @@ struct FilterPill: View {
 
     var body: some View {
         HStack {
+
             Text(activityFilter.filterDescription)
                 .foregroundColor(.white)
                 .padding(EdgeInsets(top: 5, leading: 10, bottom: 5, trailing: 0))
                 .font(.footnote)
                 .fixedSize(horizontal: false, vertical: true)
-            Button(action: {
-                self.workoutData.toggleWorkoutFilterApplied(filter: self.activityFilter)
-            }) {
-                Image(systemName: "xmark")
-                    .foregroundColor(.white)
-                    .imageScale(.small)
-            }.padding(EdgeInsets(top: 5, leading: 5, bottom: 5, trailing: 10))
+
+            Spacer()
+
+            Image(systemName: "xmark")
+                .foregroundColor(.white)
+                .imageScale(.small)
+                .padding()
         }
         .background(self.activityFilter.color)
         .cornerRadius(20)
         .padding(2)
+        .onTapGesture {
+            self.workoutData.toggleWorkoutFilterApplied(filter: self.activityFilter)
+        }
     }
 }
 
