@@ -141,21 +141,30 @@ class WorkoutDetailViewModel: ObservableObject {
     
     // MARK: Chart Data
     //
-    var simplifiedHRData: [HeartRateReading] {
+    var simplifiedHRData: [HeartRateReading]? {
+        guard workoutHRData != nil else {
+            return nil
+        }
 
         // We never want to have more datapoints than we have pixels on the screen / 2?
         //
-        let proportion = CGFloat(workoutHRData?.count ?? 0)/(UIScreen.main.bounds.width/CGFloat(2))
+        let proportion = CGFloat(workoutHRData?.count ?? 0)/(UIScreen.main.bounds.width/CGFloat(4))
 
         // If the proportion is less than 0, then we know there are fewer data points than there are pixels on the screen
         // so we can go ahead and display all of them. Otherwise, we want to take the division and ROUND DOWN, so that we don't
         // ever try to access an item outside of the array
         //
-        let strideAmount = proportion < 0 ? 1 : Int(proportion.rounded(.down)) // always want to round
+        var strideAmount = proportion <= 0 ? 1 : Int(proportion.rounded(.down)) // always want to round
 
-        return workoutHRData?.indices.compactMap {
-            if $0 % strideAmount != 0 { return workoutHRData?[$0] }
+        if strideAmount == 0 {
+            strideAmount = 1
+        }
+
+        let simplifiedData: [HeartRateReading]? = workoutHRData?.indices.compactMap {
+            if $0 % strideAmount == 0 { return workoutHRData?[$0] }
             else { return nil }
-        } ?? []
+        }
+
+        return simplifiedData
     }
 }

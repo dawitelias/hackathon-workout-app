@@ -129,6 +129,7 @@ struct WorkoutDetail: View {
 
                     // MARK: Heart Rate Chart
                     //
+                    
                     if selectedChart == 2 {
 
                         if viewModel.errorFetchingWorkoutHRData {
@@ -137,22 +138,23 @@ struct WorkoutDetail: View {
                                 Text("There was an error loading the workout heart rate data.")
                                 Button("Retry Load") { viewModel.retryLoadWorkoutHeartRateData() }
                             }.padding()
-                            
-                        } else if let heartRateData = viewModel.workoutHRData, heartRateData.count >= 2 {
 
-                            LineView(data: viewModel.simplifiedHRData.map { $0.reading }, title: "Heart Rate")
+                        } else if let simplifiedHRData = viewModel.simplifiedHRData, simplifiedHRData.count > 2 {
+
+                            LineView(data: simplifiedHRData.map { $0.reading }, title: "Heart Rate")
                                 .frame(width: nil, height: 350)
+                                .padding(.horizontal)
 
-                        } else if let heartRateData = viewModel.workoutHRData, heartRateData.count < 2 {
-                            
+                        } else if let simplifiedHRData = viewModel.simplifiedHRData, simplifiedHRData.count > 2 {
+
                             Text("No heart rate data for this workout.")
-                            
+
                         } else {
-                            
+
                             Text("Heart rate data is loading.")
 
                         }
-                        
+
                     }
 
                     Picker(selection: $selectedChart, label: Text("Pick")) {
