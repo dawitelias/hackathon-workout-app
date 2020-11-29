@@ -22,40 +22,68 @@ struct FilterHome: View {
 
         return NavigationView {
             List {
+
                 Section {
+
                     NavigationLink(destination: WorkoutsMultiSelect().environmentObject(workoutData)) {
+
                         HStack {
-                            Text("Workouts")
+
+                            Text("Activity Types")
+                                .fontWeight(.light)
+
                             Spacer()
+
                             Text(workoutsIndicationText)
                                 .font(.footnote)
                                 .foregroundColor(Color.gray)
                         }
                     }
                 }
+
                 Section {
+
                     NavigationLink(destination: DateFilter().environmentObject(workoutData)) {
+                        
                         HStack {
-                            Text("Date")
+
+                            Text("Date Range")
+                                .fontWeight(.light)
+
                             Spacer()
+
                             Text(self.workoutData.dateRangeFilter.isApplied ? "On" : "Off")
                                 .font(.footnote)
                                 .foregroundColor(Color.gray)
                         }
                     }
+
                     NavigationLink(destination: DistanceFilter().environmentObject(workoutData)) {
+
                         HStack {
+
                             Text("Distance")
+                                .fontWeight(.light)
+
                             Spacer()
+
                             Text(self.workoutData.distanceFilter.isApplied ? "On" : "Off")
                                 .font(.footnote)
                                 .foregroundColor(Color.gray)
+
                         }
+
                     }
+
                     NavigationLink(destination: DurationFilter().environmentObject(workoutData)) {
+
                         HStack {
+
                             Text("Duration")
+                                .fontWeight(.light)
+
                             Spacer()
+
                             Text(self.workoutData.durationFilter.isApplied ? "On" : "Off")
                                 .font(.footnote)
                                 .foregroundColor(Color.gray)
@@ -64,6 +92,7 @@ struct FilterHome: View {
                     NavigationLink(destination: CaloriesFilter().environmentObject(workoutData)) {
                         HStack {
                             Text("Calories Burned")
+                                .fontWeight(.light)
                             Spacer()
                             Text(self.workoutData.calorieFilter.isApplied ? "On" : "Off")
                                 .font(.footnote)
@@ -93,6 +122,9 @@ struct FilterHome: View {
                     }
                     NavigationLink(destination: Feedback()) {
                         Text("Feedback")
+                    }
+                    NavigationLink(destination: Licensing()) {
+                        Text("Acknowledgements")
                     }
                 }
                 

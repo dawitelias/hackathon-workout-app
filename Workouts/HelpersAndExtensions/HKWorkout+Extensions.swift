@@ -98,10 +98,8 @@ extension HKWorkout {
                 }
                 let reading = currData.quantity.doubleValue(for: heartRateUnit)
                 let dateRecorded = item.startDate
-                
-                print(item.startDate)
 
-                return HeartRateReading(Int(reading), dateRecorded)
+                return HeartRateReading(reading, dateRecorded)
             }
             
             completion(results, nil)

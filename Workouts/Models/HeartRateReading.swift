@@ -9,10 +9,10 @@
 import Foundation
 
 class HeartRateReading {
-    let reading: Int
+    let reading: Double
     let date: Date
     
-    init(_ reading: Int, _ dateTaken: Date) {
+    init(_ reading: Double, _ dateTaken: Date) {
         self.reading = reading
         self.date = dateTaken
     }

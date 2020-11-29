@@ -68,7 +68,7 @@ struct DailySummary: View {
                         .frame(width: UIScreen.main.bounds.width, alignment: .leading)
                 }) {
                     ForEach(workouts, id: \.self) { workout in
-                        NavigationLink(destination: WorkoutDetail(workout: workout)) {
+                        NavigationLink(destination: WorkoutDetail(viewModel: WorkoutDetailViewModel(workout: workout))) {
                             WorkoutRow(workout: workout)
                         }.padding(.vertical, 8.0)
                     }

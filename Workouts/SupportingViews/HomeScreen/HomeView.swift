@@ -58,7 +58,7 @@ struct HomeView: View {
                                     
                                     ForEach(workoutsDoneToday!, id: \.self) { workout in
 
-                                        NavigationLink(destination: WorkoutDetail(workout: workout)) {
+                                        NavigationLink(destination: WorkoutDetail(viewModel: WorkoutDetailViewModel(workout: workout))) {
 
                                             DailyWorkout(workout: workout)
 
@@ -85,7 +85,7 @@ struct HomeView: View {
 
                             FeaturedWorkout(workout: featuredWorkout!)
 
-                            NavigationLink(destination: WorkoutDetail(workout: featuredWorkout!)) {
+                            NavigationLink(destination: WorkoutDetail(viewModel: WorkoutDetailViewModel(workout: featuredWorkout!))) {
                                 EmptyView()
                             }
                         }
@@ -136,7 +136,7 @@ struct HomeView: View {
 
                             ForEach(grouped[key]!, id: \.self) { workout in
                             
-                                NavigationLink(destination: WorkoutDetail(workout: workout)) {
+                                NavigationLink(destination: WorkoutDetail(viewModel: WorkoutDetailViewModel(workout: workout))) {
                                     WorkoutRow(workout: workout)
                                 }
                                 .padding(.vertical, 8.0)

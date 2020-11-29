@@ -28,12 +28,12 @@ struct FilterPill: View {
                 .imageScale(.small)
                 .padding()
         }
-        .background(self.activityFilter.color)
-        .cornerRadius(20)
-        .padding(2)
         .onTapGesture {
             self.workoutData.toggleWorkoutFilterApplied(filter: self.activityFilter)
         }
+        .background(self.activityFilter.color)
+        .cornerRadius(20)
+        .padding(2)
     }
 }
 

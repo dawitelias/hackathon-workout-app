@@ -15,65 +15,33 @@ import SwiftUICharts
 var generatedMapImageTwo: UIImage = UIImage()
 
 struct WorkoutDetail: View {
-    let workout: HKWorkout
 
-    @State var route: [CLLocation]? = nil
-    @State var workoutHRData: [HeartRateReading] = [HeartRateReading]()
+    let viewModel: WorkoutDetailViewModel
+
     @State var selectedChart: Int = 2 // HR Chart selected by default
 
     @Environment(\.colorScheme) var colorScheme
 
     var body: some View {
-        let workoutDistance = workout.totalDistance?.doubleValue(for: .mile()) ?? 0
-        let distanceString = "\(String.init(format: "%.2f", workoutDistance))mi"
-        let workoutTimer = workout.duration.getTimerStyleActivityDurationString()
-        let workoutHrAndMin = workout.duration.getHoursAndMinutesString()
-        
-        if route == nil {
-            workout.getWorkoutLocationData { route, error in
-                if error != nil {
-                    print(error!.localizedDescription)
-                    return
-                }
-                self.route = route
-            }
-        }
-        if workoutHRData.count == 0 {
-            workout.getWorkoutHeartRateData() { results, error in
-                if let error = error {
-                    // TODO: display to user
-                    print(error.localizedDescription)
-                    return
-                }
-                if let heartRateResults = results {
-                    self.workoutHRData = heartRateResults
-                }
-            }
-        }
-        
-        var altitudeData: [Double]?
-        var velocityData: [Double]?
-        if let path = route, path.count > 0 {
-            altitudeData = path.map { item in
-                return item.altitude
-            }
-            velocityData = path.map { item in
-                return item.speed
-            }
-        }
         
         return ScrollView {
+
             VStack(alignment: .leading) {
+
                 HStack {
-                    Icon(image: Image(workout.workoutActivityType.workoutTypeMetadata.systemIconName), mainColor: workout.workoutActivityType.workoutTypeMetadata.mainColor, highlightColor: workout.workoutActivityType.workoutTypeMetadata.highlightColor, size: 50)
+
+                    Icon(image: Image(viewModel.iconName), mainColor: viewModel.mainColor, highlightColor: viewModel.highlightColor, size: 50)
                         .padding()
+
                     VStack(alignment: .leading) {
+
                         HStack {
-                            Text("\(workout.startDate.weekday), \(workout.startDate.date)")
+                            Text("\(viewModel.workout.startDate.weekday), \(viewModel.workout.startDate.date)")
                                 .font(.subheadline)
                                 .foregroundColor(Color.gray)
                         }
-                        Text("\(workoutHrAndMin) 🔥")
+                        
+                        Text("\(viewModel.workoutHoursAndMinutes) 🔥")
                             .font(.system(.largeTitle, design: .rounded))
                     }
                 }
@@ -81,30 +49,30 @@ struct WorkoutDetail: View {
                     Spacer()
                     VStack(alignment: .leading) {
                         Text("Total Time")
-                        Text(workoutTimer)
+                        Text(viewModel.workoutTimerDescription)
                             .font(.title)
                             .fontWeight(.regular)
                             .minimumScaleFactor(0.01)
-                            .foregroundColor(workout.workoutActivityType.workoutTypeMetadata.mainColor)
+                            .foregroundColor(viewModel.mainColor)
                     }
                     Spacer()
                     VStack(alignment: .leading) {
                         Text("Calories")
-                        Text("\(workout.totalEnergyBurned?.doubleValue(for: .kilocalorie()) ?? 0, specifier: "%.0f")cal")
+                        Text(viewModel.numberOfCaloriesBurned)
                             .font(.title)
                             .fontWeight(.regular)
                             .minimumScaleFactor(0.01)
-                            .foregroundColor(workout.workoutActivityType.workoutTypeMetadata.mainColor)
+                            .foregroundColor(viewModel.mainColor)
                     }
                     Spacer()
-                    if route != nil && route!.count != 0 {
+                    if viewModel.route != nil && viewModel.route!.count != 0 {
                         VStack(alignment: .leading) {
                             Text("Distance")
-                            Text(distanceString)
+                            Text(viewModel.workoutDistanceDescription)
                                 .font(.title)
                                 .fontWeight(.regular)
                                 .minimumScaleFactor(0.01)
-                                .foregroundColor(workout.workoutActivityType.workoutTypeMetadata.mainColor)
+                                .foregroundColor(viewModel.mainColor)
                         }
                     }
                     Spacer()
@@ -112,19 +80,27 @@ struct WorkoutDetail: View {
 
                 // Render a map showing route data if the workout HAS route data...
                 //
-                if route != nil && route!.count != 0 {
+                if viewModel.route != nil && viewModel.route!.count != 0 {
+
                     VStack(alignment: .leading) {
-                        NavigationLink(destination: FullScreenMapView(route: route!)) {
+
+                        NavigationLink(destination: FullScreenMapView(route: viewModel.route!)) {
+
                             VStack {
-                                if workout.getImageFromDocumentsDirectory(colorScheme: colorScheme) != nil {
-                                    Image(uiImage: workout.getImageFromDocumentsDirectory(colorScheme: colorScheme)!)
+
+                                if viewModel.workout.getImageFromDocumentsDirectory(colorScheme: colorScheme) != nil {
+
+                                    Image(uiImage: viewModel.workout.getImageFromDocumentsDirectory(colorScheme: colorScheme)!)
                                         .resizable()
                                         .frame(height: 200)
                                         .cornerRadius(20)
+
                                 } else {
-                                    EsriMapCard(workout: workout, route: route!)
+
+                                    EsriMapCard(workout: viewModel.workout, route: viewModel.route!)
                                         .frame(width: nil, height: 200, alignment: .center)
                                         .cornerRadius(20)
+
                                 }
                                 Text("(tap to expand)")
                                     .font(.callout)
@@ -140,49 +116,72 @@ struct WorkoutDetail: View {
                 // Show pace data, elevation data and HR data
                 //
                 VStack(alignment: .leading) {
-                    if selectedChart == 0 && route != nil {
-                        VStack {
-                            ElevationChart(routeData: route!)
-                        }.frame(width: nil, height: 150)
-                    }
-                    if selectedChart == 1 && route != nil {
-                        VStack {
-                            SpeedChart(routeData: route!)
-                        }.frame(width: nil, height: 150)
-                    }
-                    if selectedChart == 2 && workoutHRData.count > 2 {
-                        VStack {
-                            LineView(data: workoutHRData.map { Double($0.reading) }, title: "Heart Rate")
-                                .frame(width: nil, height: 150)
+//                    if selectedChart == 0 && viewModel.route != nil {
+//                        VStack {
+//                            ElevationChart(routeData: route!)
+//                        }.frame(width: nil, height: 150)
+//                    }
+//                    if selectedChart == 1 && route != nil {
+//                        VStack {
+//                            SpeedChart(routeData: route!)
+//                        }.frame(width: nil, height: 150)
+//                    }
+
+                    // MARK: Heart Rate Chart
+                    //
+                    if selectedChart == 2 {
+
+                        if viewModel.errorFetchingWorkoutHRData {
+
+                            VStack(alignment: .center, spacing: 5) {
+                                Text("There was an error loading the workout heart rate data.")
+                                Button("Retry Load") { viewModel.retryLoadWorkoutHeartRateData() }
+                            }.padding()
+                            
+                        } else if let heartRateData = viewModel.workoutHRData, heartRateData.count >= 2 {
+
+                            LineView(data: viewModel.simplifiedHRData.map { $0.reading }, title: "Heart Rate")
+                                .frame(width: nil, height: 350)
+
+                        } else if let heartRateData = viewModel.workoutHRData, heartRateData.count < 2 {
+                            
+                            Text("No heart rate data for this workout.")
+                            
+                        } else {
+                            
+                            Text("Heart rate data is loading.")
+
                         }
+                        
                     }
 
-                    // Only show the picker of there are multiple things to pick from
-                    //
-                    if workoutHRData.count > 0 && route != nil && route!.count != 0 {
-                        Picker(selection: $selectedChart, label: Text("Pick")) {
-                            if altitudeData != nil {
-                                Text("Elevation").tag(0)
-                            }
-                            if velocityData != nil {
-                                Text("Speed").tag(1)
-                            }
-                            if self.workoutHRData.count > 0 {
-                                Text("Heart Rate").tag(2)
-                            }
+                    Picker(selection: $selectedChart, label: Text("Pick")) {
+
+                        if viewModel.altitudeData != nil {
+                            Text("Elevation").tag(0)
                         }
-                        .pickerStyle(SegmentedPickerStyle())
-                        .padding()
+
+                        if viewModel.velocityData != nil {
+                            Text("Speed").tag(1)
+                        }
+
+                        if let workoutHRData = viewModel.workoutHRData, workoutHRData.count > 0 {
+                            Text("Heart Rate").tag(2)
+                        }
+
                     }
+                    .pickerStyle(SegmentedPickerStyle())
+                    .padding()
+
                 }.padding(.top, 20)
             }
         }
-        .navigationBarTitle(Text(workout.workoutActivityType.workoutTypeMetadata.activityTypeDescription), displayMode: .large)
+        .navigationBarTitle(Text(viewModel.workout.workoutActivityType.workoutTypeMetadata.activityTypeDescription), displayMode: .large)
     }
 }
 
 struct WorkoutDetail_Previews: PreviewProvider {
     static var previews: some View {
-        WorkoutDetail(workout: HKWorkout(activityType: .running, start: Date(), end: Date()))
+        WorkoutDetail(viewModel: WorkoutDetailViewModel(workout: HKWorkout(activityType: .running, start: Date(), end: Date())))
     }
 }
