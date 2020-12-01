@@ -99,7 +99,7 @@ class WorkoutDetailViewModel: ObservableObject {
         return workout.totalEnergyBurned?.doubleValue(for: .kilocalorie()) ?? 0
     }
     var numberOfCaloriesBurned: String {
-        return String(format: "%.0f cal", [workoutCalories])
+        return String(format: "%.0f cal", workoutCalories)
     }
 
     // Time
@@ -114,7 +114,7 @@ class WorkoutDetailViewModel: ObservableObject {
     // Distance
     //
     var workoutDistanceDescription: String {
-        String(format: "%.2f mi", [workout.totalDistance?.doubleValue(for: .mile()) ?? 0])
+        return String(format: "%.2f mi", workout.totalDistance?.doubleValue(for: .mile()) ?? 0)
     }
     
     // Altitude Data
@@ -140,6 +140,9 @@ class WorkoutDetailViewModel: ObservableObject {
     }
     
     // MARK: Chart Data
+    //
+    
+    // HEART RATE DATA
     //
     var simplifiedHRData: [HeartRateReading]? {
         guard workoutHRData != nil else {
@@ -167,4 +170,24 @@ class WorkoutDetailViewModel: ObservableObject {
 
         return simplifiedData
     }
+    
+    // SPEED DATA
+    //
+    var speedData: [Double] {
+        return route?
+            .map { metersPerSecondToMPH(pace: $0.speed) }
+            .filter { $0 > 0 } ?? []
+    }
+    var averageSpeed: Double {
+        getAverageSpeed(segment: route ?? [])
+    }
+    var mphValue: Double {
+        metersPerSecondToMPH(pace: averageSpeed)
+    }
+    var averagePaceDescription: String {
+        "Average Pace: \(getPaceString(route: route ?? [])) - \(String(format: "%.1f", mphValue)) mph"
+    }
+    
+    // ELEVATION DATA
+    //
 }

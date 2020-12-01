@@ -23,6 +23,13 @@ struct WorkoutDetail: View {
     @Environment(\.colorScheme) var colorScheme
 
     var body: some View {
+        // MARK: Custom chart styles
+        //
+        let heartRateChartStyle = ChartStyle(backgroundColor: Color(UIColor.systemBackground), accentColor: viewModel.highlightColor, gradientColor: GradientColor(start: Color("AL_1"), end: Color("AQ_1")), textColor: Color(UIColor.label), legendTextColor: Color(UIColor.secondaryLabel), dropShadowColor: Color(UIColor.systemFill))
+
+        let speedChartStyle = ChartStyle(backgroundColor: Color(UIColor.systemBackground), accentColor: viewModel.highlightColor, gradientColor: GradientColor(start: Color("AQ_1"), end: Color("B_1")), textColor: Color(UIColor.label), legendTextColor: Color(UIColor.secondaryLabel), dropShadowColor: Color(UIColor.systemFill))
+
+        let elevationChartStyle = ChartStyle(backgroundColor: Color(UIColor.systemBackground), accentColor: viewModel.highlightColor, gradientColor: GradientColor(start: Color("AQ_1"), end: Color("B_1")), textColor: Color(UIColor.label), legendTextColor: Color(UIColor.secondaryLabel), dropShadowColor: Color(UIColor.systemFill))
         
         return ScrollView {
 
@@ -86,7 +93,7 @@ struct WorkoutDetail: View {
 
                         NavigationLink(destination: FullScreenMapView(route: viewModel.route!)) {
 
-                            VStack {
+                            ZStack(alignment: .topTrailing) {
 
                                 if viewModel.workout.getImageFromDocumentsDirectory(colorScheme: colorScheme) != nil {
 
@@ -102,8 +109,20 @@ struct WorkoutDetail: View {
                                         .cornerRadius(20)
 
                                 }
-                                Text("(tap to expand)")
-                                    .font(.callout)
+                                // Shows the
+                                ZStack {
+                                    Circle()
+                                        .foregroundColor(Color(UIColor.label.withAlphaComponent(0.8)))
+
+                                    Image(systemName: "rectangle.and.arrow.up.right.and.arrow.down.left")
+                                        .resizable()
+                                        .foregroundColor(viewModel.mainColor)
+                                        .frame(width: 18, height: 23)
+                                        .padding()
+                                }
+                                .frame(width: 25, height: 25)
+                                .padding(20)
+
                             }
                             
                         }.buttonStyle(PlainButtonStyle())
@@ -121,11 +140,16 @@ struct WorkoutDetail: View {
 //                            ElevationChart(routeData: route!)
 //                        }.frame(width: nil, height: 150)
 //                    }
-//                    if selectedChart == 1 && route != nil {
-//                        VStack {
-//                            SpeedChart(routeData: route!)
-//                        }.frame(width: nil, height: 150)
-//                    }
+
+                    // MARK: Speed Chart
+                    //
+                    if selectedChart == 1 {
+
+                        LineView(data: viewModel.speedData, title: "Speed (MPH)", style: speedChartStyle, valueSpecifier: "%.2f")
+                            .frame(width: nil, height: 350)
+                            .padding(.horizontal)
+
+                    }
 
                     // MARK: Heart Rate Chart
                     //
@@ -141,7 +165,7 @@ struct WorkoutDetail: View {
 
                         } else if let simplifiedHRData = viewModel.simplifiedHRData, simplifiedHRData.count > 2 {
 
-                            LineView(data: simplifiedHRData.map { $0.reading }, title: "Heart Rate")
+                            LineView(data: simplifiedHRData.map { $0.reading }, title: "Heart Rate (BPM)", style: heartRateChartStyle, valueSpecifier: "%.0f")
                                 .frame(width: nil, height: 350)
                                 .padding(.horizontal)
 

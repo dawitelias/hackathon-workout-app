@@ -22,6 +22,7 @@ struct Icon: View {
                 .frame(width: size, height: size, alignment: .center)
                 .padding(size * 0.3)
                 .foregroundColor(Color(UIColor.label))
+                .animation(.easeInOut, value: size)
             
         }
         .background(LinearGradient(

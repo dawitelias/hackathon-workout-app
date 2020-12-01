@@ -48,7 +48,7 @@ struct HomeView: View {
                 //
                 if workoutsDoneToday != nil && workoutsDoneToday!.count > 1 {
 
-                    Section(header: SectionHeader(text: "Your workouts today 🏅")) {
+                    Section(header: Text("Your workouts today 🏅")) {
 
                         VStack(alignment: .leading, spacing: nil) {
 
@@ -79,7 +79,7 @@ struct HomeView: View {
 
                 } else if featuredWorkout != nil {
 
-                    Section(header: SectionHeader(text: "Your latest workout 🏅")) {
+                    Section(header: Text("Your latest workout 🏅")) {
 
                         ZStack {
 

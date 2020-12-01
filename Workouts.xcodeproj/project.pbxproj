@@ -29,20 +29,17 @@
 		A546226E2455223F003BA285 /* DailyWorkout.swift in Sources */ = {isa = PBXBuildFile; fileRef = A546226D2455223F003BA285 /* DailyWorkout.swift */; };
 		A54622762459C7A4003BA285 /* DailySummary.swift in Sources */ = {isa = PBXBuildFile; fileRef = A54622752459C7A4003BA285 /* DailySummary.swift */; };
 		A54A7E4324840B4900358DFB /* LandingPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = A54A7E4224840B4900358DFB /* LandingPage.swift */; };
-		A5516D7E256058DA00BDAB2D /* SwiftUICharts in Frameworks */ = {isa = PBXBuildFile; productRef = A5516D7D256058DA00BDAB2D /* SwiftUICharts */; };
 		A5516D8325605D0600BDAB2D /* WorkoutHistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5516D8225605D0600BDAB2D /* WorkoutHistoryView.swift */; };
 		A5516D8825605D1400BDAB2D /* WorkoutHistoryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5516D8725605D1400BDAB2D /* WorkoutHistoryViewModel.swift */; };
 		A5516D8E2562158F00BDAB2D /* GroupedListModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5516D8D2562158F00BDAB2D /* GroupedListModifier.swift */; };
 		A553D4C724B91E8400F02007 /* RouteCalculationsHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A553D4C624B91E8400F02007 /* RouteCalculationsHelper.swift */; };
 		A553D4C924B9607B00F02007 /* FileHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A553D4C824B9607B00F02007 /* FileHelper.swift */; };
+		A558979F2575ABDD004A064B /* SwiftUICharts in Frameworks */ = {isa = PBXBuildFile; productRef = A558979E2575ABDD004A064B /* SwiftUICharts */; };
 		A55BCB842573279E0007E286 /* WorkoutDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A55BCB832573279E0007E286 /* WorkoutDetailViewModel.swift */; };
 		A55C84E52449EC3F00D81C44 /* Blur.swift in Sources */ = {isa = PBXBuildFile; fileRef = A55C84E42449EC3F00D81C44 /* Blur.swift */; };
 		A562B6BA245A6F4200742ECF /* SectionHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = A562B6B9245A6F4200742ECF /* SectionHeader.swift */; };
 		A562B6C0245A724E00742ECF /* AboutScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = A562B6BF245A724E00742ECF /* AboutScreen.swift */; };
 		A562B6C4245A72C900742ECF /* Feedback.swift in Sources */ = {isa = PBXBuildFile; fileRef = A562B6C3245A72C900742ECF /* Feedback.swift */; };
-		A562B6C6245A780900742ECF /* HealthInfoScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = A562B6C5245A780900742ECF /* HealthInfoScreen.swift */; };
-		A562B6C8245A786700742ECF /* WeeklySummary.swift in Sources */ = {isa = PBXBuildFile; fileRef = A562B6C7245A786700742ECF /* WeeklySummary.swift */; };
-		A562B6CA245A789E00742ECF /* Badges.swift in Sources */ = {isa = PBXBuildFile; fileRef = A562B6C9245A789E00742ECF /* Badges.swift */; };
 		A5780C6424A1891A00D79927 /* MockDataHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5780C6324A1891A00D79927 /* MockDataHelper.swift */; };
 		A582894D244F7B7C00B7B6B0 /* FilterPill.swift in Sources */ = {isa = PBXBuildFile; fileRef = A582894C244F7B7C00B7B6B0 /* FilterPill.swift */; };
 		A5828953244FC15600B7B6B0 /* WorkoutsMultiSelect.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5828952244FC15600B7B6B0 /* WorkoutsMultiSelect.swift */; };
@@ -59,8 +56,6 @@
 		A5B6CEEB2448D91100CF2B86 /* ShareSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B6CEEA2448D91100CF2B86 /* ShareSheet.swift */; };
 		A5D8CD042467751000DC54FA /* EsriMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5D8CD032467751000DC54FA /* EsriMapView.swift */; };
 		A5D8CD06246843FF00DC54FA /* ElevationChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5D8CD05246843FF00DC54FA /* ElevationChart.swift */; };
-		A5D8CD082468440900DC54FA /* SpeedChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5D8CD072468440900DC54FA /* SpeedChart.swift */; };
-		A5D8CD0A2468441700DC54FA /* HeartRateChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5D8CD092468441700DC54FA /* HeartRateChart.swift */; };
 		A5D8CD0C2468621E00DC54FA /* WorkoutDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5D8CD0B2468621E00DC54FA /* WorkoutDetail.swift */; };
 		A5D8CD0E2468806100DC54FA /* FullScreenMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5D8CD0D2468806100DC54FA /* FullScreenMapView.swift */; };
 		A5DC18F524B41BF800E4EE8C /* CompleteSegmentPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5DC18F424B41BF800E4EE8C /* CompleteSegmentPopup.swift */; };
@@ -134,9 +129,6 @@
 		A562B6B9245A6F4200742ECF /* SectionHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionHeader.swift; sourceTree = "<group>"; };
 		A562B6BF245A724E00742ECF /* AboutScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutScreen.swift; sourceTree = "<group>"; };
 		A562B6C3245A72C900742ECF /* Feedback.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Feedback.swift; sourceTree = "<group>"; };
-		A562B6C5245A780900742ECF /* HealthInfoScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthInfoScreen.swift; sourceTree = "<group>"; };
-		A562B6C7245A786700742ECF /* WeeklySummary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeeklySummary.swift; sourceTree = "<group>"; };
-		A562B6C9245A789E00742ECF /* Badges.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Badges.swift; sourceTree = "<group>"; };
 		A5780C6324A1891A00D79927 /* MockDataHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockDataHelper.swift; sourceTree = "<group>"; };
 		A582894C244F7B7C00B7B6B0 /* FilterPill.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterPill.swift; sourceTree = "<group>"; };
 		A5828952244FC15600B7B6B0 /* WorkoutsMultiSelect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutsMultiSelect.swift; sourceTree = "<group>"; };
@@ -153,8 +145,6 @@
 		A5B6CEEA2448D91100CF2B86 /* ShareSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareSheet.swift; sourceTree = "<group>"; };
 		A5D8CD032467751000DC54FA /* EsriMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EsriMapView.swift; sourceTree = "<group>"; };
 		A5D8CD05246843FF00DC54FA /* ElevationChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ElevationChart.swift; sourceTree = "<group>"; };
-		A5D8CD072468440900DC54FA /* SpeedChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeedChart.swift; sourceTree = "<group>"; };
-		A5D8CD092468441700DC54FA /* HeartRateChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeartRateChart.swift; sourceTree = "<group>"; };
 		A5D8CD0B2468621E00DC54FA /* WorkoutDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutDetail.swift; sourceTree = "<group>"; };
 		A5D8CD0D2468806100DC54FA /* FullScreenMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullScreenMapView.swift; sourceTree = "<group>"; };
 		A5DC18F424B41BF800E4EE8C /* CompleteSegmentPopup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompleteSegmentPopup.swift; sourceTree = "<group>"; };
@@ -187,7 +177,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A5516D7E256058DA00BDAB2D /* SwiftUICharts in Frameworks */,
+				A558979F2575ABDD004A064B /* SwiftUICharts in Frameworks */,
 				AC46323E244781E800619284 /* HealthKit.framework in Frameworks */,
 				4B73A6B52EF9B0C0AD711F96 /* Pods_Workouts.framework in Frameworks */,
 			);
@@ -229,7 +219,6 @@
 			isa = PBXGroup;
 			children = (
 				A562B6BC245A722E00742ECF /* AppInfoRelated */,
-				A562B6BB245A722500742ECF /* ProfileRelated */,
 				AC46323F2447863600619284 /* ProfileView.swift */,
 				A5516D8225605D0600BDAB2D /* WorkoutHistoryView.swift */,
 				A5516D8725605D1400BDAB2D /* WorkoutHistoryViewModel.swift */,
@@ -345,8 +334,6 @@
 			isa = PBXGroup;
 			children = (
 				A5D8CD05246843FF00DC54FA /* ElevationChart.swift */,
-				A5D8CD072468440900DC54FA /* SpeedChart.swift */,
-				A5D8CD092468441700DC54FA /* HeartRateChart.swift */,
 				A512CD7C24A6DC9E00643036 /* BarChart.swift */,
 				A530794024BFD9660086CF01 /* CapsuleGraph.swift */,
 			);
@@ -375,16 +362,6 @@
 				A5516D8D2562158F00BDAB2D /* GroupedListModifier.swift */,
 			);
 			path = ViewModifiers;
-			sourceTree = "<group>";
-		};
-		A562B6BB245A722500742ECF /* ProfileRelated */ = {
-			isa = PBXGroup;
-			children = (
-				A562B6C5245A780900742ECF /* HealthInfoScreen.swift */,
-				A562B6C7245A786700742ECF /* WeeklySummary.swift */,
-				A562B6C9245A789E00742ECF /* Badges.swift */,
-			);
-			path = ProfileRelated;
 			sourceTree = "<group>";
 		};
 		A562B6BC245A722E00742ECF /* AppInfoRelated */ = {
@@ -512,7 +489,7 @@
 			);
 			name = Workouts;
 			packageProductDependencies = (
-				A5516D7D256058DA00BDAB2D /* SwiftUICharts */,
+				A558979E2575ABDD004A064B /* SwiftUICharts */,
 			);
 			productName = Workouts;
 			productReference = AC4632062447593700619284 /* Workouts.app */;
@@ -590,7 +567,7 @@
 			);
 			mainGroup = AC4631FD2447593700619284;
 			packageReferences = (
-				A5516D7C256058DA00BDAB2D /* XCRemoteSwiftPackageReference "ChartView" */,
+				A558979D2575ABDD004A064B /* XCRemoteSwiftPackageReference "ChartView" */,
 			);
 			productRefGroup = AC4632072447593700619284 /* Products */;
 			projectDirPath = "";
@@ -739,15 +716,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				A52FBEFA2447C89300016025 /* WorkoutRow.swift in Sources */,
-				A5D8CD0A2468441700DC54FA /* HeartRateChart.swift in Sources */,
 				A5A7FCBB2479717B00247C24 /* UnitConversion.swift in Sources */,
 				A5A4DC3824B29D2F00FA7580 /* PopupPanel.swift in Sources */,
 				A5D8CD042467751000DC54FA /* EsriMapView.swift in Sources */,
 				A52F932524493C4900DDB791 /* ChuckNorris.swift in Sources */,
 				A514CB2F24CDDA17007C6A90 /* HeartRateReading.swift in Sources */,
 				A5828953244FC15600B7B6B0 /* WorkoutsMultiSelect.swift in Sources */,
-				A5D8CD082468440900DC54FA /* SpeedChart.swift in Sources */,
-				A562B6C6245A780900742ECF /* HealthInfoScreen.swift in Sources */,
 				A54A7E4324840B4900358DFB /* LandingPage.swift in Sources */,
 				A5221E72245462DB005416BC /* DistanceFilter.swift in Sources */,
 				A5F5A71F24871E110051C7BB /* ActivityTypeFilterPill.swift in Sources */,
@@ -766,7 +740,6 @@
 				A55BCB842573279E0007E286 /* WorkoutDetailViewModel.swift in Sources */,
 				A5AF6083244AAAAD00AB7E72 /* ToggleableHeader.swift in Sources */,
 				A5AF6087244BAA3900AB7E72 /* FilterTypes.swift in Sources */,
-				A562B6C8245A786700742ECF /* WeeklySummary.swift in Sources */,
 				A5FB56A024BB7675001A2273 /* MapUseInstructions.swift in Sources */,
 				A55C84E52449EC3F00D81C44 /* Blur.swift in Sources */,
 				A530794124BFD9660086CF01 /* CapsuleGraph.swift in Sources */,
@@ -777,7 +750,6 @@
 				A5D8CD06246843FF00DC54FA /* ElevationChart.swift in Sources */,
 				A5D8CD0C2468621E00DC54FA /* WorkoutDetail.swift in Sources */,
 				A5780C6424A1891A00D79927 /* MockDataHelper.swift in Sources */,
-				A562B6CA245A789E00742ECF /* Badges.swift in Sources */,
 				A52F368A247B0657008DE35B /* MailView.swift in Sources */,
 				A5221E76245462FE005416BC /* CaloriesFilter.swift in Sources */,
 				A5AF6085244BAA1200AB7E72 /* WorkoutData.swift in Sources */,
@@ -1138,20 +1110,20 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		A5516D7C256058DA00BDAB2D /* XCRemoteSwiftPackageReference "ChartView" */ = {
+		A558979D2575ABDD004A064B /* XCRemoteSwiftPackageReference "ChartView" */ = {
 			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/AppPear/ChartView";
+			repositoryURL = "https://github.com/emilyCheroske/ChartView";
 			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 1.5.4;
+				branch = master;
+				kind = branch;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		A5516D7D256058DA00BDAB2D /* SwiftUICharts */ = {
+		A558979E2575ABDD004A064B /* SwiftUICharts */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = A5516D7C256058DA00BDAB2D /* XCRemoteSwiftPackageReference "ChartView" */;
+			package = A558979D2575ABDD004A064B /* XCRemoteSwiftPackageReference "ChartView" */;
 			productName = SwiftUICharts;
 		};
 /* End XCSwiftPackageProductDependency section */

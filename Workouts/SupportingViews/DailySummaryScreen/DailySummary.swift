@@ -26,51 +26,84 @@ struct DailySummary: View {
         let workoutTimeString = TimeInterval(exactly: totalTime)?.getHoursAndMinutesString() ?? ""
 
         return VStack(alignment: .center, spacing: 10) {
+
             List {
+
                 Section(header: VStack {
-                    Text("Todays Stats:")
-                        .padding(.all)
-                        .font(.system(size: 21, weight: .medium))
+
+                    Text("Quick Glance")
+                        .padding(.leading)
                         .frame(width: UIScreen.main.bounds.width, alignment: .leading)
+
                 }, footer: VStack {
+
                     Text("These statistics are aggregated across the \(workouts.count) workouts you've completed today.")
+
                 }) {
+
+                    // Total Calories Burned
+                    //
                     VStack(alignment: .leading, spacing: 5) {
-                        Text("Total Calories Burned")
+
+                        Text("Total Calories Burned:")
                             .font(.callout)
                             .foregroundColor(Color.gray)
+
                         Text("\(String.init(format: "%.0f", totalCalories)) cal")
                             .font(.system(.largeTitle))
                             .fontWeight(.bold)
+
                     }
+
+                    // Total Duration
+                    //
                     VStack(alignment: .leading) {
-                        Text("Total Time:")
+
+                        Text("Total Duration:")
                             .font(.callout)
                             .foregroundColor(Color.gray)
+
                         Text("\(workoutTimeString)")
                             .font(.system(.largeTitle))
                             .fontWeight(.bold)
+
                     }
                     
+                    // Total Distance
+                    //
                     VStack(alignment: .leading) {
+
                         Text("Total Distance:")
                             .font(.callout)
                             .foregroundColor(Color.gray)
+
                         Text("\(String.init(format: "%.0f", totalDistance)) miles")
                             .font(.system(.largeTitle))
                             .fontWeight(.bold)
+
                     }
+
                 }
+
+                // List Workouts for the day
+                //
                 Section(header: VStack {
+
                     Text("More Detail 🏅")
-                        .padding(.all)
-                        .font(.system(size: 21, weight: .medium))
+                        .padding(.leading)
                         .frame(width: UIScreen.main.bounds.width, alignment: .leading)
+
                 }) {
+
                     ForEach(workouts, id: \.self) { workout in
+
                         NavigationLink(destination: WorkoutDetail(viewModel: WorkoutDetailViewModel(workout: workout))) {
+
                             WorkoutRow(workout: workout)
-                        }.padding(.vertical, 8.0)
+
+                        }
+                        .padding(.vertical, 8.0)
+
                     }
                 }
             }
