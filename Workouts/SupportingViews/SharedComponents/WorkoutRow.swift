@@ -10,14 +10,19 @@ import SwiftUI
 import HealthKit
 
 struct WorkoutRow: View {
+
     var workout: HKWorkout
-    var exerciseGreenColor: Color = Color(UIColor(named: "exerciseGreen")!)
 
     var body: some View {
+
         HStack {
+
             Icon(image: Image(workout.workoutActivityType.workoutTypeMetadata.systemIconName), mainColor: workout.workoutActivityType.workoutTypeMetadata.mainColor, highlightColor: workout.workoutActivityType.workoutTypeMetadata.highlightColor, size: 35)
+
             VStack(alignment: .leading) {
+
                 HStack {
+
                     Text(workout.workoutActivityType.workoutTypeMetadata.activityTypeDescription)
                         .lineLimit(1)
                         .fixedSize(horizontal: false, vertical: true)
@@ -26,14 +31,18 @@ struct WorkoutRow: View {
                         .font(.caption)
                         .foregroundColor(Color.gray)
                         .fixedSize()
+
                     Text("\(workout.startDate.weekday)")
                         .font(.caption)
                         .foregroundColor(Color.gray)
                         .fixedSize()
+
                 }
+
                 Text("\(workout.totalEnergyBurned?.doubleValue(for: .kilocalorie()) ?? 0, specifier: "%.0f")cal")
                     .font(.system(.largeTitle, design: .rounded))
-                    .foregroundColor(exerciseGreenColor)
+                    .foregroundColor(Color.green)
+
             }
             .padding(.leading)
         }

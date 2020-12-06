@@ -9,19 +9,24 @@
 import SwiftUI
 
 struct CircleImage: View {
+
     var image: Image
 
     var body: some View {
         image
             .resizable()
             .scaledToFit()
-            .frame(width: 40.0, height: 40.0)
             .clipShape(Circle())
-            .frame(width: 20, height: 20, alignment: .center)
-            .padding(10)
+            .frame(width: imageDimension, height: imageDimension, alignment: .center)
+            .padding(padding)
     }
+    
+    private let imageDimension: CGFloat = 20
+    private let padding: CGFloat = 10
 }
 
+// MARK: Previews
+//
 struct CircleImage_Previews: PreviewProvider {
     static var previews: some View {
         CircleImage(image: Image("Biking"))

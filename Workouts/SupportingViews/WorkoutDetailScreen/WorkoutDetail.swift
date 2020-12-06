@@ -15,20 +15,25 @@ var generatedMapImageTwo: UIImage = UIImage()
 
 struct WorkoutDetail: View {
 
+    @Environment(\.colorScheme) var colorScheme
+
     let viewModel: WorkoutDetailViewModel
 
     @State var selectedChart: Int = 2 // HR Chart selected by default
-
-    @Environment(\.colorScheme) var colorScheme
+    
+    // MARK: Custom chart styles
+    //
+    private var heartRateChartStyle: ChartStyle {
+        ChartStyle(backgroundColor: Color(UIColor.systemBackground), accentColor: viewModel.highlightColor, gradientColor: GradientColor(start: Color("AL_1"), end: Color("AQ_1")), textColor: Color(UIColor.label), legendTextColor: Color(UIColor.secondaryLabel), dropShadowColor: Color(UIColor.systemFill))
+    }
+    private var speedChartStyle: ChartStyle {
+        ChartStyle(backgroundColor: Color(UIColor.systemBackground), accentColor: viewModel.highlightColor, gradientColor: GradientColor(start: Color("AQ_1"), end: Color("B_1")), textColor: Color(UIColor.label), legendTextColor: Color(UIColor.secondaryLabel), dropShadowColor: Color(UIColor.systemFill))
+    }
+    private var elevationChartStyle: ChartStyle {
+        ChartStyle(backgroundColor: Color(UIColor.systemBackground), accentColor: viewModel.highlightColor, gradientColor: GradientColor(start: Color("S_1"), end: Color("L_1")), textColor: Color(UIColor.label), legendTextColor: Color(UIColor.secondaryLabel), dropShadowColor: Color(UIColor.systemFill))
+    }
 
     var body: some View {
-        // MARK: Custom chart styles
-        //
-        let heartRateChartStyle = ChartStyle(backgroundColor: Color(UIColor.systemBackground), accentColor: viewModel.highlightColor, gradientColor: GradientColor(start: Color("AL_1"), end: Color("AQ_1")), textColor: Color(UIColor.label), legendTextColor: Color(UIColor.secondaryLabel), dropShadowColor: Color(UIColor.systemFill))
-
-        let speedChartStyle = ChartStyle(backgroundColor: Color(UIColor.systemBackground), accentColor: viewModel.highlightColor, gradientColor: GradientColor(start: Color("AQ_1"), end: Color("B_1")), textColor: Color(UIColor.label), legendTextColor: Color(UIColor.secondaryLabel), dropShadowColor: Color(UIColor.systemFill))
-
-        let elevationChartStyle = ChartStyle(backgroundColor: Color(UIColor.systemBackground), accentColor: viewModel.highlightColor, gradientColor: GradientColor(start: Color("S_1"), end: Color("L_1")), textColor: Color(UIColor.label), legendTextColor: Color(UIColor.secondaryLabel), dropShadowColor: Color(UIColor.systemFill))
         
         return ScrollView {
 
