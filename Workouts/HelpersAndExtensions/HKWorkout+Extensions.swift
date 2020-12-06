@@ -112,9 +112,13 @@ extension HKWorkout {
         HKHealthStore().execute(heartRateQuery)
     }
 
+    private func imageName(for colorScheme: ColorScheme) -> String {
+        "\(uuid)_\(colorScheme == .dark ? "dark" : "light").png"
+    }
+
     func writeImageToDocumentsDirectory(image: UIImage, colorScheme: ColorScheme) {
-        let imageName = "\(uuid)_\(colorScheme == .dark ? "dark" : "light").png"
-        let imageURL = documentsDirectoryURL.appendingPathComponent(imageName)
+
+        let imageURL = documentsDirectoryURL.appendingPathComponent(imageName(for: colorScheme))
 
         if let data = image.pngData() {
             do {
@@ -127,8 +131,7 @@ extension HKWorkout {
 
     func getImageFromDocumentsDirectory(colorScheme: ColorScheme) -> UIImage? {
 
-        let imageName = "\(uuid)_\(colorScheme == .dark ? "dark" : "light").png"
-        let mapCardPhotosPath = documentsDirectoryURL.appendingPathComponent(imageName)
+        let mapCardPhotosPath = documentsDirectoryURL.appendingPathComponent(imageName(for: colorScheme))
 
         return FileManager.default.fileExists(atPath: mapCardPhotosPath.path) ? UIImage(contentsOfFile: mapCardPhotosPath.path) : nil
     }
