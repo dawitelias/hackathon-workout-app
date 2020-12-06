@@ -9,29 +9,47 @@
 import SwiftUI
 
 struct ToggleableHeader: View {
+
     var text: String
+
     var currentValueText: String?
+
     @Binding var switchValue: Bool
     
     var body: some View {
+
         HStack {
+
             Toggle(isOn: $switchValue) {
-                VStack(alignment: .leading, spacing: nil) {
+
+                VStack(alignment: .leading) {
+
                     Text(text)
-                       .font(.system(size: 18, weight: .regular))
+                       .font(.system(size: mainTextFontSize, weight: .regular))
 
                     if currentValueText != nil {
+
                         Text(currentValueText!)
-                            .padding(.bottom, 5)
-                            .font(.system(size: 15, weight: .thin))
+                            .padding(.bottom, currentValueBottomPadding)
+                            .font(.system(size: currentValueFontSize, weight: .thin))
+
                     }
+
                 }
-               
+
             }
+
         }
+
     }
+
+    private let currentValueFontSize: CGFloat = 15
+    private let currentValueBottomPadding: CGFloat = 5
+    private let mainTextFontSize: CGFloat = 18
 }
 
+// MARK: Previews
+//
 struct ToggleableHeader_Previews: PreviewProvider {
     static var previews: some View {
         ToggleableHeader(text: "Test", currentValueText: nil, switchValue: .constant(false))
