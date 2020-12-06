@@ -109,7 +109,7 @@ struct DailySummary: View {
                 }
             }
             .modifier(GroupedListModifier())
-            .navigationBarTitle(Text("Daily Summary"))
+            .navigationBarTitle(Text(Strings.dailySummary))
         }
     }
 }
@@ -120,6 +120,9 @@ extension DailySummary {
     
     private struct Strings {
 
+        public static var dailySummary: String {
+            NSLocalizedString("com.okapi.dailySummary.dailySummary", value: "Daily Summary", comment: "Daily Summary text.")
+        }
         public static var quickGlance: String {
             NSLocalizedString("com.okapi.dailySummary.quickGlance", value: "Quick Glance", comment: "Quick Glance text.")
         }

@@ -19,12 +19,18 @@ struct HomeView: View {
 
     @State var showSettingsView = false
 
+    private var featuredWorkout: HKWorkout? {
+        workoutData.mostRecentWorkout
+    }
+
+    private var workoutsDoneToday: [HKWorkout] {
+        workoutData.workoutsForToday ?? []
+    }
+
     var body: some View {
-        let featuredWorkout = workoutData.mostRecentWorkout
-        let workoutsDoneToday = workoutData.workoutsForToday
         
         let empty: [Date: [HKWorkout]] = [:]
-        let grouped = self.workoutData.workouts.reduce(into: empty) { acc, cur in
+        let grouped = workoutData.workouts.reduce(into: empty) { acc, cur in
             let components = Calendar.current.dateComponents([.year, .month], from: cur.startDate)
             let d = Calendar.current.date(from: components)!
             let existing = acc[d] ?? []
@@ -43,9 +49,9 @@ struct HomeView: View {
                 // they have done, otherwise, if they have only done one workout or they haven't done a workout at all today, then we will
                 // fall back to showing the featured workout
                 //
-                if workoutsDoneToday != nil && workoutsDoneToday!.count > 1 {
+                if workoutsDoneToday.count > 1 {
 
-                    Section(header: Text("Your workouts today 🏅")) {
+                    Section(header: Text(Strings.yourWorkouts)) {
 
                         VStack(alignment: .leading, spacing: nil) {
 
@@ -53,7 +59,7 @@ struct HomeView: View {
 
                                 HStack(alignment: .top, spacing: 20) {
                                     
-                                    ForEach(workoutsDoneToday!, id: \.self) { workout in
+                                    ForEach(workoutsDoneToday, id: \.self) { workout in
 
                                         NavigationLink(destination: WorkoutDetail(viewModel: WorkoutDetailViewModel(workout: workout))) {
 
@@ -66,8 +72,8 @@ struct HomeView: View {
                                 
                             }
                             
-                            NavigationLink(destination: DailySummary(workouts: workoutsDoneToday!)) {
-                                Text("View Daily Summary")
+                            NavigationLink(destination: DailySummary(workouts: workoutsDoneToday)) {
+                                Text(Strings.viewDailySummary)
                                     .padding()
                             }
                             
@@ -76,7 +82,7 @@ struct HomeView: View {
 
                 } else if featuredWorkout != nil {
 
-                    Section(header: Text("Your latest workout 🏅")) {
+                    Section(header: Text(Strings.latestWorkout)) {
 
                         ZStack {
 
@@ -92,29 +98,37 @@ struct HomeView: View {
                 // If there ARE active filters, we should show some indication to the users, so that they understand why
                 // their list might look different
                 //
-                if self.workoutData.appliedFilters.count > 0 || self.workoutData.activeActivityTypeFilters.count > 0 {
+                if workoutData.appliedFilters.count > 0 || workoutData.activeActivityTypeFilters.count > 0 {
+
                     Section(header: VStack {
-                        Text("Currently Applied Filters")
+
+                        Text(Strings.currentlyAppliedFilters)
                             .padding(.all)
-                            .font(.system(size: 21, weight: .medium))
+                            .font(.subheadline)
                             .frame(width: UIScreen.main.bounds.width, alignment: .leading)
+
                     }) {
                         ScrollView(.horizontal, showsIndicators: false) {
                             HStack(alignment: .top, spacing: 1) {
-                                ForEach(self.workoutData.activeActivityTypeFilters, id: \.self) { item in
+
+                                ForEach(workoutData.activeActivityTypeFilters, id: \.self) { item in
                                     ActivityTypeFilterPill(activityTypeFilter: item)
                                 }
-                                if self.workoutData.dateRangeFilter.isApplied {
-                                    FilterPill(activityFilter: self.workoutData.dateRangeFilter)
+
+                                if workoutData.dateRangeFilter.isApplied {
+                                    FilterPill(activityFilter: workoutData.dateRangeFilter)
                                 }
-                                if self.workoutData.calorieFilter.isApplied {
-                                   FilterPill(activityFilter: self.workoutData.calorieFilter)
+
+                                if workoutData.calorieFilter.isApplied {
+                                   FilterPill(activityFilter: workoutData.calorieFilter)
                                 }
-                                if self.workoutData.distanceFilter.isApplied {
-                                   FilterPill(activityFilter: self.workoutData.distanceFilter)
+
+                                if workoutData.distanceFilter.isApplied {
+                                   FilterPill(activityFilter: workoutData.distanceFilter)
                                 }
-                                if self.workoutData.durationFilter.isApplied {
-                                   FilterPill(activityFilter: self.workoutData.durationFilter)
+
+                                if workoutData.durationFilter.isApplied {
+                                   FilterPill(activityFilter: workoutData.durationFilter)
                                 }
                             }
                         }
@@ -143,36 +157,35 @@ struct HomeView: View {
                 }
             }
             .modifier(GroupedListModifier())
-            .navigationBarTitle(Text("Workouts"))
+            .navigationBarTitle(Text(Strings.workoutsText))
             .navigationBarItems(leading:
 
                 Button(action: {
 
-                    self.showSettingsView.toggle()
+                    showSettingsView.toggle()
 
                 }) {
                 
-                    Image(systemName: "gear").imageScale(.large)
+                    Image(systemName: Images.gear.rawValue).imageScale(.large)
                 
                 }.sheet(isPresented: $showSettingsView) {
                     
-                    // TODO: Show settings page here
-                    //
-                    Text("Hi")
+                    SettingsView()
 
                 }, trailing:
                     
                     Button(action: {
 
-                        self.showFilterView.toggle()
+                        showFilterView.toggle()
 
                     }) {
 
-                        Image(systemName: "line.horizontal.3.decrease.circle").imageScale(.large)
+                        Image(systemName: Images.filterIcon.rawValue)
+                            .imageScale(.large)
 
                     }.sheet(isPresented: $showFilterView) {
 
-                        FilterHome(showFilterView: self.$showFilterView).environmentObject(self.workoutData)
+                        FilterHome(showFilterView: $showFilterView).environmentObject(workoutData)
 
                     }
             )
@@ -180,13 +193,50 @@ struct HomeView: View {
         .accentColor(.pink)
         .onReceive(NotificationCenter.default.publisher(for: UIApplication.willEnterForegroundNotification)) { _ in
  
-            self.workoutData.queryWorkouts()
+            workoutData.queryWorkouts()
 
         }
     }
 }
 
-struct ContentView_Previews: PreviewProvider {
+// MARK: Strings and Assets
+//
+extension HomeView {
+
+    private enum Images: String {
+        case filterIcon = "line.horizontal.3.decrease.circle"
+        case gear
+    }
+
+    private struct Strings {
+
+        static var workoutsText: String {
+            NSLocalizedString("com.okapi.homePage.workouts", value: "Workouts", comment: "Workouts")
+        }
+
+        static var viewDailySummary: String {
+            NSLocalizedString("com.okapi.homePage.viewDailySummary", value: "View Daily Summary", comment: "Text saying view daily sumamry")
+        }
+
+        static var currentlyAppliedFilters: String {
+            NSLocalizedString("com.okapi.homePage.currentlyAppliedFilters", value: "Currently Applied Filters", comment: "currently applied filters description text")
+        }
+
+        static var latestWorkout: String {
+            NSLocalizedString("com.okapi.homePage.latestWorkoutText", value: "Your latest workout 🏅", comment: "latest workout text")
+        }
+
+        static var yourWorkouts: String {
+            NSLocalizedString("com.okapi.homePage.yourWorkouts", value: "Your workouts today 🏅", comment: "Your workouts today text")
+        }
+
+    }
+
+}
+
+// MARK: Previews
+//
+struct HomeView_Previews: PreviewProvider {
     static var previews: some View {
         HomeView().environmentObject(WorkoutData())
     }

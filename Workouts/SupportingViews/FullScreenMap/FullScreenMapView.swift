@@ -76,33 +76,29 @@ struct FullScreenMapView: View {
         .navigationBarItems(trailing:
 
             Button(action: {
-                
-                if self.showShareSheet == false {
-                    
-                    self.mapView.exportImage { image, error in
-                        
-                        if let error = error {
-                            print(error.localizedDescription)
-                        }
-                        
-                        guard let generatedImage = image else {
+
+                if showShareSheet == false {
+
+                    mapView.exportImage { image, error in
+
+                        guard error == nil, let generatedImage = image else {
                             return
                         }
-                        
+
                         generatedMapImage = generatedImage
-                        self.showShareSheet.toggle()
-                        
+                        showShareSheet.toggle()
+
                     }
-                    
+
                 } else {
-                    
-                    self.showShareSheet.toggle()
-                    
+
+                    showShareSheet.toggle()
+
                 }
 
             }) {
 
-                Image(systemName: "square.and.arrow.up").imageScale(.large)
+                Image(systemName: Images.shareIcon.rawValue).imageScale(.large)
 
             }.sheet(isPresented: $showShareSheet) {
 
@@ -116,6 +112,10 @@ struct FullScreenMapView: View {
 // MARK: Strings and assets
 //
 extension FullScreenMapView {
+
+    private enum Images: String {
+        case shareIcon = "square.and.arrow.up"
+    }
 
     private struct Strings {
 

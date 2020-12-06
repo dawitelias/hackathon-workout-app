@@ -9,15 +9,22 @@
 import SwiftUI
 
 struct GroupedListModifier: ViewModifier {
+
     func body(content: Content) -> some View {
+
         Group {
+
             if #available(iOS 14, *) {
+
                 content
                     .listStyle(InsetGroupedListStyle())
+
             } else {
+
                 content
                     .listStyle(GroupedListStyle())
                     .environment(\.horizontalSizeClass, .regular)
+
             }
         }
     }
