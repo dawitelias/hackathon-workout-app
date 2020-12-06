@@ -50,7 +50,9 @@ struct DateFilter: View {
                 
             }
             .navigationBarTitle(Strings.dateText)
-            .listStyle(GroupedListStyle()).environment(\.horizontalSizeClass, .regular).frame(alignment: .center)
+            .listStyle(GroupedListStyle())
+            .environment(\.horizontalSizeClass, .regular)
+            .frame(alignment: .center)
 
         }.onAppear {
 
