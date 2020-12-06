@@ -256,36 +256,24 @@ struct EsriMapView: UIViewRepresentable {
     
             if let mapView = geoView as? AGSMapView {
     
-                mapView.identifyLayers(atScreenPoint: screenPoint, tolerance: 12, returnPopupsOnly: false, maximumResultsPerLayer: 10) { (results: [AGSIdentifyLayerResult]?, error: Error?) in
+                mapView.identifyLayers(atScreenPoint: screenPoint, tolerance: 12, returnPopupsOnly: false, maximumResultsPerLayer: 10) { [weak self] (results: [AGSIdentifyLayerResult]?, error: Error?) in
                     if let error = error {
                         print(error.localizedDescription)
                         return
                     }
                     
                     if results?.count == 0 {
-                        self.parent.selectedSegment.removeAll()
+                        self?.parent.selectedSegment.removeAll()
                     }
     
                     if let featureCollectionLayer = mapView.map?.operationalLayers.firstObject as? AGSFeatureCollectionLayer, let featureLayer = featureCollectionLayer.layers.first {
                         if let res = results?.first, let feature = res.sublayerResults.first?.geoElements.first as? AGSFeature {
-                            self.selectFeatures(feature: feature, featureLayer: featureLayer)
+                            self?.selectFeatures(feature: feature, featureLayer: featureLayer)
                         }
                     }
     
                 }
             }
         }
-    }
-}
-
-struct EsriMapView_Previews: PreviewProvider {
-    static var previews: some View {
-        EsriMapView(route: [
-            CLLocation(latitude: 70.2568, longitude: 43.6591),
-            CLLocation(latitude: 70.2578, longitude: 43.65978),
-            CLLocation(latitude: 70.2548, longitude: 43.6548),
-            CLLocation(latitude: 70.2538, longitude: 43.6538),
-        ], isUserInteractionEnabled: true, selectedSegment: .constant([AGSFeature]()), mapView: .constant(AGSMapView(frame: .zero)))
-            .previewDevice("iPhone 11")
     }
 }

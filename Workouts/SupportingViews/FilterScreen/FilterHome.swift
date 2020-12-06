@@ -115,18 +115,19 @@ struct FilterHome: View {
                             .foregroundColor(Color.pink)
                     }
                 }
-                
-                Section(header: SectionHeader(text: "App Info")) {
-                    NavigationLink(destination: AboutScreen()) {
-                        Text("About")
-                    }
-                    NavigationLink(destination: Feedback()) {
-                        Text("Feedback")
-                    }
-                    NavigationLink(destination: Licensing()) {
-                        Text("Acknowledgements")
-                    }
-                }
+
+// TODO: Move these to new 'App Settings' page
+//                Section(header: SectionHeader(text: "App Info")) {
+//                    NavigationLink(destination: AboutScreen()) {
+//                        Text("About")
+//                    }
+//                    NavigationLink(destination: Feedback()) {
+//                        Text("Feedback")
+//                    }
+//                    NavigationLink(destination: Licensing()) {
+//                        Text("Acknowledgements")
+//                    }
+//                }
                 
             }
             .modifier(GroupedListModifier())

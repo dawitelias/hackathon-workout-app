@@ -15,68 +15,116 @@ import ArcGIS
 var generatedMapImage: UIImage = UIImage()
 
 struct FullScreenMapView: View {
+
     let route: [CLLocation]
+
     @State var showShareSheet: Bool = false
     @State var selectedSegment: [AGSFeature] = [AGSFeature]()
     @State var mapView: AGSMapView = AGSMapView(frame: .zero)
+    
+    private func getInfoText() -> String {
+
+        var value = ""
+
+        if selectedSegment.count > 1 {
+
+            let segmentStartDate = selectedSegment.last?.attributes[WorkoutRouteAttributes.timestamp.rawValue] as? Date ?? Date()
+            let segmentEndDate = selectedSegment.first?.attributes[WorkoutRouteAttributes.timestamp.rawValue] as? Date ?? Date()
+            let elapsedTime = abs(segmentStartDate.distance(to: segmentEndDate))
+            let elapsedTimeString = elapsedTime > 60 ? elapsedTime.getHoursAndMinutesString() : "\(Int(elapsedTime))s"
+            let segmentLength = getSegmentLength(segment: selectedSegment)
+
+            let formattedMileageString = String(format: "%.2f", segmentLength)
+            value = "Selected Segment: \(elapsedTimeString), \(formattedMileageString)mi, \(getPaceString(selectedSegment: selectedSegment))"
+
+        } else {
+
+            value = ChuckNorris.getRandomChuckNorrisQuote()
+
+        }
+
+        return value
+    }
 
     var body: some View {
-        func getInfoText() -> String {
-            var value = ""
-            if selectedSegment.count > 1 {
-                let segmentStartDate = selectedSegment.last?.attributes[WorkoutRouteAttributes.timestamp.rawValue] as? Date ?? Date()
-                let segmentEndDate = selectedSegment.first?.attributes[WorkoutRouteAttributes.timestamp.rawValue] as? Date ?? Date()
-                let elapsedTime = abs(segmentStartDate.distance(to: segmentEndDate))
-                let elapsedTimeString = elapsedTime > 60 ? elapsedTime.getHoursAndMinutesString() : "\(Int(elapsedTime))s"
-                let segmentLength = getSegmentLength(segment: selectedSegment)
 
-                let formattedMileageString = String(format: "%.2f", segmentLength)
-                value = "Selected Segment: \(elapsedTimeString), \(formattedMileageString)mi, \(getPaceString(selectedSegment: selectedSegment))"
-            } else {
-                value = ChuckNorris.getRandomChuckNorrisQuote()
-            }
-
-            return value
-        }
         return ZStack(alignment: .bottom) {
+
             EsriMapView(route: route, isUserInteractionEnabled: true, selectedSegment: $selectedSegment, mapView: $mapView)
             
             if selectedSegment.count == 1 {
-                CompleteSegmentPopup()
-                    .transition(.slide)
-                    .offset(x: 0, y: -10)
+                SlidingPanel {
+                    VStack {
+                        Text(Strings.selectPointPrompt)
+                            .font(.headline)
+                        Spacer()
+                    }
+                }
             }
+
             if selectedSegment.count > 1 {
-                PopupPanel(selectedSegment: $selectedSegment)
-                    .transition(.slide)
-                    .offset(x: 0, y: -10)
+                SlidingPanel {
+                    VStack {
+                        Text("SEGMENT!")
+                            .font(.headline)
+                        Spacer()
+                    }
+                }
             }
         }
         .edgesIgnoringSafeArea(.vertical)
         .navigationBarItems(trailing:
+
             Button(action: {
+                
                 if self.showShareSheet == false {
+                    
                     self.mapView.exportImage { image, error in
+                        
                         if let error = error {
                             print(error.localizedDescription)
                         }
+                        
                         guard let generatedImage = image else {
                             return
                         }
+                        
                         generatedMapImage = generatedImage
                         self.showShareSheet.toggle()
+                        
                     }
+                    
                 } else {
+                    
                     self.showShareSheet.toggle()
+                    
                 }
+
             }) {
+
                 Image(systemName: "square.and.arrow.up").imageScale(.large)
+
             }.sheet(isPresented: $showShareSheet) {
-                ShareSheet(activityItems: [generatedMapImage,
-                "\(getInfoText())"])
+
+                ShareSheet(activityItems: [generatedMapImage, getInfoText()])
+
             }
         )
     }
+}
+
+// MARK: Strings and assets
+//
+extension FullScreenMapView {
+
+    private struct Strings {
+
+        static var selectPointPrompt: String {
+            NSLocalizedString("com.okapi.fullScreenMap.selectPoint", value: "Select another point to complete the segment", comment: "Prompt the user to select another point on the map.")
+        }
+
+    }
+
 }
 
 struct FullScreenMapView_Previews: PreviewProvider {

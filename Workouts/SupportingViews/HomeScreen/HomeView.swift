@@ -16,14 +16,11 @@ struct HomeView: View {
     @EnvironmentObject var workoutData: WorkoutData
 
     @State var showFilterView = false
-    @State var showProfileView = false
-    
-    init() {
-        UITableViewHeaderFooterView.appearance().tintColor = UIColor.systemBackground
-    }
-    
+
+    @State var showSettingsView = false
+
     var body: some View {
-        let featuredWorkout = workoutData.featuredWorkout
+        let featuredWorkout = workoutData.mostRecentWorkout
         let workoutsDoneToday = workoutData.workoutsForToday
         
         let empty: [Date: [HKWorkout]] = [:]
@@ -150,32 +147,41 @@ struct HomeView: View {
             .navigationBarItems(leading:
 
                 Button(action: {
-                    self.showProfileView.toggle()
+
+                    self.showSettingsView.toggle()
+
                 }) {
                 
-                    Image(systemName: "calendar").imageScale(.large)
+                    Image(systemName: "gear").imageScale(.large)
                 
-                }.sheet(isPresented: $showProfileView) {
-
-                    WorkoutHistoryView(viewModel: WorkoutHistoryViewModel(), showProfileView: self.$showProfileView)
+                }.sheet(isPresented: $showSettingsView) {
+                    
+                    // TODO: Show settings page here
+                    //
+                    Text("Hi")
 
                 }, trailing:
                     
                     Button(action: {
+
                         self.showFilterView.toggle()
+
                     }) {
+
                         Image(systemName: "line.horizontal.3.decrease.circle").imageScale(.large)
+
                     }.sheet(isPresented: $showFilterView) {
+
                         FilterHome(showFilterView: self.$showFilterView).environmentObject(self.workoutData)
+
                     }
             )
         }
         .accentColor(.pink)
         .onReceive(NotificationCenter.default.publisher(for: UIApplication.willEnterForegroundNotification)) { _ in
-            // Update the view with refreshed data if the user has say, backgrounded the app, gone to do a workout and then
-            // re-opened the app. We should also implement a pull down to refresh.
-            //
+ 
             self.workoutData.queryWorkouts()
+
         }
     }
 }

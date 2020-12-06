@@ -20,10 +20,15 @@ class WorkoutDetailViewModel: ObservableObject {
 
     @Published var errorFetchingRouteData = false
     @Published var errorFetchingWorkoutHRData = false
+    
+    private var chartXAxisFormatter: DateFormatter
 
     init(workout: HKWorkout) {
         self.workout = workout
-        
+
+        chartXAxisFormatter = DateFormatter()
+        chartXAxisFormatter.dateFormat = "h:mm a"
+
         // Go off and fetch the data
         //
         fetchWorkoutHeartRateData { [weak self] error in
@@ -116,7 +121,7 @@ class WorkoutDetailViewModel: ObservableObject {
     var workoutDistanceDescription: String {
         return String(format: "%.2f mi", workout.totalDistance?.doubleValue(for: .mile()) ?? 0)
     }
-    
+
     // Altitude Data
     //
     var altitudeData: [Double]? {
@@ -127,7 +132,7 @@ class WorkoutDetailViewModel: ObservableObject {
             return item.altitude
         }
     }
-    
+
     // Velocity Data
     //
     var velocityData: [Double]? {
@@ -141,7 +146,19 @@ class WorkoutDetailViewModel: ObservableObject {
     
     // MARK: Chart Data
     //
-    
+
+    // X-Axis label data
+    //
+    var xAxisLabelData: [String]? {
+        guard route != nil else {
+            return nil
+        }
+        return [
+            chartXAxisFormatter.string(from: route?.first?.timestamp ?? Date()),
+            chartXAxisFormatter.string(from: route?.last?.timestamp ?? Date())
+        ]
+    }
+
     // HEART RATE DATA
     //
     var simplifiedHRData: [HeartRateReading]? {
@@ -171,12 +188,38 @@ class WorkoutDetailViewModel: ObservableObject {
         return simplifiedData
     }
     
+    var maxHeartRate: Int {
+        Int(workoutHRData?.map { $0.reading }.max() ?? 0)
+    }
+
+    var minHeartRate: Int {
+        Int(workoutHRData?.map { $0.reading }.min() ?? 0)
+    }
+
     // SPEED DATA
     //
     var speedData: [Double] {
-        return route?
+
+        let data = route?
             .map { metersPerSecondToMPH(pace: $0.speed) }
             .filter { $0 > 0 } ?? []
+
+        // We never want to have more datapoints than we have pixels on the screen / 2?
+        //
+        let proportion = CGFloat(data.count)/(UIScreen.main.bounds.width/CGFloat(4))
+        
+        var strideAmount = proportion <= 0 ? 1 : Int(proportion.rounded(.down)) // always want to round
+
+        if strideAmount == 0 {
+            strideAmount = 1
+        }
+
+        let simplifiedData: [Double] = data.indices.compactMap {
+            if $0 % strideAmount == 0 { return data[$0] }
+            else { return nil }
+        }
+
+        return simplifiedData
     }
     var averageSpeed: Double {
         getAverageSpeed(segment: route ?? [])
@@ -185,9 +228,40 @@ class WorkoutDetailViewModel: ObservableObject {
         metersPerSecondToMPH(pace: averageSpeed)
     }
     var averagePaceDescription: String {
-        "Average Pace: \(getPaceString(route: route ?? [])) - \(String(format: "%.1f", mphValue)) mph"
+        "Average Pace: \(String(format: "%.1f", mphValue)) mph - \(getPaceString(route: route ?? []))"
     }
     
     // ELEVATION DATA
     //
+    var elevationData: [Double] {
+        let elevationData = route?
+            .map { metersToFeet(meters: $0.altitude) }
+            .filter { $0 > 0 } ?? []
+        
+        // We never want to have more datapoints than we have pixels on the screen / 2?
+        //
+        let proportion = CGFloat(elevationData.count)/(UIScreen.main.bounds.width/CGFloat(4))
+        
+        var strideAmount = proportion <= 0 ? 1 : Int(proportion.rounded(.down)) // always want to round
+
+        if strideAmount == 0 {
+            strideAmount = 1
+        }
+
+        let simplifiedData: [Double] = elevationData.indices.compactMap {
+            if $0 % strideAmount == 0 { return elevationData[$0] }
+            else { return nil }
+        }
+
+        return simplifiedData
+    }
+    var netElevationGain: Int {
+        Int(getElevation(format: .net, segment: route ?? []))
+    }
+    var totalGain: Int {
+        Int(getElevation(format: .gain, segment: route ?? []))
+    }
+    var totalLoss: Int {
+        Int(getElevation(format: .loss, segment: route ?? []))
+    }
 }

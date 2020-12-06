@@ -10,6 +10,7 @@ import SwiftUI
 import HealthKit
 
 struct DailySummary: View {
+
     var workouts: [HKWorkout]
 
     var body: some View {
@@ -17,7 +18,7 @@ struct DailySummary: View {
         var totalDistance: Double = 0
         var totalTime: Double = 0
         
-        _ = workouts.map { workout in
+        workouts.forEach { workout in
             totalCalories += workout.totalEnergyBurned?.doubleValue(for: .kilocalorie()) ?? 0
             totalDistance += workout.totalDistance?.doubleValue(for: .mile()) ?? 0
             totalTime += workout.duration
@@ -31,7 +32,7 @@ struct DailySummary: View {
 
                 Section(header: VStack {
 
-                    Text("Quick Glance")
+                    Text(Strings.quickGlance)
                         .padding(.leading)
                         .frame(width: UIScreen.main.bounds.width, alignment: .leading)
 
@@ -45,7 +46,7 @@ struct DailySummary: View {
                     //
                     VStack(alignment: .leading, spacing: 5) {
 
-                        Text("Total Calories Burned:")
+                        Text(Strings.totalCalories)
                             .font(.callout)
                             .foregroundColor(Color.gray)
 
@@ -59,7 +60,7 @@ struct DailySummary: View {
                     //
                     VStack(alignment: .leading) {
 
-                        Text("Total Duration:")
+                        Text(Strings.totalDuration)
                             .font(.callout)
                             .foregroundColor(Color.gray)
 
@@ -73,7 +74,7 @@ struct DailySummary: View {
                     //
                     VStack(alignment: .leading) {
 
-                        Text("Total Distance:")
+                        Text(Strings.totalDistance)
                             .font(.callout)
                             .foregroundColor(Color.gray)
 
@@ -89,7 +90,7 @@ struct DailySummary: View {
                 //
                 Section(header: VStack {
 
-                    Text("More Detail 🏅")
+                    Text(Strings.moreDetail)
                         .padding(.leading)
                         .frame(width: UIScreen.main.bounds.width, alignment: .leading)
 
@@ -113,6 +114,33 @@ struct DailySummary: View {
     }
 }
 
+// MARK: Strings and assets
+//
+extension DailySummary {
+    
+    private struct Strings {
+
+        public static var quickGlance: String {
+            NSLocalizedString("com.okapi.dailySummary.quickGlance", value: "Quick Glance", comment: "Quick Glance text.")
+        }
+        public static var totalCalories: String {
+            NSLocalizedString("com.okapi.dailySummary.totalCalories", value: "Total Calories Burned:", comment: "Total calories burned text.")
+        }
+        public static var totalDuration: String {
+            NSLocalizedString("com.okapi.dailySummary.totalDuration", value: "Total Duration", comment: "Total duration string")
+        }
+        public static var totalDistance: String {
+            NSLocalizedString("com.okapi.dailySummary.totalDistance", value: "Total Distance", comment: "Total distance string")
+        }
+        public static var moreDetail: String {
+            NSLocalizedString("com.okapi.dailySummary.moreDetail", value: "More Detail 🏅", comment: "More Detail text")
+        }
+    }
+
+}
+
+// MARK: Previews
+//
 struct DailySummary_Previews: PreviewProvider {
     static var previews: some View {
         DailySummary(workouts: [

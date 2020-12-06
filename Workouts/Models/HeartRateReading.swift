@@ -8,12 +8,7 @@
 
 import Foundation
 
-class HeartRateReading {
+struct HeartRateReading {
     let reading: Double
     let date: Date
-    
-    init(_ reading: Double, _ dateTaken: Date) {
-        self.reading = reading
-        self.date = dateTaken
-    }
 }

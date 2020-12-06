@@ -527,8 +527,8 @@ extension HKWorkoutActivityType {
              return WorkoutTypeMetadata(
                  icon: "Walking",
                  description: "Walking",
-                 mainColor: Color("AE_1"),
-                 highlightColor: Color("AE_2"))
+                 mainColor: Color("AM_1"),
+                 highlightColor: Color("AM_2"))
          case .trackAndField:
              return WorkoutTypeMetadata(
                  icon: "TrackAndField",
@@ -545,8 +545,8 @@ extension HKWorkoutActivityType {
              return WorkoutTypeMetadata(
                  icon: "Running",
                  description: "Running",
-                 mainColor: Color("AH_1"),
-                 highlightColor: Color("AH_2"))
+                 mainColor: Color("AA_1"),
+                 highlightColor: Color("AA_2"))
          case .mixedCardio:
              return WorkoutTypeMetadata(
                  icon: "MixedCardio",
