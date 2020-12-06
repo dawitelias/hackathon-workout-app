@@ -33,7 +33,7 @@ struct WorkoutsMultiSelect: View {
 
                         if item.isApplied {
 
-                            Image(systemName: Images.checkmark)
+                            Image(systemName: Images.checkmark.rawValue)
                                 .accentColor(/*@START_MENU_TOKEN@*/.pink/*@END_MENU_TOKEN@*/)
 
                         }
