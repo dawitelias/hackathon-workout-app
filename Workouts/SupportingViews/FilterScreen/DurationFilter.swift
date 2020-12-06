@@ -9,34 +9,76 @@
 import SwiftUI
 
 struct DurationFilter: View {
+
     @EnvironmentObject var workoutData: WorkoutData
+
     @State private var workoutDuration = DurationWorkoutFilter(value: 0, isApplied: false)
 
+    var durationString: String {
+        "\(Int(workoutDuration.value/3600)) hr \(Int((workoutDuration.value/3600).truncatingRemainder(dividingBy: 1) * 60)) min"
+    }
+
     var body: some View {
-        let durationString = "\(Int(workoutDuration.value/3600)) hr \(Int((workoutDuration.value/3600).truncatingRemainder(dividingBy: 1) * 60)) min"
-        
-        return VStack {
+
+        VStack {
+
             List {
-                Section(footer: Text("Only show workouts up to the selected duration.")) {
-                    ToggleableHeader(text: "Duration", currentValueText: nil, switchValue: $workoutDuration.isApplied)
+
+                Section(footer: Text(Strings.footerText)) {
+
+                    ToggleableHeader(text: Strings.durationText, currentValueText: nil, switchValue: $workoutDuration.isApplied)
+
                     if workoutDuration.isApplied {
-                        Stepper(value: $workoutDuration.value, step: 60 * 15) { // 60 seconds * 15 minutes
+
+                        Stepper(value: $workoutDuration.value, step: fifteenMinutes) {
+
                             Text(durationString)
+
                         }
+
                     }
+
                 }
+
             }
-            .navigationBarTitle("Duration")
-            .listStyle(GroupedListStyle()).environment(\.horizontalSizeClass, .regular).frame(width: nil, height: nil, alignment: .top)
+            .navigationBarTitle(Strings.durationText)
+            .listStyle(GroupedListStyle())
+            .environment(\.horizontalSizeClass, .regular)
+            .frame(width: nil, height: nil, alignment: .top)
+
         }.onAppear {
-            self.workoutDuration = self.workoutData.durationFilter
+
+            workoutDuration = workoutData.durationFilter
+
         }.onDisappear {
-            self.workoutData.durationFilter = self.workoutDuration
-            self.workoutData.queryWorkouts()
+
+            workoutData.durationFilter = workoutDuration
+            workoutData.queryWorkouts()
+
+        }
+    }
+
+    private let fifteenMinutes: Double = 15 * 60 // 60 seconds * 15 minutes
+}
+
+// MARK: Strings and assets
+//
+extension DurationFilter {
+
+    private struct Strings {
+
+        static var durationText: String {
+            NSLocalizedString("com.okapi.durationPage.title", value: "Duration", comment: "Title of the duration filter page.")
+        }
+
+        static var footerText: String {
+            NSLocalizedString("com.okapi.durationPage.footer", value: "Only show workouts up to the selected duration.", comment: "Only show workouts up to the selected duration.")
         }
     }
 }
 
+// MARK: Previews
+//
 struct DurationFilter_Previews: PreviewProvider {
     static var previews: some View {
         DurationFilter().environmentObject(WorkoutData())
