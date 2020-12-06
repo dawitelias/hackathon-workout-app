@@ -12,17 +12,18 @@ import CoreLocation
 import HealthKit
 
 struct EsriMapCard: UIViewRepresentable {
+
+    @Environment(\.colorScheme) var colorScheme
+
     var workout: HKWorkout
     var route: [CLLocation]?
     let mapView = AGSMapView(frame: .zero)
 
-    @Environment(\.colorScheme) var colorScheme
-
     func makeUIView(context: Context) -> AGSMapView {
         mapView.isAttributionTextVisible = false
-
         return mapView
     }
+
     func updateUIView(_ uiView: AGSMapView, context: Context) {
         
         guard let url = colorScheme == .dark ? URL(string: BasemapUrls.dark.rawValue) : URL(string: BasemapUrls.light.rawValue) else {
@@ -57,12 +58,13 @@ struct EsriMapCard: UIViewRepresentable {
         // If we have received route data, add the graphic to the layer
         //
         if let workoutRoute = route {
-            let points = workoutRoute.map { location in
-                return AGSPoint(clLocationCoordinate2D: location.coordinate)
-            }
+
+            let points = workoutRoute.map { AGSPoint(clLocationCoordinate2D: $0.coordinate) }
+
             let lineGraphic = AGSGraphic(geometry: AGSPolyline(points: points), symbol: nil, attributes: nil)
             lineGraphic.zIndex = 0
             graphicsOverlay.graphics.add(lineGraphic)
+
             if let targetExtent = lineGraphic.geometry?.extent {
                 uiView.setViewpoint(AGSViewpoint(targetExtent: targetExtent))
             }
@@ -70,6 +72,7 @@ struct EsriMapCard: UIViewRepresentable {
         
         // Add in the start and end graphics
         if let firstPoint = route?.first?.coordinate, let lastPoint = route?.last?.coordinate {
+
             let startCoordinate = AGSPoint(clLocationCoordinate2D: firstPoint)
             let endCoordinate = AGSPoint(clLocationCoordinate2D: lastPoint)
             
@@ -90,7 +93,9 @@ struct EsriMapCard: UIViewRepresentable {
         let pointsCollectionTable = self.pointsCollectionTable()
         let featureCollection = AGSFeatureCollection(featureCollectionTables: [pointsCollectionTable])
         let featureCollectionLayer = AGSFeatureCollectionLayer(featureCollection: featureCollection)
+
         // Wait for the layer
+        //
         featureCollectionLayer.load { error in
             if let error = error {
                 print(error.localizedDescription)
@@ -99,8 +104,9 @@ struct EsriMapCard: UIViewRepresentable {
             uiView.map?.operationalLayers.add(featureCollectionLayer)
         }
     }
+
     private func pointsCollectionTable() -> AGSFeatureCollectionTable {
-        //create schema for points feature collection table
+
         var fields = [AGSField]()
         let speedField = AGSField(fieldType: .double, name: WorkoutRouteAttributes.speed.rawValue, alias: WorkoutRouteAttributes.speed.rawValue, length: 100, domain: nil, editable: true, allowNull: true)
         
@@ -158,39 +164,54 @@ struct EsriMapCard: UIViewRepresentable {
 
         return pointsCollectionTable
     }
+
     // Coordinator code
     //
     func makeCoordinator() -> Coordinator {
         Coordinator(self)
     }
+
     class Coordinator: NSObject {
-        var parent: EsriMapCard
+
+        private var parent: EsriMapCard
         private var drawStatusObservation: NSKeyValueObservation?
-        var numLayersDrawn = 0
+        private var numLayersDrawn = 0
 
         init(_ item: EsriMapCard) {
-            self.parent = item
+
+            parent = item
+    
             super.init()
-            drawStatusObservation = self.parent.mapView.observe(\.drawStatus, options: .initial) { [weak self] (mapView, _) in
-                if let drawStatus = self?.parent.mapView.drawStatus {
-                    switch drawStatus {
-                    case .completed:
-                        // We are currently adding 4 layers to the map
-                        // so this will fire FOUR times before the map is in a state
-                        // where we want to screenshot it
-                        //
-                        self?.numLayersDrawn += 1
-                        if let numLayersDrawn = self?.numLayersDrawn, numLayersDrawn == 4 {
-                            self?.parent.mapView.exportImage { image, error in
-                                if let colorScheme = self?.parent.colorScheme, let image = image {
-                                    self?.parent.workout.writeImageToDocumentsDirectory(image: image, colorScheme: colorScheme)
-                                }
-                            }
-                        }
-                    default:
-                        print("unknown draw state")
-                    }
+
+            drawStatusObservation = parent.mapView.observe(\.drawStatus, options: .initial) { [weak self] (mapView, _) in
+
+                guard let mySelf = self, let drawStatus = self?.parent.mapView.drawStatus else {
+                    return
                 }
+
+                switch drawStatus {
+                case .completed:
+                    // We are currently adding 4 layers to the map
+                    // so this will fire FOUR times before the map is in a state
+                    // where we want to screenshot it
+                    //
+                    mySelf.numLayersDrawn += 1
+
+                    if mySelf.numLayersDrawn == 4 {
+
+                        mySelf.parent.mapView.exportImage { image, error in
+
+                            guard error == nil, let image = image else {
+                                return
+                            }
+
+                            mySelf.parent.workout.writeImageToDocumentsDirectory(image: image, colorScheme: mySelf.parent.colorScheme)
+                        }
+                    }
+                default:
+                    print("unknown draw state")
+                }
+
             }
         }
     }
