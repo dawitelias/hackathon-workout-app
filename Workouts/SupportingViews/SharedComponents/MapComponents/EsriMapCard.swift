@@ -114,14 +114,17 @@ struct EsriMapCard: UIViewRepresentable {
 
         // initialize feature collection table with the fields created
         // and geometry type as Point
+        //
         let pointsCollectionTable = AGSFeatureCollectionTable(fields: fields, geometryType: .point, spatialReference: .wgs84())
         
         // renderer
+        //
         let minValue: Double = 0
         var maxValue: Double = 0
         if let workoutRoute = route, let max = workoutRoute.map({ return $0.speed }).max() {
             maxValue = max
         }
+
         let colors: [UIColor] = [
             UIColor(named:"C_12")!,
             UIColor(named:"C_11")!,
@@ -136,26 +139,27 @@ struct EsriMapCard: UIViewRepresentable {
             UIColor(named:"C_2")!,
             UIColor(named:"C_1")!
         ]
+
         var classBreaks = [AGSClassBreak]()
         let incrementAmount = (maxValue - minValue) / Double(colors.count)
         for i in 0...colors.count - 1 {
             classBreaks.append(AGSClassBreak(description: "\(i)", label: "\(i)", minValue: incrementAmount * Double(i), maxValue: (incrementAmount * Double(i)) + incrementAmount, symbol: AGSSimpleMarkerSymbol(style: .circle, color: colors[i], size: 5)))
         }
 
-        let renderer = AGSClassBreaksRenderer(fieldName: WorkoutRouteAttributes.speed.rawValue, classBreaks: classBreaks)
-        pointsCollectionTable.renderer = renderer
+        pointsCollectionTable.renderer = AGSClassBreaksRenderer(fieldName: WorkoutRouteAttributes.speed.rawValue, classBreaks: classBreaks)
         
         // Create a new point feature, provide geometry and attribute values
+        //
         if var workoutRoute = route {
-            workoutRoute = workoutRoute.filter { item in
-                return item.horizontalAccuracy > 0 && item.coordinate.latitude != 0 && item.coordinate.longitude != 0
-            }
+            workoutRoute = workoutRoute.filter { $0.horizontalAccuracy > 0 && $0.coordinate.latitude != 0 && $0.coordinate.longitude != 0 }
             let density = Double(workoutRoute.count)/2000.0
             let stepCount = density < 1 ? 1 : Int(density)
             
             for index in stride(from: 0, to: workoutRoute.count - stepCount, by: stepCount) {
+
                 let pointFeature = pointsCollectionTable.createFeature()
                 let point = AGSPoint(clLocationCoordinate2D: workoutRoute[index].coordinate)
+
                 pointFeature.geometry = point
                 pointFeature.attributes[WorkoutRouteAttributes.speed.rawValue] = workoutRoute[index].speed
                 pointsCollectionTable.add(pointFeature, completion: nil)
