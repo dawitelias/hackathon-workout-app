@@ -10,8 +10,10 @@ import SwiftUI
 import ArcGIS
 
 struct PopupPanel: View {
-    @Binding var selectedSegment: [AGSFeature]
+    
     @Environment(\.colorScheme) var colorScheme
+
+    @Binding var selectedSegment: [AGSFeature]
 
     var body: some View {
         let segmentStartDate = selectedSegment.last?.attributes[WorkoutRouteAttributes.timestamp.rawValue] as? Date ?? Date()

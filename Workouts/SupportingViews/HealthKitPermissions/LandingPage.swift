@@ -11,6 +11,7 @@ import SwiftUI
 struct LandingPage: View {
 
     @State var logoOpacity: Double = 0
+
     @State var landingPageOpacity: Double = 1
 
     var body: some View {

@@ -19,6 +19,21 @@ struct SettingsView: View {
 
 }
 
+// TODO: These used to live under filters, incorporate into this view instead
+//                Section(header: SectionHeader(text: "App Info")) {
+//                    NavigationLink(destination: AboutScreen()) {
+//                        Text("About")
+//                    }
+//                    NavigationLink(destination: Feedback()) {
+//                        Text("Feedback")
+//                    }
+//                    NavigationLink(destination: Licensing()) {
+//                        Text("Acknowledgements")
+//                    }
+//                }
+
+// MARK: Previews
+//
 struct SettingsView_Previews: PreviewProvider {
     static var previews: some View {
         SettingsView()

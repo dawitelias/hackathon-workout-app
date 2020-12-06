@@ -71,6 +71,7 @@ struct EsriMapCard: UIViewRepresentable {
         }
         
         // Add in the start and end graphics
+        //
         if let firstPoint = route?.first?.coordinate, let lastPoint = route?.last?.coordinate {
 
             let startCoordinate = AGSPoint(clLocationCoordinate2D: firstPoint)

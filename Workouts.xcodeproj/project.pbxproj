@@ -58,7 +58,6 @@
 		A5D8CD0E2468806100DC54FA /* FullScreenMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5D8CD0D2468806100DC54FA /* FullScreenMapView.swift */; };
 		A5DC18F524B41BF800E4EE8C /* CompleteSegmentPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5DC18F424B41BF800E4EE8C /* CompleteSegmentPopup.swift */; };
 		A5F5A71F24871E110051C7BB /* ActivityTypeFilterPill.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5F5A71E24871E110051C7BB /* ActivityTypeFilterPill.swift */; };
-		A5FB56A024BB7675001A2273 /* MapUseInstructions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5FB569F24BB7675001A2273 /* MapUseInstructions.swift */; };
 		AC46320A2447593700619284 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC4632092447593700619284 /* AppDelegate.swift */; };
 		AC46320C2447593700619284 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC46320B2447593700619284 /* SceneDelegate.swift */; };
 		AC46320E2447593700619284 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC46320D2447593700619284 /* HomeView.swift */; };
@@ -144,7 +143,6 @@
 		A5D8CD0D2468806100DC54FA /* FullScreenMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullScreenMapView.swift; sourceTree = "<group>"; };
 		A5DC18F424B41BF800E4EE8C /* CompleteSegmentPopup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompleteSegmentPopup.swift; sourceTree = "<group>"; };
 		A5F5A71E24871E110051C7BB /* ActivityTypeFilterPill.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityTypeFilterPill.swift; sourceTree = "<group>"; };
-		A5FB569F24BB7675001A2273 /* MapUseInstructions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapUseInstructions.swift; sourceTree = "<group>"; };
 		AC4632062447593700619284 /* Workouts.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Workouts.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AC4632092447593700619284 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		AC46320B2447593700619284 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -362,7 +360,6 @@
 		A5D8CD0F2468807000DC54FA /* FullScreenMap */ = {
 			isa = PBXGroup;
 			children = (
-				A5FB569F24BB7675001A2273 /* MapUseInstructions.swift */,
 				A5D8CD0D2468806100DC54FA /* FullScreenMapView.swift */,
 			);
 			path = FullScreenMap;
@@ -715,7 +712,6 @@
 				A55BCB842573279E0007E286 /* WorkoutDetailViewModel.swift in Sources */,
 				A5AF6083244AAAAD00AB7E72 /* ToggleableHeader.swift in Sources */,
 				A5AF6087244BAA3900AB7E72 /* FilterTypes.swift in Sources */,
-				A5FB56A024BB7675001A2273 /* MapUseInstructions.swift in Sources */,
 				A55C84E52449EC3F00D81C44 /* Blur.swift in Sources */,
 				A5516D8E2562158F00BDAB2D /* GroupedListModifier.swift in Sources */,
 				A582894D244F7B7C00B7B6B0 /* FilterPill.swift in Sources */,
