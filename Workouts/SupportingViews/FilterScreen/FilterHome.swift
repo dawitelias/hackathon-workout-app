@@ -110,18 +110,25 @@ struct FilterHome: View {
                     }
                 }
                 Section {
+
                     Button(action: {
+
                         workoutData.distanceFilter.isApplied = false
                         workoutData.durationFilter.isApplied = false
                         workoutData.calorieFilter.isApplied = false
                         workoutData.dateRangeFilter.isApplied = false
+
                         workoutData.activeActivityTypeFilters.forEach { filter in
                             workoutData.toggleActivityFilterApplied(filter: filter)
                         }
+
                         workoutData.queryWorkouts()
+
                     }) {
+
                         Text(Strings.clearFiltersText)
                             .foregroundColor(Color.pink)
+
                     }
                 }
             }
@@ -143,7 +150,7 @@ struct FilterHome: View {
 // MARK: Assets and strings
 //
 extension FilterHome {
-    
+
     private struct Strings {
 
         static var filtersText: String {
@@ -169,7 +176,7 @@ extension FilterHome {
         static var caloriesBurnedString: String {
             NSLocalizedString("com.okapi.filterPage.caloriesFilter", value: "Calories Burned", comment: "Calories burned filter text.")
         }
-        
+
         static var durationString: String {
             NSLocalizedString("com.okapi.filterPage.durationFilter", value: "Duration", comment: "Duration filter text.")
         }
@@ -177,19 +184,19 @@ extension FilterHome {
         static var distanceString: String {
             NSLocalizedString("com.okapi.filterPage.distanceFilter", value: "Distance", comment: "Distance filter text.")
         }
-        
+
         static var dateRange: String {
             NSLocalizedString("com.okapi.filterPage.dateRange", value: "Date Range", comment: "Date rage filter text.")
         }
-        
+
         static var activityTypes: String {
             NSLocalizedString("com.okapi.filterPage.activityTypes", value: "Activity Types", comment: "Activity Types filter text.")
         }
-        
+
         static var multipleWorkoutsSelected: String {
             NSLocalizedString("com.okapi.filterPage.multipleWorkoutsSelected", value: "Multiple", comment: "Text showing that multiple workout filters have been selected.")
         }
-        
+
         static var noWorkoutsSelected: String {
             NSLocalizedString("com.okapi.filterPage.noWorkoutsSelected", value: "None", comment: "Text showing that no workouts were selected.")
         }
