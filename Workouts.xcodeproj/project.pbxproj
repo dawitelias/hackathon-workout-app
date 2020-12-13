@@ -10,6 +10,9 @@
 		1D7E1C40B601A0B2B765ED78 /* Pods_WorkoutsTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C1B7B64F533B1CC7BDE59E1C /* Pods_WorkoutsTests.framework */; };
 		4B73A6B52EF9B0C0AD711F96 /* Pods_Workouts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EAEA94D5B7AEE35D513BA19F /* Pods_Workouts.framework */; };
 		A50E464A2449E76000D1F435 /* FeaturedWorkout.swift in Sources */ = {isa = PBXBuildFile; fileRef = A50E46492449E76000D1F435 /* FeaturedWorkout.swift */; };
+		A511476B258260C8006151DD /* CompleteSegmentHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = A511476A258260C8006151DD /* CompleteSegmentHeader.swift */; };
+		A51147C32585B2D3006151DD /* UnitPreference.swift in Sources */ = {isa = PBXBuildFile; fileRef = A51147C22585B2D3006151DD /* UnitPreference.swift */; };
+		A51147C82585B2F5006151DD /* SourcePreference.swift in Sources */ = {isa = PBXBuildFile; fileRef = A51147C72585B2F5006151DD /* SourcePreference.swift */; };
 		A514CB2F24CDDA17007C6A90 /* HeartRateReading.swift in Sources */ = {isa = PBXBuildFile; fileRef = A514CB2E24CDDA17007C6A90 /* HeartRateReading.swift */; };
 		A51514482460F1B800D4D643 /* Icon.swift in Sources */ = {isa = PBXBuildFile; fileRef = A51514472460F1B800D4D643 /* Icon.swift */; };
 		A51D439525708B71001DD215 /* Licensing.swift in Sources */ = {isa = PBXBuildFile; fileRef = A51D439425708B71001DD215 /* Licensing.swift */; };
@@ -43,6 +46,10 @@
 		A5A7FCBB2479717B00247C24 /* UnitConversion.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5A7FCBA2479717B00247C24 /* UnitConversion.swift */; };
 		A5ACBABC257C6DCA00F8C836 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5ACBABB257C6DCA00F8C836 /* SettingsView.swift */; };
 		A5ACBAC1257C6DD900F8C836 /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5ACBAC0257C6DD900F8C836 /* SettingsViewModel.swift */; };
+		A5ACBAD8257DBEC400F8C836 /* AboutScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5ACBAD7257DBEC400F8C836 /* AboutScreen.swift */; };
+		A5ACBADD257DBED000F8C836 /* Feedback.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5ACBADC257DBED000F8C836 /* Feedback.swift */; };
+		A5ACBB34257F21A100F8C836 /* UnitsSelect.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5ACBB33257F21A100F8C836 /* UnitsSelect.swift */; };
+		A5ACBB39257F226600F8C836 /* SourceSelect.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5ACBB38257F226600F8C836 /* SourceSelect.swift */; };
 		A5AF6083244AAAAD00AB7E72 /* ToggleableHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5AF6082244AAAAD00AB7E72 /* ToggleableHeader.swift */; };
 		A5AF6085244BAA1200AB7E72 /* WorkoutData.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5AF6084244BAA1200AB7E72 /* WorkoutData.swift */; };
 		A5AF6087244BAA3900AB7E72 /* FilterTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5AF6086244BAA3900AB7E72 /* FilterTypes.swift */; };
@@ -94,6 +101,9 @@
 		927E4AED7593DE413C0F14EA /* Pods-Workouts.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Workouts.debug.xcconfig"; path = "Target Support Files/Pods-Workouts/Pods-Workouts.debug.xcconfig"; sourceTree = "<group>"; };
 		9B66A8E16238912FA086E27B /* Pods-Workouts.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Workouts.release.xcconfig"; path = "Target Support Files/Pods-Workouts/Pods-Workouts.release.xcconfig"; sourceTree = "<group>"; };
 		A50E46492449E76000D1F435 /* FeaturedWorkout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeaturedWorkout.swift; sourceTree = "<group>"; };
+		A511476A258260C8006151DD /* CompleteSegmentHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompleteSegmentHeader.swift; sourceTree = "<group>"; };
+		A51147C22585B2D3006151DD /* UnitPreference.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnitPreference.swift; sourceTree = "<group>"; };
+		A51147C72585B2F5006151DD /* SourcePreference.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SourcePreference.swift; sourceTree = "<group>"; };
 		A514CB2E24CDDA17007C6A90 /* HeartRateReading.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeartRateReading.swift; sourceTree = "<group>"; };
 		A51514472460F1B800D4D643 /* Icon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Icon.swift; sourceTree = "<group>"; };
 		A51D439425708B71001DD215 /* Licensing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Licensing.swift; sourceTree = "<group>"; };
@@ -126,6 +136,10 @@
 		A5A7FCBA2479717B00247C24 /* UnitConversion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnitConversion.swift; sourceTree = "<group>"; };
 		A5ACBABB257C6DCA00F8C836 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		A5ACBAC0257C6DD900F8C836 /* SettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewModel.swift; sourceTree = "<group>"; };
+		A5ACBAD7257DBEC400F8C836 /* AboutScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutScreen.swift; sourceTree = "<group>"; };
+		A5ACBADC257DBED000F8C836 /* Feedback.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Feedback.swift; sourceTree = "<group>"; };
+		A5ACBB33257F21A100F8C836 /* UnitsSelect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnitsSelect.swift; sourceTree = "<group>"; };
+		A5ACBB38257F226600F8C836 /* SourceSelect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SourceSelect.swift; sourceTree = "<group>"; };
 		A5AF6082244AAAAD00AB7E72 /* ToggleableHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToggleableHeader.swift; sourceTree = "<group>"; };
 		A5AF6084244BAA1200AB7E72 /* WorkoutData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutData.swift; sourceTree = "<group>"; };
 		A5AF6086244BAA3900AB7E72 /* FilterTypes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterTypes.swift; sourceTree = "<group>"; };
@@ -325,6 +339,7 @@
 			children = (
 				A558981B25794755004A064B /* Handle.swift */,
 				A558982025794782004A064B /* SlidingPanel.swift */,
+				A511476A258260C8006151DD /* CompleteSegmentHeader.swift */,
 			);
 			path = SlidingPanel;
 			sourceTree = "<group>";
@@ -347,6 +362,12 @@
 				A51D439425708B71001DD215 /* Licensing.swift */,
 				A5ACBABB257C6DCA00F8C836 /* SettingsView.swift */,
 				A5ACBAC0257C6DD900F8C836 /* SettingsViewModel.swift */,
+				A5ACBB33257F21A100F8C836 /* UnitsSelect.swift */,
+				A5ACBB38257F226600F8C836 /* SourceSelect.swift */,
+				A5ACBAD7257DBEC400F8C836 /* AboutScreen.swift */,
+				A5ACBADC257DBED000F8C836 /* Feedback.swift */,
+				A51147C22585B2D3006151DD /* UnitPreference.swift */,
+				A51147C72585B2F5006151DD /* SourcePreference.swift */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -685,7 +706,9 @@
 				A5A7FCBB2479717B00247C24 /* UnitConversion.swift in Sources */,
 				A5A4DC3824B29D2F00FA7580 /* PopupPanel.swift in Sources */,
 				A5D8CD042467751000DC54FA /* EsriMapView.swift in Sources */,
+				A51147C32585B2D3006151DD /* UnitPreference.swift in Sources */,
 				A52F932524493C4900DDB791 /* ChuckNorris.swift in Sources */,
+				A5ACBADD257DBED000F8C836 /* Feedback.swift in Sources */,
 				A514CB2F24CDDA17007C6A90 /* HeartRateReading.swift in Sources */,
 				A5828953244FC15600B7B6B0 /* WorkoutsMultiSelect.swift in Sources */,
 				A54A7E4324840B4900358DFB /* LandingPage.swift in Sources */,
@@ -694,7 +717,9 @@
 				A5ACBABC257C6DCA00F8C836 /* SettingsView.swift in Sources */,
 				A5B6CEE52448AB2D00CF2B86 /* HKWorkoutActivityType+Extension.swift in Sources */,
 				A5A4DC3624B258E300FA7580 /* EsriMapCard.swift in Sources */,
+				A5ACBAD8257DBEC400F8C836 /* AboutScreen.swift in Sources */,
 				A51514482460F1B800D4D643 /* Icon.swift in Sources */,
+				A51147C82585B2F5006151DD /* SourcePreference.swift in Sources */,
 				A50E464A2449E76000D1F435 /* FeaturedWorkout.swift in Sources */,
 				A5221E74245462ED005416BC /* DurationFilter.swift in Sources */,
 				A558982125794782004A064B /* SlidingPanel.swift in Sources */,
@@ -703,11 +728,14 @@
 				AC46320A2447593700619284 /* AppDelegate.swift in Sources */,
 				A55BCB842573279E0007E286 /* WorkoutDetailViewModel.swift in Sources */,
 				A5AF6083244AAAAD00AB7E72 /* ToggleableHeader.swift in Sources */,
+				A5ACBB39257F226600F8C836 /* SourceSelect.swift in Sources */,
 				A5AF6087244BAA3900AB7E72 /* FilterTypes.swift in Sources */,
 				A55C84E52449EC3F00D81C44 /* Blur.swift in Sources */,
 				A5516D8E2562158F00BDAB2D /* GroupedListModifier.swift in Sources */,
+				A5ACBB34257F21A100F8C836 /* UnitsSelect.swift in Sources */,
 				A582894D244F7B7C00B7B6B0 /* FilterPill.swift in Sources */,
 				A5D8CD0E2468806100DC54FA /* FullScreenMapView.swift in Sources */,
+				A511476B258260C8006151DD /* CompleteSegmentHeader.swift in Sources */,
 				A5B3497924AFCAA200EDD653 /* Array+Extensions.swift in Sources */,
 				A5D8CD0C2468621E00DC54FA /* WorkoutDetail.swift in Sources */,
 				A5780C6424A1891A00D79927 /* MockDataHelper.swift in Sources */,

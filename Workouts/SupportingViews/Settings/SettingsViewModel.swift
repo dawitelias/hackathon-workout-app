@@ -6,4 +6,22 @@
 //  Copyright © 2020 Dawit Elias. All rights reserved.
 //
 
-import Foundation
+import SwiftUI
+
+public protocol Setting {
+    var stringValue: String { get }
+    func save() -> Void
+}
+
+class SettingsViewModel: ObservableObject {
+
+    public enum SettingsKey: String {
+        case unitPreference
+        case sourcePreference
+    }
+
+    @Published var userUnitPreferences = UnitPreference()
+
+    @Published var userSourcePreference = SourcePreference()
+
+}

@@ -21,6 +21,8 @@ struct FullScreenMapView: View {
     @State var showShareSheet: Bool = false
     @State var selectedSegment: [AGSFeature] = [AGSFeature]()
     @State var mapView: AGSMapView = AGSMapView(frame: .zero)
+
+    @State var slidingPanelPosition = SlidingPanelPosition.hidden
     
     private func getInfoText() -> String {
 
@@ -51,25 +53,35 @@ struct FullScreenMapView: View {
         return ZStack(alignment: .bottom) {
 
             EsriMapView(route: route, isUserInteractionEnabled: true, selectedSegment: $selectedSegment, mapView: $mapView)
-            
-            if selectedSegment.count == 1 {
-                SlidingPanel {
-                    VStack {
-                        Text(Strings.selectPointPrompt)
-                            .font(.headline)
-                        Spacer()
-                    }
-                }
-            }
 
-            if selectedSegment.count > 1 {
-                SlidingPanel {
-                    VStack {
-                        Text("SEGMENT!")
-                            .font(.headline)
-                        Spacer()
+            SlidingPanel(selectedSegment: $selectedSegment) {
+                
+                Group {
+
+                    if selectedSegment.count == 1 {
+
+                        VStack {
+
+                            Text("Tap another point along the route to complete the segment.")
+                                .padding()
+
+                            Spacer()
+
+                        }
+
+                    } else if selectedSegment.count > 1 {
+                         
+                        VStack {
+
+                            PopupPanel(selectedSegment: $selectedSegment)
+
+                            Spacer()
+
+                        }
+
                     }
                 }
+                
             }
         }
         .edgesIgnoringSafeArea(.vertical)

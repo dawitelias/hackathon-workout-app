@@ -170,7 +170,7 @@ struct HomeView: View {
                 
                 }.sheet(isPresented: $showSettingsView) {
                     
-                    SettingsView()
+                    SettingsView(showSettings: $showSettingsView)
 
                 }, trailing:
                     
@@ -211,7 +211,7 @@ extension HomeView {
     private struct Strings {
 
         static var workoutsText: String {
-            NSLocalizedString("com.okapi.homePage.workouts", value: "Workouts", comment: "Workouts")
+            NSLocalizedString("com.okapi.homePage.workouts", value: "Your Workouts", comment: "Workouts")
         }
 
         static var viewDailySummary: String {

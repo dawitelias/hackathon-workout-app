@@ -10,32 +10,169 @@ import SwiftUI
 
 struct SettingsView: View {
 
+    let viewModel = SettingsViewModel()
+
+    @Binding var showSettings: Bool
+
+    @State var selectedUnit = UnitPreference()
+
+    @State var selectedSource = SourcePreference()
+
     var body: some View {
-        
-        VStack {
-            Text("Settings View!")
+
+        NavigationView {
+
+            Form {
+                
+                Section(header: Text(Strings.unitPreferences).font(.callout)) {
+
+                    // Units picker
+                    //
+                    Picker(Strings.units, selection: $selectedUnit) {
+
+                        ForEach(UnitPreference.allCases, id: \.self) { item in
+
+                            Text(item.stringValue).tag(UnitPreference.allCases.first(where: { $0.rawValue == item.rawValue }) ?? UnitPreference.usImperial)
+
+                        }
+
+                    }.pickerStyle(SegmentedPickerStyle())
+
+                }
+
+                Section(header: Text(Strings.sourcePreferences).font(.subheadline), footer: Text(Strings.footerText)) {
+
+                    // Source
+                    //
+                    Picker(Strings.source, selection: $selectedSource) {
+
+                        ForEach(SourcePreference.allCases, id: \.self) { item in
+
+                            Text(item.stringValue).tag(SourcePreference.allCases.first(where: { $0.rawValue == item.rawValue }) ?? SourcePreference.okapiOnly)
+
+                        }
+
+                    }
+
+                }
+
+                Section(header: Text(Strings.appInfoText).font(.body)) {
+
+                    NavigationLink(destination: AboutScreen()) {
+                        Text(Strings.aboutLinkText)
+                    }
+
+                    NavigationLink(destination: Feedback()) {
+                        Text(Strings.feedbackLinkText)
+                    }
+
+                    NavigationLink(destination: Licensing()) {
+                        Text(Strings.acknowledgements)
+                    }
+
+                }
+
+            }
+            .modifier(GroupedListModifier())
+            .navigationBarTitle(Text(Strings.settings))
+            .navigationBarItems(trailing: Button(action: {
+
+                showSettings = false
+
+            }) {
+
+                Text(Strings.doneText).foregroundColor(Color.pink).bold()
+
+            })
+
         }
+
     }
+
+    // MARK: Style constants
+    //
+    private let unitsPickerWidth: CGFloat = 200
 
 }
 
-// TODO: These used to live under filters, incorporate into this view instead
-//                Section(header: SectionHeader(text: "App Info")) {
-//                    NavigationLink(destination: AboutScreen()) {
-//                        Text("About")
-//                    }
-//                    NavigationLink(destination: Feedback()) {
-//                        Text("Feedback")
-//                    }
-//                    NavigationLink(destination: Licensing()) {
-//                        Text("Acknowledgements")
-//                    }
-//                }
+// MARK: Strings and assets
+//
+extension SettingsView {
+    
+    private struct Strings {
+
+        public static var doneText: String {
+            NSLocalizedString("com.okapi.settings.done", value: "Done", comment: "done text")
+        }
+
+        public static var allHealthkitWorkouts: String {
+            NSLocalizedString("com.okapi.settings.allHealthKitWorkouts", value: "All HealthKit Workouts", comment: "Text for user to chose all workouts from health kit")
+        }
+
+        public static var onlyOkapiWorkouts: String {
+            NSLocalizedString("com.okapi.settings.onlyOkapiWorkouts", value: "Okapi workouts only", comment: "Text for users to choose only workouts recorded from Okapi watch app")
+        }
+
+        public static var usStandard: String {
+            NSLocalizedString("com.okapi.settings.usStandard", value: "US Standard", comment: "Unit type for us standard")
+        }
+
+        public static var metric: String {
+            NSLocalizedString("com.okapi.settings.metric", value: "Metric", comment: "Unit type for metric")
+        }
+
+        public static var footerText: String {
+            NSLocalizedString("com.okapi.settings.footerText", value: "Show workouts recorded from specific apps. We can only guarantee the data integrity from workouts recorded with the Okapi watch app.", comment: "Footer text expalaining that if you choose all health kit workouts, the data might not show up correctly")
+        }
+
+        public static var userPreferences: String {
+            NSLocalizedString("com.okapi.settings.userPreferences", value: "User Preferences", comment: "User Preferences")
+        }
+
+        public static var source: String {
+            NSLocalizedString("com.okapi.settings.appSource", value: "Source", comment: "User source preferences label")
+        }
+
+        public static var units: String {
+            NSLocalizedString("com.okapi.settings.units", value: "Units", comment: "User unit preferences label")
+        }
+        
+        public static var unitPreferences: String {
+            NSLocalizedString("com.okapi.settings.unitPreferences", value: "Unit Preferences 📏", comment: "User unit preferences section header")
+        }
+        
+        public static var sourcePreferences: String {
+            NSLocalizedString("com.okapi.settings.sourcePreferences", value: "Source Preferences ⌚️", comment: "Source preferences section header")
+        }
+
+        public static var settings: String {
+            NSLocalizedString("com.okapi.settings.settings", value: "Settings", comment: "Title of the settings page")
+        }
+
+        public static var appInfoText: String {
+            NSLocalizedString("com.okapi.settings.appInfo", value: "App Info", comment: "App Info section header")
+        }
+        
+        public static var aboutLinkText: String {
+            NSLocalizedString("com.okapi.settings.aboutLink", value: "About", comment: "About link text")
+        }
+        
+        public static var feedbackLinkText: String {
+            NSLocalizedString("com.okapi.settings.feedbackLink", value: "Feedback", comment: "Feedback link text")
+        }
+        
+        public static var acknowledgements: String {
+            NSLocalizedString("com.okapi.settings.acknowledgements", value: "Acknowledgements", comment: "Acknowledgements link text.")
+        }
+
+    }
+
+}
 
 // MARK: Previews
 //
 struct SettingsView_Previews: PreviewProvider {
     static var previews: some View {
-        SettingsView()
+        SettingsView(showSettings: .constant(true))
     }
 }

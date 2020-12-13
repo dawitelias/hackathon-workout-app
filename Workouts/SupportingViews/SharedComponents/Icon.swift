@@ -27,8 +27,8 @@ struct Icon: View {
         }
         .background(LinearGradient(
             gradient: .init(colors: [mainColor, highlightColor]),
-            startPoint: .init(x: 0.35, y: 0.0),
-            endPoint: .init(x: 0.0, y: 0.7)
+            startPoint: .init(x: 0.6, y: 0.0),
+            endPoint: .init(x: 0.0, y: 0.9)
         ))
         .clipShape(Circle())
     }

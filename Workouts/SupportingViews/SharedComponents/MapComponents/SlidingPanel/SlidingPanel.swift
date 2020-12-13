@@ -6,9 +6,8 @@
 //  Copyright © 2020 Dawit Elias. All rights reserved.
 //
 
-// NOTE: Implementation taken from here: https://www.mozzafiller.com/posts/swiftui-slide-over-card-like-maps-stocks
-
 import SwiftUI
+import ArcGIS
 
 struct SlidingPanel<Content: View> : View {
 
@@ -16,7 +15,19 @@ struct SlidingPanel<Content: View> : View {
 
     @State var position = SlidingPanelPosition.bottom
     
+    @Binding var selectedSegment: [AGSFeature]
+    
     var content: () -> Content
+
+    private func getYOffset() -> CGFloat {
+        if selectedSegment.count == 1 {
+            return SlidingPanelPosition.bottom.rawValue + dragState.translation.height
+        } else if selectedSegment.count > 0 {
+            return position.rawValue + dragState.translation.height
+        } else {
+            return UIScreen.main.bounds.height
+        }
+    }
 
     var body: some View {
 
@@ -29,15 +40,18 @@ struct SlidingPanel<Content: View> : View {
         return Group {
 
             Handle()
+                .frame(width: 100, height: 100)
+                .border(Color.blue)
+                .padding()
 
-            self.content()
+            content()
 
         }
         .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
-        .background(Blur())
+        .background(Color(UIColor.systemBackground))
         .shadow(color: Color(.sRGBLinear, white: 0, opacity: 0.13), radius: 10.0)
-        .offset(y: (UIScreen.main.bounds.height - self.position.rawValue + self.dragState.translation.height))
-        .animation(self.dragState.isDragging ? nil : .interpolatingSpring(stiffness: 300.0, damping: 30.0, initialVelocity: 10.0))
+        .offset(y: getYOffset())
+        .animation(dragState.isDragging ? nil : .interpolatingSpring(stiffness: 300.0, damping: 30.0, initialVelocity: 10.0))
         .gesture(drag)
     }
     
@@ -74,9 +88,9 @@ struct SlidingPanel<Content: View> : View {
 
 enum SlidingPanelPosition: CGFloat {
     case hidden = 0
-    case top = 80
-    case middle = 200
-    case bottom = 600
+    case top = 120
+    case middle = 400
+    case bottom = 580
 }
 
 enum DragState {
