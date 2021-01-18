@@ -44,6 +44,7 @@ struct HomeView: View {
         }
         
         return NavigationView {
+
             List {
                 // If the user has done multiple workouts today, we want to show them a horizontal scroll view of the workouts that
                 // they have done, otherwise, if they have only done one workout or they haven't done a workout at all today, then we will
@@ -135,6 +136,12 @@ struct HomeView: View {
                     }
                 }
 
+                if sortedDictionaryKeys.count == 0 {
+
+                    Text("Nothing to see here! Either get crackin or check and make sure you've granted us the correct permissions to read your workout data saved in Health Kit.")
+
+                }
+
                 ForEach(sortedDictionaryKeys, id: \.self) { key in
 
                     Section(header: VStack {
@@ -170,7 +177,7 @@ struct HomeView: View {
                 
                 }.sheet(isPresented: $showSettingsView) {
                     
-                    SettingsView(showSettings: $showSettingsView)
+                    MenuViewContent(showSettings: $showSettingsView)
 
                 }, trailing:
                     
@@ -237,7 +244,11 @@ extension HomeView {
 // MARK: Previews
 //
 struct HomeView_Previews: PreviewProvider {
+
     static var previews: some View {
+
         HomeView().environmentObject(WorkoutData())
+
     }
+
 }

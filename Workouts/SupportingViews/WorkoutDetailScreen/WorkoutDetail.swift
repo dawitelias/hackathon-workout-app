@@ -95,7 +95,7 @@ struct WorkoutDetail: View {
 
                     VStack(alignment: .leading) {
 
-                        NavigationLink(destination: FullScreenMapView(route: viewModel.route!)) {
+                        NavigationLink(destination: FullScreenMapView(viewModel: FullScreenMapViewModel(route: viewModel.route!))) {
 
                             ZStack(alignment: .topTrailing) {
 

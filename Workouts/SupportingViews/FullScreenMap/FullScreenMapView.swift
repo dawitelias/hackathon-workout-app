@@ -15,50 +15,25 @@ import ArcGIS
 var generatedMapImage: UIImage = UIImage()
 
 struct FullScreenMapView: View {
-
-    let route: [CLLocation]
+    
+    @ObservedObject var viewModel: FullScreenMapViewModel
 
     @State var showShareSheet: Bool = false
-    @State var selectedSegment: [AGSFeature] = [AGSFeature]()
     @State var mapView: AGSMapView = AGSMapView(frame: .zero)
 
     @State var slidingPanelPosition = SlidingPanelPosition.hidden
-    
-    private func getInfoText() -> String {
-
-        var value = ""
-
-        if selectedSegment.count > 1 {
-
-            let segmentStartDate = selectedSegment.last?.attributes[WorkoutRouteAttributes.timestamp.rawValue] as? Date ?? Date()
-            let segmentEndDate = selectedSegment.first?.attributes[WorkoutRouteAttributes.timestamp.rawValue] as? Date ?? Date()
-            let elapsedTime = abs(segmentStartDate.distance(to: segmentEndDate))
-            let elapsedTimeString = elapsedTime > 60 ? elapsedTime.getHoursAndMinutesString() : "\(Int(elapsedTime))s"
-            let segmentLength = getSegmentLength(segment: selectedSegment)
-
-            let formattedMileageString = String(format: "%.2f", segmentLength)
-            value = "Selected Segment: \(elapsedTimeString), \(formattedMileageString)mi, \(getPaceString(selectedSegment: selectedSegment))"
-
-        } else {
-
-            value = ChuckNorris.getRandomChuckNorrisQuote()
-
-        }
-
-        return value
-    }
 
     var body: some View {
 
         return ZStack(alignment: .bottom) {
 
-            EsriMapView(route: route, isUserInteractionEnabled: true, selectedSegment: $selectedSegment, mapView: $mapView)
+            EsriMapView(mapView: $mapView, isUserInteractionEnabled: true).environmentObject(viewModel)
 
-            SlidingPanel(selectedSegment: $selectedSegment) {
+            SlidingPanel(selectedSegment: $viewModel.selectedSegment) {
                 
                 Group {
 
-                    if selectedSegment.count == 1 {
+                    if viewModel.selectedSegment.count == 1 {
 
                         VStack {
 
@@ -69,11 +44,11 @@ struct FullScreenMapView: View {
 
                         }
 
-                    } else if selectedSegment.count > 1 {
+                    } else if viewModel.selectedSegment.count > 1 {
                          
                         VStack {
 
-                            PopupPanel(selectedSegment: $selectedSegment)
+                            PopupPanel().environmentObject(viewModel)
 
                             Spacer()
 
@@ -114,7 +89,7 @@ struct FullScreenMapView: View {
 
             }.sheet(isPresented: $showShareSheet) {
 
-                ShareSheet(activityItems: [generatedMapImage, getInfoText()])
+                ShareSheet(activityItems: [generatedMapImage, viewModel.getInfoText()])
 
             }
         )
@@ -137,15 +112,4 @@ extension FullScreenMapView {
 
     }
 
-}
-
-struct FullScreenMapView_Previews: PreviewProvider {
-    static var previews: some View {
-        FullScreenMapView(route: [
-            CLLocation(latitude: 70.2568, longitude: 43.6591),
-            CLLocation(latitude: 70.2578, longitude: 43.65978),
-            CLLocation(latitude: 70.2548, longitude: 43.6548),
-            CLLocation(latitude: 70.2538, longitude: 43.6538),
-        ], selectedSegment: [AGSFeature]())
-    }
 }

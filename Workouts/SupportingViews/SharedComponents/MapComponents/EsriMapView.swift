@@ -24,12 +24,14 @@ enum BasemapUrls: String {
 }
 
 struct EsriMapView: UIViewRepresentable {
-    var route: [CLLocation]?
-    var isUserInteractionEnabled: Bool = false
+    
+    @EnvironmentObject var viewModel: FullScreenMapViewModel
 
     @Environment(\.colorScheme) var colorScheme
-    @Binding var selectedSegment: [AGSFeature]
+
     @Binding var mapView: AGSMapView
+    
+    var isUserInteractionEnabled: Bool = false
 
     func makeCoordinator() -> Coordinator {
         Coordinator(self)
@@ -56,7 +58,7 @@ struct EsriMapView: UIViewRepresentable {
         return mapView
     }
     func updateUIView(_ uiView: AGSMapView, context: Context) {
-        if selectedSegment.count <= 0 {
+        if viewModel.selectedSegment.count <= 0 {
             if let featureCollectionLayer = uiView.map?.operationalLayers.firstObject as? AGSFeatureCollectionLayer, let featureLayer = featureCollectionLayer.layers.first {
                 featureLayer.clearSelection()
             }
@@ -74,7 +76,7 @@ struct EsriMapView: UIViewRepresentable {
     }
     
     private func drawRoute(uiView: AGSMapView) {
-        guard let maxVelocity = route?.max(by: { return $0.speed < $1.speed })?.speed, let minVelocity = route?.min(by: { return $0.speed < $1.speed })?.speed else {
+        guard let maxVelocity = viewModel.route?.max(by: { return $0.speed < $1.speed })?.speed, let minVelocity = viewModel.route?.min(by: { return $0.speed < $1.speed })?.speed else {
             return
         }
 
@@ -91,7 +93,7 @@ struct EsriMapView: UIViewRepresentable {
 
         // If we have received route data, add the graphic to the layer
         //
-        if let workoutRoute = route {
+        if let workoutRoute = viewModel.route {
             let points = workoutRoute.map { location in
                 return AGSPoint(clLocationCoordinate2D: location.coordinate)
             }
@@ -104,7 +106,7 @@ struct EsriMapView: UIViewRepresentable {
         }
         
         // Add in the start and end graphics
-        if let firstPoint = route?.first?.coordinate, let lastPoint = route?.last?.coordinate {
+        if let firstPoint = viewModel.route?.first?.coordinate, let lastPoint = viewModel.route?.last?.coordinate {
             let startCoordinate = AGSPoint(clLocationCoordinate2D: firstPoint)
             let endCoordinate = AGSPoint(clLocationCoordinate2D: lastPoint)
             
@@ -153,7 +155,7 @@ struct EsriMapView: UIViewRepresentable {
         // renderer
         let minValue: Double = 0
         var maxValue: Double = 0
-        if let workoutRoute = route, let max = workoutRoute.map({ return $0.speed }).max() {
+        if let workoutRoute = viewModel.route, let max = workoutRoute.map({ return $0.speed }).max() {
             maxValue = max
         }
         let colors: [UIColor] = [
@@ -180,7 +182,7 @@ struct EsriMapView: UIViewRepresentable {
         pointsCollectionTable.renderer = renderer
         
         // Create a new point feature, provide geometry and attribute values
-        if var workoutRoute = route {
+        if var workoutRoute = viewModel.route {
             workoutRoute = workoutRoute.filter { item in
                 return item.horizontalAccuracy > 0 && item.coordinate.latitude != 0 && item.coordinate.longitude != 0
             }
@@ -212,8 +214,8 @@ struct EsriMapView: UIViewRepresentable {
             // If there is only one point in our existing segment, then just append this point and
             // select it without doing anything else,
             //
-            if parent.selectedSegment.count == 0 {
-                parent.selectedSegment.append(feature)
+            if parent.viewModel.selectedSegment.count == 0 {
+                parent.viewModel.selectedSegment.append(feature)
                 featureLayer.select(feature)
                 return
             }
@@ -221,7 +223,7 @@ struct EsriMapView: UIViewRepresentable {
             // We can assume the user has already defined a starting point for the segment - now we can
             // continue with the logic to highlight/select wherever else they tap
             //
-            let startValue = parent.selectedSegment[Int(parent.selectedSegment.count/2)].attributes[WorkoutRouteAttributes.index.rawValue] as! Int
+            let startValue = parent.viewModel.selectedSegment[Int(parent.viewModel.selectedSegment.count/2)].attributes[WorkoutRouteAttributes.index.rawValue] as! Int
             let endValue = feature.attributes[WorkoutRouteAttributes.index.rawValue] as! Int
     
             let queryParams = AGSQueryParameters()
@@ -239,13 +241,13 @@ struct EsriMapView: UIViewRepresentable {
                         // Create a temp variable to hold our features so that we can perform
                         // all of our operations without triggering a UI update
                         //
-                        var temp = self.parent.selectedSegment
+                        var temp = self.parent.viewModel.selectedSegment
                         temp.append(contentsOf: agsfeatures)
                         temp.removeDuplicates()
                         temp.sort { f1, f2 in
                             return f1.attributes[WorkoutRouteAttributes.index.rawValue] as! Int > f2.attributes[WorkoutRouteAttributes.index.rawValue] as! Int
                         }
-                        self.parent.selectedSegment = temp
+                        self.parent.viewModel.selectedSegment = temp
                     }
                 }
             }
@@ -263,7 +265,7 @@ struct EsriMapView: UIViewRepresentable {
                     }
                     
                     if results?.count == 0 {
-                        self?.parent.selectedSegment.removeAll()
+                        self?.parent.viewModel.selectedSegment.removeAll()
                     }
     
                     if let featureCollectionLayer = mapView.map?.operationalLayers.firstObject as? AGSFeatureCollectionLayer, let featureLayer = featureCollectionLayer.layers.first {

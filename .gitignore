@@ -1,2 +1,4 @@
 Pods/
 AppStoreScreenshots/
+*UserInterfaceState.xcuserstate
+*DS_Store

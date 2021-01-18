@@ -12,18 +12,18 @@ import ArcGIS
 struct PopupPanel: View {
     
     @Environment(\.colorScheme) var colorScheme
-
-    @Binding var selectedSegment: [AGSFeature]
+    
+    @EnvironmentObject var viewModel: FullScreenMapViewModel
 
     var body: some View {
-        let segmentStartDate = selectedSegment.last?.attributes[WorkoutRouteAttributes.timestamp.rawValue] as? Date ?? Date()
-        let segmentEndDate = selectedSegment.first?.attributes[WorkoutRouteAttributes.timestamp.rawValue] as? Date ?? Date()
-        let netElevationGain = getElevation(format: .net, segment: selectedSegment)
-        let totalGain = getElevation(format: .gain, segment: selectedSegment)
-        let totalLoss = getElevation(format: .loss, segment: selectedSegment)
-        let segmentLength = getSegmentLength(segment: selectedSegment)
+        let segmentStartDate = viewModel.selectedSegment.last?.attributes[WorkoutRouteAttributes.timestamp.rawValue] as? Date ?? Date()
+        let segmentEndDate = viewModel.selectedSegment.first?.attributes[WorkoutRouteAttributes.timestamp.rawValue] as? Date ?? Date()
+        let netElevationGain = getElevation(format: .net, segment: viewModel.selectedSegment)
+        let totalGain = getElevation(format: .gain, segment: viewModel.selectedSegment)
+        let totalLoss = getElevation(format: .loss, segment: viewModel.selectedSegment)
+        let segmentLength = getSegmentLength(segment: viewModel.selectedSegment)
         
-        let averageSpeed = getAverageSpeed(segment: selectedSegment)
+        let averageSpeed = getAverageSpeed(segment: viewModel.selectedSegment)
         let mphValue = metersPerSecondToMPH(pace: averageSpeed)
         
         let elapsedTime = abs(segmentStartDate.distance(to: segmentEndDate))
@@ -41,7 +41,7 @@ struct PopupPanel: View {
                     .padding(.top, 30)
                 Spacer()
                 Button(action: {
-                    self.selectedSegment.removeAll()
+                    self.viewModel.selectedSegment.removeAll()
                 }, label: {
                     Image(systemName: "xmark.circle.fill")
                         .resizable()
@@ -57,7 +57,7 @@ struct PopupPanel: View {
                     Text("Average Speed:")
                         .font(.callout)
                         .fontWeight(.heavy)
-                    Text("\(getPaceString(selectedSegment: selectedSegment)) - \(String(format: "%.1f", mphValue)) mph")
+                    Text("\(getPaceString(selectedSegment: viewModel.selectedSegment)) - \(String(format: "%.1f", mphValue)) mph")
                         .font(.callout)
                         .fontWeight(.thin)
                 }.padding(.bottom, 5)
@@ -85,11 +85,5 @@ struct PopupPanel: View {
         .background(Blur().cornerRadius(5).shadow(color: Color(colorScheme == .dark ? UIColor.black : UIColor.systemGray3), radius: 2, x: 0, y: 0)
         )
         .padding()
-    }
-}
-
-struct PopupPanel_Previews: PreviewProvider {
-    static var previews: some View {
-        PopupPanel(selectedSegment: .constant([AGSFeature]()))
     }
 }
