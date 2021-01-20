@@ -62,6 +62,7 @@
 		A5D8CC9025B4FC8200F35702 /* BrandPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5D8CC8F25B4FC8200F35702 /* BrandPage.swift */; };
 		A5D8CC9D25B5065800F35702 /* LetsGo.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5D8CC9C25B5065800F35702 /* LetsGo.swift */; };
 		A5D8CCAA25B638D300F35702 /* FullScreenMapViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5D8CCA925B638D300F35702 /* FullScreenMapViewModel.swift */; };
+		A5D8CCB225B65E7C00F35702 /* PopupPanelListItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5D8CCB125B65E7C00F35702 /* PopupPanelListItem.swift */; };
 		A5D8CD042467751000DC54FA /* EsriMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5D8CD032467751000DC54FA /* EsriMapView.swift */; };
 		A5D8CD0C2468621E00DC54FA /* WorkoutDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5D8CD0B2468621E00DC54FA /* WorkoutDetail.swift */; };
 		A5D8CD0E2468806100DC54FA /* FullScreenMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5D8CD0D2468806100DC54FA /* FullScreenMapView.swift */; };
@@ -157,6 +158,7 @@
 		A5D8CC8F25B4FC8200F35702 /* BrandPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrandPage.swift; sourceTree = "<group>"; };
 		A5D8CC9C25B5065800F35702 /* LetsGo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LetsGo.swift; sourceTree = "<group>"; };
 		A5D8CCA925B638D300F35702 /* FullScreenMapViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullScreenMapViewModel.swift; sourceTree = "<group>"; };
+		A5D8CCB125B65E7C00F35702 /* PopupPanelListItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopupPanelListItem.swift; sourceTree = "<group>"; };
 		A5D8CD032467751000DC54FA /* EsriMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EsriMapView.swift; sourceTree = "<group>"; };
 		A5D8CD0B2468621E00DC54FA /* WorkoutDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutDetail.swift; sourceTree = "<group>"; };
 		A5D8CD0D2468806100DC54FA /* FullScreenMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullScreenMapView.swift; sourceTree = "<group>"; };
@@ -365,6 +367,7 @@
 				A5A4DC3524B258E300FA7580 /* EsriMapCard.swift */,
 				A5A4DC3724B29D2F00FA7580 /* PopupPanel.swift */,
 				A5DC18F424B41BF800E4EE8C /* CompleteSegmentPopup.swift */,
+				A5D8CCB125B65E7C00F35702 /* PopupPanelListItem.swift */,
 			);
 			path = MapComponents;
 			sourceTree = "<group>";
@@ -771,6 +774,7 @@
 				A5221E6E24545F00005416BC /* FilterHome.swift in Sources */,
 				A553D4C724B91E8400F02007 /* RouteCalculationsHelper.swift in Sources */,
 				AC46320C2447593700619284 /* SceneDelegate.swift in Sources */,
+				A5D8CCB225B65E7C00F35702 /* PopupPanelListItem.swift in Sources */,
 				A5221E70245462B4005416BC /* DateFilter.swift in Sources */,
 				A52F3688247ABB00008DE35B /* AboutPageCard.swift in Sources */,
 				A54622762459C7A4003BA285 /* DailySummary.swift in Sources */,

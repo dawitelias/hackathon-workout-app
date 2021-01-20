@@ -73,7 +73,7 @@ extension TimeInterval {
     }
 
     func getHoursString() -> String {
-        return "\(String.init(format: "%.2f", self/3600)) hr"
+        "\(String.init(format: "%.2f", self/3600)) hr"
     }
 
     func getHoursAndMinutesString() -> String {

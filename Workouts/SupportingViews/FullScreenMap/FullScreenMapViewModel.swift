@@ -82,6 +82,18 @@ class FullScreenMapViewModel: ObservableObject {
 
     }
 
+    public var speedText: String {
+
+        "\(getPaceString(selectedSegment: selectedSegment)) - \(String(format: "%.1f", mphValue)) mph"
+
+    }
+    
+    public var elevationGainText: String {
+
+        "\(Int(netElevationGain))ft, (+ \(Int(totalGain))ft, \(Int(totalLoss))ft)"
+
+    }
+
     func getInfoText() -> String {
 
         var value = ""

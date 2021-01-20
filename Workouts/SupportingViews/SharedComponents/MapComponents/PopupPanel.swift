@@ -16,74 +16,108 @@ struct PopupPanel: View {
     @EnvironmentObject var viewModel: FullScreenMapViewModel
 
     var body: some View {
-        let segmentStartDate = viewModel.selectedSegment.last?.attributes[WorkoutRouteAttributes.timestamp.rawValue] as? Date ?? Date()
-        let segmentEndDate = viewModel.selectedSegment.first?.attributes[WorkoutRouteAttributes.timestamp.rawValue] as? Date ?? Date()
-        let netElevationGain = getElevation(format: .net, segment: viewModel.selectedSegment)
-        let totalGain = getElevation(format: .gain, segment: viewModel.selectedSegment)
-        let totalLoss = getElevation(format: .loss, segment: viewModel.selectedSegment)
-        let segmentLength = getSegmentLength(segment: viewModel.selectedSegment)
-        
-        let averageSpeed = getAverageSpeed(segment: viewModel.selectedSegment)
-        let mphValue = metersPerSecondToMPH(pace: averageSpeed)
-        
-        let elapsedTime = abs(segmentStartDate.distance(to: segmentEndDate))
-        let elapsedTimeString = elapsedTime > 60 ? elapsedTime.getHoursAndMinutesString() : "\(Int(elapsedTime))"
-        let formattedMileageString = String(format: "%.2f", segmentLength)
-        
+
+        let formattedMileageString = String(format: "%.2f", viewModel.segmentLength)
+
+        let segmentSpecs = [
+            (Strings.startDate, viewModel.segmentStartDate.hourAndMin),
+            (Strings.endDate, viewModel.segmentEndDate.hourAndMin),
+            (Strings.duration, viewModel.elapsedTimeString),
+            (Strings.distance, formattedMileageString),
+            (Strings.speed, viewModel.speedText),
+            (Strings.elevationGain, viewModel.elevationGainText)
+        ]
+
         return VStack(alignment: .leading) {
-            // Header for segment length and duration
-            //
-            HStack(alignment: .top) {
-                Text("\(formattedMileageString)mi (\(elapsedTimeString)s)")
+
+            HStack(alignment: .bottom) {
+
+                Text(Strings.selectedSegmentOverview)
                     .font(.title)
-                    .fontWeight(.semibold)
-                    .frame(width: nil, height: 15, alignment: .center)
-                    .padding(.top, 30)
+                    .foregroundColor(Color(UIColor.secondaryLabel))
+                    .padding(.horizontal)
+
                 Spacer()
+
                 Button(action: {
-                    self.viewModel.selectedSegment.removeAll()
+
+                    viewModel.selectedSegment.removeAll()
+
                 }, label: {
-                    Image(systemName: "xmark.circle.fill")
+
+                    Image(systemName: Images.close.rawValue)
                         .resizable()
-                        .frame(width: 25, height: 25, alignment: .center)
-                        .padding([.top, .bottom, .leading])
+                        .frame(width: closeButtonDimension, height: closeButtonDimension, alignment: .center)
+                        .padding(.all)
+
                 })
-            }.padding([.leading,.trailing])
+
+            }
+
+            Divider()
             
-            // Body for averages
-            //
-            VStack(alignment: .leading) {
-                HStack(alignment: .top) {
-                    Text("Average Speed:")
-                        .font(.callout)
-                        .fontWeight(.heavy)
-                    Text("\(getPaceString(selectedSegment: viewModel.selectedSegment)) - \(String(format: "%.1f", mphValue)) mph")
-                        .font(.callout)
-                        .fontWeight(.thin)
-                }.padding(.bottom, 5)
-                HStack(alignment: .center) {
-                    Text("Net Elevation Gain:")
-                        .font(.callout)
-                        .fontWeight(.heavy)
-                    Text("\(Int(netElevationGain))ft")
-                        .font(.callout)
-                        .fontWeight(.thin)
-                    Text("(+ \(Int(totalGain))ft")
-                        .font(.footnote)
-                        .foregroundColor(.green)
-                    Text("\(Int(totalLoss))ft)")
-                        .font(.footnote)
-                        .foregroundColor(.red)
+            VStack {
+
+                ForEach(0...segmentSpecs.count - 1, id: \.self) { index in
+
+                    PopupPanelListItem(title: segmentSpecs[index].0, value: segmentSpecs[index].1)
+
+                    if index != segmentSpecs.count - 1 {
+
+                        Divider()
+
+                    }
+
                 }
-                Text("\(segmentStartDate.hourAndMin) - \(segmentEndDate.hourAndMin)")
-                    .font(.callout)
-                    .fontWeight(.thin)
-                    .padding(.top)
-            }.padding([.leading, .trailing, .bottom])
+
+            }
+            .padding(.horizontal)
+
         }
         .frame(width: UIScreen.main.bounds.width - 8, height: nil, alignment: .center)
-        .background(Blur().cornerRadius(5).shadow(color: Color(colorScheme == .dark ? UIColor.black : UIColor.systemGray3), radius: 2, x: 0, y: 0)
-        )
-        .padding()
+
     }
+
+    private let closeButtonDimension: CGFloat = 25
+
+}
+
+extension PopupPanel {
+    
+    private enum Images: String {
+        case close = "xmark.circle.fill"
+    }
+
+    private struct Strings {
+
+        static var selectedSegmentOverview: String {
+            NSLocalizedString("com.okapi.popupPanel.selected-segment-overview", value: "Segment Overview", comment: "Selected segment overview text")
+        }
+
+        static var startDate: String {
+            NSLocalizedString("com.okapi.popupPanel.start-date", value: "Start Date", comment: "Start date string")
+        }
+
+        static var endDate: String {
+            NSLocalizedString("com.okapi.popupPanel.end-date", value: "End Date", comment: "End date string")
+        }
+
+        static var duration: String {
+            NSLocalizedString("com.okapi.popupPanel.duration", value: "Duration", comment: "Duration string")
+        }
+
+        static var distance: String {
+            NSLocalizedString("com.okapi.popupPanel.distance", value: "Distance", comment: "Distance String")
+        }
+
+        static var speed: String {
+            NSLocalizedString("com.okapi.popupPanel.speed", value: "Speed", comment: "Speed text")
+        }
+
+        static var elevationGain: String {
+            NSLocalizedString("com.okapi.popupPanel.elevation-gain", value: "Elevation Gain", comment: "Elevation Gain")
+        }
+
+    }
+
 }
