@@ -15,6 +15,8 @@ class WorkoutDetailViewModel: ObservableObject {
 
     let workout: HKWorkout
 
+    let settings: UserSettings
+
     @Published var route: [CLLocation]? = nil
     @Published var workoutHRData: [HeartRateReading]? = nil
 
@@ -23,8 +25,9 @@ class WorkoutDetailViewModel: ObservableObject {
     
     private var chartXAxisFormatter: DateFormatter
 
-    init(workout: HKWorkout) {
+    init(workout: HKWorkout, settings: UserSettings) {
         self.workout = workout
+        self.settings = settings
 
         chartXAxisFormatter = DateFormatter()
         chartXAxisFormatter.dateFormat = "h:mm a"
@@ -119,7 +122,11 @@ class WorkoutDetailViewModel: ObservableObject {
     // Distance
     //
     var workoutDistanceDescription: String {
-        return String(format: "%.2f mi", workout.totalDistance?.doubleValue(for: .mile()) ?? 0)
+
+        let distance = workout.totalDistance?.doubleValue(for: settings.userUnitPreferences == .metric ? .meterUnit(with: .kilo) : .mile()) ?? 0
+
+        return String(format: "%.2f \(settings.userUnitPreferences.abbreviatedDistanceUnit)", distance)
+
     }
 
     // Altitude Data
@@ -201,7 +208,7 @@ class WorkoutDetailViewModel: ObservableObject {
     var speedData: [Double] {
 
         let data = route?
-            .map { metersPerSecondToMPH(pace: $0.speed) }
+            .map { settings.userUnitPreferences == .usImperial ? metersPerSecondToMPH(pace: $0.speed) : metersPerSecondToKPH(pace: $0.speed) }
             .filter { $0 > 0 } ?? []
 
         // We never want to have more datapoints than we have pixels on the screen / 2?
@@ -221,21 +228,39 @@ class WorkoutDetailViewModel: ObservableObject {
 
         return simplifiedData
     }
+
     var averageSpeed: Double {
-        getAverageSpeed(segment: route ?? [])
+
+        getAverageSpeed(segment: route ?? [], settings: settings)
+
     }
+
     var mphValue: Double {
+
         metersPerSecondToMPH(pace: averageSpeed)
+
     }
+    
+    var kphValue: Double {
+        
+        metersPerSecondToKPH(pace: averageSpeed)
+
+    }
+
     var averagePaceDescription: String {
-        "Average Pace: \(String(format: "%.1f", mphValue)) mph - \(getPaceString(route: route ?? []))"
+
+        let speedString = settings.userUnitPreferences == .metric ? kphValue : mphValue
+
+        let pace = settings.userUnitPreferences == .metric ? getPaceString(kilometersPerHour: kphValue) : getPaceString(milesPerHour: mphValue)
+
+        return "Average Pace: \(String(format: "%.1f", speedString)) \(settings.userUnitPreferences.speed) - \(pace)"
     }
     
     // ELEVATION DATA
     //
     var elevationData: [Double] {
         let elevationData = route?
-            .map { metersToFeet(meters: $0.altitude) }
+            .map { settings.userUnitPreferences == .usImperial ? metersToFeet(meters: $0.altitude) : $0.altitude }
             .filter { $0 > 0 } ?? []
         
         // We never want to have more datapoints than we have pixels on the screen / 2?
@@ -255,13 +280,17 @@ class WorkoutDetailViewModel: ObservableObject {
 
         return simplifiedData
     }
+
     var netElevationGain: Int {
-        Int(getElevation(format: .net, segment: route ?? []))
+        Int(getElevation(format: .net, segment: route ?? [], settings: settings))
     }
+
     var totalGain: Int {
-        Int(getElevation(format: .gain, segment: route ?? []))
+        Int(getElevation(format: .gain, segment: route ?? [], settings: settings))
     }
+
     var totalLoss: Int {
-        Int(getElevation(format: .loss, segment: route ?? []))
+        Int(getElevation(format: .loss, segment: route ?? [], settings: settings))
     }
+
 }

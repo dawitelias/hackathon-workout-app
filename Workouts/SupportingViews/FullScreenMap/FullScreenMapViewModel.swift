@@ -14,11 +14,15 @@ class FullScreenMapViewModel: ObservableObject {
     
     let route: [CLLocation]?
 
+    let settings: UserSettings
+
     @Published var selectedSegment: [AGSFeature] = [AGSFeature]()
     
-    init(route: [CLLocation]) {
+    init(route: [CLLocation], settings: UserSettings) {
 
         self.route = route
+
+        self.settings = settings
 
     }
     
@@ -36,37 +40,42 @@ class FullScreenMapViewModel: ObservableObject {
     
     public var netElevationGain: Double {
         
-        getElevation(format: .net, segment: selectedSegment)
+        getElevation(format: .net, segment: selectedSegment, settings: settings)
 
     }
     
     public var totalGain: Double {
 
-        getElevation(format: .gain, segment: selectedSegment)
+        getElevation(format: .gain, segment: selectedSegment, settings: settings)
 
     }
     
     public var totalLoss: Double {
 
-        getElevation(format: .loss, segment: selectedSegment)
+        getElevation(format: .loss, segment: selectedSegment, settings: settings)
 
     }
     
     public var segmentLength: Double {
 
-        getSegmentLength(segment: selectedSegment)
+        getSegmentLength(segment: selectedSegment, settings: settings)
 
     }
     
     public var averageSpeed: Double {
 
-        getAverageSpeed(segment: selectedSegment)
+        getAverageSpeed(segment: selectedSegment, settings: settings)
 
     }
     
     public var mphValue: Double {
 
         metersPerSecondToMPH(pace: averageSpeed)
+
+    }
+    public var kphValue: Double {
+        
+        metersPerSecondToKPH(pace: averageSpeed)
 
     }
     
@@ -84,13 +93,15 @@ class FullScreenMapViewModel: ObservableObject {
 
     public var speedText: String {
 
-        "\(getPaceString(selectedSegment: selectedSegment)) - \(String(format: "%.1f", mphValue)) mph"
+        let paceString = settings.userUnitPreferences == .usImperial ? getPaceString(milesPerHour: mphValue) : getPaceString(kilometersPerHour: kphValue)
+
+        return "\(paceString) - \(String(format: "%.1f", settings.userUnitPreferences == .usImperial ? mphValue : kphValue)) \(settings.userUnitPreferences.speed)"
 
     }
     
     public var elevationGainText: String {
 
-        "\(Int(netElevationGain))ft, (+ \(Int(totalGain))ft, \(Int(totalLoss))ft)"
+        "\(Int(netElevationGain))\(settings.userUnitPreferences.abbreviatedElevationUnit), (+ \(Int(totalGain))\(settings.userUnitPreferences.abbreviatedElevationUnit), \(Int(totalLoss))\(settings.userUnitPreferences.abbreviatedElevationUnit))"
 
     }
 
@@ -104,10 +115,10 @@ class FullScreenMapViewModel: ObservableObject {
             let segmentEndDate = selectedSegment.first?.attributes[WorkoutRouteAttributes.timestamp.rawValue] as? Date ?? Date()
             let elapsedTime = abs(segmentStartDate.distance(to: segmentEndDate))
             let elapsedTimeString = elapsedTime > 60 ? elapsedTime.getHoursAndMinutesString() : "\(Int(elapsedTime))s"
-            let segmentLength = getSegmentLength(segment: selectedSegment)
+            let segmentLength = getSegmentLength(segment: selectedSegment, settings: settings)
 
-            let formattedMileageString = String(format: "%.2f", segmentLength)
-            value = "Selected Segment: \(elapsedTimeString), \(formattedMileageString)mi, \(getPaceString(selectedSegment: selectedSegment))"
+            let formattedLengthString = String(format: "%.2f", segmentLength)
+            value = "Selected Segment: \(elapsedTimeString), \(formattedLengthString)\(settings.userUnitPreferences.abbreviatedDistanceUnit)"
 
         } else {
 

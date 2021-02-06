@@ -10,7 +10,9 @@ import Foundation
 import CoreLocation
 import ArcGIS
 
-func getAverageSpeed(segment: [AGSFeature]) -> Double {
+// Average speed in meters / second
+//
+func getAverageSpeed(segment: [AGSFeature], settings: UserSettings) -> Double {
     var speedSum: Double = 0
     segment.forEach { point in
         speedSum += point.attributes[WorkoutRouteAttributes.speed.rawValue] as? Double ?? 0
@@ -18,7 +20,9 @@ func getAverageSpeed(segment: [AGSFeature]) -> Double {
     return speedSum/Double(segment.count)
 }
 
-func getAverageSpeed(segment: [CLLocation]) -> Double {
+// Average speed in meters / second
+//
+func getAverageSpeed(segment: [CLLocation], settings: UserSettings) -> Double {
     var speedSum: Double = 0
     segment.forEach { point in
         speedSum += point.speed
@@ -26,20 +30,23 @@ func getAverageSpeed(segment: [CLLocation]) -> Double {
     return speedSum/Double(segment.count)
 }
 
-func getPaceString(selectedSegment: [AGSFeature]) -> String {
-    let averageSpeed = getAverageSpeed(segment: selectedSegment)
-    let minPerMilePace = metersPerSecondToMinPerMile(pace: averageSpeed)
-    let minValue = Int(minPerMilePace)
-    let secondsValue = Int(60 * minPerMilePace.truncatingRemainder(dividingBy: 1))
-    return "\(minValue)'\(String(format: "%02d", secondsValue))\" pace"
+func getPaceString(milesPerHour: Double) -> String {
+
+    // TODO: Crash here sometimes :(
+    //
+    let pace = milesPerHour > 0 ? 60 / milesPerHour : 0
+    let minVal = Int(pace)
+    let secondsVal = Int(60 * pace.truncatingRemainder(dividingBy: 1))
+
+    return "\(minVal)'\(String(format: "%02d", secondsVal))\" pace"
 }
 
-func getPaceString(route: [CLLocation]) -> String {
-    let averageSpeed = getAverageSpeed(segment: route)
-    let minPerMilePace = metersPerSecondToMinPerMile(pace: averageSpeed)
-    let minValue = Int(minPerMilePace)
-    let secondsValue = Int(60 * minPerMilePace.truncatingRemainder(dividingBy: 1))
-    return "\(minValue)'\(String(format: "%02d", secondsValue))\" pace"
+func getPaceString(kilometersPerHour: Double) -> String {
+    let pace = kilometersPerHour > 0 ? 60 / kilometersPerHour : 0
+    let minVal = Int(pace)
+    let secondsVal = Int(60 * pace.truncatingRemainder(dividingBy: 1))
+
+    return "\(minVal)'\(String(format: "%02d", secondsVal))\" pace"
 }
 
 // This returns the amount of elevation that a user gained taking into account
@@ -51,19 +58,22 @@ enum ElevationFormat {
 
 // Get the length of the selected segment using the geometry engine
 //
-func getSegmentLength(segment: [AGSFeature]) -> Double {
+func getSegmentLength(segment: [AGSFeature], settings: UserSettings) -> Double {
+
     var points = [AGSPoint]()
+
     segment.forEach { item in
         if let point = item.geometry as? AGSPoint {
             points.append(point)
         }
     }
+
     let line = AGSPolyline(points: points)
-    let lineLength = AGSGeometryEngine.geodeticLength(of: line, lengthUnit: .miles(), curveType: .geodesic)
-    return lineLength
+
+    return AGSGeometryEngine.geodeticLength(of: line, lengthUnit: settings.userUnitPreferences == .metric ? .kilometers() : .miles(), curveType: .geodesic)
 }
 
-func getElevation(format: ElevationFormat, segment: [AGSFeature]) -> Double {
+func getElevation(format: ElevationFormat, segment: [AGSFeature], settings: UserSettings) -> Double {
     guard segment.count >= 1 else {
         return 0
     }
@@ -84,10 +94,10 @@ func getElevation(format: ElevationFormat, segment: [AGSFeature]) -> Double {
         }
     }
     
-    return metersToFeet(meters: sumValue)
+    return settings.userUnitPreferences == .metric ? sumValue : metersToFeet(meters: sumValue)
 }
 
-func getElevation(format: ElevationFormat, segment: [CLLocation]) -> Double {
+func getElevation(format: ElevationFormat, segment: [CLLocation], settings: UserSettings) -> Double {
     guard segment.count >= 1 else {
         return 0
     }
@@ -106,6 +116,6 @@ func getElevation(format: ElevationFormat, segment: [CLLocation]) -> Double {
             sumValue += difference
         }
     }
-    
-    return metersToFeet(meters: sumValue)
+
+    return settings.userUnitPreferences == .metric ? sumValue : metersToFeet(meters: sumValue)
 }

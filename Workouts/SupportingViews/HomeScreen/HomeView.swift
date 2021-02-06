@@ -46,6 +46,7 @@ struct HomeView: View {
         return NavigationView {
 
             List {
+
                 // If the user has done multiple workouts today, we want to show them a horizontal scroll view of the workouts that
                 // they have done, otherwise, if they have only done one workout or they haven't done a workout at all today, then we will
                 // fall back to showing the featured workout
@@ -62,7 +63,7 @@ struct HomeView: View {
                                     
                                     ForEach(workoutsDoneToday, id: \.self) { workout in
 
-                                        NavigationLink(destination: WorkoutDetail(viewModel: WorkoutDetailViewModel(workout: workout))) {
+                                        NavigationLink(destination: WorkoutDetail(viewModel: WorkoutDetailViewModel(workout: workout, settings: workoutData.settings))) {
 
                                             DailyWorkout(workout: workout)
 
@@ -89,7 +90,7 @@ struct HomeView: View {
 
                             FeaturedWorkout(workout: featuredWorkout!)
 
-                            NavigationLink(destination: WorkoutDetail(viewModel: WorkoutDetailViewModel(workout: featuredWorkout!))) {
+                            NavigationLink(destination: WorkoutDetail(viewModel: WorkoutDetailViewModel(workout: featuredWorkout!, settings: workoutData.settings))) {
                                 EmptyView()
                             }
                         }
@@ -154,7 +155,7 @@ struct HomeView: View {
 
                             ForEach(grouped[key]!, id: \.self) { workout in
                             
-                                NavigationLink(destination: WorkoutDetail(viewModel: WorkoutDetailViewModel(workout: workout))) {
+                                NavigationLink(destination: WorkoutDetail(viewModel: WorkoutDetailViewModel(workout: workout, settings: workoutData.settings))) {
                                     WorkoutRow(workout: workout)
                                 }
                                 .padding(.vertical, 8.0)
@@ -177,7 +178,7 @@ struct HomeView: View {
                 
                 }.sheet(isPresented: $showSettingsView) {
                     
-                    MenuViewContent(showSettings: $showSettingsView)
+                    SettingsView(showSettings: $showSettingsView).environmentObject(workoutData.settings)
 
                 }, trailing:
                     

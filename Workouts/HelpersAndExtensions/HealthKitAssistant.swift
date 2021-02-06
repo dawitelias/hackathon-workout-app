@@ -16,6 +16,8 @@ class HealthKitAssistant {
       case notAvailableOnDevice
       case dataTypeNotAvailable
     }
+    
+    private let healthKitBundleId = "com.apple.health"
 
     // MARK: Get workouts with predicates for each activity type
     //
@@ -32,17 +34,24 @@ class HealthKitAssistant {
             var workoutData = [HKWorkout]()
 
             types.forEach { activityType in
+
                 var summedPredicates = predicates
                 summedPredicates.append(HKQuery.predicateForWorkouts(with: activityType.value))
+
                 let compound = NSCompoundPredicate(andPredicateWithSubpredicates: summedPredicates)
                 let sortDescriptor = NSSortDescriptor(key: HKSampleSortIdentifierEndDate, ascending: false)
                 
                 dispatchGroup.enter()
+
                 let query = HKSampleQuery(
                     sampleType: .workoutType(),
                     predicate: compound,
                     limit: HKObjectQueryNoLimit,
-                    sortDescriptors: [sortDescriptor]) { (query, samples, error) in
+                    sortDescriptors: [sortDescriptor]) { [weak self] (query, samples, error) in
+                    
+                        guard let mySelf = self else {
+                            return
+                        }
                         
                         if error != nil {
                             dispatchGroup.leave()
@@ -51,12 +60,18 @@ class HealthKitAssistant {
                         }
 
                         if let data = samples as? [HKWorkout] {
+
                             // workoutData += data Note* I ocassionaly get badAccess error thrown here crashing the app (only on app startup), very hard to repro going to try another way of copying over these array contents and see if I see the same error popup again.
-                            workoutData.append(contentsOf: data)
+                            workoutData.append(contentsOf: data.filter { $0.sourceRevision.source.bundleIdentifier.contains(mySelf.healthKitBundleId) })
+
                         }
+
                         dispatchGroup.leave()
+
                     }
+
                 HKHealthStore().execute(query)
+
             }
             
             dispatchGroup.notify(queue: .main) {
@@ -74,14 +89,18 @@ class HealthKitAssistant {
             sampleType: .workoutType(),
             predicate: NSCompoundPredicate(andPredicateWithSubpredicates: predicates),
             limit: HKObjectQueryNoLimit,
-            sortDescriptors: [sortDescriptor]) { (query, samples, error) in
+            sortDescriptors: [sortDescriptor]) { [weak self] (query, samples, error) in
+            
+            guard let mySelf = self else {
+                return
+            }
                 
             guard error == nil, let data = samples as? [HKWorkout] else {
                 completion(nil, error)
                 return
             }
 
-            completion(data, nil)
+            completion(data.filter { $0.sourceRevision.source.bundleIdentifier.contains(mySelf.healthKitBundleId) }, nil)
 
         }
 
@@ -103,14 +122,19 @@ class HealthKitAssistant {
             sampleType: .workoutType(),
             predicate: predicate,
             limit: 10,
-            sortDescriptors: [sortDescriptor]) { (_, samples, error) in
+            sortDescriptors: [sortDescriptor]) { [weak self] (_, samples, error) in
+
+            guard let mySelf = self else {
+                return
+            }
 
             guard error == nil, let data = samples as? [HKWorkout] else {
                 completion(nil, error)
                 return
             }
+            
+            completion(data.filter { $0.sourceRevision.source.bundleIdentifier.contains(mySelf.healthKitBundleId) }, error)
 
-            completion(data, error)
         }
 
         HKHealthStore().execute(query)
@@ -129,17 +153,22 @@ class HealthKitAssistant {
             sampleType: .workoutType(),
             predicate: predicate,
             limit: 1,
-            sortDescriptors: [sortDescriptor]) { (query, samples, error) in
+            sortDescriptors: [sortDescriptor]) { [weak self] (query, samples, error) in
                 
-                if error != nil {
-                    completion(nil, error)
-                    return
-                }
-
-                if let data = samples as? [HKWorkout] {
-                    completion(data.first, error)
-                }
+            guard let mySelf = self else {
+                return
             }
+
+            if error != nil {
+                completion(nil, error)
+                return
+            }
+
+            if let data = samples as? [HKWorkout] {
+                completion(data.filter { $0.sourceRevision.source.bundleIdentifier.contains(mySelf.healthKitBundleId) }.first, error)
+            }
+
+        }
 
         HKHealthStore().execute(query)
 

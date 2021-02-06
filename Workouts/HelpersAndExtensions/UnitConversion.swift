@@ -9,11 +9,19 @@
 import Foundation
 
 func metersToFeet(meters: Double) -> Double {
-    return meters * 3.28084
+
+    meters * 3.28084
+
 }
-func metersPerSecondToMinPerMile(pace: Double) -> Double {
-    return (5280 / (pace * 196.82)) > 0 ? (5280 / (pace * 196.82)) : 0
-}
+
 func metersPerSecondToMPH(pace: Double) -> Double {
-    return pace * 2.23694
+
+    pace * 2.23694
+
+}
+
+func metersPerSecondToKPH(pace: Double) -> Double {
+
+    pace * 3.6
+
 }

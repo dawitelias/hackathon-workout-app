@@ -9,6 +9,9 @@
 import SwiftUI
 
 struct Icon: View {
+    
+    @Environment(\.colorScheme) var colorScheme
+
     var image: Image
     var mainColor: Color
     var highlightColor: Color
@@ -21,12 +24,12 @@ struct Icon: View {
                 .frame(width: size, height: size)
                 .frame(width: size, height: size, alignment: .center)
                 .padding(size * 0.3)
-                .foregroundColor(Color(UIColor.label))
+                .foregroundColor(Color(UIColor.black))
                 .animation(.easeInOut, value: size)
             
         }
         .background(LinearGradient(
-            gradient: .init(colors: [mainColor, highlightColor]),
+            gradient: .init(colors: [colorScheme == .dark ? .white : Color(UIColor.systemGray5), highlightColor]),
             startPoint: .init(x: 0.6, y: 0.0),
             endPoint: .init(x: 0.0, y: 0.9)
         ))

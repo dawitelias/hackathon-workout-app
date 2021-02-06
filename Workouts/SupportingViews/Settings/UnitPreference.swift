@@ -15,7 +15,7 @@ public enum UnitPreference: String, CaseIterable, Setting {
 
     init() {
 
-        let unitValue = UserDefaults.standard.string(forKey: SettingsViewModel.SettingsKey.unitPreference.rawValue)
+        let unitValue = UserDefaults.standard.string(forKey: UserSettings.SettingsKey.unitPreference.rawValue)
         
         switch unitValue {
 
@@ -55,7 +55,66 @@ public enum UnitPreference: String, CaseIterable, Setting {
     
     public func save() {
 
-        UserDefaults.standard.setValue(self.rawValue, forKey: SettingsViewModel.SettingsKey.unitPreference.rawValue)
+        UserDefaults.standard.setValue(self.rawValue, forKey: UserSettings.SettingsKey.unitPreference.rawValue)
+
+    }
+
+}
+
+extension UnitPreference {
+
+    var abbreviatedDistanceUnit: String {
+        
+        switch self {
+        case .metric:
+            return "km"
+        case .usImperial:
+            return "mi"
+        }
+
+    }
+    
+    var distanceUnit: String {
+        
+        switch self {
+        case .metric:
+            return "kilometers"
+        case .usImperial:
+            return "miles"
+        }
+
+    }
+    
+    var elevartionUnit: String {
+        
+        switch self {
+        case .metric:
+            return "meters"
+        default:
+            return "feet"
+        }
+
+    }
+    
+    var abbreviatedElevationUnit: String {
+
+        switch self {
+        case .metric:
+            return "m"
+        default:
+            return "ft"
+        }
+
+    }
+    
+    var speed: String {
+        
+        switch self {
+        case .metric:
+            return "km/h"
+        default:
+            return "mph"
+        }
 
     }
 

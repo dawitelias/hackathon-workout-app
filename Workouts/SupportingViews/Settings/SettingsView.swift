@@ -10,25 +10,25 @@ import SwiftUI
 
 struct SettingsView: View {
 
-    let viewModel = SettingsViewModel()
+    @EnvironmentObject var viewModel: UserSettings
 
     @Binding var showSettings: Bool
-
-    @State var selectedUnit = UnitPreference()
-
-    @State var selectedSource = SourcePreference()
 
     var body: some View {
 
         NavigationView {
 
             Form {
+
+                Image(Images.logo.rawValue)
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
                 
                 Section(header: Text(Strings.unitPreferences).font(.callout)) {
 
                     // Units picker
                     //
-                    Picker(Strings.units, selection: $selectedUnit) {
+                    Picker(Strings.units, selection: $viewModel.userUnitPreferences) {
 
                         ForEach(UnitPreference.allCases, id: \.self) { item in
 
@@ -37,22 +37,6 @@ struct SettingsView: View {
                         }
 
                     }.pickerStyle(SegmentedPickerStyle())
-
-                }
-
-                Section(header: Text(Strings.sourcePreferences).font(.subheadline), footer: Text(Strings.footerText)) {
-
-                    // Source
-                    //
-                    Picker(Strings.source, selection: $selectedSource) {
-
-                        ForEach(SourcePreference.allCases, id: \.self) { item in
-
-                            Text(item.stringValue).tag(SourcePreference.allCases.first(where: { $0.rawValue == item.rawValue }) ?? SourcePreference.okapiOnly)
-
-                        }
-
-                    }
 
                 }
 
@@ -73,8 +57,13 @@ struct SettingsView: View {
                 }
 
             }
+            .onDisappear {
+
+                viewModel.userUnitPreferences.save()
+
+            }
             .modifier(GroupedListModifier())
-            .navigationBarTitle(Text(Strings.settings))
+            .navigationBarTitle(Strings.settings, displayMode: .inline)
             .navigationBarItems(trailing: Button(action: {
 
                 showSettings = false
@@ -98,6 +87,10 @@ struct SettingsView: View {
 // MARK: Strings and assets
 //
 extension SettingsView {
+    
+    private enum Images: String {
+        case logo
+    }
     
     private struct Strings {
 
@@ -172,7 +165,11 @@ extension SettingsView {
 // MARK: Previews
 //
 struct SettingsView_Previews: PreviewProvider {
+
     static var previews: some View {
+
         SettingsView(showSettings: .constant(true))
+
     }
+
 }

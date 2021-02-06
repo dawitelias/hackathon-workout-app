@@ -11,6 +11,8 @@ import HealthKit
 
 struct DailySummary: View {
 
+    @EnvironmentObject var settings: UserSettings
+
     var workouts: [HKWorkout]
 
     var body: some View {
@@ -20,8 +22,8 @@ struct DailySummary: View {
         
         workouts.forEach { workout in
             totalCalories += workout.totalEnergyBurned?.doubleValue(for: .kilocalorie()) ?? 0
-            totalDistance += workout.totalDistance?.doubleValue(for: .mile()) ?? 0
             totalTime += workout.duration
+            totalDistance += workout.totalDistance?.doubleValue(for: settings.userUnitPreferences == .metric ? .mile() : .meterUnit(with: .kilo)) ?? 0
         }
         
         let workoutTimeString = TimeInterval(exactly: totalTime)?.getHoursAndMinutesString() ?? ""
@@ -78,7 +80,7 @@ struct DailySummary: View {
                             .font(.callout)
                             .foregroundColor(Color.gray)
 
-                        Text("\(String.init(format: "%.0f", totalDistance)) miles")
+                        Text("\(String.init(format: "%.0f", totalDistance)) \(settings.userUnitPreferences.distanceUnit)")
                             .font(.system(.largeTitle))
                             .fontWeight(.bold)
 
@@ -98,7 +100,7 @@ struct DailySummary: View {
 
                     ForEach(workouts, id: \.self) { workout in
 
-                        NavigationLink(destination: WorkoutDetail(viewModel: WorkoutDetailViewModel(workout: workout))) {
+                        NavigationLink(destination: WorkoutDetail(viewModel: WorkoutDetailViewModel(workout: workout, settings: settings))) {
 
                             WorkoutRow(workout: workout)
 

@@ -25,16 +25,9 @@ struct EsriMapCard: UIViewRepresentable {
     }
 
     func updateUIView(_ uiView: AGSMapView, context: Context) {
-        
-        guard let url = colorScheme == .dark ? URL(string: BasemapUrls.dark.rawValue) : URL(string: BasemapUrls.light.rawValue) else {
-            return
-        }
-        let vectorTiledLayer = AGSArcGISVectorTiledLayer(url: url)
-        let basemap = AGSBasemap(baseLayer: vectorTiledLayer)
 
-        let map = AGSMap(basemap: basemap)
+        uiView.map = AGSMap(basemap: colorScheme == .dark ? AGSBasemap.darkGrayCanvasVector() : AGSBasemap.lightGrayCanvasVector())
 
-        uiView.map = map
         uiView.isUserInteractionEnabled = false
 
         guard let maxVelocity = route?.max(by: { return $0.speed < $1.speed })?.speed, let minVelocity = route?.min(by: { return $0.speed < $1.speed })?.speed else {

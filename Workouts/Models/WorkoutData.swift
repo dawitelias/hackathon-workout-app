@@ -36,6 +36,8 @@ class WorkoutData: ObservableObject {
 
     @Published var appliedFilters: [WorkoutFilter] = [WorkoutFilter]()
 
+    @Published var settings: UserSettings = UserSettings()
+
     var dateRangeFilter = DateRangeWorkoutFilter(startDate: Date(), endDate: Date(), isApplied: false)
     var calorieFilter = CaloriesWorkoutFilter(value: 500, isApplied: false)
     var distanceFilter = DistanceWorkoutFilter(value: 10, isApplied: false)

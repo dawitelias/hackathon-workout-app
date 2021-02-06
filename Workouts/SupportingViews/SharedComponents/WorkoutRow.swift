@@ -41,7 +41,7 @@ struct WorkoutRow: View {
 
                 Text("\(workout.totalEnergyBurned?.doubleValue(for: .kilocalorie()) ?? 0, specifier: "%.0f")cal")
                     .font(.system(.largeTitle, design: .rounded))
-                    .foregroundColor(Color.green)
+                    .foregroundColor(Color(UIColor.secondaryLabel))
 
             }
             .padding(.leading)

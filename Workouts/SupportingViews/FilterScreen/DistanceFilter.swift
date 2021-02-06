@@ -28,7 +28,7 @@ struct DistanceFilter: View {
 
                         Stepper(value: $workoutDistance.value) {
 
-                            Text("\(Int(workoutDistance.value)) mi")
+                            Text("\(Int(workoutDistance.value)) \(workoutData.settings.userUnitPreferences.abbreviatedDistanceUnit)")
 
                         }
 

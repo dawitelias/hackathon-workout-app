@@ -13,7 +13,7 @@ public protocol Setting {
     func save() -> Void
 }
 
-class SettingsViewModel: ObservableObject {
+class UserSettings: ObservableObject {
 
     public enum SettingsKey: String {
         case unitPreference
@@ -21,7 +21,5 @@ class SettingsViewModel: ObservableObject {
     }
 
     @Published var userUnitPreferences = UnitPreference()
-
-    @Published var userSourcePreference = SourcePreference()
 
 }

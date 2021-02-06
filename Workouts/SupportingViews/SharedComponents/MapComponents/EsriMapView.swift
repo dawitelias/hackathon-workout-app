@@ -18,10 +18,6 @@ enum WorkoutRouteAttributes: String {
     case index = "PointIndex"
     case timestamp = "Timestamp"
 }
-enum BasemapUrls: String {
-    case light = "https://emilcheroske.maps.arcgis.com/home/item.html?id=1becad86ac93425eb3fd2343e4507359"
-    case dark = "https://emilcheroske.maps.arcgis.com/home/item.html?id=6f4816759ad34e66b2b5a1c15e51f8e0"
-}
 
 struct EsriMapView: UIViewRepresentable {
     
@@ -38,25 +34,21 @@ struct EsriMapView: UIViewRepresentable {
     }
 
     func makeUIView(context: Context) -> AGSMapView {
+    
         mapView.isAttributionTextVisible = false
         mapView.touchDelegate = context.coordinator
         mapView.selectionProperties.color = .cyan
 
-        lightOrDark = colorScheme
-        if let url = colorScheme == .dark ? URL(string: BasemapUrls.dark.rawValue) : URL(string: BasemapUrls.light.rawValue) {
-            let vectorTiledLayer = AGSArcGISVectorTiledLayer(url: url)
-            let basemap = AGSBasemap(baseLayer: vectorTiledLayer)
+        let map = AGSMap(basemap: colorScheme == .dark ? AGSBasemap.darkGrayCanvasVector() : AGSBasemap.lightGrayCanvasVector())
 
-            let map = AGSMap(basemap: basemap)
+        mapView.map = map
+        mapView.isUserInteractionEnabled = isUserInteractionEnabled
 
-            mapView.map = map
-            mapView.isUserInteractionEnabled = isUserInteractionEnabled
-
-            drawRoute(uiView: mapView)
-        }
+        drawRoute(uiView: mapView)
 
         return mapView
     }
+
     func updateUIView(_ uiView: AGSMapView, context: Context) {
         if viewModel.selectedSegment.count <= 0 {
             if let featureCollectionLayer = uiView.map?.operationalLayers.firstObject as? AGSFeatureCollectionLayer, let featureLayer = featureCollectionLayer.layers.first {
@@ -64,15 +56,16 @@ struct EsriMapView: UIViewRepresentable {
             }
         }
         if lightOrDark != nil && lightOrDark != colorScheme {
+
             lightOrDark = colorScheme
-            if let url = colorScheme == .dark ? URL(string: BasemapUrls.dark.rawValue) : URL(string: BasemapUrls.light.rawValue) {
-                let vectorTiledLayer = AGSArcGISVectorTiledLayer(url: url)
-                let basemap = AGSBasemap(baseLayer: vectorTiledLayer)
     
-                uiView.map?.basemap = basemap
-                uiView.reloadInputViews()
-            }
+            let basemap = colorScheme == .dark ? AGSBasemap.darkGrayCanvasVector() : AGSBasemap.lightGrayCanvasVector()
+
+            uiView.map?.basemap = basemap
+            uiView.reloadInputViews()
+
         }
+
     }
     
     private func drawRoute(uiView: AGSMapView) {

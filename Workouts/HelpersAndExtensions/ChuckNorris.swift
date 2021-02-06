@@ -32,3 +32,26 @@ class ChuckNorris {
         return "\(chuckNorrisQuotes[randomQuoteIndex]) - Chuck Norris"
     }
 }
+
+class DataDidntLoadQuotes {
+
+    static func getRandomDissapointmentQuote() -> String {
+        
+        let dissapointmentQuotes = [
+            "The best way to avoid disappointment is not to expect anything from software.",
+            "Sometimes we create our own heartbreaks through expectation.",
+            "Dont blame software for disappointing you, blame yourself from expecting too much from it.",
+            "Life is a long preparation for something that never happens.",
+            "We all have this perfect picture in our minds of how an app is supposed to be and that's why we all end up being dissapointed.",
+            "Suspense is worse than disappointment. -Robert Burns",
+            "No expectations, no disappointments.",
+            "Silly you, expecting too much from software again.",
+            "You may be sad, hurt, angry, mad and dissapointed right now. But you know what? Put on a happy face and move on. It will hurt, but you will survive."
+        ]
+        
+        let numberOfQuotes = dissapointmentQuotes.count
+        let randomQuoteIndex = Int.random(in: 0 ... numberOfQuotes - 1)
+        return "\(dissapointmentQuotes[randomQuoteIndex])"
+    }
+
+}

@@ -107,9 +107,14 @@ struct FeaturedWorkout: View {
                             .padding(.top, 20)
 
                             VStack(alignment: .trailing, spacing: nil) {
+
                                 Image(workout.workoutActivityType.workoutTypeMetadata.systemIconName)
-                                    .foregroundColor(workout.workoutActivityType.workoutTypeMetadata.highlightColor)
-                                    .opacity(0.2)
+                                    .resizable()
+                                    .aspectRatio(contentMode: .fill)
+                                    .foregroundColor(Color(UIColor.systemGray2))
+                                    .frame(width: 150)
+                                    .opacity(0.4)
+
                             }.offset(x: 100, y: 0)
                         }
                     }
