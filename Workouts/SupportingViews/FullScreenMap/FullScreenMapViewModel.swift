@@ -91,6 +91,12 @@ class FullScreenMapViewModel: ObservableObject {
 
     }
 
+    public var formattedDistanceString: String {
+
+        String(format: "%.2f \(settings.userUnitPreferences.distanceUnit)", segmentLength)
+
+    }
+
     public var speedText: String {
 
         let paceString = settings.userUnitPreferences == .usImperial ? getPaceString(milesPerHour: mphValue) : getPaceString(kilometersPerHour: kphValue)

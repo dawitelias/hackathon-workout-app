@@ -26,6 +26,12 @@ struct WorkoutTypeMetadata {
 
 extension HKWorkoutActivityType {
     
+    static func randomActivityType() -> HKWorkoutActivityType {
+
+        allCases[Int.random(in: 0...allCases.count - 1)]
+
+    }
+    
     // Thanks to Apple for not letting HKWorkoutActivity type extend CaseIterable OR String
     //
     static var allCases: [HKWorkoutActivityType] {

@@ -45,7 +45,6 @@
 		A5A7FCBB2479717B00247C24 /* UnitConversion.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5A7FCBA2479717B00247C24 /* UnitConversion.swift */; };
 		A5ACBABC257C6DCA00F8C836 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5ACBABB257C6DCA00F8C836 /* SettingsView.swift */; };
 		A5ACBAC1257C6DD900F8C836 /* UserSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5ACBAC0257C6DD900F8C836 /* UserSettings.swift */; };
-		A5ACBAD8257DBEC400F8C836 /* AboutScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5ACBAD7257DBEC400F8C836 /* AboutScreen.swift */; };
 		A5ACBADD257DBED000F8C836 /* Feedback.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5ACBADC257DBED000F8C836 /* Feedback.swift */; };
 		A5AF6083244AAAAD00AB7E72 /* ToggleableHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5AF6082244AAAAD00AB7E72 /* ToggleableHeader.swift */; };
 		A5AF6085244BAA1200AB7E72 /* WorkoutData.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5AF6084244BAA1200AB7E72 /* WorkoutData.swift */; };
@@ -138,7 +137,6 @@
 		A5A7FCBA2479717B00247C24 /* UnitConversion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnitConversion.swift; sourceTree = "<group>"; };
 		A5ACBABB257C6DCA00F8C836 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		A5ACBAC0257C6DD900F8C836 /* UserSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSettings.swift; sourceTree = "<group>"; };
-		A5ACBAD7257DBEC400F8C836 /* AboutScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutScreen.swift; sourceTree = "<group>"; };
 		A5ACBADC257DBED000F8C836 /* Feedback.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Feedback.swift; sourceTree = "<group>"; };
 		A5AF6082244AAAAD00AB7E72 /* ToggleableHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToggleableHeader.swift; sourceTree = "<group>"; };
 		A5AF6084244BAA1200AB7E72 /* WorkoutData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutData.swift; sourceTree = "<group>"; };
@@ -373,7 +371,6 @@
 			children = (
 				A51D439425708B71001DD215 /* Licensing.swift */,
 				A5ACBABB257C6DCA00F8C836 /* SettingsView.swift */,
-				A5ACBAD7257DBEC400F8C836 /* AboutScreen.swift */,
 				A5ACBADC257DBED000F8C836 /* Feedback.swift */,
 				A51147C22585B2D3006151DD /* UnitPreference.swift */,
 			);
@@ -727,7 +724,6 @@
 				A5D8CC8225B3496A00F35702 /* OnboardingPage.swift in Sources */,
 				A5B6CEE52448AB2D00CF2B86 /* HKWorkoutActivityType+Extension.swift in Sources */,
 				A5A4DC3624B258E300FA7580 /* EsriMapCard.swift in Sources */,
-				A5ACBAD8257DBEC400F8C836 /* AboutScreen.swift in Sources */,
 				A51514482460F1B800D4D643 /* Icon.swift in Sources */,
 				A5D8CCAA25B638D300F35702 /* FullScreenMapViewModel.swift in Sources */,
 				A50E464A2449E76000D1F435 /* FeaturedWorkout.swift in Sources */,

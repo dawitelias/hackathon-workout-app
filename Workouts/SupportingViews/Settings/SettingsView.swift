@@ -7,6 +7,7 @@
 //
 
 import SwiftUI
+import HealthKit
 
 struct SettingsView: View {
 
@@ -14,16 +15,27 @@ struct SettingsView: View {
 
     @Binding var showSettings: Bool
 
+    let randomActivityType = HKWorkoutActivityType.randomActivityType()
+
     var body: some View {
 
         NavigationView {
 
-            Form {
-
-                Image(Images.logo.rawValue)
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
+            List {
                 
+                VStack(alignment: .center) {
+
+                    Image(Images.logo.rawValue)
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .foregroundColor(randomActivityType.workoutTypeMetadata.highlightColor)
+                        .frame(height: 200)
+
+                    Text(Strings.appDescription)
+                        .font(.callout)
+
+                }
+
                 Section(header: Text(Strings.unitPreferences).font(.callout)) {
 
                     // Units picker
@@ -41,10 +53,6 @@ struct SettingsView: View {
                 }
 
                 Section(header: Text(Strings.appInfoText).font(.body)) {
-
-                    NavigationLink(destination: AboutScreen()) {
-                        Text(Strings.aboutLinkText)
-                    }
 
                     NavigationLink(destination: Feedback()) {
                         Text(Strings.feedbackLinkText)
@@ -87,12 +95,18 @@ struct SettingsView: View {
 // MARK: Strings and assets
 //
 extension SettingsView {
-    
+
     private enum Images: String {
+
         case logo
+
     }
-    
+
     private struct Strings {
+
+        public static var appDescription: String {
+            NSLocalizedString("com.okapi.settings.appDescription", value: "Okapi is an Activities companion app. Only workouts recorded from the Activities app will appear in Okapi.", comment: "Okapi app description text.")
+        }
 
         public static var doneText: String {
             NSLocalizedString("com.okapi.settings.done", value: "Done", comment: "done text")

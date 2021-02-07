@@ -74,7 +74,7 @@ struct HomeView: View {
                                 
                             }
                             
-                            NavigationLink(destination: DailySummary(workouts: workoutsDoneToday)) {
+                            NavigationLink(destination: DailySummary(workouts: workoutsDoneToday).environmentObject(workoutData.settings)) {
                                 Text(Strings.viewDailySummary)
                                     .padding()
                             }

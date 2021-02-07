@@ -15,25 +15,25 @@ struct Licensing: View {
 
             VStack(alignment: .leading) {
 
-                Text("ArcGIS")
+                Text(Strings.arcGIS)
                     .font(.largeTitle)
                     .fontWeight(.bold)
 
-                Text("Okapi's GIS capabilities are made possible using the ArcGIS iOS SDK! Check it out!")
+                Text(Strings.arcGISUsage)
 
-                Link("Check it out here.",
-                      destination: URL(string: "https://developers.arcgis.com/ios/")!)
+                Link(Strings.checkItOut,
+                      destination: URL(string: arcGISLink)!)
                     .foregroundColor(.blue)
 
                 ZStack {
 
-                    RoundedRectangle(cornerRadius: 10)
+                    RoundedRectangle(cornerRadius: cornerRadius)
                         .foregroundColor(.white)
 
-                    Image("esriLogo")
+                    Image(Images.esri.rawValue)
                         .resizable()
                         .aspectRatio(contentMode: .fit)
-                        .frame(width: 200, height: 100)
+                        .frame(width: logoWidth, height: logoHeight)
 
                 }
 
@@ -41,19 +41,19 @@ struct Licensing: View {
 
             VStack(alignment: .leading) {
 
-                Text("SwiftUICharts")
+                Text(Strings.swiftUICharts)
                     .font(.largeTitle)
                     .fontWeight(.bold)
 
-                Text("Without SwiftUICharts, Okapi's speed, elevation and heart rate visualizations wouldn't be as rad 😎")
+                Text(Strings.swiftuiChartsUsage)
 
-                Link("Check it out here.",
-                     destination: URL(string: "https://github.com/AppPear/ChartView")!)
+                Link(Strings.checkItOut,
+                     destination: URL(string: swiftUIChartsURL)!)
                     .foregroundColor(.blue)
 
                 ZStack {
 
-                    RoundedRectangle(cornerRadius: 10)
+                    RoundedRectangle(cornerRadius: cornerRadius)
                         .foregroundColor(Color(UIColor.secondarySystemBackground))
 
                     Text("MIT License\n\nCopyright (c) 2019 Andras Samu\n\nPermission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the 'Software'), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions: \n\n The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.\n\n THE SOFTWARE IS PROVIDED 'AS IS', WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.")
@@ -66,14 +66,46 @@ struct Licensing: View {
 
         }
         .navigationBarTitle(Strings.acknowledgmentPageTitle, displayMode: .inline)
+
     }
+    
+    private let logoHeight: CGFloat = 100
+    private let logoWidth: CGFloat = 200
+    private let cornerRadius: CGFloat = 10
+    private let swiftUIChartsURL = "https://github.com/AppPear/ChartView"
+    private let arcGISLink = "https://developers.arcgis.com/ios/"
+
 }
 
 // MARK: Strings and Assets
 //
 extension Licensing {
+    
+    private enum Images: String {
+        case esri = "esriLogo"
+    }
 
     private struct Strings {
+
+        public static var checkItOut: String {
+            NSLocalizedString("com.okapi.achnoledgements.checkItOut", value: "Check it out here.", comment: "Check it out")
+        }
+
+        public static var swiftUICharts: String {
+            "SwiftUICharts"
+        }
+        
+        public static var arcGIS: String {
+            "ArcGIS"
+        }
+
+        public static var swiftuiChartsUsage: String {
+            NSLocalizedString("com.okapi.acknowledgments.swiftuiChartsUsage", value: "Without SwiftUICharts, Okapi's speed, elevation and heart rate visualizations wouldn't be as rad 😎", comment: "Desicribing how Okapi uses charts")
+        }
+
+        public static var arcGISUsage: String {
+            NSLocalizedString("com.okapi.achnoledgements.arcgisUsage", value: "Okapi's GIS capabilities are made possible using the ArcGIS iOS SDK! Check it out!", comment: "Arcgis usage in Okapi.")
+        }
 
         public static var acknowledgmentPageTitle: String {
             NSLocalizedString("com.okapi.licensingPage.title", value: "Acknowledgments", comment: "Title for the acknowledgments page.")

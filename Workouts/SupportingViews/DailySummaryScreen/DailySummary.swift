@@ -23,7 +23,7 @@ struct DailySummary: View {
         workouts.forEach { workout in
             totalCalories += workout.totalEnergyBurned?.doubleValue(for: .kilocalorie()) ?? 0
             totalTime += workout.duration
-            totalDistance += workout.totalDistance?.doubleValue(for: settings.userUnitPreferences == .metric ? .mile() : .meterUnit(with: .kilo)) ?? 0
+            totalDistance += workout.totalDistance?.doubleValue(for: settings.userUnitPreferences == .metric ? .meterUnit(with: .kilo) : .mile()) ?? 0
         }
         
         let workoutTimeString = TimeInterval(exactly: totalTime)?.getHoursAndMinutesString() ?? ""
@@ -129,7 +129,7 @@ extension DailySummary {
             NSLocalizedString("com.okapi.dailySummary.quickGlance", value: "Quick Glance", comment: "Quick Glance text.")
         }
         public static var totalCalories: String {
-            NSLocalizedString("com.okapi.dailySummary.totalCalories", value: "Total Calories Burned:", comment: "Total calories burned text.")
+            NSLocalizedString("com.okapi.dailySummary.totalCalories", value: "Total Active Calories Burned", comment: "Total calories burned text.")
         }
         public static var totalDuration: String {
             NSLocalizedString("com.okapi.dailySummary.totalDuration", value: "Total Duration", comment: "Total duration string")

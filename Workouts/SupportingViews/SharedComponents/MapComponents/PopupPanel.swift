@@ -10,20 +10,18 @@ import SwiftUI
 import ArcGIS
 
 struct PopupPanel: View {
-    
+
     @Environment(\.colorScheme) var colorScheme
-    
+
     @EnvironmentObject var viewModel: FullScreenMapViewModel
 
     var body: some View {
-
-        let formattedMileageString = String(format: "%.2f", viewModel.segmentLength)
 
         let segmentSpecs = [
             (Strings.startDate, viewModel.segmentStartDate.hourAndMin),
             (Strings.endDate, viewModel.segmentEndDate.hourAndMin),
             (Strings.duration, viewModel.elapsedTimeString),
-            (Strings.distance, formattedMileageString),
+            (Strings.distance, viewModel.formattedDistanceString),
             (Strings.speed, viewModel.speedText),
             (Strings.elevationGain, viewModel.elevationGainText)
         ]
