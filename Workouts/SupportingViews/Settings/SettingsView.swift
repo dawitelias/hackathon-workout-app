@@ -85,6 +85,8 @@ struct SettingsView: View {
                     }
 
                 }
+    
+                AppDevs()
 
             }
             .onDisappear {

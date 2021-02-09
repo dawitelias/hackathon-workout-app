@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		1D7E1C40B601A0B2B765ED78 /* Pods_WorkoutsTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C1B7B64F533B1CC7BDE59E1C /* Pods_WorkoutsTests.framework */; };
 		4B73A6B52EF9B0C0AD711F96 /* Pods_Workouts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EAEA94D5B7AEE35D513BA19F /* Pods_Workouts.framework */; };
+		A500AD0125D236D500BCD21D /* DesignerDeveloperRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = A500AD0025D236D500BCD21D /* DesignerDeveloperRow.swift */; };
+		A500AD0625D238AC00BCD21D /* AppDevs.swift in Sources */ = {isa = PBXBuildFile; fileRef = A500AD0525D238AC00BCD21D /* AppDevs.swift */; };
 		A50E464A2449E76000D1F435 /* FeaturedWorkout.swift in Sources */ = {isa = PBXBuildFile; fileRef = A50E46492449E76000D1F435 /* FeaturedWorkout.swift */; };
 		A511476B258260C8006151DD /* CompleteSegmentHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = A511476A258260C8006151DD /* CompleteSegmentHeader.swift */; };
 		A51147C32585B2D3006151DD /* UnitPreference.swift in Sources */ = {isa = PBXBuildFile; fileRef = A51147C22585B2D3006151DD /* UnitPreference.swift */; };
@@ -102,6 +104,8 @@
 		63D1E61F55B25C451A14415C /* Pods-Workouts-WorkoutsUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Workouts-WorkoutsUITests.release.xcconfig"; path = "Target Support Files/Pods-Workouts-WorkoutsUITests/Pods-Workouts-WorkoutsUITests.release.xcconfig"; sourceTree = "<group>"; };
 		927E4AED7593DE413C0F14EA /* Pods-Workouts.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Workouts.debug.xcconfig"; path = "Target Support Files/Pods-Workouts/Pods-Workouts.debug.xcconfig"; sourceTree = "<group>"; };
 		9B66A8E16238912FA086E27B /* Pods-Workouts.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Workouts.release.xcconfig"; path = "Target Support Files/Pods-Workouts/Pods-Workouts.release.xcconfig"; sourceTree = "<group>"; };
+		A500AD0025D236D500BCD21D /* DesignerDeveloperRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DesignerDeveloperRow.swift; sourceTree = "<group>"; };
+		A500AD0525D238AC00BCD21D /* AppDevs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDevs.swift; sourceTree = "<group>"; };
 		A50E46492449E76000D1F435 /* FeaturedWorkout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeaturedWorkout.swift; sourceTree = "<group>"; };
 		A511476A258260C8006151DD /* CompleteSegmentHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompleteSegmentHeader.swift; sourceTree = "<group>"; };
 		A51147C22585B2D3006151DD /* UnitPreference.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnitPreference.swift; sourceTree = "<group>"; };
@@ -373,6 +377,8 @@
 				A5ACBABB257C6DCA00F8C836 /* SettingsView.swift */,
 				A5ACBADC257DBED000F8C836 /* Feedback.swift */,
 				A51147C22585B2D3006151DD /* UnitPreference.swift */,
+				A500AD0025D236D500BCD21D /* DesignerDeveloperRow.swift */,
+				A500AD0525D238AC00BCD21D /* AppDevs.swift */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -717,11 +723,13 @@
 				A52F932524493C4900DDB791 /* ChuckNorris.swift in Sources */,
 				A5ACBADD257DBED000F8C836 /* Feedback.swift in Sources */,
 				A514CB2F24CDDA17007C6A90 /* HeartRateReading.swift in Sources */,
+				A500AD0125D236D500BCD21D /* DesignerDeveloperRow.swift in Sources */,
 				A5828953244FC15600B7B6B0 /* WorkoutsMultiSelect.swift in Sources */,
 				A5221E72245462DB005416BC /* DistanceFilter.swift in Sources */,
 				A5F5A71F24871E110051C7BB /* ActivityTypeFilterPill.swift in Sources */,
 				A5ACBABC257C6DCA00F8C836 /* SettingsView.swift in Sources */,
 				A5D8CC8225B3496A00F35702 /* OnboardingPage.swift in Sources */,
+				A500AD0625D238AC00BCD21D /* AppDevs.swift in Sources */,
 				A5B6CEE52448AB2D00CF2B86 /* HKWorkoutActivityType+Extension.swift in Sources */,
 				A5A4DC3624B258E300FA7580 /* EsriMapCard.swift in Sources */,
 				A51514482460F1B800D4D643 /* Icon.swift in Sources */,

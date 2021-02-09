@@ -1,7 +1,7 @@
 {
   "images" : [
     {
-      "filename" : "Twitter_Logo_Blue.png",
+      "filename" : "Twitter_Logo_WhiteOnBlue.png",
       "idiom" : "universal"
     },
     {
@@ -11,7 +11,7 @@
           "value" : "dark"
         }
       ],
-      "filename" : "Twitter_Logo_WhiteOnBlue.png",
+      "filename" : "Twitter_Logo_WhiteOnBlue-1.png",
       "idiom" : "universal"
     }
   ],
