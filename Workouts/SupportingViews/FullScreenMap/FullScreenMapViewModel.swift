@@ -87,7 +87,7 @@ class FullScreenMapViewModel: ObservableObject {
     
     public var elapsedTimeString: String {
 
-        elapsedTime > 60 ? elapsedTime.getHoursAndMinutesString() : "\(Int(elapsedTime))"
+        elapsedTime > 60 ? elapsedTime.getHoursAndMinutesString() : "\(Int(elapsedTime))s"
 
     }
 

@@ -27,29 +27,37 @@ struct PopupPanel: View {
         ]
 
         return VStack(alignment: .leading) {
+            
+            VStack(alignment: .center, spacing: 3) {
 
-            HStack(alignment: .bottom) {
+                RoundedRectangle(cornerRadius: 5)
+                    .foregroundColor(viewModel.settings.themeColor.color)
+                    .frame(width: 50, height: 3)
+                    .padding(.top, 10)
 
-                Text(Strings.selectedSegmentOverview)
-                    .font(.title)
-                    .foregroundColor(Color(UIColor.secondaryLabel))
-                    .padding(.horizontal)
+                HStack(alignment: .center) {
 
-                Spacer()
+                    Text(Strings.selectedSegmentOverview)
+                        .font(.title)
+                        .foregroundColor(viewModel.settings.themeColor.color)
+                        .padding(.horizontal)
 
-                Button(action: {
+                    Spacer()
 
-                    viewModel.selectedSegment.removeAll()
+                    Button(action: {
 
-                }, label: {
+                        viewModel.selectedSegment.removeAll()
 
-                    Image(systemName: Images.close.rawValue)
-                        .resizable()
-                        .frame(width: closeButtonDimension, height: closeButtonDimension, alignment: .center)
-                        .padding(.all)
+                    }, label: {
 
-                })
+                        Image(systemName: Images.close.rawValue)
+                            .resizable()
+                            .frame(width: closeButtonDimension, height: closeButtonDimension, alignment: .center)
+                            .padding(.all)
 
+                    })
+
+                }
             }
 
             Divider()
