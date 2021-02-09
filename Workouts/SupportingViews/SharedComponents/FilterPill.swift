@@ -9,30 +9,37 @@
 import SwiftUI
 
 struct FilterPill: View {
+
     @EnvironmentObject private var workoutData: WorkoutData
+
     var activityFilter: WorkoutFilter
 
     var body: some View {
+
         HStack {
 
             Text(activityFilter.filterDescription)
-                .foregroundColor(.white)
+                .foregroundColor(Color(UIColor.systemBackground))
                 .padding(EdgeInsets(top: 5, leading: 10, bottom: 5, trailing: 0))
-                .font(.footnote)
+                .font(.callout)
                 .fixedSize(horizontal: false, vertical: true)
 
-            Spacer()
+            Button(action: {
 
-            Image(systemName: "xmark")
-                .foregroundColor(.white)
-                .imageScale(.small)
-                .padding()
+                self.workoutData.toggleWorkoutFilterApplied(filter: self.activityFilter)
+
+            }) {
+
+                Image(systemName: "xmark")
+                    .foregroundColor(Color(UIColor.systemBackground))
+                    .imageScale(.medium)
+
+            }
+            .padding(EdgeInsets(top: 5, leading: 5, bottom: 5, trailing: 10))
+
         }
-        .onTapGesture {
-            self.workoutData.toggleWorkoutFilterApplied(filter: self.activityFilter)
-        }
-        .background(self.activityFilter.color)
-        .cornerRadius(20)
+        .background(workoutData.settings.themeColor.color)
+        .cornerRadius(15)
         .padding(2)
     }
 }

@@ -140,7 +140,7 @@ struct HomeView: View {
 
                 if sortedDictionaryKeys.count == 0 {
 
-                    Text("Nothing to see here! Either get crackin or check and make sure you've granted us the correct permissions to read your workout data saved in Health Kit.")
+                    Text("Nothing to see here!")
 
                 }
 

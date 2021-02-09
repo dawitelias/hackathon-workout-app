@@ -19,9 +19,9 @@ struct ActivityTypeFilterPill: View {
         HStack {
 
             Text(activityTypeFilter.value.workoutTypeMetadata.activityTypeDescription)
-                .foregroundColor(.white)
+                .foregroundColor(Color(UIColor.systemBackground))
                 .padding(EdgeInsets(top: 5, leading: 10, bottom: 5, trailing: 0))
-                .font(.footnote)
+                .font(.body)
                 .fixedSize(horizontal: false, vertical: true)
 
             Button(action: {
@@ -31,15 +31,15 @@ struct ActivityTypeFilterPill: View {
             }) {
 
                 Image(systemName: "xmark")
-                    .foregroundColor(.white)
-                    .imageScale(.small)
+                    .foregroundColor(Color(UIColor.systemBackground))
+                    .imageScale(.medium)
 
             }
             .padding(EdgeInsets(top: 5, leading: 5, bottom: 5, trailing: 10))
 
         }
-        .background(Color(UIColor.darkGray))
-        .cornerRadius(20)
+        .background(workoutData.settings.themeColor.color)
+        .cornerRadius(15)
         .padding(2)
     }
 }
