@@ -152,18 +152,18 @@ struct EsriMapView: UIViewRepresentable {
             maxValue = max
         }
         let colors: [UIColor] = [
-            UIColor(named:"C_12")!,
-            UIColor(named:"C_11")!,
-            UIColor(named:"C_10")!,
-            UIColor(named:"C_9")!,
-            UIColor(named:"C_8")!,
-            UIColor(named:"C_7")!,
-            UIColor(named:"C_6")!,
-            UIColor(named:"C_5")!,
-            UIColor(named:"C_4")!,
-            UIColor(named:"C_3")!,
-            UIColor(named:"C_2")!,
-            UIColor(named:"C_1")!
+            UIColor(named:"GC_12")!,
+            UIColor(named:"GC_11")!,
+            UIColor(named:"GC_10")!,
+            UIColor(named:"GC_9")!,
+            UIColor(named:"GC_8")!,
+            UIColor(named:"GC_7")!,
+            UIColor(named:"GC_6")!,
+            UIColor(named:"GC_5")!,
+            UIColor(named:"GC_4")!,
+            UIColor(named:"GC_3")!,
+            UIColor(named:"GC_2")!,
+            UIColor(named:"GC_1")!
         ]
         var classBreaks = [AGSClassBreak]()
         let incrementAmount = (maxValue - minValue) / Double(colors.count)

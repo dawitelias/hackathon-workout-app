@@ -76,6 +76,7 @@ struct HomeView: View {
                             
                             NavigationLink(destination: DailySummary(workouts: workoutsDoneToday).environmentObject(workoutData.settings)) {
                                 Text(Strings.viewDailySummary)
+                                    .foregroundColor(workoutData.settings.themeColor.color)
                                     .padding()
                             }
                             
@@ -156,7 +157,7 @@ struct HomeView: View {
                             ForEach(grouped[key]!, id: \.self) { workout in
                             
                                 NavigationLink(destination: WorkoutDetail(viewModel: WorkoutDetailViewModel(workout: workout, settings: workoutData.settings))) {
-                                    WorkoutRow(workout: workout)
+                                    WorkoutRow(workout: workout, color: workoutData.settings.themeColor.color)
                                 }
                                 .padding(.vertical, 8.0)
                             }
@@ -198,7 +199,7 @@ struct HomeView: View {
                     }
             )
         }
-        .accentColor(.pink)
+        .accentColor(workoutData.settings.themeColor.color)
         .onReceive(NotificationCenter.default.publisher(for: UIApplication.willEnterForegroundNotification)) { _ in
  
             workoutData.queryWorkouts()

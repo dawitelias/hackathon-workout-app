@@ -110,7 +110,8 @@ extension HKWorkoutActivityType {
             .barre,
             .boxing,
             .taiChi,
-            .dance,
+            .cardioDance,
+            .socialDance,
             .martialArts,
             .mindAndBody,
             .gymnastics,
@@ -484,10 +485,16 @@ extension HKWorkoutActivityType {
                 description: "Tai Chi",
                 mainColor: Color("AS_1"),
                 highlightColor: Color("AS_2"))
-        case .dance:
+        case .socialDance:
             return WorkoutTypeMetadata(
                 icon: "Dance",
-                description: "Dance",
+                description: "Social Dance",
+                mainColor: Color("AT_1"),
+                highlightColor: Color("AT_2"))
+        case .cardioDance:
+            return WorkoutTypeMetadata(
+                icon: "Dance",
+                description: "Cardio Dance",
                 mainColor: Color("AT_1"),
                 highlightColor: Color("AT_2"))
         case .martialArts:

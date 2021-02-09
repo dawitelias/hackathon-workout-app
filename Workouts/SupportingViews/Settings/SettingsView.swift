@@ -15,20 +15,18 @@ struct SettingsView: View {
 
     @Binding var showSettings: Bool
 
-    let randomActivityType = HKWorkoutActivityType.randomActivityType()
-
     var body: some View {
 
         NavigationView {
 
             List {
-                
+
                 VStack(alignment: .center) {
 
                     Image(Images.logo.rawValue)
                         .resizable()
                         .aspectRatio(contentMode: .fit)
-                        .foregroundColor(randomActivityType.workoutTypeMetadata.highlightColor)
+                        .foregroundColor(viewModel.themeColor.color)
                         .frame(height: 200)
 
                     Text(Strings.appDescription)
@@ -52,6 +50,30 @@ struct SettingsView: View {
 
                 }
 
+                Section(header: Text(Strings.chooseATheme).font(.callout)) {
+
+                    ScrollView(.horizontal) {
+
+                        HStack {
+
+                            ForEach(ThemeColor.allCases, id: \.self) { color in
+
+                                Rectangle()
+                                    .foregroundColor(color.color)
+                                    .frame(width: colorSwatchSize, height: colorSwatchSize)
+                                    .border(color == viewModel.themeColor ? Color.blue : Color.clear, width: 3)
+                                    .onTapGesture {
+                                        viewModel.themeColor = color
+                                    }
+
+                            }
+
+                        }
+
+                    }
+
+                }
+
                 Section(header: Text(Strings.appInfoText).font(.body)) {
 
                     NavigationLink(destination: Feedback()) {
@@ -68,6 +90,7 @@ struct SettingsView: View {
             .onDisappear {
 
                 viewModel.userUnitPreferences.save()
+                viewModel.themeColor.save()
 
             }
             .modifier(GroupedListModifier())
@@ -78,7 +101,7 @@ struct SettingsView: View {
 
             }) {
 
-                Text(Strings.doneText).foregroundColor(Color.pink).bold()
+                Text(Strings.doneText).foregroundColor(viewModel.themeColor.color).bold()
 
             })
 
@@ -89,6 +112,7 @@ struct SettingsView: View {
     // MARK: Style constants
     //
     private let unitsPickerWidth: CGFloat = 200
+    private let colorSwatchSize: CGFloat = 40
 
 }
 
@@ -146,6 +170,10 @@ extension SettingsView {
         
         public static var unitPreferences: String {
             NSLocalizedString("com.okapi.settings.unitPreferences", value: "Unit Preferences 📏", comment: "User unit preferences section header")
+        }
+        
+        public static var chooseATheme: String {
+            NSLocalizedString("com.okapi.settings.chooseATheme", value: "Choose a theme 🎨", comment: "User theme preferences")
         }
         
         public static var sourcePreferences: String {

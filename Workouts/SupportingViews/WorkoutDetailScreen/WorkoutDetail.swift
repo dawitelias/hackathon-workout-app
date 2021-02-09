@@ -78,7 +78,7 @@ struct WorkoutDetail: View {
 
                     VStack(alignment: .leading) {
 
-                        Text("Calories")
+                        Text("Active Calories")
 
                         Text(viewModel.numberOfCaloriesBurned)
                             .font(.title)

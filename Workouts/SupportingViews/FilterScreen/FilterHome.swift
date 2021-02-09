@@ -126,8 +126,7 @@ struct FilterHome: View {
 
                     }) {
 
-                        Text(Strings.clearFiltersText)
-                            .foregroundColor(Color.pink)
+                        Text(Strings.clearFiltersText).foregroundColor(workoutData.settings.themeColor.color)
 
                     }
                 }
@@ -140,7 +139,7 @@ struct FilterHome: View {
 
             }) {
 
-                Text(Strings.doneText).foregroundColor(Color.pink).bold()
+                Text(Strings.doneText).foregroundColor(workoutData.settings.themeColor.color).bold()
 
             })
         }

@@ -102,7 +102,7 @@ struct DailySummary: View {
 
                         NavigationLink(destination: WorkoutDetail(viewModel: WorkoutDetailViewModel(workout: workout, settings: settings))) {
 
-                            WorkoutRow(workout: workout)
+                            WorkoutRow(workout: workout, color: settings.themeColor.color)
 
                         }
                         .padding(.vertical, 8.0)

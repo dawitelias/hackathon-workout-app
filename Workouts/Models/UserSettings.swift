@@ -7,6 +7,7 @@
 //
 
 import SwiftUI
+import HealthKit
 
 public protocol Setting {
     var stringValue: String { get }
@@ -17,9 +18,11 @@ class UserSettings: ObservableObject {
 
     public enum SettingsKey: String {
         case unitPreference
-        case sourcePreference
+        case colorTheme
     }
 
     @Published var userUnitPreferences = UnitPreference()
+
+    @Published var themeColor = ThemeColor()
 
 }

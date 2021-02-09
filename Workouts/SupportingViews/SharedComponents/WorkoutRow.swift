@@ -12,6 +12,8 @@ import HealthKit
 struct WorkoutRow: View {
 
     var workout: HKWorkout
+    
+    let color: Color
 
     var body: some View {
 
@@ -41,7 +43,7 @@ struct WorkoutRow: View {
 
                 Text("\(workout.totalEnergyBurned?.doubleValue(for: .kilocalorie()) ?? 0, specifier: "%.0f")cal")
                     .font(.system(.largeTitle, design: .rounded))
-                    .foregroundColor(Color(UIColor.secondaryLabel))
+                    .foregroundColor(color)
 
             }
             .padding(.leading)
@@ -51,6 +53,6 @@ struct WorkoutRow: View {
 
 struct WorkoutRow_Previews: PreviewProvider {
     static var previews: some View {
-        WorkoutRow(workout: HKWorkout(activityType: .running, start: Date(), end: Date()))
+        WorkoutRow(workout: HKWorkout(activityType: .running, start: Date(), end: Date()), color: .red)
     }
 }
