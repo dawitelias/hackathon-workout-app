@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "AC4632052447593700619284"
-               BuildableName = "Workouts.app"
-               BlueprintName = "Workouts"
-               ReferencedContainer = "container:Workouts.xcodeproj">
+               BuildableName = "Okapi.app"
+               BlueprintName = "Okapi"
+               ReferencedContainer = "container:Okapi.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -33,9 +33,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "AC46321B2447593C00619284"
-               BuildableName = "WorkoutsTests.xctest"
-               BlueprintName = "WorkoutsTests"
-               ReferencedContainer = "container:Workouts.xcodeproj">
+               BuildableName = "OkapiTests.xctest"
+               BlueprintName = "OkapiTests"
+               ReferencedContainer = "container:Okapi.xcodeproj">
             </BuildableReference>
          </TestableReference>
          <TestableReference
@@ -43,9 +43,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "AC4632262447593C00619284"
-               BuildableName = "WorkoutsUITests.xctest"
-               BlueprintName = "WorkoutsUITests"
-               ReferencedContainer = "container:Workouts.xcodeproj">
+               BuildableName = "OkapiUITests.xctest"
+               BlueprintName = "OkapiUITests"
+               ReferencedContainer = "container:Okapi.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -65,9 +65,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "AC4632052447593700619284"
-            BuildableName = "Workouts.app"
-            BlueprintName = "Workouts"
-            ReferencedContainer = "container:Workouts.xcodeproj">
+            BuildableName = "Okapi.app"
+            BlueprintName = "Okapi"
+            ReferencedContainer = "container:Okapi.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </LaunchAction>
@@ -82,9 +82,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "AC4632052447593700619284"
-            BuildableName = "Workouts.app"
-            BlueprintName = "Workouts"
-            ReferencedContainer = "container:Workouts.xcodeproj">
+            BuildableName = "Okapi.app"
+            BlueprintName = "Okapi"
+            ReferencedContainer = "container:Okapi.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

@@ -161,7 +161,7 @@
 		A5D8CD0D2468806100DC54FA /* FullScreenMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullScreenMapView.swift; sourceTree = "<group>"; };
 		A5DC18F424B41BF800E4EE8C /* CompleteSegmentPopup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompleteSegmentPopup.swift; sourceTree = "<group>"; };
 		A5F5A71E24871E110051C7BB /* ActivityTypeFilterPill.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityTypeFilterPill.swift; sourceTree = "<group>"; };
-		AC4632062447593700619284 /* Workouts.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Workouts.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		AC4632062447593700619284 /* Okapi.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Okapi.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AC4632092447593700619284 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		AC46320B2447593700619284 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		AC46320D2447593700619284 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
@@ -169,10 +169,10 @@
 		AC4632122447593C00619284 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		AC4632152447593C00619284 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		AC4632172447593C00619284 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		AC46321C2447593C00619284 /* WorkoutsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WorkoutsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		AC46321C2447593C00619284 /* OkapiTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OkapiTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		AC4632202447593C00619284 /* WorkoutsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutsTests.swift; sourceTree = "<group>"; };
 		AC4632222447593C00619284 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		AC4632272447593C00619284 /* WorkoutsUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WorkoutsUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		AC4632272447593C00619284 /* OkapiUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OkapiUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		AC46322B2447593C00619284 /* WorkoutsUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutsUITests.swift; sourceTree = "<group>"; };
 		AC46322D2447593C00619284 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AC46323B244781E800619284 /* Workouts.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Workouts.entitlements; sourceTree = "<group>"; };
@@ -407,9 +407,9 @@
 		AC4632072447593700619284 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				AC4632062447593700619284 /* Workouts.app */,
-				AC46321C2447593C00619284 /* WorkoutsTests.xctest */,
-				AC4632272447593C00619284 /* WorkoutsUITests.xctest */,
+				AC4632062447593700619284 /* Okapi.app */,
+				AC46321C2447593C00619284 /* OkapiTests.xctest */,
+				AC4632272447593C00619284 /* OkapiUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -472,9 +472,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		AC4632052447593700619284 /* Workouts */ = {
+		AC4632052447593700619284 /* Okapi */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = AC4632302447593C00619284 /* Build configuration list for PBXNativeTarget "Workouts" */;
+			buildConfigurationList = AC4632302447593C00619284 /* Build configuration list for PBXNativeTarget "Okapi" */;
 			buildPhases = (
 				4D22497FAE1DA1C04DC173FC /* [CP] Check Pods Manifest.lock */,
 				AC4632022447593700619284 /* Sources */,
@@ -486,17 +486,17 @@
 			);
 			dependencies = (
 			);
-			name = Workouts;
+			name = Okapi;
 			packageProductDependencies = (
 				A558979E2575ABDD004A064B /* SwiftUICharts */,
 			);
 			productName = Workouts;
-			productReference = AC4632062447593700619284 /* Workouts.app */;
+			productReference = AC4632062447593700619284 /* Okapi.app */;
 			productType = "com.apple.product-type.application";
 		};
-		AC46321B2447593C00619284 /* WorkoutsTests */ = {
+		AC46321B2447593C00619284 /* OkapiTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = AC4632332447593C00619284 /* Build configuration list for PBXNativeTarget "WorkoutsTests" */;
+			buildConfigurationList = AC4632332447593C00619284 /* Build configuration list for PBXNativeTarget "OkapiTests" */;
 			buildPhases = (
 				2FA36E8D86886D5BDC723B29 /* [CP] Check Pods Manifest.lock */,
 				AC4632182447593C00619284 /* Sources */,
@@ -508,14 +508,14 @@
 			dependencies = (
 				AC46321E2447593C00619284 /* PBXTargetDependency */,
 			);
-			name = WorkoutsTests;
+			name = OkapiTests;
 			productName = WorkoutsTests;
-			productReference = AC46321C2447593C00619284 /* WorkoutsTests.xctest */;
+			productReference = AC46321C2447593C00619284 /* OkapiTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		AC4632262447593C00619284 /* WorkoutsUITests */ = {
+		AC4632262447593C00619284 /* OkapiUITests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = AC4632362447593C00619284 /* Build configuration list for PBXNativeTarget "WorkoutsUITests" */;
+			buildConfigurationList = AC4632362447593C00619284 /* Build configuration list for PBXNativeTarget "OkapiUITests" */;
 			buildPhases = (
 				0A7B578E9F8714F9207CDE9E /* [CP] Check Pods Manifest.lock */,
 				AC4632232447593C00619284 /* Sources */,
@@ -528,9 +528,9 @@
 			dependencies = (
 				AC4632292447593C00619284 /* PBXTargetDependency */,
 			);
-			name = WorkoutsUITests;
+			name = OkapiUITests;
 			productName = WorkoutsUITests;
-			productReference = AC4632272447593C00619284 /* WorkoutsUITests.xctest */;
+			productReference = AC4632272447593C00619284 /* OkapiUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 /* End PBXNativeTarget section */
@@ -540,7 +540,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1140;
-				LastUpgradeCheck = 1140;
+				LastUpgradeCheck = 1220;
 				ORGANIZATIONNAME = "Dawit Elias";
 				TargetAttributes = {
 					AC4632052447593700619284 = {
@@ -556,7 +556,7 @@
 					};
 				};
 			};
-			buildConfigurationList = AC4632012447593700619284 /* Build configuration list for PBXProject "Workouts" */;
+			buildConfigurationList = AC4632012447593700619284 /* Build configuration list for PBXProject "Okapi" */;
 			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -572,9 +572,9 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				AC4632052447593700619284 /* Workouts */,
-				AC46321B2447593C00619284 /* WorkoutsTests */,
-				AC4632262447593C00619284 /* WorkoutsUITests */,
+				AC4632052447593700619284 /* Okapi */,
+				AC46321B2447593C00619284 /* OkapiTests */,
+				AC4632262447593C00619284 /* OkapiUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -798,12 +798,12 @@
 /* Begin PBXTargetDependency section */
 		AC46321E2447593C00619284 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = AC4632052447593700619284 /* Workouts */;
+			target = AC4632052447593700619284 /* Okapi */;
 			targetProxy = AC46321D2447593C00619284 /* PBXContainerItemProxy */;
 		};
 		AC4632292447593C00619284 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = AC4632052447593700619284 /* Workouts */;
+			target = AC4632052447593700619284 /* Okapi */;
 			targetProxy = AC4632282447593C00619284 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -846,6 +846,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -906,6 +907,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -1006,7 +1008,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Workouts.app/Workouts";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Okapi.app/Okapi";
 			};
 			name = Debug;
 		};
@@ -1028,7 +1030,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Workouts.app/Workouts";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Okapi.app/Okapi";
 			};
 			name = Release;
 		};
@@ -1075,7 +1077,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		AC4632012447593700619284 /* Build configuration list for PBXProject "Workouts" */ = {
+		AC4632012447593700619284 /* Build configuration list for PBXProject "Okapi" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				AC46322E2447593C00619284 /* Debug */,
@@ -1084,7 +1086,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		AC4632302447593C00619284 /* Build configuration list for PBXNativeTarget "Workouts" */ = {
+		AC4632302447593C00619284 /* Build configuration list for PBXNativeTarget "Okapi" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				AC4632312447593C00619284 /* Debug */,
@@ -1093,7 +1095,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		AC4632332447593C00619284 /* Build configuration list for PBXNativeTarget "WorkoutsTests" */ = {
+		AC4632332447593C00619284 /* Build configuration list for PBXNativeTarget "OkapiTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				AC4632342447593C00619284 /* Debug */,
@@ -1102,7 +1104,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		AC4632362447593C00619284 /* Build configuration list for PBXNativeTarget "WorkoutsUITests" */ = {
+		AC4632362447593C00619284 /* Build configuration list for PBXNativeTarget "OkapiUITests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				AC4632372447593C00619284 /* Debug */,
