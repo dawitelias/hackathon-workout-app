@@ -27,7 +27,7 @@ struct PopupPanel: View {
         ]
 
         return VStack(alignment: .leading) {
-            
+
             VStack(alignment: .center, spacing: 3) {
 
                 RoundedRectangle(cornerRadius: 5)

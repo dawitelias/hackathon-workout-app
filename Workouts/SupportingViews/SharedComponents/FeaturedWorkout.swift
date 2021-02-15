@@ -103,22 +103,27 @@ struct FeaturedWorkout: View {
                 }
                 .padding(.top, 5)
 
-                if viewModel.workout.getImageFromDocumentsDirectory(colorScheme: colorScheme) != nil {
+//                if viewModel.workout.getImageFromDocumentsDirectory(colorScheme: colorScheme) != nil {
+//
+//                    Image(uiImage: viewModel.workout.getImageFromDocumentsDirectory(colorScheme: colorScheme)!)
+//                        .resizable()
+//                        .frame(height: 200)
+//                        .padding(.horizontal, -40)
+//                        .padding(.bottom, -20)
+//
+//                } else {
+//
+//                    EsriMapCard(workout: viewModel.workout, route: viewModel.route)
+//                        .frame(height: 200)
+//                        .padding(.horizontal, -40)
+//                        .padding(.bottom, -20)
+//
+//                }
 
-                    Image(uiImage: viewModel.workout.getImageFromDocumentsDirectory(colorScheme: colorScheme)!)
-                        .resizable()
-                        .frame(height: 200)
-                        .padding(.horizontal, -40)
-                        .padding(.bottom, -20)
-
-                } else {
-
-                    EsriMapCard(workout: viewModel.workout, route: viewModel.route)
-                        .frame(height: 200)
-                        .padding(.horizontal, -40)
-                        .padding(.bottom, -20)
-
-                }
+                EsriMapCard(workout: viewModel.workout, route: viewModel.route)
+                    .frame(height: 200)
+                    .padding(.horizontal, -40)
+                    .padding(.bottom, -20)
 
             } else {
                 HStack {

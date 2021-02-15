@@ -952,7 +952,7 @@
 				CODE_SIGN_ENTITLEMENTS = Workouts/Workouts.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 5;
+				CURRENT_PROJECT_VERSION = 6;
 				DEVELOPMENT_ASSET_PATHS = "\"Workouts/Preview Content\"";
 				DEVELOPMENT_TEAM = UHCTQ8X679;
 				ENABLE_PREVIEWS = YES;
@@ -979,7 +979,7 @@
 				CODE_SIGN_ENTITLEMENTS = Workouts/Workouts.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 5;
+				CURRENT_PROJECT_VERSION = 6;
 				DEVELOPMENT_ASSET_PATHS = "\"Workouts/Preview Content\"";
 				DEVELOPMENT_TEAM = UHCTQ8X679;
 				ENABLE_PREVIEWS = YES;
