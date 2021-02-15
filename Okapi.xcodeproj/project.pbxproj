@@ -67,6 +67,7 @@
 		A5D8CD0C2468621E00DC54FA /* WorkoutDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5D8CD0B2468621E00DC54FA /* WorkoutDetail.swift */; };
 		A5D8CD0E2468806100DC54FA /* FullScreenMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5D8CD0D2468806100DC54FA /* FullScreenMapView.swift */; };
 		A5DC18F524B41BF800E4EE8C /* CompleteSegmentPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5DC18F424B41BF800E4EE8C /* CompleteSegmentPopup.swift */; };
+		A5E6B13325DA29DE009CB185 /* View+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5E6B13225DA29DE009CB185 /* View+Extensions.swift */; };
 		A5F5A71F24871E110051C7BB /* ActivityTypeFilterPill.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5F5A71E24871E110051C7BB /* ActivityTypeFilterPill.swift */; };
 		AC46320A2447593700619284 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC4632092447593700619284 /* AppDelegate.swift */; };
 		AC46320C2447593700619284 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC46320B2447593700619284 /* SceneDelegate.swift */; };
@@ -162,6 +163,7 @@
 		A5D8CD0B2468621E00DC54FA /* WorkoutDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutDetail.swift; sourceTree = "<group>"; };
 		A5D8CD0D2468806100DC54FA /* FullScreenMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullScreenMapView.swift; sourceTree = "<group>"; };
 		A5DC18F424B41BF800E4EE8C /* CompleteSegmentPopup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompleteSegmentPopup.swift; sourceTree = "<group>"; };
+		A5E6B13225DA29DE009CB185 /* View+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Extensions.swift"; sourceTree = "<group>"; };
 		A5F5A71E24871E110051C7BB /* ActivityTypeFilterPill.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityTypeFilterPill.swift; sourceTree = "<group>"; };
 		AC4632062447593700619284 /* Okapi.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Okapi.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AC4632092447593700619284 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -319,6 +321,7 @@
 				A553D4C624B91E8400F02007 /* RouteCalculationsHelper.swift */,
 				A553D4C824B9607B00F02007 /* FileHelper.swift */,
 				A56E159025D4DFA4003E08FD /* WorkoutDataHelper.swift */,
+				A5E6B13225DA29DE009CB185 /* View+Extensions.swift */,
 			);
 			path = HelpersAndExtensions;
 			sourceTree = "<group>";
@@ -749,6 +752,7 @@
 				A55C84E52449EC3F00D81C44 /* Blur.swift in Sources */,
 				A5516D8E2562158F00BDAB2D /* GroupedListModifier.swift in Sources */,
 				A582894D244F7B7C00B7B6B0 /* FilterPill.swift in Sources */,
+				A5E6B13325DA29DE009CB185 /* View+Extensions.swift in Sources */,
 				A56E159125D4DFA4003E08FD /* WorkoutDataHelper.swift in Sources */,
 				A5D8CD0E2468806100DC54FA /* FullScreenMapView.swift in Sources */,
 				A511476B258260C8006151DD /* CompleteSegmentHeader.swift in Sources */,
@@ -948,7 +952,7 @@
 				CODE_SIGN_ENTITLEMENTS = Workouts/Workouts.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 4;
+				CURRENT_PROJECT_VERSION = 5;
 				DEVELOPMENT_ASSET_PATHS = "\"Workouts/Preview Content\"";
 				DEVELOPMENT_TEAM = UHCTQ8X679;
 				ENABLE_PREVIEWS = YES;
@@ -975,7 +979,7 @@
 				CODE_SIGN_ENTITLEMENTS = Workouts/Workouts.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 4;
+				CURRENT_PROJECT_VERSION = 5;
 				DEVELOPMENT_ASSET_PATHS = "\"Workouts/Preview Content\"";
 				DEVELOPMENT_TEAM = UHCTQ8X679;
 				ENABLE_PREVIEWS = YES;
