@@ -199,7 +199,7 @@ class HealthKitAssistant {
             HKObjectType.workoutType(),
             HKSeriesType.workoutRoute()]
         
-        let healthKitTypesToWrite: Set<HKSampleType> = [ HKObjectType.workoutType(), HKSeriesType.workoutRoute() ]
+        //let healthKitTypesToWrite: Set<HKSampleType> = [ HKObjectType.workoutType(), HKSeriesType.workoutRoute() ]
 
         // Check if the device has HealthKit capabilities
         //
@@ -207,7 +207,7 @@ class HealthKitAssistant {
             
             // Request authorization
             //
-            HKHealthStore().requestAuthorization(toShare: healthKitTypesToWrite, read: healthKitTypesToRead) { (success, error) in
+            HKHealthStore().requestAuthorization(toShare: [], read: healthKitTypesToRead) { (success, error) in
 
                 completion(success, error)
 
