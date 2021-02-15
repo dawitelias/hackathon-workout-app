@@ -1,0 +1,49 @@
+//
+//  ShareSheet.swift
+//  Workouts
+//
+//  Created by Emily Cheroske on 4/16/20.
+//  Copyright © 2020 Dawit Elias. All rights reserved.
+//
+
+// This component is curtosy of Jeff Jackson
+
+import SwiftUI
+
+struct ShareSheet: UIViewControllerRepresentable {
+
+    typealias Callback = (_ activityType: UIActivity.ActivityType?, _ completed: Bool, _ returnedItems: [Any]?, _ error: Error?) -> Void
+
+    let activityItems: [Any]
+
+    let applicationActivities: [UIActivity]? = nil
+
+    let excludedActivityTypes: [UIActivity.ActivityType]? = nil
+
+    let callback: Callback? = nil
+
+    func makeUIViewController(context: Context) -> UIActivityViewController {
+
+        let controller = UIActivityViewController(
+            activityItems: activityItems,
+            applicationActivities: applicationActivities)
+    
+        controller.excludedActivityTypes = excludedActivityTypes
+
+        controller.completionWithItemsHandler = callback
+
+        return controller
+    }
+
+    func updateUIViewController(_ uiViewController: UIActivityViewController, context: Context) {
+        // nothing to do here
+    }
+}
+
+// MARK: Previews
+//
+struct ShareSheet_Previews: PreviewProvider {
+    static var previews: some View {
+        ShareSheet(activityItems: [Image("Running") as AnyObject])
+    }
+}

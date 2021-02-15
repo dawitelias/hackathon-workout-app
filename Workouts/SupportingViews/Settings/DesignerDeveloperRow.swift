@@ -38,9 +38,9 @@ struct DesignerDeveloperRow: View {
                         .fontWeight(.bold)
                         .foregroundColor(Color(UIColor.label))
 
-                    Text(description)
-                        .font(.callout)
-                        .foregroundColor(Color(UIColor.secondaryLabel))
+//                    Text(description)
+//                        .font(.callout)
+//                        .foregroundColor(Color(UIColor.secondaryLabel))
 
                 }
                 

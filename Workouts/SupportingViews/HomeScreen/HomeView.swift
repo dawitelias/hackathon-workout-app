@@ -143,6 +143,12 @@ struct HomeView: View {
                     Text("Nothing to see here!")
 
                 }
+//                
+//                Button(action: {
+//                    WorkoutDataHelper.populateEachActivityType()
+//                }, label: {
+//                    Text("Backfill with test data")
+//                })
 
                 ForEach(sortedDictionaryKeys, id: \.self) { key in
 

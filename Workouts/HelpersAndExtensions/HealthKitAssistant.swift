@@ -18,6 +18,7 @@ class HealthKitAssistant {
     }
     
     private let healthKitBundleId = "com.apple.health"
+    private let selfBundleId = "com.emilycheroske.okapi"
 
     // MARK: Get workouts with predicates for each activity type
     //
@@ -62,7 +63,7 @@ class HealthKitAssistant {
                         if let data = samples as? [HKWorkout] {
 
                             // workoutData += data Note* I ocassionaly get badAccess error thrown here crashing the app (only on app startup), very hard to repro going to try another way of copying over these array contents and see if I see the same error popup again.
-                            workoutData.append(contentsOf: data.filter { $0.sourceRevision.source.bundleIdentifier.contains(mySelf.healthKitBundleId) })
+                            workoutData.append(contentsOf: data.filter { $0.sourceRevision.source.bundleIdentifier.contains(mySelf.healthKitBundleId) || $0.sourceRevision.source.bundleIdentifier.contains(mySelf.selfBundleId) })
 
                         }
 
@@ -100,7 +101,7 @@ class HealthKitAssistant {
                 return
             }
 
-            completion(data.filter { $0.sourceRevision.source.bundleIdentifier.contains(mySelf.healthKitBundleId) }, nil)
+            completion(data.filter { $0.sourceRevision.source.bundleIdentifier.contains(mySelf.healthKitBundleId) || $0.sourceRevision.source.bundleIdentifier.contains(mySelf.selfBundleId) }, nil)
 
         }
 
@@ -133,7 +134,7 @@ class HealthKitAssistant {
                 return
             }
             
-            completion(data.filter { $0.sourceRevision.source.bundleIdentifier.contains(mySelf.healthKitBundleId) }, error)
+            completion(data.filter { $0.sourceRevision.source.bundleIdentifier.contains(mySelf.healthKitBundleId) || $0.sourceRevision.source.bundleIdentifier.contains(mySelf.selfBundleId) }, error)
 
         }
 
@@ -165,7 +166,7 @@ class HealthKitAssistant {
             }
 
             if let data = samples as? [HKWorkout] {
-                completion(data.filter { $0.sourceRevision.source.bundleIdentifier.contains(mySelf.healthKitBundleId) }.first, error)
+                completion(data.filter { $0.sourceRevision.source.bundleIdentifier.contains(mySelf.healthKitBundleId) || $0.sourceRevision.source.bundleIdentifier.contains(mySelf.selfBundleId) }.first, error)
             }
 
         }
@@ -198,13 +199,15 @@ class HealthKitAssistant {
             HKObjectType.workoutType(),
             HKSeriesType.workoutRoute()]
         
+        let healthKitTypesToWrite: Set<HKSampleType> = [ HKObjectType.workoutType(), HKSeriesType.workoutRoute() ]
+
         // Check if the device has HealthKit capabilities
         //
         if HKHealthStore.isHealthDataAvailable() {
             
             // Request authorization
             //
-            HKHealthStore().requestAuthorization(toShare: nil, read: healthKitTypesToRead) { (success, error) in
+            HKHealthStore().requestAuthorization(toShare: healthKitTypesToWrite, read: healthKitTypesToRead) { (success, error) in
 
                 completion(success, error)
 

@@ -81,7 +81,7 @@ extension LandingPage {
     private enum Images: String {
 
         case heartRateChart = "HeartRateChart"
-        case highlightedRoute = "HighlightedRoute"
+        case highlightedRoute = "WorkoutGISView"
         case workoutOverview = "WorkoutOverview"
 
     }

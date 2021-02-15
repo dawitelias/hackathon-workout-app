@@ -39,6 +39,7 @@
 		A55BCB842573279E0007E286 /* WorkoutDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A55BCB832573279E0007E286 /* WorkoutDetailViewModel.swift */; };
 		A55C84E52449EC3F00D81C44 /* Blur.swift in Sources */ = {isa = PBXBuildFile; fileRef = A55C84E42449EC3F00D81C44 /* Blur.swift */; };
 		A567E6FD25CE3B4C00B21CC8 /* ChartDataFailLoad.swift in Sources */ = {isa = PBXBuildFile; fileRef = A567E6FC25CE3B4C00B21CC8 /* ChartDataFailLoad.swift */; };
+		A56E159125D4DFA4003E08FD /* WorkoutDataHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A56E159025D4DFA4003E08FD /* WorkoutDataHelper.swift */; };
 		A5780C6424A1891A00D79927 /* MockDataHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5780C6324A1891A00D79927 /* MockDataHelper.swift */; };
 		A582894D244F7B7C00B7B6B0 /* FilterPill.swift in Sources */ = {isa = PBXBuildFile; fileRef = A582894C244F7B7C00B7B6B0 /* FilterPill.swift */; };
 		A5828953244FC15600B7B6B0 /* WorkoutsMultiSelect.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5828952244FC15600B7B6B0 /* WorkoutsMultiSelect.swift */; };
@@ -133,6 +134,7 @@
 		A55BCB832573279E0007E286 /* WorkoutDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutDetailViewModel.swift; sourceTree = "<group>"; };
 		A55C84E42449EC3F00D81C44 /* Blur.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Blur.swift; sourceTree = "<group>"; };
 		A567E6FC25CE3B4C00B21CC8 /* ChartDataFailLoad.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartDataFailLoad.swift; sourceTree = "<group>"; };
+		A56E159025D4DFA4003E08FD /* WorkoutDataHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutDataHelper.swift; sourceTree = "<group>"; };
 		A5780C6324A1891A00D79927 /* MockDataHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockDataHelper.swift; sourceTree = "<group>"; };
 		A582894C244F7B7C00B7B6B0 /* FilterPill.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterPill.swift; sourceTree = "<group>"; };
 		A5828952244FC15600B7B6B0 /* WorkoutsMultiSelect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutsMultiSelect.swift; sourceTree = "<group>"; };
@@ -316,6 +318,7 @@
 				A5B3497824AFCAA200EDD653 /* Array+Extensions.swift */,
 				A553D4C624B91E8400F02007 /* RouteCalculationsHelper.swift */,
 				A553D4C824B9607B00F02007 /* FileHelper.swift */,
+				A56E159025D4DFA4003E08FD /* WorkoutDataHelper.swift */,
 			);
 			path = HelpersAndExtensions;
 			sourceTree = "<group>";
@@ -746,6 +749,7 @@
 				A55C84E52449EC3F00D81C44 /* Blur.swift in Sources */,
 				A5516D8E2562158F00BDAB2D /* GroupedListModifier.swift in Sources */,
 				A582894D244F7B7C00B7B6B0 /* FilterPill.swift in Sources */,
+				A56E159125D4DFA4003E08FD /* WorkoutDataHelper.swift in Sources */,
 				A5D8CD0E2468806100DC54FA /* FullScreenMapView.swift in Sources */,
 				A511476B258260C8006151DD /* CompleteSegmentHeader.swift in Sources */,
 				A5B3497924AFCAA200EDD653 /* Array+Extensions.swift in Sources */,
@@ -944,9 +948,9 @@
 				CODE_SIGN_ENTITLEMENTS = Workouts/Workouts.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 7;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_ASSET_PATHS = "\"Workouts/Preview Content\"";
-				DEVELOPMENT_TEAM = ARSB35QAMQ;
+				DEVELOPMENT_TEAM = UHCTQ8X679;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = Workouts/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
@@ -955,7 +959,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.emilycheroske-personal.okapi";
+				PRODUCT_BUNDLE_IDENTIFIER = com.emilycheroske.okapi;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
@@ -971,9 +975,9 @@
 				CODE_SIGN_ENTITLEMENTS = Workouts/Workouts.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 7;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_ASSET_PATHS = "\"Workouts/Preview Content\"";
-				DEVELOPMENT_TEAM = ARSB35QAMQ;
+				DEVELOPMENT_TEAM = UHCTQ8X679;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = Workouts/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
@@ -982,7 +986,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.emilycheroske-personal.okapi";
+				PRODUCT_BUNDLE_IDENTIFIER = com.emilycheroske.okapi;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
