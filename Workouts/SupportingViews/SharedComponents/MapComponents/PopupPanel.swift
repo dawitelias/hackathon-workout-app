@@ -32,7 +32,7 @@ struct PopupPanel: View {
 
                 RoundedRectangle(cornerRadius: 5)
                     .foregroundColor(viewModel.settings.themeColor.color)
-                    .frame(width: 50, height: 3)
+                    .frame(width: 30, height: 5)
                     .padding(.top, 10)
 
                 HStack(alignment: .center) {

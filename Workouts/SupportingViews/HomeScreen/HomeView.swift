@@ -85,17 +85,12 @@ struct HomeView: View {
 
                 } else if featuredWorkout != nil {
 
-                    Section(header: Text(Strings.latestWorkout)) {
+                    NavigationLink(destination: WorkoutDetail(viewModel: WorkoutDetailViewModel(workout: featuredWorkout!, settings: workoutData.settings))) {
 
-                        ZStack {
+                        FeaturedWorkout(workout: featuredWorkout!)
 
-                            FeaturedWorkout(workout: featuredWorkout!)
+                    }.buttonStyle(PlainButtonStyle())
 
-                            NavigationLink(destination: WorkoutDetail(viewModel: WorkoutDetailViewModel(workout: featuredWorkout!, settings: workoutData.settings))) {
-                                EmptyView()
-                            }
-                        }
-                    }
                 }
 
                 // If there ARE active filters, we should show some indication to the users, so that they understand why

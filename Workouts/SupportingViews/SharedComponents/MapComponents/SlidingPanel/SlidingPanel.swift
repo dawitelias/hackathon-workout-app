@@ -90,7 +90,7 @@ enum SlidingPanelPosition: CGFloat {
     case hidden = 0
     case top = 120
     case middle = 400
-    case bottom = 580
+    case bottom = 500
 }
 
 enum DragState {
