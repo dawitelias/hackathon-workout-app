@@ -11,9 +11,7 @@ import HealthKit
 
 struct SettingsView: View {
 
-    @EnvironmentObject var viewModel: UserSettings
-
-    @Binding var showSettings: Bool
+    @EnvironmentObject var viewModel: WorkoutData
 
     var body: some View {
 
@@ -26,7 +24,7 @@ struct SettingsView: View {
                     Image(Images.logo.rawValue)
                         .resizable()
                         .aspectRatio(contentMode: .fit)
-                        .foregroundColor(viewModel.themeColor.color)
+                        .foregroundColor(viewModel.settings.themeColor.color)
                         .frame(height: 200)
 
                     Text(Strings.appDescription)
@@ -38,7 +36,7 @@ struct SettingsView: View {
 
                     // Units picker
                     //
-                    Picker(Strings.units, selection: $viewModel.userUnitPreferences) {
+                    Picker(Strings.units, selection: $viewModel.settings.userUnitPreferences) {
 
                         ForEach(UnitPreference.allCases, id: \.self) { item in
 
@@ -61,9 +59,10 @@ struct SettingsView: View {
                                 Rectangle()
                                     .foregroundColor(color.color)
                                     .frame(width: colorSwatchSize, height: colorSwatchSize)
-                                    .border(color == viewModel.themeColor ? Color.blue : Color.clear, width: 3)
+                                    .border(color == viewModel.settings.themeColor ? Color.blue : Color.clear, width: 3)
                                     .onTapGesture {
-                                        viewModel.themeColor = color
+                                        viewModel.settings.themeColor = color
+                                        viewModel.objectWillChange.send()
                                     }
 
                             }
@@ -91,21 +90,12 @@ struct SettingsView: View {
             }
             .onDisappear {
 
-                viewModel.userUnitPreferences.save()
-                viewModel.themeColor.save()
+                viewModel.settings.userUnitPreferences.save()
+                viewModel.settings.themeColor.save()
 
             }
             .modifier(GroupedListModifier())
             .navigationBarTitle(Strings.settings, displayMode: .inline)
-            .navigationBarItems(trailing: Button(action: {
-
-                showSettings = false
-
-            }) {
-
-                Text(Strings.doneText).foregroundColor(viewModel.themeColor.color).bold()
-
-            })
 
         }
 
@@ -131,7 +121,7 @@ extension SettingsView {
     private struct Strings {
 
         public static var appDescription: String {
-            NSLocalizedString("com.okapi.settings.appDescription", value: "Okapi is an Activities companion app. Only workouts recorded from the Activities app will appear in Okapi.", comment: "Okapi app description text.")
+            NSLocalizedString("com.okapi.settings.appDescription", value: "Okapi is a Fitness companion app. Only workouts recorded from the Fitness app will appear in Okapi.", comment: "Okapi app description text.")
         }
 
         public static var doneText: String {
@@ -201,18 +191,6 @@ extension SettingsView {
         public static var acknowledgements: String {
             NSLocalizedString("com.okapi.settings.acknowledgements", value: "Acknowledgements", comment: "Acknowledgements link text.")
         }
-
-    }
-
-}
-
-// MARK: Previews
-//
-struct SettingsView_Previews: PreviewProvider {
-
-    static var previews: some View {
-
-        SettingsView(showSettings: .constant(true))
 
     }
 

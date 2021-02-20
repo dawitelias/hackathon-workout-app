@@ -27,12 +27,7 @@ struct BrandPage: View {
                     withAnimation(Animation.easeIn(duration: animationDuration)) {
                         logoOpacity = 1
                     }
-                }
-
-            Text(Strings.brandingPageDescription)
-                .multilineTextAlignment(.center)
-                .fixedSize(horizontal: false, vertical: true)
-                .padding()
+                }.padding(.top, 100)
 
             Spacer()
 
@@ -50,14 +45,6 @@ extension BrandPage {
 
     private enum Images: String {
         case logo
-    }
-
-    private struct Strings {
-
-        public static var brandingPageDescription: String {
-            NSLocalizedString("com.okapi.brandingPage.branding-page-description", value: "Okapi enhances the Activities app by giving you the ability to dig into your workout route data.", comment: "Explain why okapi needs health kit permissions")
-        }
-
     }
 
 }

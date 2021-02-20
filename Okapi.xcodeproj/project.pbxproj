@@ -68,6 +68,8 @@
 		A5D8CD0E2468806100DC54FA /* FullScreenMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5D8CD0D2468806100DC54FA /* FullScreenMapView.swift */; };
 		A5DC18F524B41BF800E4EE8C /* CompleteSegmentPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5DC18F424B41BF800E4EE8C /* CompleteSegmentPopup.swift */; };
 		A5E6B13325DA29DE009CB185 /* View+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5E6B13225DA29DE009CB185 /* View+Extensions.swift */; };
+		A5E6B16125DB08D7009CB185 /* RootTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5E6B16025DB08D7009CB185 /* RootTabView.swift */; };
+		A5E6B16625DB1136009CB185 /* DailySummaryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5E6B16525DB1136009CB185 /* DailySummaryViewModel.swift */; };
 		A5F5A71F24871E110051C7BB /* ActivityTypeFilterPill.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5F5A71E24871E110051C7BB /* ActivityTypeFilterPill.swift */; };
 		AC46320A2447593700619284 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC4632092447593700619284 /* AppDelegate.swift */; };
 		AC46320C2447593700619284 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC46320B2447593700619284 /* SceneDelegate.swift */; };
@@ -164,6 +166,8 @@
 		A5D8CD0D2468806100DC54FA /* FullScreenMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullScreenMapView.swift; sourceTree = "<group>"; };
 		A5DC18F424B41BF800E4EE8C /* CompleteSegmentPopup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompleteSegmentPopup.swift; sourceTree = "<group>"; };
 		A5E6B13225DA29DE009CB185 /* View+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Extensions.swift"; sourceTree = "<group>"; };
+		A5E6B16025DB08D7009CB185 /* RootTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootTabView.swift; sourceTree = "<group>"; };
+		A5E6B16525DB1136009CB185 /* DailySummaryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailySummaryViewModel.swift; sourceTree = "<group>"; };
 		A5F5A71E24871E110051C7BB /* ActivityTypeFilterPill.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityTypeFilterPill.swift; sourceTree = "<group>"; };
 		AC4632062447593700619284 /* Okapi.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Okapi.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AC4632092447593700619284 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -284,6 +288,7 @@
 		A52FBEF22447BF9E00016025 /* SupportingViews */ = {
 			isa = PBXGroup;
 			children = (
+				A5E6B15F25DB08C3009CB185 /* RootTabView */,
 				A5ACBABA257C6DB600F8C836 /* Settings */,
 				A54A7E4124840B2500358DFB /* Onboarding */,
 				A5D8CD0F2468807000DC54FA /* FullScreenMap */,
@@ -330,6 +335,7 @@
 			isa = PBXGroup;
 			children = (
 				A54622752459C7A4003BA285 /* DailySummary.swift */,
+				A5E6B16525DB1136009CB185 /* DailySummaryViewModel.swift */,
 			);
 			path = DailySummaryScreen;
 			sourceTree = "<group>";
@@ -396,6 +402,14 @@
 				A5D8CCA925B638D300F35702 /* FullScreenMapViewModel.swift */,
 			);
 			path = FullScreenMap;
+			sourceTree = "<group>";
+		};
+		A5E6B15F25DB08C3009CB185 /* RootTabView */ = {
+			isa = PBXGroup;
+			children = (
+				A5E6B16025DB08D7009CB185 /* RootTabView.swift */,
+			);
+			path = RootTabView;
 			sourceTree = "<group>";
 		};
 		AC4631FD2447593700619284 = {
@@ -755,6 +769,7 @@
 				A5E6B13325DA29DE009CB185 /* View+Extensions.swift in Sources */,
 				A56E159125D4DFA4003E08FD /* WorkoutDataHelper.swift in Sources */,
 				A5D8CD0E2468806100DC54FA /* FullScreenMapView.swift in Sources */,
+				A5E6B16625DB1136009CB185 /* DailySummaryViewModel.swift in Sources */,
 				A511476B258260C8006151DD /* CompleteSegmentHeader.swift in Sources */,
 				A5B3497924AFCAA200EDD653 /* Array+Extensions.swift in Sources */,
 				A5D8CC7A25B346BB00F35702 /* LandingPage.swift in Sources */,
@@ -769,6 +784,7 @@
 				A5D8CC9D25B5065800F35702 /* LetsGo.swift in Sources */,
 				A546226E2455223F003BA285 /* DailyWorkout.swift in Sources */,
 				A51D439525708B71001DD215 /* Licensing.swift in Sources */,
+				A5E6B16125DB08D7009CB185 /* RootTabView.swift in Sources */,
 				A5B6CEEB2448D91100CF2B86 /* ShareSheet.swift in Sources */,
 				A558981C25794755004A064B /* Handle.swift in Sources */,
 				A5221E6E24545F00005416BC /* FilterHome.swift in Sources */,
@@ -952,7 +968,7 @@
 				CODE_SIGN_ENTITLEMENTS = Workouts/Workouts.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 6;
+				CURRENT_PROJECT_VERSION = 9;
 				DEVELOPMENT_ASSET_PATHS = "\"Workouts/Preview Content\"";
 				DEVELOPMENT_TEAM = UHCTQ8X679;
 				ENABLE_PREVIEWS = YES;
@@ -979,7 +995,7 @@
 				CODE_SIGN_ENTITLEMENTS = Workouts/Workouts.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 6;
+				CURRENT_PROJECT_VERSION = 9;
 				DEVELOPMENT_ASSET_PATHS = "\"Workouts/Preview Content\"";
 				DEVELOPMENT_TEAM = UHCTQ8X679;
 				ENABLE_PREVIEWS = YES;

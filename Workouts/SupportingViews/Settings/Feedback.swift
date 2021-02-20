@@ -95,7 +95,7 @@ extension Feedback {
         public static var feedbackDescription: String {
             NSLocalizedString(
                 "com.okapi.feedback.feedbackDescription",
-                value: "Did you find a bug 🐛, or mabye you have an idea for a shiny new feature 🌟! Either way, we'd love to hear your feedback!",
+                value: "Did you find a bug 🐛,...\n\n ...or mabye you have an idea for a shiny new feature 🌟!\n\n Either way, go ahead and smash that feedback button and give us a shout!",
                 comment: "How to give feedback description.")
         }
 

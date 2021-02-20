@@ -38,7 +38,7 @@ struct LandingPage: View {
 
                    let window = UIWindow(windowScene: scene!)
                     
-                   window.rootViewController = UIHostingController(rootView: HomeView().environmentObject(WorkoutData()))
+                   window.rootViewController = UIHostingController(rootView: RootTabView().environmentObject(WorkoutData()))
                    windowScenedelegate.window = window
                    window.makeKeyAndVisible()
 

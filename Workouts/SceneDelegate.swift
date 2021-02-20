@@ -37,9 +37,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                 window.makeKeyAndVisible()
             }
         } else {
+
             // Show main view
             //
-            let contentView = HomeView().environmentObject(WorkoutData())
+            let contentView = RootTabView().environmentObject(WorkoutData())
                 
             // Use a UIHostingController as window root view controller.
             if let windowScene = scene as? UIWindowScene {

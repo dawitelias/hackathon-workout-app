@@ -12,6 +12,7 @@ struct ChartDataFailLoad: View {
 
     let text: String
     let height: CGFloat
+    var showQuote: Bool = true
     
     @State var isAnimating = false
     @State var rotationAngle: Double = 0
@@ -30,11 +31,13 @@ struct ChartDataFailLoad: View {
                 Text(text)
                     .foregroundColor(Color(UIColor.label))
 
-                Text(DataDidntLoadQuotes.getRandomDissapointmentQuote())
-                    .font(.caption)
-                    .foregroundColor(Color(UIColor.secondaryLabel))
-                    .italic()
-                    .padding()
+                if showQuote {
+                    Text(DataDidntLoadQuotes.getRandomDissapointmentQuote())
+                        .font(.caption)
+                        .foregroundColor(Color(UIColor.secondaryLabel))
+                        .italic()
+                        .padding()
+                }
                 
                 Spacer()
 

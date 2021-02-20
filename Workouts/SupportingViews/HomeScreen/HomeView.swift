@@ -23,10 +23,6 @@ struct HomeView: View {
         workoutData.mostRecentWorkout
     }
 
-    private var workoutsDoneToday: [HKWorkout] {
-        workoutData.workoutsForToday ?? []
-    }
-
     var body: some View {
         
         let empty: [Date: [HKWorkout]] = [:]
@@ -46,52 +42,8 @@ struct HomeView: View {
         return NavigationView {
 
             List {
-
-                // If the user has done multiple workouts today, we want to show them a horizontal scroll view of the workouts that
-                // they have done, otherwise, if they have only done one workout or they haven't done a workout at all today, then we will
-                // fall back to showing the featured workout
-                //
-                if workoutsDoneToday.count > 1 {
-
-                    Section(header: Text(Strings.yourWorkouts)) {
-
-                        VStack(alignment: .leading, spacing: nil) {
-
-                            ScrollView(.horizontal, showsIndicators: true) {
-
-                                HStack(alignment: .top, spacing: 20) {
-                                    
-                                    ForEach(workoutsDoneToday, id: \.self) { workout in
-
-                                        NavigationLink(destination: WorkoutDetail(viewModel: WorkoutDetailViewModel(workout: workout, settings: workoutData.settings))) {
-
-                                            DailyWorkout(workout: workout)
-
-                                        }.buttonStyle(PlainButtonStyle())
-                                    }
-                                    
-                                }.padding(5)
-                                
-                            }
-                            
-                            NavigationLink(destination: DailySummary(workouts: workoutsDoneToday).environmentObject(workoutData.settings)) {
-                                Text(Strings.viewDailySummary)
-                                    .foregroundColor(workoutData.settings.themeColor.color)
-                                    .padding()
-                            }
-                            
-                        }
-                    }
-
-                } else if featuredWorkout != nil {
-
-                    NavigationLink(destination: WorkoutDetail(viewModel: WorkoutDetailViewModel(workout: featuredWorkout!, settings: workoutData.settings))) {
-
-                        FeaturedWorkout(workout: featuredWorkout!)
-
-                    }.buttonStyle(PlainButtonStyle())
-
-                }
+                
+                // TODO: Add back in the featured workout someday.
 
                 // If there ARE active filters, we should show some indication to the users, so that they understand why
                 // their list might look different
@@ -135,7 +87,7 @@ struct HomeView: View {
 
                 if sortedDictionaryKeys.count == 0 {
 
-                    Text("Nothing to see here!")
+                    Text("Hmmmm, looks like we aren't finding any data. 🤔")
 
                 }
 //                
@@ -168,37 +120,22 @@ struct HomeView: View {
             }
             .modifier(GroupedListModifier())
             .navigationBarTitle(Text(Strings.workoutsText))
-            .navigationBarItems(leading:
-
-                Button(action: {
-
-                    showSettingsView.toggle()
-
-                }) {
-                
-                    Image(systemName: Images.gear.rawValue).imageScale(.large)
-                
-                }.sheet(isPresented: $showSettingsView) {
-                    
-                    SettingsView(showSettings: $showSettingsView).environmentObject(workoutData.settings)
-
-                }, trailing:
-                    
+            .navigationBarItems(leading: EmptyView() , trailing:
                     Button(action: {
-
+    
                         showFilterView.toggle()
-
+    
                     }) {
-
+    
                         Image(systemName: Images.filterIcon.rawValue)
                             .imageScale(.large)
-
+    
                     }.sheet(isPresented: $showFilterView) {
-
+    
                         FilterHome(showFilterView: $showFilterView).environmentObject(workoutData)
-
+    
                     }
-            )
+                )
         }
         .accentColor(workoutData.settings.themeColor.color)
         .onReceive(NotificationCenter.default.publisher(for: UIApplication.willEnterForegroundNotification)) { _ in

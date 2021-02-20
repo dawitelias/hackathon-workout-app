@@ -11,107 +11,117 @@ import HealthKit
 
 struct DailySummary: View {
 
-    @EnvironmentObject var settings: UserSettings
+    @EnvironmentObject var workoutData: WorkoutData
 
-    var workouts: [HKWorkout]
+    @ObservedObject var viewModel: DailySummaryViewModel
+    
+    init(workoutData: WorkoutData) {
+        viewModel = DailySummaryViewModel(workoutData: workoutData)
+    }
 
     var body: some View {
-        var totalCalories: Double = 0
-        var totalDistance: Double = 0
-        var totalTime: Double = 0
-        
-        workouts.forEach { workout in
-            totalCalories += workout.totalEnergyBurned?.doubleValue(for: .kilocalorie()) ?? 0
-            totalTime += workout.duration
-            totalDistance += workout.totalDistance?.doubleValue(for: settings.userUnitPreferences == .metric ? .meterUnit(with: .kilo) : .mile()) ?? 0
-        }
-        
-        let workoutTimeString = TimeInterval(exactly: totalTime)?.getHoursAndMinutesString() ?? ""
 
-        return VStack(alignment: .center, spacing: 10) {
+        NavigationView {
 
-            List {
+            VStack(alignment: .center, spacing: 10) {
 
-                Section(header: VStack {
+                List {
 
-                    Text(Strings.quickGlance)
-                        .padding(.leading)
-                        .frame(width: UIScreen.main.bounds.width, alignment: .leading)
+                    Section(header: VStack {
 
-                }, footer: VStack {
+                        Text(Strings.quickGlance)
+                            .padding(.leading)
+                            .frame(width: UIScreen.main.bounds.width, alignment: .leading)
 
-                    Text("These statistics are aggregated across the \(workouts.count) workouts you've completed today.")
+                    }, footer: VStack {
 
-                }) {
+                        Text("These statistics are aggregated across the \(viewModel.todaysWorkouts.count) workouts you've completed today.")
 
-                    // Total Calories Burned
-                    //
-                    VStack(alignment: .leading, spacing: 5) {
+                    }) {
 
-                        Text(Strings.totalCalories)
-                            .font(.callout)
-                            .foregroundColor(Color.gray)
+                        // Total Calories Burned
+                        //
+                        VStack(alignment: .leading, spacing: 5) {
 
-                        Text("\(String.init(format: "%.0f", totalCalories)) cal")
-                            .font(.system(.largeTitle))
-                            .fontWeight(.bold)
+                            Text(Strings.totalCalories)
+                                .font(.callout)
+                                .foregroundColor(Color.gray)
+
+                            Text("\(String.init(format: "%.0f", viewModel.totalCalories)) cal")
+                                .font(.system(.largeTitle))
+                                .fontWeight(.bold)
+
+                        }
+
+                        // Total Duration
+                        //
+                        VStack(alignment: .leading) {
+
+                            Text(Strings.totalDuration)
+                                .font(.callout)
+                                .foregroundColor(Color.gray)
+
+                            Text(viewModel.timerString)
+                                .font(.system(.largeTitle))
+                                .fontWeight(.bold)
+
+                        }
+                        
+                        // Total Distance
+                        //
+                        VStack(alignment: .leading) {
+
+                            Text(Strings.totalDistance)
+                                .font(.callout)
+                                .foregroundColor(Color.gray)
+
+                            Text("\(String.init(format: "%.0f", viewModel.totalDistance)) \(workoutData.settings.userUnitPreferences.distanceUnit)")
+                                .font(.system(.largeTitle))
+                                .fontWeight(.bold)
+
+                        }
 
                     }
 
-                    // Total Duration
+                    // Show a list of the workouts that the user has completed today
                     //
-                    VStack(alignment: .leading) {
+                    if viewModel.todaysWorkouts.count > 0 {
+                        // List Workouts for the day
+                        //
+                        Section(header: VStack {
 
-                        Text(Strings.totalDuration)
-                            .font(.callout)
-                            .foregroundColor(Color.gray)
+                            Text(Strings.moreDetail)
+                                .padding(.leading)
+                                .frame(width: UIScreen.main.bounds.width, alignment: .leading)
 
-                        Text("\(workoutTimeString)")
-                            .font(.system(.largeTitle))
-                            .fontWeight(.bold)
+                        }) {
+
+                            ForEach(viewModel.todaysWorkouts, id: \.self) { workout in
+
+                                NavigationLink(destination: WorkoutDetail(viewModel: WorkoutDetailViewModel(workout: workout, settings: workoutData.settings))) {
+
+                                    WorkoutRow(workout: workout, color: workoutData.settings.themeColor.color)
+
+                                }
+                                .padding(.vertical, 8.0)
+
+                            }
+                        }
+                    } else {
+
+                        Section {
+
+                            ChartDataFailLoad(text: Strings.noData, height: 200, showQuote: false)
+
+                        }
 
                     }
                     
-                    // Total Distance
-                    //
-                    VStack(alignment: .leading) {
-
-                        Text(Strings.totalDistance)
-                            .font(.callout)
-                            .foregroundColor(Color.gray)
-
-                        Text("\(String.init(format: "%.0f", totalDistance)) \(settings.userUnitPreferences.distanceUnit)")
-                            .font(.system(.largeTitle))
-                            .fontWeight(.bold)
-
-                    }
-
                 }
-
-                // List Workouts for the day
-                //
-                Section(header: VStack {
-
-                    Text(Strings.moreDetail)
-                        .padding(.leading)
-                        .frame(width: UIScreen.main.bounds.width, alignment: .leading)
-
-                }) {
-
-                    ForEach(workouts, id: \.self) { workout in
-
-                        NavigationLink(destination: WorkoutDetail(viewModel: WorkoutDetailViewModel(workout: workout, settings: settings))) {
-
-                            WorkoutRow(workout: workout, color: settings.themeColor.color)
-
-                        }
-                        .padding(.vertical, 8.0)
-
-                    }
-                }
+                .modifier(GroupedListModifier())
+                .navigationBarTitle(Text(Strings.dailySummary), displayMode: .large)
             }
-            .modifier(GroupedListModifier())
-            .navigationBarTitle(Text(Strings.dailySummary))
+
         }
     }
 }
@@ -122,6 +132,9 @@ extension DailySummary {
     
     private struct Strings {
 
+        public static var noData: String {
+            NSLocalizedString("com.okapi.dailySummary.noData", value: "We can't seem to find any data for today 🤔... \n\n Better get crackin!", comment: "Text for no data today.")
+        }
         public static var dailySummary: String {
             NSLocalizedString("com.okapi.dailySummary.dailySummary", value: "Daily Summary", comment: "Daily Summary text.")
         }
@@ -144,14 +157,3 @@ extension DailySummary {
 
 }
 
-// MARK: Previews
-//
-struct DailySummary_Previews: PreviewProvider {
-    static var previews: some View {
-        DailySummary(workouts: [
-            HKWorkout(activityType: .running, start: Date(), end: Date()),
-            HKWorkout(activityType: .walking, start: Date(), end: Date()),
-            HKWorkout(activityType: .yoga, start: Date(), end: Date())
-        ])
-    }
-}
