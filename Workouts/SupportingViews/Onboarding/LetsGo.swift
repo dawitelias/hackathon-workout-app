@@ -24,8 +24,53 @@ struct LetsGo: View {
                     .font(.largeTitle)
                     .fontWeight(.bold)
 
-                Text(Strings.requestHealthKitPermissions)
+                Text(Strings.healthKitIntegration)
                     .font(.subheadline)
+                
+                VStack(alignment: .leading, spacing: 3) {
+                    HStack {
+                        Text("🥇")
+                            .font(.body)
+                        Text(Strings.workoutAndWorkoutRoutes)
+                            .font(.body)
+                    }
+                    .padding()
+                    
+                    HStack {
+                        Text("👟")
+                            .font(.body)
+                        Text(Strings.walkingAndRunningDistance)
+                            .font(.body)
+                    }
+                    .padding()
+                   
+                    HStack {
+                        Text("🚲")
+                            .font(.body)
+                        Text(Strings.cyclingDistance)
+                            .font(.body)
+                    }
+                    .padding()
+                    
+                    HStack {
+                        Text("♥️")
+                            .font(.body)
+                        Text(Strings.heartRateData)
+                            .font(.body)
+                    }
+                    .padding()
+                    
+                    HStack {
+                        Text("🔥")
+                            .font(.body)
+                        Text(Strings.calories)
+                            .font(.body)
+                    }
+                    .padding()
+                    
+                }
+                .cornerRadius(3)
+                .background(Color(UIColor.secondarySystemBackground))
 
             }
             .padding(.horizontal, textPadding)
@@ -74,8 +119,28 @@ extension LetsGo {
             NSLocalizedString("com.okapi.letsGo.ready-to-get-started", value: "Ready to get started?", comment: "Text for ready to get started?")
         }
         
-        static var requestHealthKitPermissions: String {
-            NSLocalizedString("com.okapi.letsGo.request-health-kit-permission", value: "Please grant us permissions to read your workout data saved in Health Kit so that we can give you the best in-app experience possible.", comment: "Description text explaining why we need health kit permissions.")
+        static var healthKitIntegration: String {
+            NSLocalizedString("com.okapi.letsGo.healthKitIntegration", value: "Okapi integrates deeply with HealthKit. We will request the following permissions to read your data so that we can give you a complete in-app experience:", comment: "Stating that Okapi integrates with HealthKit")
+        }
+        
+        static var workoutAndWorkoutRoutes: String {
+            NSLocalizedString("com.okapi.letsGo.workoutAndWorkoutRoutes", value: "Workout and workout routes", comment: "Workout and workout routes")
+        }
+
+        static var walkingAndRunningDistance: String {
+            NSLocalizedString("com.okapi.letsGo.walkingAndRunningDistance", value: "Walking and running distance", comment: "Walking and running distance")
+        }
+
+        static var cyclingDistance: String {
+            NSLocalizedString("com.okapi.letsGo.cyclingDistance", value: "Cycling distance", comment: "Cycling distance")
+        }
+        
+        static var heartRateData: String {
+            NSLocalizedString("com.okapi.letsGo.hr", value: "Heart rate", comment: "heart rate data")
+        }
+        
+        static var calories: String {
+            NSLocalizedString("com.okapi.letsGo.calories", value: "Active Energy (Calories burned)", comment: "calories")
         }
         
         static var continueText: String {
